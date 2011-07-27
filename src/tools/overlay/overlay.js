@@ -85,8 +85,6 @@
 					'width':w,
 					'height':h
 				}).addClass(cls);
-				
-				console.log(cls)
 			},
 			//关闭
 			close:function(callback){

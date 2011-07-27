@@ -19,6 +19,7 @@
 			<fileset dir="${src.dir}" includes="tools/*/*.js"/>
 			<fileset dir="${src.dir}" includes="core/GMcore.js"/>
 		</copy>
+		
 		<!-- 合并源文件文件 -->
 		<concat destfile="${bulid.dir}\${GM.source}" encoding="UTF-8" outputencoding="UTF-8">
 			<filelist dir="${bulid.dir}"
@@ -42,6 +43,12 @@
 				</not>
 			</fileset>
 		</delete>
+		
+		<!-- 复制apps到bulid环境 | 暂时先不压缩，方便调试-->
+		<copy todir="${bulid.dir}/apps" encoding="UTF-8" outputencoding="UTF-8">
+			<fileset dir="${src.dir}/apps"/>
+		</copy>
+		
 		<!-- 压缩GM-min文件 -->
 		<apply executable="java" parallel="false" failonerror="true">
 			<fileset dir="${bulid.dir}" includes="*.js" />

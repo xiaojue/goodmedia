@@ -4,7 +4,7 @@
  * 基于jquery1.6.2
  * Goodmedia前端js库core文件，负责创建GM对象和构建命名空间
  */
-(function(W,doc){
+(function(W,doc,$){
 	if(!window.GM) var GM={};
 	
 	//与业务紧密相关的-挂件
@@ -14,8 +14,20 @@
 	//独立项目或者应用
 	GM.apps={};
 	
+	//额外加载项目文件 - 项目文件目前依赖关系依靠ant维护
+	GM.apps.require=function(appname,callback){
+		var ishost=(W.location.href.match('dev.ifiter')),
+		uri=(ishost) ?'http://dev.ifiter.com/static/GM/' : 'http://goodmedia01-pc/gm/'
+		var appuri= uri + 'bulid/apps/'+appname+'/'+appname+'.js';
+		$(function(){
+			$.getScript(appuri,function(){
+				if(callback) callback(GM.apps[appname]['export'])
+			});
+		});
+	}
+	
 	W.GM=GM;
-})(window,document);
+})(window,document,jQuery);
 /**
  * @author fuqiang
  * @date 20110726
@@ -103,8 +115,6 @@
 					'width':w,
 					'height':h
 				}).addClass(cls);
-				
-				console.log(cls)
 			},
 			//关闭
 			close:function(callback){
