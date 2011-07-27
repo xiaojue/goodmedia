@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="GBK"?>
+<project name="MyTask" basedir="." default="loadfile">
+	<!-- 定义全局变量和需要的目录 -->
+	<property name="yui-compressor" value="tool/yuicompressor.jar"/>
+	<property name="bulid.dir" value="bulid"/>
+	<property name="src.dir" value="src"/>
+	<property name="GM.source" value="GM.js"/>
+	<property name="GM.min" value="GM-min.js"/>
+	<property name="GM.dir" value="E:/apache/htdocs/gm"/>
+	<property name="GMonline.dir" value="\\devatsport\smb\static-resource\loohou\static\GM"/>
+	<!-- 删除现有目录-->
+	<delete dir="${bulid.dir}"/>
+	<!-- 创建基本目录-->
+	<mkdir dir="${bulid.dir}"/>
+	<target name="loadfile">
+		<!-- 复制目录文件-->
+		<copy todir="${bulid.dir}" encoding="UTF-8" outputencoding="UTF-8">
+			<fileset dir="${src.dir}" includes="widget/*/*.js"/>
+			<fileset dir="${src.dir}" includes="tools/*/*.js"/>
+			<fileset dir="${src.dir}" includes="core/GMcore.js"/>
+		</copy>
+		
+		<!-- 合并源文件文件 -->
+		<concat destfile="${bulid.dir}\${GM.source}" encoding="UTF-8" outputencoding="UTF-8">
+			<filelist dir="${bulid.dir}"
+			files="core\GMcore.js
+			tools\overlay\overlay.js
+			tools\bubble\bubble.js
+			widget\cityzone\cityzone.js
+			widget\detercopy\detercopy.js
+			widget\saycountdown\saycountdown.js"/>
+		</concat>
+		
+		<!--删除所有合并文件，只留出最后的GMsource和GMmin文件-->
+		<delete dir="${bulid.dir}/core"/>
+		<delete dir="${bulid.dir}/tools"/>
+		<delete dir="${bulid.dir}/widget"/>
+		<delete>
+			<fileset dir="${bulid.dir}">
+				<filename name="*.js"/>
+				<not>
+					<filename name="${GM.source}"/>
+				</not>
+			</fileset>
+		</delete>
+		
+		<!-- 复制apps到bulid环境 | 暂时先不压缩，方便调试-->
+		<copy todir="${bulid.dir}/apps" encoding="UTF-8" outputencoding="UTF-8">
+			<fileset dir="${src.dir}/apps"/>
+		</copy>
+		
+		<!-- 压缩GM-min文件 -->
+		<apply executable="java" parallel="false" failonerror="true">
+			<fileset dir="${bulid.dir}" includes="*.js" />
+			<arg line="-jar" />
+			<arg path="${yui-compressor}" />
+			<arg line="--charset utf-8" />
+			<srcfile/>
+			<arg line="-o" />
+			<mapper type="glob" from="*.js" to="${bulid.dir}/*-min.js" />
+			<targetfile/>
+		</apply>
+		
+		<!-- 压缩apps-min文件 -->
+		<apply executable="java" parallel="false" failonerror="true">
+			<fileset dir="${bulid.dir}/apps" includes="*/*.js" />
+			<arg line="-jar" />
+			<arg path="${yui-compressor}" />
+			<arg line="--charset utf-8" />
+			<srcfile/>
+			<arg line="-o" />
+			<mapper type="glob" from="*.js" to="${bulid.dir}/apps/*-min.js" />
+			<targetfile/>
+		</apply>
+		
+		<!--部署-->
+		<!--
+		<delete dir="${GMonline.dir}"/>
+		<mkdir dir="${GMonline.dir}"/>
+		<copy todir="${GMonline.dir}" encoding="UTF-8" outputencoding="UTF-8">
+			<fileset dir="${GM.dir}" includes="bulid/*.js"/>
+			<fileset dir="${GM.dir}" includes="bulid/widget/*/*.js"/>
+			<fileset dir="${GM.dir}" includes="jquery/jquery-1.6.2.js"/>
+			<fileset dir="${GM.dir}" includes="jquery/jquery-1.6.2.min.js"/>
+			<fileset dir="${GM.dir}" includes="src/widget/*/*.js"/>
+		</copy>
+		-->
+	</target>
+</project>

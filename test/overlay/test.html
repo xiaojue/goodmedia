@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>overlay</title>
+		<script src="../../jquery/jquery-1.6.2.js" charset=”UTF-8″></script>
+		<script src="../../bulid/GM.js" type="text/javascript" charset=”UTF-8″></script>
+	</head>
+	<body>
+		<style>
+			.J_GM_OverlayWrapCls{
+				border:#ccc solid 1px;
+				background:#fff;
+			}
+		</style>
+		<a href="#" id="J_MyOverlay">点我！出浮动层~</a>
+		<div style="height:1000px;" class="J_NoCopy">1212</div>
+		1212
+		<div style="height:500px;"></div>
+		aaa
+		<div id="console"></div>
+		<script>
+			(function(){
+			/**
+			 * 设置全局overlay属性，并增加GM.tools.overlay对象
+			 */	
+			$.overlay({
+					content:'我是浮动层啦~<a href="#" class="close">点我关闭自己~</a>'
+			});
+				
+			$('#J_MyOverlay').click(function(){
+				GM.tools.overlay.fire();
+			});
+			
+			$('.close').live('click',function(){
+				GM.tools.overlay.close();
+				//GM.tools.overlay.destroy(); //删除 干掉overlay全局对象
+			});
+			
+				
+			})();
+		</script>
+	</body>
+</html>
