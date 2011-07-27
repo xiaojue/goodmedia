@@ -21,7 +21,7 @@
 		var appuri= uri + 'bulid/apps/'+appname+'/'+appname+'.js';
 		$(function(){
 			$.getScript(appuri,function(){
-				if(callback) callback(GM.apps[appname]['export'])
+				if(callback) callback(GM.apps[appname]['exports'])
 			});
 		});
 	}
