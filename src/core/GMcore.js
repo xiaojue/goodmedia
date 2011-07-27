@@ -1,0 +1,18 @@
+/**
+ * @author fuqiang [designsor@gmail.com]
+ * @date 20110726
+ * 基于jquery1.6.2
+ * Goodmedia前端js库core文件，负责创建GM对象和构建命名空间
+ */
+(function(W,doc){
+	if(!window.GM) var GM={};
+	
+	//与业务紧密相关的-挂件
+	GM.widget={};
+	//与业务无关的比如overlay组件,最后扩展到jquery上，使用jquery的扩展机制进行最后的封装
+	GM.tools={};
+	//独立项目或者应用
+	GM.apps={};
+	
+	W.GM=GM;
+})(window,document);
