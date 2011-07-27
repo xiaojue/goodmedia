@@ -1,0 +1,1 @@
+(function(b,e,d,c){var a=function(){return{init:function(){},"export":{a:1}}}();if(c&&c.apps){c.apps.syllabus=a}c.apps.syllabus.init()})(window,document,jQuery,GM);

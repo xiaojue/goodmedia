@@ -61,6 +61,18 @@
 			<targetfile/>
 		</apply>
 		
+		<!-- Ñ¹Ëõapps-minÎÄ¼þ -->
+		<apply executable="java" parallel="false" failonerror="true">
+			<fileset dir="${bulid.dir}/apps" includes="*/*.js" />
+			<arg line="-jar" />
+			<arg path="${yui-compressor}" />
+			<arg line="--charset utf-8" />
+			<srcfile/>
+			<arg line="-o" />
+			<mapper type="glob" from="*.js" to="${bulid.dir}/apps/*-min.js" />
+			<targetfile/>
+		</apply>
+		
 		<!--²¿Êð-->
 		<!--
 		<delete dir="${GMonline.dir}"/>
