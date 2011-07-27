@@ -50,7 +50,7 @@
 			 $.each($(selector).children(),function(index,opt){
 			 	if(opt.value==0) opt.parentNode.removeChild(opt);
 			 });
-		}
+		};
 		
 		function selectOption(selector,city){
 			var opts=$(selector).get()[0].getElementsByTagName('option');
@@ -61,7 +61,7 @@
 						break;
 					}
 				}
-		}
+		};
 		
 		return {
 			init_city:function(city,district){

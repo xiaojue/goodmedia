@@ -38,7 +38,7 @@
 				
 			}else{
 				$(selector).each(function(index,node){
-					node.style.cssText="-moz-user-select:none;-webkit-user-select:none;";
+					node.style.cssText+="-moz-user-select:none;-webkit-user-select:none;";
 				});
 			}
 		});
