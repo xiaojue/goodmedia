@@ -6,6 +6,11 @@
 		<script src="../../bulid/GM.js" type="text/javascript" charset=”UTF-8″></script>
 	</head>
 	<body>
+		<style>
+			.J_GM_OverlayWrapCls{
+				border:#ccc solid 1px;
+			}
+		</style>
 		<a href="#" id="J_MyOverlay">点我！出浮动层~</a>
 		<div style="height:1000px;" class="J_NoCopy">1212</div>
 		1212
@@ -29,7 +34,7 @@
 			
 			$('.close').live('click',function(){
 				GM.tools.overlay.close();
-				GM.tools.overlay.destroy(); //删除 干掉overlay全局对象
+				//GM.tools.overlay.destroy(); //删除 干掉overlay全局对象
 			});
 			
 				

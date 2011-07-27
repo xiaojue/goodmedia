@@ -51,9 +51,9 @@
 						
 						close=$(config.closeCls);
 					
-					that.reset(config.width,config.height,config.wrapCls);
-					
 					wrap.appendTo('body').html(config.content);
+					
+					that.reset(config.width,config.height,config.wrapCls);
 					
 					if(html) $('#'+config.wrapId).html(html);
 					
@@ -85,6 +85,8 @@
 					'width':w,
 					'height':h
 				}).addClass(cls);
+				
+				console.log(cls)
 			},
 			//关闭
 			close:function(callback){
