@@ -8,6 +8,14 @@
 	
 	var syllabus=function(){
 		
+		var htmlstr='<a class="t" href="javascript:void(0);">添加课程</a>',
+			modifstr='<a class="blue" href="javascript:void(0);">编辑</a>'+
+					 '<a class="red" href="javascript:void(0);">删除</a>';
+		
+		//初始化添加课程的功能
+		var _initCoursehover=function(){
+			
+		};
 		
 		
 		return {
@@ -15,7 +23,7 @@
 				
 			},
 			'export':{
-				a:1
+				
 			}
 		}
 	}();

@@ -1,1 +1,1 @@
-(function(b,e,d,c){var a=function(){return{init:function(){},"export":{a:1}}}();if(c&&c.apps){c.apps.syllabus=a}c.apps.syllabus.init()})(window,document,jQuery,GM);
+(function(b,e,d,c){var a=function(){var h='<a class="t" href="javascript:void(0);">添加课程</a>',f='<a class="blue" href="javascript:void(0);">编辑</a><a class="red" href="javascript:void(0);">删除</a>';var g=function(){};return{init:function(){},"export":{}}}();if(c&&c.apps){c.apps.syllabus=a}c.apps.syllabus.init()})(window,document,jQuery,GM);
