@@ -25,6 +25,7 @@
 						width:400,
 						height:200,
 						content:'',
+						_destroy:false, 
 						cover:true,
 						drag:false
 					};
@@ -44,6 +45,8 @@
 			//触发
 			fire:function(html,callback){
 				var that=this,config=that.config;
+				
+				if(config._destroy) return;
 				
 				if(!doc.getElementById(config.wrapId)){
 				
@@ -149,20 +152,20 @@
 			},
 			_fixScroll:function(){
 				var that=this,config=that.config;
-				$(W).scroll(function(){
-					that._fix($('#'+config.wrapId),that);
-				});
-				$(W).resize(function(){
-					that._fix($('#'+config.wrapId),that);
-					$('#'+config.coverId).css({'height': doc.documentElement.clientHeight});
-				});
+				$(W).bind('scroll resize',{host:that},that._windowBind);
+			},
+			_windowBind:function(e){
+				var host=e.data.host;
+				host._fix($('#'+host.config.wrapId),host);
+				$('#'+host.config.coverId).css({'height': doc.documentElement.clientHeight});
 			},
 			//注销
 			destroy:function(){
 				var that=this;config=that.config;
-				if(G.tools.overlay) G.tools.overlay=null;
 				$('#'+config.coverId).remove();
 				$('#'+config.wrapId).remove();
+				$(W).unbind('scroll resize',that._windowBind);
+				if(G.tools.overlay) G.tools.overlay=new _overlay._init({_destroy:true});
 			}
 		};
 		

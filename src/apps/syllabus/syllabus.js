@@ -24,6 +24,8 @@
 	var syllabus=function(){
 		
 		
+		
+		
 		var _initTab=function(tabName){
 			var tabHash={
 				//课表管理
