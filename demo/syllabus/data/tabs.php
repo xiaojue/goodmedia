@@ -15,13 +15,17 @@
 <html>
 	<head>
 		<title>tabs</title>
-		<link type="text/css" rel="stylesheet" href="http://s1.ifiter.com/static/css.css">
+		<meta content="text/html; charset=utf-8" http-equiv="content-type">
 		<script src="../../../jquery/jquery-1.6.2.js" charset=”UTF-8″></script>
 		<script src="../../../bulid/GM.js" type="text/javascript" charset=”UTF-8″></script>
 	</head>
 	<body style="background:none;">
+	<a href="tabs.php?tab=timetable">课表管理</a>
+	<a href="tabs.php?tab=room">教室管理</a>
+	<a href="tabs.php?tab=item">健身项目管理</a>
+	<a href="tabs.php?tab=instructor">教练管理</a>
+	<?php if($name=="timetable"){ ?>
 		<div class="new_sschedule">
-			
 			<div class="new_title">
 				第 29 周（2081-07-14--2081-07-20）教室AAＡ 课表
 			</div>
@@ -52,7 +56,6 @@
 			
 			<a href="#" id="J_CreateSyllabus">创建主课表</a>
 		</div>
-
 		<script>
 			(function(){
 				GM.apps.require('syllabus',function(exports){
@@ -60,6 +63,7 @@
 				});
 			})();
 		</script>
+	<?php }; ?>
 
 	</body>
 </html>

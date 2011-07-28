@@ -37,8 +37,7 @@
 				CreateSyllabus:function(){
 					
 					parent$.overlay({
-							content:'创建主课表<a href="javascript:void(0);" class="J_OverlayClose">关闭</a>'+
-									'<div id="J_Calendar"></div>'
+						content:'创建主课表<a href="javascript:void(0);" class="J_OverlayClose">关闭</a><div id="J_Calendar"></div>'
 					});
 					
 					$('#J_CreateSyllabus').live('click',function(){
@@ -86,6 +85,9 @@
 						ST=setInterval(findtable,300);
 						
 					});
+					
+					//防止iframe切换后ie下不能执行已经释放的代码错误- 函数指针找不到，需要重新绑定live函数
+					parent$('.J_OverlayClose').die('click');
 					
 					parent$('.J_OverlayClose').live('click',function(){
 						parentGM.tools.overlay.close();

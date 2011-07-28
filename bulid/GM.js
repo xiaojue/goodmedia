@@ -38,7 +38,7 @@
 	 * 对IE6进行兼容shade fixed
 	 */
 	var overlay=function(cg){
-		
+
 		var _overlay=function(){
 			return {
 				_init:function(o){
@@ -59,15 +59,15 @@
 						cover:true,
 						drag:false
 					};
-					
+
 					$.extend(_o,o);
-					
+
 					this.config=_o;
-					
+
 				}
 			}
 		}();
-		
+
 		/**
 		 * 开放出去的通用api
 		 */
@@ -75,45 +75,45 @@
 			//触发
 			fire:function(html,callback){
 				var that=this,config=that.config;
-				
+
 				if(config._destroy) return;
-				
+
 				if(!doc.getElementById(config.wrapId)){
-				
+
 					var wrap=$('<div>',{id:config.wrapId}),
-						
+
 						close=$(config.closeCls);
-					
+
 					wrap.appendTo('body').html(config.content);
-					
+
 					that.reset(config.width,config.height,config.wrapCls);
-					
+
 					if(html) $('#'+config.wrapId).html(html);
-					
+
 					if(config.cover && $('#'+config.coverId).length==0) that._cover();
-					
+
 					that._fix(wrap,that);
-					
+
 				}else{
 					if(html) $('#'+config.wrapId).html(html);
-					
+
 					$('#'+config.coverId).show();
-					
+
 					$('#'+config.wrapId).show();
 				}
-				
+
 				if(callback) callback(wrap);
-				
+
 			},
 			//可以在此处重置样式与高宽
 			reset:function(w,h,cls){
-				
+
 				var that=this,config=that.config;
-				
+
 				config.width=w;
 				config.height=h;
 				config.wrapCls=cls;
-				
+
 				$('#'+config.wrapId).css({
 					'width':w,
 					'height':h,
@@ -122,50 +122,50 @@
 			},
 			//关闭
 			close:function(callback){
-				
+
 				var that=this,config=that.config;
-				
+
 				$('#'+config.coverId).hide();
-				
+
 				$('#'+config.wrapId).hide();
-				
+
 				if(callback) callback($('#'+config.coverId),$('#'+config.wrapId));
-				
+
 			},
 			//拖拽
 			_drag:function(callstart,callend){
-				
+
 			},
 			//遮罩
 			_cover:function(){
-				
+
 				var that=this,config=that.config,
 					cover=$('<div>',{id:config.coverId}),
 					ie6=($.browser.msie && $.browser.version=='6.0');
-					
+
 				cover.css({
 					'background-color':'#ccc',
 					'opacity':'0.5',
 					'height': doc.documentElement.clientHeight
 				}).prependTo('body');
-				
+
 		        if (ie6) {
 		            cover.append("<" + "iframe style='width:100%;" +
 		                "height:expression(this.parentNode.offsetHeight);" +
 		                "filter:alpha(opacity=0);" +
 		                "z-index:-1;'>");
 		        }
-		        
+
 		        that._fixScroll();
-			
+
 			},
 			//fix复位
 			_fix:function(node,host){
-				
+
 				var that=host,config=that.config,
 					ie6=($.browser.msie && $.browser.version=='6.0'),
 					scrollTop=$(doc).scrollTop();
-					
+
 				node.css({
 						'position':ie6 ? 'absolute' : 'fixed',
 						'left':'50%',
@@ -173,7 +173,7 @@
 						'margin-left':-(config.width/2),
 						'margin-top':ie6 ? 0 : -(config.height/2)
 				});
-				
+
 				$('#'+config.coverId).css({
 					'position':ie6 ? 'absolute' : 'fixed',
 		            'left':0,
@@ -199,21 +199,21 @@
 				if(G.tools.overlay) G.tools.overlay=new _overlay._init({_destroy:true});
 			}
 		};
-		
+
 		/**
 		 * 每次引用都返回唯一一个全局的浮层对象
 		 */
-		
+
 		if(!G.tools.overlay) G.tools.overlay=new _overlay._init(cg);
-		
+
 		return 	G.tools.overlay;
 	};
-	
+
 	//扩展到jquery原型上，不绑定到GM上
 	$.extend({
 		overlay:overlay
 	});
-	
+
 })(window,document,jQuery,GM);
 /**
  * @author fuqiang
