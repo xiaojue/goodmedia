@@ -86,7 +86,8 @@
 				
 				$('#'+config.wrapId).css({
 					'width':w,
-					'height':h
+					'height':h,
+					'background-color':'#fff'
 				}).addClass(cls);
 			},
 			//关闭

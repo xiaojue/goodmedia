@@ -17,7 +17,7 @@
 	//额外加载项目文件 - 项目文件目前依赖关系依靠ant维护
 	GM.apps.require=function(appname,callback){
 		var ishost=(W.location.href.match('dev.ifiter')),
-		uri=(ishost) ?'http://dev.ifiter.com/static/GM/' : 'http://goodmedia01-pc/gm/'
+		uri=(ishost) ?'http://dev.ifiter.com/static/GM/' : 'http://172.16.2.215/gm/'
 		var appuri= uri + 'bulid/apps/'+appname+'/'+appname+'.js';
 		$(function(){
 			$.getScript(appuri,function(){

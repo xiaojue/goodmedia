@@ -20,34 +20,9 @@
 		return;
 	}
 	
+	var ST;
 	
 	var syllabus=function(){
-		
-		
-		
-		
-		var _initTab=function(tabName){
-			var tabHash={
-				//课表管理
-				'timetablemanage':function(){
-					
-				},
-				//教室管理
-				'classroommanage':function(){
-					
-				},
-				//健身项目管理
-				'itemmmanage':function(){
-					
-				},
-				//教练管理
-				'instructormanage':function(){
-					
-				}
-			}
-			
-			tabHash[tabName]();
-		};
 		
 		//初始化添加课程的功能
 		var _initCoursehover=function(){
@@ -56,12 +31,67 @@
 					 '<a class="red" href="javascript:void(0);">删除</a>';
 		};
 		
-		
-		
-		
 		return {
 			'exports':{
-				_initTab:function(tabmark){
+				//创建主课表
+				CreateSyllabus:function(){
+					
+					parent$.overlay({
+							content:'创建主课表<a href="javascript:void(0);" class="J_OverlayClose">关闭</a>'+
+									'<div id="J_Calendar"></div>'
+					});
+					
+					$('#J_CreateSyllabus').live('click',function(){
+						
+						parentGM.tools.overlay.fire();
+						
+						top.WdatePicker({
+							eCont:'J_Calendar',
+							firstDayOfWeek:1,
+							onpicked:function(dp){
+								findtable();
+							}
+						});
+						
+						var CalendarWindow=parent$('#J_Calendar iframe')[0].contentWindow;
+						
+						function addheighlight(table){
+							var tds=table.getElementsByTagName('td');
+							for(var i=0;i<tds.length;i++){
+								if(tds[i].className=="Wselday"){
+								 var lighttds=tds[i].parentNode.getElementsByTagName('td');
+								 for(var j=0;j<lighttds.length;j++){
+								 	lighttds[j].style.cssText="color:#000;";
+								 }
+								 break;
+								}	
+							}
+						};
+						
+						
+						function findtable(){
+							var tables=CalendarWindow.document.getElementsByTagName('table');
+							if(tables.length==0){
+								setTimeout(findtable,500);
+							}else{
+								for(var i=0;i<tables.length;i++){
+									if(tables[i].className=="WdayTable"){
+										addheighlight(tables[i]);
+										break;
+									}
+								}
+							}
+						};
+						
+						ST=setInterval(findtable,300);
+						
+					});
+					
+					parent$('.J_OverlayClose').live('click',function(){
+						parentGM.tools.overlay.close();
+						clearInterval(ST);
+					});
+					
 					
 				}
 			}
