@@ -16,8 +16,8 @@
 	
 	//额外加载项目文件 - 项目文件目前依赖关系依靠ant维护
 	GM.apps.require=function(appname,callback){
-		var ishost=(W.location.href.match('dev.ifiter')),
-		uri=(ishost) ?'http://dev.ifiter.com/static/GM/' : 'http://172.16.2.215/gm/'
+		var ishost=(W.location.href.match('idongmi.com')),
+		uri=(ishost) ?'http://x.idongmi.com/static/GM/' : 'http://172.16.2.215/gm/'
 		var appuri= uri + 'bulid/apps/'+appname+'/'+appname+'.js';
 		$(function(){
 			$.getScript(appuri,function(){
@@ -117,8 +117,11 @@
 				$('#'+config.wrapId).css({
 					'width':w,
 					'height':h,
-					'background-color':'#fff'
+					'z-index':1000
 				}).addClass(cls);
+				
+				that._fix($('#'+config.wrapId),that);
+				
 			},
 			//关闭
 			close:function(callback){
@@ -146,7 +149,8 @@
 				cover.css({
 					'background-color':'#ccc',
 					'opacity':'0.5',
-					'height': doc.documentElement.clientHeight
+					'height': doc.documentElement.clientHeight,
+					'z-index':999
 				}).prependTo('body');
 
 		        if (ie6) {
@@ -468,7 +472,7 @@
 					holdTarget.unbind('click');
 					
 					holdTarget.bind('click',function(){
-						if(l<=max && l>0) that.holdAction();
+						if(l<=max) that.holdAction();
 					});
 					
 					wrap.html(putout);

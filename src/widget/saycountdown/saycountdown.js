@@ -51,7 +51,7 @@
 					holdTarget.unbind('click');
 					
 					holdTarget.bind('click',function(){
-						if(l<=max && l>0) that.holdAction();
+						if(l<=max) that.holdAction();
 					});
 					
 					wrap.html(putout);

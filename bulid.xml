@@ -74,16 +74,17 @@
 		</apply>
 		
 		<!--²¿Êð-->
-		<!--
 		<delete dir="${GMonline.dir}"/>
 		<mkdir dir="${GMonline.dir}"/>
 		<copy todir="${GMonline.dir}" encoding="UTF-8" outputencoding="UTF-8">
 			<fileset dir="${GM.dir}" includes="bulid/*.js"/>
-			<fileset dir="${GM.dir}" includes="bulid/widget/*/*.js"/>
+			<fileset dir="${GM.dir}" includes="bulid/apps/*/*.js"/>
+			<fileset dir="${GM.dir}" includes="src/core/*.js"/>
+			<fileset dir="${GM.dir}" includes="src/tools/*/*.js"/>
+			<fileset dir="${GM.dir}" includes="src/widget/*/*.js"/>
+			<fileset dir="${GM.dir}" includes="src/apps/*/*.js"/>
 			<fileset dir="${GM.dir}" includes="jquery/jquery-1.6.2.js"/>
 			<fileset dir="${GM.dir}" includes="jquery/jquery-1.6.2.min.js"/>
-			<fileset dir="${GM.dir}" includes="src/widget/*/*.js"/>
 		</copy>
-		-->
 	</target>
 </project>

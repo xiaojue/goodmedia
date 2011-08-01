@@ -87,8 +87,11 @@
 				$('#'+config.wrapId).css({
 					'width':w,
 					'height':h,
-					'background-color':'#fff'
+					'z-index':1000
 				}).addClass(cls);
+				
+				that._fix($('#'+config.wrapId),that);
+				
 			},
 			//关闭
 			close:function(callback){
@@ -116,7 +119,8 @@
 				cover.css({
 					'background-color':'#ccc',
 					'opacity':'0.5',
-					'height': doc.documentElement.clientHeight
+					'height': doc.documentElement.clientHeight,
+					'z-index':999
 				}).prependTo('body');
 
 		        if (ie6) {
