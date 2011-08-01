@@ -141,7 +141,10 @@
 		
 		var dataday=null,
 			roomid=null,
-			courseid=null;		
+			courseid=null,
+			coursetype=null,
+			courseitmeid=null,
+			coachid=null;		
 		
 		return {
 			'exports':{
@@ -149,6 +152,34 @@
 				CreateSyllabus:function(){
 					
 					parent$.overlay();
+					
+					//防止iframe切换后ie下不能执行已经释放的代码错误- 函数指针找不到，需要重新绑定live函数
+					var dieAry=['.J_OverlayClose',
+					'#J_ChooseYetRoom',
+					'#J_ChooseNewRoom',
+					'#J_Submit',
+					'.J_NoCourse',
+					'#J_CourseCommit',
+					'.J_addCourse',
+					'.J_Redact',
+					'#J_AddinOneItem',
+					'#J_OneItemSub',
+					'#J_CourseCommit',
+					'#J_Itemwrap li',
+					'#J_Instructorwrap li',
+					'.J_CourseType',
+					'.J_NoCourse',
+					'.add',
+					'.J_YetCourse',
+					'.J_Operation',
+					'#J_CourseEdit',
+					'#J_SubmitOtherTable',
+					'.J_RmoveUp'];
+					
+					$.each(dieAry,function(index,el){
+						parent$(el).die();
+					});
+					
 					
 					$('#J_CreateSyllabus').live('click',function(){
 						
@@ -280,32 +311,6 @@
 						parentGM.tools.overlay.close();
 					});
 					
-					//防止iframe切换后ie下不能执行已经释放的代码错误- 函数指针找不到，需要重新绑定live函数
-					var dieAry=['.J_OverlayClose',
-					'#J_ChooseYetRoom',
-					'#J_ChooseNewRoom',
-					'#J_Submit',
-					'.J_NoCourse',
-					'#J_CourseCommit',
-					'.J_addCourse',
-					'.J_Redact',
-					'#J_AddinOneItem',
-					'#J_OneItemSub',
-					'#J_CourseCommit',
-					'#J_Itemwrap li',
-					'#J_Instructorwrap li',
-					'.J_CourseType',
-					'.J_NoCourse',
-					'.add',
-					'.J_YetCourse',
-					'.J_Operation',
-					'#J_CourseEdit',
-					'.J_RmoveUp'];
-					
-					$.each(dieAry,function(index,el){
-						parent$(el).die();
-					});
-					
 					parent$('.J_OverlayClose').live('click',function(){
 						parentGM.tools.overlay.close();
 						clearInterval(ST);
@@ -375,7 +380,16 @@
 						
 						var items=bulidul(W.coursehash,courseary[0],6),
 							instructor=bulidul(W.instructorhash,'',6);
-							type=function(){
+							
+						if(name=="编辑课程"){
+							courseid=$(that).parent().parent().attr('data-courseid');
+							coursetype=$(that).parent().parent().attr('data-itemtype');
+							courseitmeid=$(that).parent().parent().attr('data-itemid');
+							coachid=$(that).parent().parent().attr('data-coachid');
+							items=bulidul(W.coursehash,coursetype,6);
+						}
+						
+						var	type=function(){
 								var str='';
 								for(var i=0;i<courseary.length;i++){
 									str+='<div class="course_list"><input type="radio" value="'+courseary[i]+'" name="type" class="J_CourseType">'+courseary[i]+'</div>';
@@ -471,12 +485,21 @@
 						var day=$(that).parent().parent().attr('data-day'),
 							section=$(that).parent().parent().attr('data-section');
 							
-						if(name=="编辑课程"){
-							courseid=$(that).parent().parent().attr('data-courseid');
-						}
-						
 						dataday=$(that).parent().parent().attr('data-day');
 						roomid=$(that).parent().parent().attr('data-roomid'); //"12:00-13:08"
+						
+						
+						//提交的时候增加校验 前后区间 || 时间00-60 必须00 2位 必须前面的小于后面的
+						parent$('.J_CourseType').each(function(index,item){
+							if(index==0) item.checked='checked';
+						});
+						
+						if(name=="编辑课程"){
+							parent$('#J_Itemwrap li[data-value="'+courseitmeid+'"]').addClass('checked');
+							parent$('#J_Instructorwrap li[data-value="'+coachid+'"]').addClass('checked');
+							parent$('input[value="'+coursetype+'"]').attr('checked','checked');
+						}
+						
 						
 						var temptime=section.split('-');
 							tempSh=temptime[0].split(':')[0],
@@ -488,14 +511,6 @@
 							parent$('#J_StartMinute').val(tempSm);
 							parent$('#J_EndHour').val(tempEh);
 							parent$('#J_EndMinute').val(tempEm);
-						
-						
-						
-						//提交的时候增加校验 前后区间 || 时间00-60 必须00 2位 必须前面的小于后面的
-						
-						parent$('.J_CourseType').each(function(index,item){
-							if(index==0) item.checked='checked';
-						});
 					}
 					
 					
@@ -655,6 +670,7 @@
 								$('#J_EditCourse').submit();
 							}
 							parentGM.tools.overlay.close(); //关闭浮出层
+							top.window.location.reload();
 						}
 					}
 					

@@ -7,20 +7,20 @@
 	
 	var editphoto=function(){
 		
-				
-		
 		return {
 			exports:{
 				init:function(){
 					
 					$.overlay();
 					
-					$('.editor_box').blur(function(){
+					function getaction(){
+						
+						if($(this).val()==$(this).attr('data-old')) return;
+						
 						var overlaystr='<div class="popup1_rounded">'+
 									    '<div class="popup1_cont">'+
 									        '<div class="close"><img src="http://x.idongmi.com/static/images/tab_ico.gif" class="J_OverlayClose"></div>'+
-									        '<div class="text"><img src="http://x.idongmi.com/static/images/loading.gif" alt="loading"></div>'+
-									        //'<div class="text">相片名称修改成功</div>'+
+									        '<div class="text" id="J_MainText"><img src="http://x.idongmi.com/static/images/loading.gif" alt="loading"></div>'+
 									        '<div class="pop_but">'+
 									        	'<input type="button" class="space_button" value="确认" class="J_OverlayClose">'+
 									        '</div>'+
@@ -31,21 +31,61 @@
 						GM.tools.overlay.reset(323,219);
 						GM.tools.overlay.fire(overlaystr);
 						var setobj={};
-						$(this).parent('from').children('input[type="text"],input[type="hidden"],select').each(function(){
+						
+						$(this).parents('form').children('input,select').each(function(){
+							console.log($(this).attr('name'));
+							var name=$(this).attr('name'),value=$(this).val();
+							setobj[name]=value;
 						});
 						
 						$.ajax({
-							url:'xxx.jsp',
-							data:{},
-							success:function(){
-								
+							url:'/photo/photoAction.jsp',
+							type:'POST',
+							data:setobj,
+							success:function(str){
+								var str=$.trim(str);
+								try{
+									eval('var obj='+str);
+									$('#J_MainText').text(obj.msg);
+								}catch(e){
+									$('#J_MainText').text('程序异常，稍后再试');
+								}
+								setTimeout(function(){
+									GM.tools.overlay.close();
+									if(obj.status==1){
+										if(obj.op && obj.colid){
+											window.location.href="/photo/index.jsp?op=editcol&colid="+obj.colid+"&reload=1";
+											return;
+										}else{
+											if(window.location.href.match('reload=1')){
+												window.location.reload();
+											}else{
+												window.location.href+='reload=1'
+											}
+										}
+									}
+								},2000);
 							},
 							error:function(){
-								
+								$('#J_MainText').text('程序异常，稍后再试');
+								setTimeout(function(){
+									GM.tools.overlay.close();
+								},2000);
 							}
-						})
+						});
+					}
+					
+					var saveValue=function(){
+						$(this).attr('data-old',$(this).val());
+					};
+					
+					$('.editor_box1,.editor_box').focus(saveValue).blur(getaction);
+					
+					$('.editor_box2').change(getaction);
+					
+					$('.J_OverlayClose').live('click',function(){
+						GM.tools.overlay.close();
 					});
-										
 				}
 			}
 		}
