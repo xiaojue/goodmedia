@@ -670,7 +670,6 @@
 								$('#J_EditCourse').submit();
 							}
 							parentGM.tools.overlay.close(); //关闭浮出层
-							top.window.location.reload();
 						}
 					}
 					

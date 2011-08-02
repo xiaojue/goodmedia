@@ -67,26 +67,26 @@
 							<span>13:00</span>
 							<span>13:00</span>
 						</td>
-						<td class="J_NoCourse"></td>
-						<td class="J_YetCourse">性感拉丁</td>
-						<td class="J_NoCourse"></td>
-						<td class="J_NoCourse"></td>
-						<td class="J_NoCourse"></td>
-						<td class="J_NoCourse"></td>
-						<td class="J_NoCourse"></td>
+						<td class="J_NoCourse" data-seton="1" data-section="12:00-14:00" data-day="2011-08-22" data-roomid="84"></td>
+						<td class="J_YetCourse" data-seton="1" data-section="10:00-12:00" data-day="2011-08-25" data-roomid="84" data-courseid="20243" data-itemid="49" data-itemtype="减肥塑形" data-coachid="0">性感拉丁</td>
+						<td class="J_NoCourse" data-seton="1" data-section="12:00-14:00" data-day="2011-08-22" data-roomid="84"></td>
+						<td class="J_NoCourse" data-seton="1" data-section="12:00-14:00" data-day="2011-08-22" data-roomid="84"></td>
+						<td class="J_NoCourse" data-seton="1" data-section="12:00-14:00" data-day="2011-08-22" data-roomid="84"></td>
+						<td class="J_NoCourse" data-seton="1" data-section="12:00-14:00" data-day="2011-08-22" data-roomid="84"></td>
+						<td class="J_NoCourse" data-seton="1" data-section="12:00-14:00" data-day="2011-08-22" data-roomid="84"></td>
 					</tr>
 					<tr>
 						<td class="green">
 							<span>13:00</span>
 							<span>13:00</span>
 						</td>
-						<td class="J_NoCourse"></td>
-						<td class="J_YetCourse">性感拉丁</td>
-						<td class="J_NoCourse"></td>
-						<td class="J_NoCourse"></td>
-						<td class="J_NoCourse"></td>
-						<td class="J_NoCourse"></td>
-						<td class="J_NoCourse"></td>
+						<td class="J_NoCourse" data-seton="1" data-section="12:00-14:00" data-day="2011-08-22" data-roomid="84"></td>
+						<td class="J_YetCourse" data-seton="1" data-section="10:00-12:00" data-day="2011-08-25" data-roomid="84" data-courseid="20243" data-itemid="49" data-itemtype="减肥塑形" data-coachid="0">性感拉丁</td>
+						<td class="J_NoCourse" data-seton="1" data-section="12:00-14:00" data-day="2011-08-22" data-roomid="84"></td>
+						<td class="J_NoCourse" data-seton="1" data-section="12:00-14:00" data-day="2011-08-22" data-roomid="84"></td>
+						<td class="J_NoCourse" data-seton="1" data-section="12:00-14:00" data-day="2011-08-22" data-roomid="84"></td>
+						<td class="J_NoCourse" data-seton="1" data-section="12:00-14:00" data-day="2011-08-22" data-roomid="84"></td>
+						<td class="J_NoCourse" data-seton="1" data-section="12:00-14:00" data-day="2011-08-22" data-roomid="84"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -109,7 +109,7 @@
 			<a class="green" href="#">上一篇课表：第18周（04.18--04.25）</a>
 			<input type="button" id="J_CreateSyllabus" class="add_button" value="添加主课表">
 		</div>
-		<div class="add_schedule"><input type="button" class="add_button" value="添加副课表" name=""></div>
+		<div class="add_schedule"><input type="button" id="J_addOtherTable" class="add_button" value="添加副课表" name=""></div>
 		<script>
 			(function(){
 				GM.apps.require('syllabus',function(exports){
@@ -159,6 +159,9 @@
 			catch (ex){}
 		};
 		$(window).load(iframeAutoFit);
+
+	 var yetroomlist={84:'3333',92:'9',101:'3333'};var coursehash={'强身健体':{23:'性感拉丁    ',24:'低冲击有氧操   ',25:'踏板操   ',26:'街舞    ',27:'激情桑巴   ',28:'芭蕾   ',29:'钢管舞  ',30:'健美操   ',31:'有氧搏击  ',32:'有氧拉丁  ',33:'太极',34:'REAL K/韩式跆拳道',35:'现代舞   ',36:'肚皮舞  ',37:'民族舞 ',38:'流行舞   ',39:'草裙舞  ',40:'爵士舞    ',41:'排舞    ',42:'莎莎   ',43:'恰恰    ',44:'Zumba   ',45:'游泳   ',46:'动感单车',121:'321321',122:'3213'},'减肥塑形':{47:'高温瑜伽',48:'心灵瑜伽',49:'三维瑜伽',50:'哈达瑜伽',51:'流瑜伽',52:'阴瑜伽',53:'阿斯汤加  ',54:'热瑜伽  ',55:'香薰瑜伽',56:'减腹操   ',57:'平衡操  ',58:'腹背训练  ',59:'普拉提    ',60:'哑铃踏板    ',61:'健身球    ',62:'慢跑  ',63:'动感单车'},'力量训练':{64:'哑铃操 ',65:'固定器械：哑铃、杠铃',66:'组合器械'}};
+        var instructorhash={};
 	</script>
 	</body>
 </html>
