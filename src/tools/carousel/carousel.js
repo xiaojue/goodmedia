@@ -74,26 +74,50 @@
 			}
 		}();
 		
-		_carousel.prototype={
+		_carousel._init.prototype={
 			forward:function(){
-				
+				var that=this,config=that.config,
+					l=$(config.wrap).find(config.wrapitem).length;
+				config.current++;
+				if(config.current>l-1) config.current=0;
+				that.to(config.current);
 			},
 			backward:function(){
-				
+				var that=this,config=that.config,
+					l=$(config.wrap).find(config.wrapitem).length;
+				config.current--;
+				if(config.current<0) config.current=l-1;
+				that.to(config.current);
 			},
 			to:function(guide){
+				var that=this,config=that.config,moveObj={},
+					Realwrap=$(config.wrap).find('.fixclear'),
+					l=$(config.wrap).find(config.wrapitem).length;
 				
+				if(guide>l || guide<0) return;
+					
+				if(config.direction=='left'){
+					moveObj={'left':'-'+$(config.wrap).width()*guide}
+				}else if(config.direction=='top'){
+					moveObj={'top':'-'+$(config.wrap).height()*guide}
+				}
+								
+				Realwrap.animate(moveObj,500,that.after);
 			},
 			stop:function(){
+				var that=this,config=that.config;
 				
 			},
 			auto:function(){
+				var that=this,config=that.config;
 				
 			},
 			before:function(){
+				var that=this,config=that.config;
 				
 			},
 			after:function(){
+				var that=this,config=that.config;
 				
 			}
 		};
