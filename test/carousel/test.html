@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>carousel</title>
+		<script src="../../jquery/jquery-1.6.2.js"  charset=”UTF-8″></script>
+		<script src="../../bulid/GM.js" type="text/javascript"  charset=”UTF-8″></script>
+		
+	</head>
+	<body>
+		<style>
+			.fixclear{
+				zoom:1;
+			}
+		    .fixclear:after{
+		    	content: '\0020';
+				display: block;
+				height: 0;
+				clear: both;
+		    }
+			#main{
+				border:#ccc solid 1px;
+			}
+			.item{
+				background:#eee;
+				width:500px;
+				height:500px;
+				border:red solid 1px;
+			}
+		</style>
+		
+		<div id="main">
+			<div class="item">1</div>
+			<div class="item">2</div>
+			<div class="item">3</div>
+			<div class="item">4</div>
+		</div>
+		<script>
+			$.carousel({
+				wrap:'#main',
+				wrapitem:'.item'
+			});
+		</script>
+	</body>
+</html>

@@ -10,6 +10,7 @@
 	var overlay=function(cg){
 
 		var _overlay=function(){
+			
 			return {
 				_init:function(o){
 					/**
@@ -36,6 +37,7 @@
 
 				}
 			}
+			
 		}();
 
 		/**

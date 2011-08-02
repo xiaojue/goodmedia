@@ -548,33 +548,44 @@
 							alert('请填写特色项目');
 							return;
 						} 
-						var itemname=parent$('#J_AddinOneItem').val(),setNo=$('input[name="siteno"]').val();
+						var itemname=parent$('#J_AddinOneItem').val(),setNo=$('input[name="siteno"]').val(),
+							typevalue=parent$('input[name="type"]:checked').val();
+						
+						var ftype={
+							'强身健体':1,
+							'减肥塑形':2,
+							'力量训练':3,
+							'其他运动':4
+						};
+						
 						$.ajax({
-							url:'/course/fitItemAjax.jsp?op=addfit&ftype=1&siteno='+setNo+'&name='+itemname,
+							url:'/course/fitItemAjax.jsp?op=addfit&ftype='+ftype[typevalue]+'&siteno='+setNo+'&name='+itemname,
 							success:function(str){
 								var result=parseInt($.trim(str));
-								if(result==0){
+								if(result<0){  //result为ID
 									alert('添加失败');
 								}else{
 									alert('添加项目成功');
 									var lastul=parent$('#J_Itemwrap>ul:last');
 									if(lastul.children('li').length==6){
-										lastul.after('<ul><li>'+itemname+'</li></ul>');
+										lastul.after('<ul><li data-value="'+result+'">'+itemname+'</li></ul>');
 									}else{
-										lastul.append('<li>'+itemname+'</li>');
+										lastul.append('<li data-value="'+result+'">'+itemname+'</li>');
 									}
 									
-									
 									var type;
+									
 									parent$('.J_CourseType').each(function(index,item){
 										if(item.checked) type=item.value;
 									});
-									W.coursehash[type][999]=itemname;
+									
+									W.coursehash[type][result]=itemname;
 								}
 							},
 							error:function(){
 								alert('相应超时，请重新添加');
-							}
+							},
+							timeout:5000
 						});
 					});
 					
