@@ -15,7 +15,7 @@
 					
 					function getaction(){
 						
-						if($(this).val()==$(this).attr('data-old')) return;
+						if($(this).val()==$(this).attr('data-old') || $(this).val()=="-1") return;
 						
 						var overlaystr='<div class="popup1_rounded">'+
 									    '<div class="popup1_cont">'+
