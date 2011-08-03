@@ -22,7 +22,7 @@
 									        '<div class="close"><img src="http://x.idongmi.com/static/images/tab_ico.gif" class="J_OverlayClose"></div>'+
 									        '<div class="text" id="J_MainText"><img src="http://x.idongmi.com/static/images/loading.gif" alt="loading"></div>'+
 									        '<div class="pop_but">'+
-									        	'<input type="button" class="space_button" value="确认" class="J_OverlayClose">'+
+									        	'<input type="button" class="space_button J_OverlayClose" value="确认">'+
 									        '</div>'+
 									    '</div>'+
 									    '<div class="clear"></div>'+
@@ -33,10 +33,15 @@
 						var setobj={};
 						
 						$(this).parents('form').children('input,select').each(function(){
-							console.log($(this).attr('name'));
 							var name=$(this).attr('name'),value=$(this).val();
 							setobj[name]=value;
 						});
+						
+						if($(this).attr('type')=='text'){
+							setobj['pname']=$(this).val();
+						}else if(this.tagName.toLowerCase()=='select'){
+							setobj['movecolid']=$(this).val();
+						}
 						
 						$.ajax({
 							url:'/photo/photoAction.jsp',
@@ -60,7 +65,7 @@
 											if(window.location.href.match('reload=1')){
 												window.location.reload();
 											}else{
-												window.location.href+='reload=1'
+												window.location.href+='&reload=1'
 											}
 										}
 									}
@@ -79,7 +84,13 @@
 						$(this).attr('data-old',$(this).val());
 					};
 					
-					$('.editor_box1,.editor_box').focus(saveValue).blur(getaction);
+					$('.editor_box1,.editor_box').focus(saveValue).blur(getaction).each(function(){
+						$(this).keydown(function(e){
+							if(e.keyCode==13){
+								return false;
+							}
+						});
+					});
 					
 					$('.editor_box2').change(getaction);
 					

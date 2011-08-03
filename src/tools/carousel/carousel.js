@@ -37,11 +37,15 @@
 					'position':'relative',
 					'width':firstChild.outerWidth(),
 					'height':firstChild.outerHeight()
-				}).append(WrapDiv);
+				}).prepend(WrapDiv);
 				
 				$(wrap).find(wrapitem).appendTo(WrapDiv);
 				
 				$(wrapitem).css('float','left');
+				
+				if($(wrap).find('.fixclear').length>1){
+					$(wrap).find('.fixclear').last().remove();
+				}
 				
 			};
 			
@@ -62,7 +66,10 @@
 						wrap:'',
 						wrapitem:'',
 						direction:'left',
-						current:0
+						before:function(){},
+						after:function(){},
+						current:0,
+						endflg:true
 					};
 
 					$.extend(_o,o);
@@ -78,16 +85,22 @@
 			forward:function(){
 				var that=this,config=that.config,
 					l=$(config.wrap).find(config.wrapitem).length;
-				config.current++;
-				if(config.current>l-1) config.current=0;
-				that.to(config.current);
+				if(config.endflg){
+					config.endflg=false;
+					config.current++;
+					if(config.current>l-1) config.current=0;
+					that.to(config.current);
+				}
 			},
 			backward:function(){
 				var that=this,config=that.config,
 					l=$(config.wrap).find(config.wrapitem).length;
-				config.current--;
-				if(config.current<0) config.current=l-1;
-				that.to(config.current);
+				if(config.endflg){
+					config.endflg=false;
+					config.current--;
+					if(config.current<0) config.current=l-1;
+					that.to(config.current);
+				}
 			},
 			to:function(guide){
 				var that=this,config=that.config,moveObj={},
@@ -95,14 +108,17 @@
 					l=$(config.wrap).find(config.wrapitem).length;
 				
 				if(guide>l || guide<0) return;
-					
+				
 				if(config.direction=='left'){
 					moveObj={'left':'-'+$(config.wrap).width()*guide}
 				}else if(config.direction=='top'){
 					moveObj={'top':'-'+$(config.wrap).height()*guide}
 				}
-								
-				Realwrap.animate(moveObj,500,that.after);
+				that.before(guide);			
+				Realwrap.animate(moveObj,500,function(){
+					that.after(guide);
+					config.endflg=true;
+				});
 			},
 			stop:function(){
 				var that=this,config=that.config;
@@ -112,13 +128,13 @@
 				var that=this,config=that.config;
 				
 			},
-			before:function(){
+			before:function(current){
 				var that=this,config=that.config;
-				
+				config.before(current);
 			},
-			after:function(){
+			after:function(current){
 				var that=this,config=that.config;
-				
+				config.after(current);
 			}
 		};
 		

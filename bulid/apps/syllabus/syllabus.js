@@ -84,7 +84,7 @@
             var returnlist='',data=obj[name],j=0;
             if(name=="") data=obj;
 			for(var i in data){
-                if(j%maxli==0) returnlist+='<ul>';
+                if(j%maxli==0) returnlist+='<ul class="J_Item">';
                 returnlist+='<li data-value="'+i+'">'+data[i]+'</li>';
                 if(j%maxli==maxli-1 || i==data.length-1) returnlist+='</ul>'; 
                 j++; 
@@ -144,7 +144,12 @@
 			courseid=null,
 			coursetype=null,
 			courseitmeid=null,
-			coachid=null;		
+			coachid=null,
+			cnstructorname=null;	
+		
+		var Itemwrap={};
+		var Coachwrap={};
+		
 		
 		return {
 			'exports':{
@@ -174,7 +179,13 @@
 					'.J_Operation',
 					'#J_CourseEdit',
 					'#J_SubmitOtherTable',
-					'.J_RmoveUp'];
+					'.J_RmoveUp',
+					'#J_Itemleft',
+					'#J_Itemright',
+					'#J_AddinOneStructor',
+					'#J_OneStructorSub',
+					'#J_Coachleft',
+					'#J_Coachright'];
 					
 					$.each(dieAry,function(index,el){
 						parent$(el).die();
@@ -378,15 +389,25 @@
 							return ary;
 						}();
 						
-						var items=bulidul(W.coursehash,courseary[0],6),
-							instructor=bulidul(W.instructorhash,'',6);
+						var items=bulidul(W.coursehash,courseary[0],18),
+							instructor=function(){
+								var returnlist='',data=W.instructorhash;
+								for(var i=0;i<data.length;i++){
+					                if(i%18==0) returnlist+='<ul class="J_Item">';
+					                returnlist+='<li data-value="'+data[i][0]+'">'+data[i][1]+'</li>';
+					                if(i%18==18-1 || i==data.length-1) returnlist+='</ul>'; 
+								};
+								if(returnlist=="") returnlist='<ul class="J_Item"></ul>';
+								return returnlist;
+							}();
 							
 						if(name=="编辑课程"){
 							courseid=$(that).parent().parent().attr('data-courseid');
 							coursetype=$(that).parent().parent().attr('data-itemtype');
 							courseitmeid=$(that).parent().parent().attr('data-itemid');
 							coachid=$(that).parent().parent().attr('data-coachid');
-							items=bulidul(W.coursehash,coursetype,6);
+							cnstructorname=$(that).parent().parent().attr('data-cnstructorname');
+							items=bulidul(W.coursehash,coursetype,18);
 						}
 						
 						var	type=function(){
@@ -415,11 +436,11 @@
 		                    '<div class="course_right">'+
 		                        '<div class="cour_title">课程项目</div>'+
 		                        '<div class="cour_txt">'+
-		                           // '<a href="#"><img class="cour_img1" src="http://x.idongmi.com/static/images/schedule_left.gif"></a>'+
+		                            '<a href="javascript:void(0);" id="J_Itemleft"><img class="cour_img1" src="http://x.idongmi.com/static/images/schedule_left.gif"></a>'+
 		                            '<div class="cour_text" id="J_Itemwrap">'+
 		                                items+
 		                            '</div>'+
-		                          //  '<a href="#"><img class="cour_img2" src="http://x.idongmi.com/static/images/schedule_right.gif"></a>'+
+		                            '<a href="javascript:void(0);" id="J_Itemright"><img class="cour_img2" src="http://x.idongmi.com/static/images/schedule_right.gif"></a>'+
 		                            '<div class="clear"></div>'+
 		                        '</div>'+
 		                        '<div class="cour_but"><input type="text" class="cour_input" value="添加特色项目" id="J_AddinOneItem"><input type="button" class="cour_btn" id="J_OneItemSub"></div>'+
@@ -432,14 +453,14 @@
 		                    '<div class="course_right">'+
 		                        '<div class="cour_title">任课教练</div>'+
 		                        '<div class="cour_txt">'+
-		                        //    '<a href="#"><img class="cour_img1" src="http://x.idongmi.com/static/images/schedule_left.gif"></a>'+
+		                            '<a href="javascript:void(0);" id="J_Coachleft"><img class="cour_img1" src="http://x.idongmi.com/static/images/schedule_left.gif"></a>'+
 		                            '<div class="cour_text" id="J_Instructorwrap">'+
 		                                instructor+
 		                            '</div>'+
-		                        //    '<a href="#"><img class="cour_img2" src="http://x.idongmi.com/static/images/schedule_right.gif"></a>'+
+		                            '<a href="javascript:void(0);" id="J_Coachright"><img class="cour_img2" src="http://x.idongmi.com/static/images/schedule_right.gif"></a>'+
 		                            '<div class="clear"></div>'+
 		                        '</div>'+
-		                        '<div class="cour_but" style="visibility:hidden;"><input type="text" class="cour_input" value="添加任课教练" id="J_AddinOneStructor"><input type="button" class="cour_btn" id="J_OneStructorSub"></div>'+
+		                        '<div class="cour_but"><input type="text" class="cour_input" value="添加任课教练" id="J_AddinOneStructor"><input type="button" class="cour_btn" id="J_OneStructorSub"></div>'+
 		                    '</div>'+
 		                    '<div class="clear"></div>'+
 		                '</div>'+
@@ -458,6 +479,7 @@
 		                   		'<option value="18">18</option>'+
 		                   		'<option value="19">19</option>'+
 		                   		'<option value="20">20</option>'+
+		                   		'<option value="21">21</option>'+
 		                   	'</select>时<input type="text" class="cour_box2" id="J_StartMinute">分</span><span>'+
 		                   	'<select id="J_EndHour" class="cour_box1">'+
 		                   	'<option value="10">10</option>'+
@@ -482,6 +504,16 @@
 						parentGM.tools.overlay.reset(512,530);
 						parentGM.tools.overlay.fire(addCoursestr);
 						
+						Coachwrap=parent$.carousel({
+							wrap:'#J_Instructorwrap',
+							wrapitem:'.J_Item'
+						});
+						
+						Itemwrap=parent$.carousel({
+							wrap:'#J_Itemwrap',
+							wrapitem:'.J_Item'
+						});
+						
 						var day=$(that).parent().parent().attr('data-day'),
 							section=$(that).parent().parent().attr('data-section');
 							
@@ -495,9 +527,20 @@
 						});
 						
 						if(name=="编辑课程"){
+							var coachisnow,itemisnow;
 							parent$('#J_Itemwrap li[data-value="'+courseitmeid+'"]').addClass('checked');
-							parent$('#J_Instructorwrap li[data-value="'+coachid+'"]').addClass('checked');
+							parent$('#J_Instructorwrap li').each(function(){
+								if($(this).text()==cnstructorname){
+									$(this).addClass('checked');
+									coachisnow=$(this).parent('ul').index();
+								} 
+							})
 							parent$('input[value="'+coursetype+'"]').attr('checked','checked');
+							
+							itemisnow=parent$('#J_Itemwrap li[data-value="'+courseitmeid+'"]').parent('ul').index();
+								
+							if(itemisnow) Itemwrap.to(itemisnow);
+							if(coachisnow) Coachwrap.to(coachisnow);
 						}
 						
 						
@@ -522,14 +565,15 @@
 						course('编辑课程',this);
 					});
 					
+					
 					//ajax提交教练和项目
-					/*
+					
 					parent$('#J_AddinOneStructor').live('focus',function(){
 						if($(this).val()=='添加任课教练') $(this).val('');
 					}).live('blur',function(){
 						if($(this).val()=='') $(this).val('添加任课教练');
 					});
-					*/
+					
 					
 					parent$('#J_AddinOneItem').live('focus',function(){
 						if($(this).val()=='添加特色项目') $(this).val('');
@@ -537,17 +581,64 @@
 						if($(this).val()=='') $(this).val('添加特色项目');
 					});
 					
-					/*
+					
 					parent$('#J_OneStructorSub').live('click',function(){
-						if(parent$('#J_AddinOneStructor').val()=='添加任课教练' || parent$('#J_AddinOneStructor').val()=="") alert('请填写任课教练');
+						if(parent$('#J_AddinOneStructor').val()=='添加任课教练' || parent$('#J_AddinOneStructor').val()==""){
+							alert('请填写任课教练');
+							return;
+						} 
+						
+						if(parent$('#J_AddinOneStructor').val().length>15){
+							alert('长度请再0-15个字之间')
+							return;
+						}
+						
+						var setNo=$('input[name="siteno"]').val(),
+							coachname=parent$('#J_AddinOneStructor').val();
+						
+						$.ajax({
+							url:'/course/courseAjax.jsp?op=addcoach&siteno='+setNo+'&coachname='+coachname,
+							success:function(str){
+								var result=parseInt($.trim(str));
+								if(result==0){
+									alert('添加失败，可能重名或者网络原因');
+								}else{
+									var lastul=parent$('#J_Instructorwrap ul:last');
+									if(lastul.children('li').length==18){
+										lastul.after('<ul><li>'+coachname+'</li></ul>');
+									}else{
+										lastul.append('<li>'+coachname+'</li>');
+									}
+									W.instructorhash.push([0,coachname]);
+									
+									Coachwrap=parent$.carousel({
+										wrap:'#J_Instructorwrap',
+										wrapitem:'.J_Item'
+									});
+									var last=parent$('#J_Instructorwrap ul').length;
+									Coachwrap.to(last-1);
+								}
+							},
+							error:function(){
+								alert('相应超时，请重新添加');
+							},
+							timeout:5000
+						})
+					
 					});
-					*/
+					
 					
 					parent$('#J_OneItemSub').live('click',function(){
 						if(parent$('#J_AddinOneItem').val()=='添加特色项目' || parent$('#J_AddinOneItem').val()==""){
 							alert('请填写特色项目');
 							return;
 						} 
+						
+						if(parent$('#J_AddinOneItem').val().length>15){
+							alert('长度请再0-15个字之间')
+							return;
+						}
+						
 						var itemname=parent$('#J_AddinOneItem').val(),setNo=$('input[name="siteno"]').val(),
 							typevalue=parent$('input[name="type"]:checked').val();
 						
@@ -562,12 +653,11 @@
 							url:'/course/fitItemAjax.jsp?op=addfit&ftype='+ftype[typevalue]+'&siteno='+setNo+'&name='+itemname,
 							success:function(str){
 								var result=parseInt($.trim(str));
-								if(result<0){  //result为ID
-									alert('添加失败');
+								if(result<=0){  //result为ID
+									alert('添加失败，可能网络原因或有重名项目');
 								}else{
-									alert('添加项目成功');
-									var lastul=parent$('#J_Itemwrap>ul:last');
-									if(lastul.children('li').length==6){
+									var lastul=parent$('#J_Itemwrap ul:last');
+									if(lastul.children('li').length==18){
 										lastul.after('<ul><li data-value="'+result+'">'+itemname+'</li></ul>');
 									}else{
 										lastul.append('<li data-value="'+result+'">'+itemname+'</li>');
@@ -580,6 +670,13 @@
 									});
 									
 									W.coursehash[type][result]=itemname;
+									
+									Itemwrap=parent$.carousel({
+										wrap:'#J_Itemwrap',
+										wrapitem:'.J_Item'
+									});
+									var last=parent$('#J_Itemwrap ul').length;
+									Itemwrap.to(last-1);
 								}
 							},
 							error:function(){
@@ -606,12 +703,13 @@
 							return;
 						}
 						
-						var instructor=false,instructorvalue;
+						var instructor=false,instructorvalue,instructorname;
 						
 						parent$('#J_Instructorwrap li').each(function(){
 							if($(this).hasClass('checked')){
 								itemisChecked=true;
 								instructorvalue=$(this).attr('data-value');
+								instructorname=$(this).text();
 							}
 						});
 						
@@ -656,14 +754,16 @@
 						var stime=sh+':'+sm+':00',etime=eh+':'+em+':00';
 						
 						if(type==1){
-							$('#J_instructorID').val(instructorvalue);		
+							$('#J_instructorID').val(instructorvalue);	
+							$('#J_instructorName').val(instructorname);	
 							$('#J_itemID').val(itemvalue);
 							$('#J_Stime').val(stime);
 							$('#J_Etime').val(etime);
 							$('#J_Day').val(dataday);
 							$('#J_RoomID').val(roomid);
 						}else if(type==2){
-							$('#J_editinstructorID').val(instructorvalue);		
+							$('#J_editinstructorID').val(instructorvalue);
+							$('#J_editinstructorName').val(instructorname);			
 							$('#J_edititemID').val(itemvalue);
 							$('#J_editStime').val(stime);
 							$('#J_editEtime').val(etime);
@@ -673,15 +773,13 @@
 						}
 						
 						
-						if(confirm('确定要操作课表么?')){
-							//iframe里的一个表单进行直接提交
-							if(type==1){
-								$('#J_AddCourseCommit').submit();
-							}else if(type==2){
-								$('#J_EditCourse').submit();
-							}
-							parentGM.tools.overlay.close(); //关闭浮出层
+						//iframe里的一个表单进行直接提交
+						if(type==1){
+							$('#J_AddCourseCommit').submit();
+						}else if(type==2){
+							$('#J_EditCourse').submit();
 						}
+						parentGM.tools.overlay.close(); //关闭浮出层
 					}
 					
 					
@@ -716,7 +814,27 @@
 					//选择项目类型，切换对应ul列表
 					parent$('.J_CourseType').live('click',function(){
 						var type=$(this).val();
-						parent$('#J_Itemwrap').html(bulidul(W.coursehash,type,6));
+						parent$('#J_Itemwrap').html(bulidul(W.coursehash,type,18));
+						Itemwrap=parent$.carousel({
+							wrap:'#J_Itemwrap',
+							wrapitem:'.J_Item'
+						});
+					});
+					
+					parent$('#J_Itemleft').live('click',function(){
+						Itemwrap.backward();
+					});
+					
+					parent$('#J_Itemright').live('click',function(){
+						Itemwrap.forward();
+					});
+					
+					parent$('#J_Coachleft').live('click',function(){
+						Coachwrap.backward();
+					});
+					
+					parent$('#J_Coachright').live('click',function(){
+						Coachwrap.forward();
 					});
 					
 					
