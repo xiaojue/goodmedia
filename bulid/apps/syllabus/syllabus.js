@@ -85,7 +85,7 @@
             if(name=="") data=obj;
 			for(var i in data){
                 if(j%maxli==0) returnlist+='<ul class="J_Item">';
-                returnlist+='<li data-value="'+i+'">'+data[i]+'</li>';
+                returnlist+='<li data-value="'+i+'">'+data[i].slice(0,-1)+'</li>';
                 if(j%maxli==maxli-1 || i==data.length-1) returnlist+='</ul>'; 
                 j++; 
 			}
@@ -597,7 +597,7 @@
 							coachname=parent$('#J_AddinOneStructor').val();
 						
 						$.ajax({
-							url:'/course/courseAjax.jsp?op=addcoach&siteno='+setNo+'&coachname='+coachname,
+							url:'/course/courseAjax.jsp?op=addcoach&siteno='+setNo+'&coachname='+encodeURI(coachname),
 							success:function(str){
 								var result=parseInt($.trim(str));
 								if(result==0){
@@ -650,7 +650,7 @@
 						};
 						
 						$.ajax({
-							url:'/course/fitItemAjax.jsp?op=addfit&ftype='+ftype[typevalue]+'&siteno='+setNo+'&name='+itemname,
+							url:'/course/fitItemAjax.jsp?op=addfit&ftype='+ftype[typevalue]+'&siteno='+setNo+'&name='+encodeURI(itemname),
 							success:function(str){
 								var result=parseInt($.trim(str));
 								if(result<=0){  //result为ID
@@ -669,7 +669,7 @@
 										if(item.checked) type=item.value;
 									});
 									
-									W.coursehash[type][result]=itemname;
+									W.coursehash[type][result]=itemname+'0';
 									
 									Itemwrap=parent$.carousel({
 										wrap:'#J_Itemwrap',
@@ -733,8 +733,8 @@
 							return;
 						}
 						
-						if(sm>60 || sm<0 || em>60 || sm<0){
-							alert('分钟数必须在00-60之间');
+						if(sm>59 || sm<0 || em>59 || sm<0){
+							alert('分钟数必须在00-59之间');
 							return;
 						}
 						

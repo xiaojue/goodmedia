@@ -397,6 +397,39 @@
 })(window,document,jQuery,GM);
 /**
  * @author fuqiang
+ * @date 20110804
+ * 内部似有方法，分享消息到新浪微博
+ * 
+ */
+(function(W,G){
+	
+	var sharetosina=function(data){
+		
+		if(!data) return;
+		
+		var url="/course/courseAction.jsp";
+		
+		$.ajax({
+			url:url,
+			data:data,
+			success:function(result){
+				if($.trim(result)==1){
+					alert('分享成功！');
+				}else{
+					alert('网络超时,请重试');
+				}	
+			},
+			error:function(){
+				alert('网络超时,请重试');
+			},
+			timeout:5000
+		})
+	}
+	
+	if(G && G.widget) G.widget.sharetosina=sharetosina;
+	
+})(window,GM);/**
+ * @author fuqiang
  * @date 20110725
  * 联动地区菜单
  */
@@ -492,6 +525,7 @@
 				     	var districts=ary[1].split(',');
 						if($(pbid).val()==city){
 							$(pserid).html('');
+							$(pserid).append('<option value="0">请选择城区</option>')
 							for(var j=0;j<districts.length;j++){
 								$(pserid).append('<option value="'+districts[j]+'">'+districts[j]+'</option>');
 							}
@@ -637,5 +671,86 @@
 	};
 	
 	if(G && G.widget) G.widget.countdown=countdown;
+	
+})(window,GM);/**
+ * @author fuqiang [designsor@gmail.com]
+ * @date 20110805
+ * google map api 接口实现地理定位
+ */
+(function(W,G){
+	
+	var map=function(cg){
+		
+		if(!cg) return;
+				
+		var _cg={
+			key:'ABQIAAAAq1Xa--vGn1SHR7koD9Xm5BTH1Hm64R_rmx_EQUiffvQevaq2UBRrPuG81MSPhtwwqbqzLlB64UAGyw', //默认key
+			q:'',
+			markerhtml:'',
+			target:'',
+			width:400,
+			height:400
+		};
+		
+		$.extend(_cg,cg);
+		
+		this.digit=new Date().valueOf();
+		this.apiuri='http://maps.google.com/maps/geo?q='+encodeURI(_cg.q)+
+				   '&output=json&callback=GM.widget.map.callback'+this.digit+'&oe=utf8\&sensor=false&key='+_cg.key;
+		this.q=_cg.q;
+		this.markerhtml=_cg.markerhtml;
+		this.target=_cg.target;
+		this.width=_cg.width;
+		this.height=_cg.height;
+		
+	};
+	
+	map.prototype={
+		init:function(){
+			var that=this;
+			$.getScript(that.apiuri,that.drawmap);
+			GM.widget.map['callback'+that.digit]=function(data){
+				if(data.Status.code==200){
+					console.log(data)
+					/*placemark是一个数组，可能查出多个地址，以第一个地址为准*/
+					var coord=data.Placemark[0].Point.coordinates,
+						name=data.name,
+						target=document.getElementById(that.target);
+						
+        				if(google){
+	        				geocoder = new google.maps.Geocoder();
+						    var latlng = new google.maps.LatLng(coord[1],coord[0]); //首次加载定义的中心点
+						    var myOptions = {
+						        zoom:12,
+						        center:latlng,
+						        mapTypeId: google.maps.MapTypeId.ROADMAP
+						      };
+						    map=new google.maps.Map(target,myOptions);//载入地图
+						    
+						    var marker = new google.maps.Marker({
+						    	 title:name,     
+       							 position: latlng,         
+      						 	 map: map
+      						});
+      						    
+      						var infowindow = new google.maps.InfoWindow({
+							    content:that.markerhtml
+							});
+
+						    google.maps.event.addListener(marker,'click', function () {
+						    	infowindow.open(map,marker);
+				            });
+				            
+	        				target.style.cssText+='width:'+that.width+'px;height:'+that.height+'px;' //设置高宽
+					    }
+					 
+				}else{
+					alert('地图初始化失败,搜索地区不存在');	
+				}
+			}
+		}
+	};
+	
+	if(G && G.widget) G.widget.map=map;
 	
 })(window,GM);

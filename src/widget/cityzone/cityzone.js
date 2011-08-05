@@ -95,6 +95,7 @@
 				     	var districts=ary[1].split(',');
 						if($(pbid).val()==city){
 							$(pserid).html('');
+							$(pserid).append('<option value="0">请选择城区</option>')
 							for(var j=0;j<districts.length;j++){
 								$(pserid).append('<option value="'+districts[j]+'">'+districts[j]+'</option>');
 							}

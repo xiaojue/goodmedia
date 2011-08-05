@@ -27,9 +27,11 @@
 			tools\overlay\overlay.js
 			tools\carousel\carousel.js
 			tools\bubble\bubble.js
+			widget\sharetosina\sharetosina.js
 			widget\cityzone\cityzone.js
 			widget\detercopy\detercopy.js
-			widget\saycountdown\saycountdown.js"/>
+			widget\saycountdown\saycountdown.js
+			widget\map\map.js"/>
 		</concat>
 		
 		<!--删除所有合并文件，只留出最后的GMsource和GMmin文件-->
@@ -75,7 +77,7 @@
 		</apply>
 		
 		<!--部署-->
-
+		<!--
 		<delete dir="${GMonline.dir}"/>
 		<mkdir dir="${GMonline.dir}"/>
 		<copy todir="${GMonline.dir}" encoding="UTF-8" outputencoding="UTF-8">
@@ -88,6 +90,6 @@
 			<fileset dir="${GM.dir}" includes="jquery/jquery-1.6.2.js"/>
 			<fileset dir="${GM.dir}" includes="jquery/jquery-1.6.2.min.js"/>
 		</copy>
-	
+		-->
 	</target>
 </project>
