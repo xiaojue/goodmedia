@@ -643,10 +643,11 @@
 							typevalue=parent$('input[name="type"]:checked').val();
 						
 						var ftype={
-							'强身健体':1,
-							'减肥塑形':2,
-							'力量训练':3,
-							'其他运动':4
+							 "有氧类课程":1,
+							 "肌力训练课程":2,
+							 "身心类课程":3,
+							 "特色课程":4,
+							 "其他":5
 						};
 						
 						$.ajax({
@@ -746,8 +747,8 @@
 							return;
 						}
 						
-						if(sh==eh && sm<em){
-							alert('开始时间不能大于结束时间');
+						if(sh==eh && sm>=em){
+							alert('开始时间不能大于或等于结束时间');
 							return;
 						}
 						

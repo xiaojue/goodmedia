@@ -2,28 +2,25 @@
 <html>
 	<head>
 		<title>map</title>
-		<script src="../../jquery/jquery-1.6.2.js"></script>
-		<script src="../../bulid/GM.js" type="text/javascript"></script>
+		<script src="http://localhost/gm/jquery/jquery-1.6.2.js"></script>
+		<script src="http://localhost/gm/bulid/GM.js" type="text/javascript"></script>
 		<script type="text/javascript" src="http://ditu.google.cn/maps/api/js?sensor=false"></script>
 		
 	</head>
 	<body>
+		
 		<div id="J_MAP_Target"></div>
+		
 		<script>
 		(function(){
 			$(function(){
 				var map1=new GM.widget.map({
-					q:'北京市',
+					q:'上海闸北区',
 					markerhtml:'这里是北京市',
 					target:'J_MAP_Target',
-					width:500,
-					height:350
+					width:240,
+					height:240
 				}).init();
-				/**
-				var map2=new GM.widget.map({
-					q:'杭州市'
-				}).init();
-				*/
 			});
 		})();
 		</script>
