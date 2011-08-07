@@ -729,11 +729,11 @@
 			
 			//bulid bar
 			function bulidbar(target){
-				var bar='<ul>'+
-						'<li><a href="javascript:void(0);" class="J_LookBigMap">查看全图</a></li>'+
-						'<li><a href="javascript:void(0);" class="J_LookWay">公交/驾车</a></li>'+
-						'<ul>';
-						
+				var bar='<ul style="margin: 5px 0pt;width:240px;padding:0px;">'+
+						'<li style="float: left; display: block; margin: 0pt 10px;line-height:12px;font-size:12px;"><a style="color:#4077C7;" href="javascript:void(0);" class="J_LookBigMap">查看全图</a></li>'+
+						'<li style="float: left; display: block; margin: 0pt 10px;line-height:12px;font-size:12px;"><a style="color:#4077C7;" href="javascript:void(0);" class="J_LookWay">公交/驾车</a></li>'+
+						'<li style="float: left; display: block; margin: 0pt 10px;line-height:12px;font-size:12px;"><a style="color:#4077C7;" href="javascript:void(0);" class="J_EditMap">修订坐标</a></li>'+
+						'</ul>';
 				$('#'+target).after(bar);
 			};
 			
@@ -747,6 +747,7 @@
 			
 			//取得经纬度坐标的回调函数
 			GM.widget.map['callback'+that.digit]=function(data){
+				console.log(data);
 				timeout=false;
 				var target=document.getElementById(that.target);
 				if(data.Status.code==200){
@@ -771,14 +772,16 @@
        							 position: latlng,         
       						 	 map: map
       						});
-      						    
-      						var infowindow = new google.maps.InfoWindow({
+      						
+      						if(that.markerhtml!=""){
+      							var infowindow = new google.maps.InfoWindow({
 							    content:that.markerhtml
-							});
-
-						    google.maps.event.addListener(marker,'click', function () {
-						    	infowindow.open(map,marker);
-				            });
+								});
+	
+							    google.maps.event.addListener(marker,'click', function () {
+							    	infowindow.open(map,marker);
+					            });
+      						}    
 				            
 					    }
 				}else{
@@ -828,16 +831,20 @@
 				//查询路线
 				$('.J_LookWay').live('click',function(){
 					if(that.coord){
-						var Way='<div style="position:relative;width:300px;height:200px;border:#ccc solid 2px;background:#fff;">'+
-							'<form action="http://ditu.google.cn/maps" method="get" target="_blank">'+
-								'<h3>所在地交通查询</h3>'+
-								'<p>出发地 <input value="" id="J_Start" type="text" name="saddr"/></p>'+
-								'<p><input value="确定" type="submit"/></p>'+
+						var Way='<div style="position:relative;width:300px;height:100px;border:#ccc solid 2px;background:#fff;">'+
+							'<form action="http://ditu.google.cn/maps" method="get" target="_blank" style="padding: 10px; text-align: center;">'+
+								'<div style="color:#78A000; font-size: 14px; font-weight: bold;">请输入出发所在地</div>'+
+								'<div style="margin: 10px 0pt;">'+
+								'<span style="margin-right: 10px;font-size:12px;">出发地</span>'+
+								'<input type="text" name="saddr" value="" class="profile_box1">'+
+								'</div>'+
+								'<div><input type="submit" value="确认" class="space_button"></div>'+
 								'<input value="'+that.q+'" type="hidden" name="daddr"/>'+
 							'</form>'+
 							'<a href="javascript:void(0);" class="J_OverlayClose" style="position:absolute;right:-10px;top:-10px;display:block;width:15px;height:15px;background:#000;color:#fff;line-height:15px;text-align:center;">&times</a>'+
 							'</div>';
-						GM.tools.overlay.reset(300,200);
+							
+						GM.tools.overlay.reset(300,100);
 						GM.tools.overlay.fire(Way);
 					}else{
 						errorClick();
@@ -847,6 +854,29 @@
 				//关闭覆层，注销map
 				$('.J_OverlayClose').live('click',function(){
 					GM.tools.overlay.close();
+				});
+				
+				//修改坐标
+				$('.J_EditMap').live('click',function(){
+					if(that.coord){
+						var diget=new Date().valueOf(),
+							BigMap='<div style="position:relative;width:500px;width:500px;border:#ccc solid 2px;">'+
+							'<div id="J_Map_'+diget+'"></div>'+
+								'<a href="javascript:void(0);" class="J_OverlayClose" style="position:absolute;right:-10px;top:-10px;display:block;width:15px;height:15px;background:#000;color:#fff;line-height:15px;text-align:center;">&times</a>'+
+							'</div>';
+						GM.tools.overlay.reset(500,500);
+						GM.tools.overlay.fire(BigMap);
+						var map=new GM.widget.map({
+							q:that.q,
+							markerhtml:that.markerhtml,
+							target:'J_Map_'+diget,
+							width:500,
+							height:500,
+							bar:false
+						}).init();
+					}else{
+						errorClick();
+					}
 				});
 			};
 			

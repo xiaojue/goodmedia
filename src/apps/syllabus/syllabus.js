@@ -52,6 +52,9 @@
 					parent$('#J_Week').val(timeary[0]);
 					parent$('#J_Scope').val(timeary[1]);
 					$('#J_Selectday').val(time);
+					W.copyTableObject['selectday']=time;
+					W.copyTableObject['selectyear']=timeary[2];
+					W.copyTableObject['selectweek']=timeary[0];
 					$('#J_Selectyear').val(timeary[2]);
 					$('#J_Selectweek').val(timeary[0]);
 				},
@@ -59,11 +62,6 @@
 					alert('请求超时,请重新选择时间');
 				}
 			});
-		};
-		
-		//左右滚动
-		var scrollitem=function(data,left,right,temp){
-			
 		};
 		
 		//错误提示
@@ -185,7 +183,9 @@
 					'#J_AddinOneStructor',
 					'#J_OneStructorSub',
 					'#J_Coachleft',
-					'#J_Coachright'];
+					'#J_Coachright',
+					'#J_CopyTable',
+					'#J_CopyTableSub'];
 					
 					$.each(dieAry,function(index,el){
 						parent$(el).die();
@@ -226,15 +226,19 @@
 							}
 						});
 						
-						var CalendarWindow=parent$('#J_Calendar iframe')[0].contentWindow;
+						var CalendarWindow;
+						try{
+							CalendarWindow=parent$('#J_Calendar iframe')[0].contentWindow;
+						}catch(e){}
+						
 						
 						//设置初始项
 						var nowtime=new Date(),
 							y=nowtime.getFullYear(),
 							m=nowtime.getMonth(),
 							d=nowtime.getDate(),
-							m=(m.length>1)? '0'+m : m,
-							d=(d.length>1)? '0'+d : d,
+							m=(m.toString().length==1) ? '0'+m.toString() : m,
+							d=(d.toString().length==1) ? '0'+d.toString() : d,
 							timestr=y+'-'+m+'-'+d;
 						getTime(timestr);
 						
@@ -273,6 +277,106 @@
 						parent$('#J_YetRoom').attr('disabled',false);
 						parent$('#J_NewRoom').attr('disabled',true).val('');
 						
+					});
+					
+					
+					parent$('#J_CopyTable').live('click',function(){
+						
+						var CreateStr='<div id="J_Calendar" class="poput_left pop_color2"></div>'+
+									'<div class="poput_right" style="height:200px;">'+
+									'<div class="Kb_txt">'+
+									'<div class="Kb_text"><label for="J_Week"><span>课表周期</span><input type="text" size="8" id="J_Week" disabled="disabled"></label></div>'+
+									'<div class="Kb_text"><label for="J_Scope"><span>课表日期</span><input type="text" size="22" id="J_Scope" disabled="disabled"></label></div>'+
+									'</div>'+
+									'<div class="table_but"><input type="button" class="space_button" id="J_CopyTableSub" value="确认"><input type="button" class="J_OverlayClose space_button" value="取消"></div>'+
+									'</div><div class="clear"></div>';
+						
+						CreateStr=table512w('复制当前周课表',CreateStr);
+						
+						parentGM.tools.overlay.reset(512,285);
+						parentGM.tools.overlay.fire(CreateStr);
+						
+						
+						top.WdatePicker({
+							eCont:'J_Calendar',
+							firstDayOfWeek:1,
+							dateFmt:'yyyy-MM-dd',
+							onpicked:function(dp){
+								findtable();
+								var datestr=dp.cal.getDateStr();
+								//后台返回我多少周，区间，我进行填充。
+								getTime(datestr);
+							}
+						});
+						
+						var CalendarWindow;
+						try{
+							CalendarWindow=parent$('#J_Calendar iframe')[0].contentWindow;
+						}catch(e){}
+						
+						//设置初始项
+						var nowtime=new Date(),
+							y=nowtime.getFullYear(),
+							m=nowtime.getMonth(),
+							d=nowtime.getDate(),
+							m=(m.toString().length==1) ? '0'+m.toString() : m,
+							d=(d.toString().length==1) ? '0'+d.toString() : d,
+							timestr=y+'-'+m+'-'+d;
+						getTime(timestr);
+						
+						function addheighlight(table){
+							var tds=table.getElementsByTagName('td');
+							for(var i=0;i<tds.length;i++){
+								if(tds[i].className=="Wselday"){
+								 var lighttds=tds[i].parentNode.getElementsByTagName('td');
+								 for(var j=0;j<lighttds.length;j++){
+								 	lighttds[j].style.cssText="color:#000;";
+								 }
+								 break;
+								}	
+							}
+						};
+						
+						
+						function findtable(){
+							var tables=CalendarWindow.document.getElementsByTagName('table');
+							if(tables.length==0){
+								setTimeout(findtable,500);
+							}else{
+								for(var i=0;i<tables.length;i++){
+									if(tables[i].className=="WdayTable"){
+										addheighlight(tables[i]);
+										break;
+									}
+								}
+							}
+						};
+						
+						ST=setInterval(findtable,300);
+					});
+					
+					//确定开始复制课表
+					parent$('#J_CopyTableSub').live('click',function(){
+						parentGM.tools.overlay.close(); //关闭浮出层
+						$.ajax({
+						  url:'/course/courseAjax.jsp',
+						  data:W.copyTableObject,
+						  success:function(result){
+							  var result=$.trim(result);
+							  if(result==1){
+								alert('复制课表成功');
+							  	top.location.href='/course/index.jsp?year='+W.copyTableObject['selectyear']+'&week='+W.copyTableObject['selectweek']+'&reload=1';
+							  }else{
+								alert(result);
+								top.location.href='/course/index.jsp?year='+W.copyTableObject['year']+'&week='+W.copyTableObject['week']+'&reload=1';
+							  }
+						  },
+						  error:function(){
+							alert('响应超时,复制失败,请重新尝试');
+							top.location.href='/course/index.jsp?year='+W.copyTableObject['year']+'&week='+W.copyTableObject['week']+'&reload=1';
+						  },
+						  timeout:5000
+						});
 					});
 					
 					//添加副课表
