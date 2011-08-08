@@ -25,70 +25,24 @@
 		
 		$.extend(_cg,cg);
 		
-		this.q=_cg.q;
-		this.drag=_cg.drag;
-		this.revise=_cg.revise;
-		this.siteNo=_cg.siteNo;
-		this.name=_cg.name;
-		this.center=_cg.center;
-		this.markerhtml=_cg.markerhtml;
-		this.target=_cg.target;
-		this.width=_cg.width;
-		this.height=_cg.height;
-		this.bar=_cg.bar;
+		for(var i in _cg){
+			this[i]=_cg[i];
+		}
 		
 	};
 	
 	map.prototype={
 		init:function(){
-			var that=this;
-			//不给坐标的情况下，给关键字q，自己搜索绘制
-			if(that.center==null){
-				//没有坐标的时候，用内置反查询搜索q的位置，如果q还没有搜到，则不显示
-				if(google){
-    				geocoder = new google.maps.Geocoder();
-    				geocoder.geocode( { 'address': that.q}, function(results, status) {
-				      if (status == google.maps.GeocoderStatus.OK) {
-				      	
-					      	var myOptions = {
-					        zoom:15,
-					        center:results[0].geometry.location,
-					        mapTypeId: google.maps.MapTypeId.ROADMAP
-					      };
-					      
-					    var map=new google.maps.Map(document.getElementById(that.target),myOptions);//载入地图
-					    
-				        map.setCenter(results[0].geometry.location);
-				        var marker = new google.maps.Marker({
-				            map: map, 
-				            position: results[0].geometry.location,
-				            title:that.name
-				        });
-				        
-				        that.center=[results[0].geometry.location['Oa'],results[0].geometry.location['Na']];
-				        bulidbar(that.target);
-				      } else {
-				        //alert("Geocode was not successful for the following reason: " + status);
-				        error(that.target);
-				      }
-				    });
-    			}
-			}else if(that.center!=null){
-				//给了坐标，直接根据坐标绘制地图，name为场馆名字
-				drawmap(document.getElementById(that.target),that.center,that.name,that.siteNo);
-				bulidbar(that.target);
-			}
 			
+			var that=this,target=document.getElementById(that.target);
 			
 			//set wrap
 			function setwrap(target){
-				var target=document.getElementById(target);
 				target.style.cssText+='width:'+that.width+'px;height:'+that.height+'px;';
 			};
 			
 			//error handler
 			function error(target){
-				var target=document.getElementById(target);
 				target.parentNode.removeChild(target);
 			};
 			
@@ -163,14 +117,10 @@
 							}
 			            });
 					}
+					//构建bar
+					bulidbar(that.target);
 			    }
 			};
-			
-			//设置高宽
-			setwrap(that.target);
-			
-			//查看全图
-			$.overlay();
 			
 			function errorClick(){
 				var BigMap='<div style="position:relative;width:200px;height:200px;border:#ccc solid 2px;background:#fff;">'+
@@ -179,7 +129,36 @@
 						'</div>';
 				GM.tools.overlay.reset(200,200);
 				GM.tools.overlay.fire(BigMap);
+			};
+			
+			
+			
+			//不给坐标的情况下，给关键字q，自己搜索绘制
+			if(that.center==null){
+				//没有坐标的时候，用内置反查询搜索q的位置，如果q还没有搜到，则不显示
+				if(google){
+    				geocoder = new google.maps.Geocoder();
+    				geocoder.geocode( { 'address': that.q}, function(results, status) {
+				      if (status == google.maps.GeocoderStatus.OK) {
+				        that.center=[results[0].geometry.location['Oa'],results[0].geometry.location['Na']];
+				        drawmap(target,that.center,that.name,that.siteNo);
+				      } else {
+				        error(target);
+				      }
+				    });
+    			}
+			}else if(that.center!=null){
+				//给了坐标，直接根据坐标绘制地图，name为场馆名字
+				drawmap(target,that.center,that.name,that.siteNo);
 			}
+			
+			//设置高宽
+			setwrap(target);
+			
+			//查看全图
+			$.overlay();
+			
+			
 			//绑定bar的事件
 			$('.J_LookBigMap').live('click',function(){
 				if(that.coord || that.center){
