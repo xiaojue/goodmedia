@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>table demo</title>
+		<meta content="text/html; charset=utf-8" http-equiv="content-type">
+		<script src="../../jquery/jquery-1.6.2.js" charset=”utf-8″></script>
+		<script src="../../bulid/GM.js" type="text/javascript" charset=”UTF-8″></script>
+	</head>
+	<body>
+		<script>
+			var TaskConfig={
+				taskFinishList:{
+					1:false, //1任务没完成
+					2:false, //2任务没完成
+					3:false, 
+					4:false
+				},
+				parameter:{
+					username:'付强',
+					coachname:'美女教练的名字',
+					taskURI:{
+						1:'http://x.idongmi.com/',
+						2:'http://x.idongmi.com/',
+						3:'http://x.idongmi.com/',
+						4:'http://x.idongmi.com/'
+					}
+				}
+			}
+		</script>
+		
+		<script>
+			(function(W){
+				GM.apps.require('task',function(exports){
+					exports.init();
+				});
+			})(window);
+		</script>
+	</body>
+</html>

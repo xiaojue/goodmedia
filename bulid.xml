@@ -28,6 +28,7 @@
 			tools\carousel\carousel.js
 			tools\bubble\bubble.js
 			tools\cookie\cookie.js
+			widget\task\task.js
 			widget\sharetosina\sharetosina.js
 			widget\cityzone\cityzone.js
 			widget\detercopy\detercopy.js

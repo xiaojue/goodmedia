@@ -10,13 +10,19 @@
 		if(!cg) return;
 				
 		var _cg={
-			key:'ABQIAAAAq1Xa--vGn1SHR7koD9Xm5BTH1Hm64R_rmx_EQUiffvQevaq2UBRrPuG81MSPhtwwqbqzLlB64UAGyw', //默认key
+			//key:'ABQIAAAAq1Xa--vGn1SHR7koD9Xm5BTH1Hm64R_rmx_EQUiffvQevaq2UBRrPuG81MSPhtwwqbqzLlB64UAGyw', //designsor.com key
+			key:'ABQIAAAAq1Xa--vGn1SHR7koD9Xm5BQNvc6u1vQ7de4GkWxOLW3P1U0WbBQpubl7hCBhdn-d3hc_xlYSkNpRdg', //x.idongmi.com key
 			q:'',
 			markerhtml:'',
+			name:'',
 			target:'',
-			width:400,
-			height:400,
-			bar:true
+			width:210,
+			height:270,
+			drag:false,
+			bar:true,
+			revise:false,
+			center:null,
+			siteNo:''
 		};
 		
 		$.extend(_cg,cg);
@@ -25,6 +31,11 @@
 		this.apiuri='http://maps.google.com/maps/geo?q='+encodeURI(_cg.q)+
 				   '&output=json&callback=GM.widget.map.callback'+this.digit+'&oe=utf8\&sensor=false&key='+_cg.key;
 		this.q=_cg.q;
+		this.drag=_cg.drag;
+		this.revise=_cg.revise;
+		this.siteNo=_cg.siteNo;
+		this.name=_cg.name;
+		this.center=_cg.center;
 		this.markerhtml=_cg.markerhtml;
 		this.target=_cg.target;
 		this.width=_cg.width;
@@ -36,8 +47,23 @@
 	map.prototype={
 		init:function(){
 			var that=this;
-			$.getScript(that.apiuri,that.drawmap);
-			var time=5000,timeout=true; //10秒的timeout值
+			
+			//不给坐标的情况下，给关键字q，自己搜索绘制
+			if(that.center==null){
+				$.getScript(that.apiuri,that.drawmap);
+				var time=5000,timeout=true; //10秒的timeout值
+				//处理jsonp超时请求
+				setTimeout(function(){
+					if(timeout){
+						GM.widget.map['callback'+that.digit]=function(){};
+						error(that.target);
+					}
+				},time);
+			}else if(that.center!=null){
+				//给了坐标，直接根据坐标绘制地图，name为场馆名字
+				drawmap(document.getElementById(that.target),that.center,that.name,that.siteNo);
+			}
+			
 			
 			//set wrap
 			function setwrap(target){
@@ -48,68 +74,91 @@
 			//error handler
 			function error(target){
 				var target=document.getElementById(target);
-				target.style.cssText+='background:#ccc;text-align:center;font-size:12px;display:table-cell;vertical-align:middle;overflow:hidden;';
-				target.innerHTML=that.q+'加载失败';
+				//target.style.cssText+='background:#ccc;text-align:center;font-size:12px;display:table-cell;vertical-align:middle;overflow:hidden;';
+				target.innerHTML='<img src="http://s1.ifiter.com/static/images/maperror.gif" width="210" height="270" alt="加载失败"/>';
 			};
 			
 			
 			//bulid bar
 			function bulidbar(target){
+				var revise='';
+				if(that.revise) revise='<li style="float: left; display: block; margin: 0pt 10px;line-height:12px;font-size:12px;"><a style="color:#4077C7;" href="javascript:void(0);" class="J_EditMap">修订坐标</a></li>';
 				var bar='<ul style="margin: 5px 0pt;width:240px;padding:0px;">'+
 						'<li style="float: left; display: block; margin: 0pt 10px;line-height:12px;font-size:12px;"><a style="color:#4077C7;" href="javascript:void(0);" class="J_LookBigMap">查看全图</a></li>'+
 						'<li style="float: left; display: block; margin: 0pt 10px;line-height:12px;font-size:12px;"><a style="color:#4077C7;" href="javascript:void(0);" class="J_LookWay">公交/驾车</a></li>'+
-						'<li style="float: left; display: block; margin: 0pt 10px;line-height:12px;font-size:12px;"><a style="color:#4077C7;" href="javascript:void(0);" class="J_EditMap">修订坐标</a></li>'+
+						revise+
 						'</ul>';
 				$('#'+target).after(bar);
 			};
 			
-			//处理jsonp超时请求
-			setTimeout(function(){
-				if(timeout){
-					GM.widget.map['callback'+that.digit]=function(){};
-					error(that.target);
-				}
-			},time);
+			//绘制地图
+			function drawmap(target,center,name,siteNo){
+				if(google){
+    				geocoder = new google.maps.Geocoder();
+				    var latlng = new google.maps.LatLng(center[0],center[1]); //首次加载定义的中心点
+				    var myOptions = {
+				        zoom:15,
+				        center:latlng,
+				        mapTypeId: google.maps.MapTypeId.ROADMAP
+				      };
+				      
+				    var map=new google.maps.Map(target,myOptions);//载入地图
+				    
+				    var marker = new google.maps.Marker({
+				    	 title:name,     
+						 position: latlng,         
+					 	 map: map,
+					 	 draggable:function(){
+					 	 	if(that.drag) return true;
+					 	 	return false;
+					 	 }()
+					});
+					
+					if(that.markerhtml!=""){
+						var infowindow = new google.maps.InfoWindow({
+					    content:that.markerhtml
+						});
+
+					    google.maps.event.addListener(marker,'click', function () {
+					    	infowindow.open(map,marker);
+			            });
+					}
+					
+					if(that.drag){
+						google.maps.event.addListener(marker,'dragend', function () {
+							var center=marker.getPosition();
+							if(confirm('指定这里为新的场馆坐标么?')){
+								GM.tools.overlay.close();
+								$.ajax({
+									url:'xxx.jsp',
+									data:{
+										siteNo:siteNo,
+										lat:center['Na'],
+										lng:center['Oa']
+									},
+									success:function(){
+										alert('本次修改已经提交');
+									},
+									error:function(){
+										alert('服务响应超时，请重试');
+									},
+									timeout:5000
+								});
+							}
+			            });
+					}
+			    }
+			};
 			
 			//取得经纬度坐标的回调函数
 			GM.widget.map['callback'+that.digit]=function(data){
-				console.log(data);
 				timeout=false;
 				var target=document.getElementById(that.target);
 				if(data.Status.code==200){
 					that.coord=data.Placemark[0].Point.coordinates;
 					/*placemark是一个数组，可能查出多个地址，以第一个地址为准*/
-					var coord=that.coord,
-						name=data.name;
-						
-        				if(google){
-	        				geocoder = new google.maps.Geocoder();
-						    var latlng = new google.maps.LatLng(coord[1],coord[0]); //首次加载定义的中心点
-						    var myOptions = {
-						        zoom:15,
-						        center:latlng,
-						        mapTypeId: google.maps.MapTypeId.ROADMAP
-						      };
-						      
-						    var map=new google.maps.Map(target,myOptions);//载入地图
-						    
-						    var marker = new google.maps.Marker({
-						    	 title:name,     
-       							 position: latlng,         
-      						 	 map: map
-      						});
-      						
-      						if(that.markerhtml!=""){
-      							var infowindow = new google.maps.InfoWindow({
-							    content:that.markerhtml
-								});
-	
-							    google.maps.event.addListener(marker,'click', function () {
-							    	infowindow.open(map,marker);
-					            });
-      						}    
-				            
-					    }
+					var coord=that.coord;
+						drawmap(target,[coord[1],coord[0]],that.name,that.siteNo);
 				}else{
 					error(that.target);
 				}
@@ -147,7 +196,10 @@
 							target:'J_Map_'+diget,
 							width:500,
 							height:500,
-							bar:false
+							bar:false,
+							name:that.name,
+							center:that.center,
+							siteNo:that.siteNo
 						}).init();
 					}else{
 						errorClick();
@@ -198,7 +250,11 @@
 							target:'J_Map_'+diget,
 							width:500,
 							height:500,
-							bar:false
+							drag:true,
+							bar:false,
+							name:that.name,
+							center:that.center,
+							siteNo:that.siteNo
 						}).init();
 					}else{
 						errorClick();

@@ -709,7 +709,7 @@
 								}else{
 									var lastul=parent$('#J_Instructorwrap ul:last');
 									if(lastul.children('li').length==18){
-										lastul.after('<ul><li>'+coachname+'</li></ul>');
+										lastul.after('<ul class="J_Item"><li>'+coachname+'</li></ul>');
 									}else{
 										lastul.append('<li>'+coachname+'</li>');
 									}
@@ -762,8 +762,9 @@
 									alert('添加失败，可能网络原因或有重名项目');
 								}else{
 									var lastul=parent$('#J_Itemwrap ul:last');
+									
 									if(lastul.children('li').length==18){
-										lastul.after('<ul><li data-value="'+result+'">'+itemname+'</li></ul>');
+										lastul.after('<ul class="J_Item"><li data-value="'+result+'">'+itemname+'</li></ul>');
 									}else{
 										lastul.append('<li data-value="'+result+'">'+itemname+'</li>');
 									}

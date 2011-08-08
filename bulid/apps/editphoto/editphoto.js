@@ -38,7 +38,7 @@
 						});
 						
 						if($(this).attr('type')=='text'){
-							setobj['pname']=$(this).val();
+							setobj['cname']=$(this).val();
 						}else if(this.tagName.toLowerCase()=='select'){
 							setobj['movecolid']=$(this).val();
 						}
