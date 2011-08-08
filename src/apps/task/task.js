@@ -68,9 +68,9 @@
 					fire:function(todo,parameter){
 						//如果有TaskConfig这个全局对象并且不存在flg cookie的话，则初始化任务功能
 
-						var GMTask=G.cookie('GMTask');
+						var GMTask=$.cookie('GMTask');
 						
-						if(!GMTask) G.cookie('GMTask',0,{expires:365}); //一年过期  0 弹，1不弹
+						if(!GMTask) $.cookie('GMTask',0,{expires:365}); //一年过期  0 弹，1不弹
 					
 						if(W.TaskConfig && GMTask==0){
 							

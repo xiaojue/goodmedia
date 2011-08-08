@@ -26,9 +26,9 @@
  *	
  *	GM.cookie('the_cookie', null);
  */
-(function(W,G,jQuery){
+(function(W,G,$){
 	
-	G.cookie = function (key, value, options) {
+	var cookie = function (key, value, options) {
 	    // key and at least value given, set cookie...
 	    if (arguments.length > 1 && String(value) !== "[object Object]") {
 	        options = jQuery.extend({}, options);
@@ -59,5 +59,9 @@
 	    var result, decode = options.raw ? function (s) { return s; } : decodeURIComponent;
 	    return (result = new RegExp('(?:^|; )' + encodeURIComponent(key) + '=([^;]*)').exec(document.cookie)) ? decode(result[1]) : null;
 	};
+	
+	$.extend({
+		cookie:cookie
+	});
 	
 })(window,GM,jQuery);
