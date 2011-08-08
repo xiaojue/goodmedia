@@ -10,11 +10,6 @@
 		if(!cg) return;
 				
 		var _cg={
-			//key:'ABQIAAAAq1Xa--vGn1SHR7koD9Xm5BTH1Hm64R_rmx_EQUiffvQevaq2UBRrPuG81MSPhtwwqbqzLlB64UAGyw', //designsor.com key
-			key:'ABQIAAAAq1Xa--vGn1SHR7koD9Xm5BRSL1a7gHQe5XVWJJz3oqYZh72mKBTD0jV3s-TGzKIVOQO3Z__cLNNmHQ', //idongmi.com key
-			//ABQIAAAAkmr0j7t7h7yrv1-uI0j3ExQNvc6u1vQ7de4GkWxOLW3P1U0WbBQAOKtmW6RY2bHJqZeg0ntK2C7Yow //剑雄
-			//ABQIAAAAq1Xa--vGn1SHR7koD9Xm5BQNvc6u1vQ7de4GkWxOLW3P1U0WbBQpubl7hCBhdn-d3hc_xlYSkNpRdg //x.idongmi.com
-			//ABQIAAAAq1Xa--vGn1SHR7koD9Xm5BRSL1a7gHQe5XVWJJz3oqYZh72mKBTD0jV3s-TGzKIVOQO3Z__cLNNmHQ idongmi.com key
 			q:'',
 			markerhtml:'',
 			name:'',
@@ -30,9 +25,6 @@
 		
 		$.extend(_cg,cg);
 		
-		this.digit=new Date().valueOf();
-		this.apiuri='http://ditu.google.cn/maps/geo?q='+encodeURI(_cg.q)+
-				   '&output=json&callback=GM.widget.map.callback'+this.digit+'&oe=utf8\&sensor=false&key='+_cg.key;
 		this.q=_cg.q;
 		this.drag=_cg.drag;
 		this.revise=_cg.revise;
@@ -52,6 +44,7 @@
 			var that=this;
 			//不给坐标的情况下，给关键字q，自己搜索绘制
 			if(that.center==null){
+				//没有坐标的时候，用内置反查询搜索q的位置，如果q还没有搜到，则不显示
 				if(google){
     				geocoder = new google.maps.Geocoder();
     				geocoder.geocode( { 'address': that.q}, function(results, status) {
@@ -73,14 +66,13 @@
 				        });
 				        
 				        that.center=[results[0].geometry.location['Oa'],results[0].geometry.location['Na']];
-				        
+				        bulidbar(that.target);
 				      } else {
 				        //alert("Geocode was not successful for the following reason: " + status);
 				        error(that.target);
 				      }
 				    });
     			}
-    			bulidbar(that.target);
 			}else if(that.center!=null){
 				//给了坐标，直接根据坐标绘制地图，name为场馆名字
 				drawmap(document.getElementById(that.target),that.center,that.name,that.siteNo);
@@ -98,8 +90,6 @@
 			function error(target){
 				var target=document.getElementById(target);
 				target.parentNode.removeChild(target);
-				//target.style.cssText+='background:#ccc;text-align:center;font-size:12px;display:table-cell;vertical-align:middle;overflow:hidden;';
-				//target.innerHTML='<img src="http://s1.ifiter.com/static/images/maperror.gif" width="210" height="270" alt="加载失败"/>';
 			};
 			
 			
@@ -117,7 +107,7 @@
 				}
 			};
 			
-			//绘制地图
+			//得到了坐标-绘制地图的函数
 			function drawmap(target,center,name,siteNo){
 				if(google){
     				geocoder = new google.maps.Geocoder();
