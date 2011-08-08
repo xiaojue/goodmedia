@@ -86,7 +86,7 @@
 					
 					if(that.markerhtml!=""){
 						var infowindow = new google.maps.InfoWindow({
-					    content:that.markerhtml
+					    	content:that.markerhtml
 						});
 
 					    google.maps.event.addListener(marker,'click', function () {
@@ -134,20 +134,21 @@
 			
 			
 			//不给坐标的情况下，给关键字q，自己搜索绘制
-			if(that.center==null){
+			if(!that.center){
 				//没有坐标的时候，用内置反查询搜索q的位置，如果q还没有搜到，则不显示
 				if(google){
     				geocoder = new google.maps.Geocoder();
     				geocoder.geocode( { 'address': that.q}, function(results, status) {
 				      if (status == google.maps.GeocoderStatus.OK) {
-				        that.center=[results[0].geometry.location['Oa'],results[0].geometry.location['Na']];
+				      	var location=results[0].geometry.location;
+				        that.center=[location['Oa'],location['Na']];
 				        drawmap(target,that.center,that.name,that.siteNo);
 				      } else {
 				        error(target);
 				      }
 				    });
     			}
-			}else if(that.center!=null){
+			}else if(that.center){
 				//给了坐标，直接根据坐标绘制地图，name为场馆名字
 				drawmap(target,that.center,that.name,that.siteNo);
 			}
