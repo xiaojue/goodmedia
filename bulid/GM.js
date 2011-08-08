@@ -778,7 +778,7 @@
 			
 			//set wrap
 			function setwrap(target){
-				target.style.cssText+='width:'+that.width+'px;height:'+that.height+'px;';
+				target.style.cssText+='width:'+that.width+'px;height:'+that.height+'px;border:1px solid #CCC;';
 			};
 			
 			//error handler
