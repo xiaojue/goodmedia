@@ -53,7 +53,9 @@
 		};
 		
 		function selectOption(selector,city){
-			var opts=$(selector).get()[0].getElementsByTagName('option');
+			var opts=$(selector).get()[0];
+			if(opts){
+				opts=opts.getElementsByTagName('option');
 				for(var i=0;i<opts.length;i++){
 					if(opts[i].value==city){
 						$(selector).get()[0].selectedIndex=i;
@@ -61,6 +63,7 @@
 						break;
 					}
 				}
+			}
 		};
 		
 		return {

@@ -65,7 +65,7 @@
 		var task=function(){
 			return {
 				exports:{
-					init:function(){
+					fire:function(todo,parameter){
 						//如果有TaskConfig这个全局对象并且不存在flg cookie的话，则初始化任务功能
 
 						var GMTask=G.cookie('GMTask');
@@ -74,19 +74,53 @@
 					
 						if(W.TaskConfig && GMTask==0){
 							
-							this.bindEvent();	
+							this.bulidTask(todo,parameter);
 							
-							this.bulidTask(W.TaskConfig.taskFinishList);
+							this.bindEvent();
 						}
 					},
+					bulidTask:function(todo,parameter){
+						var todolist={
+							'welcome':function(){
+								var name=parameter.username,
+									url='#';
+								
+								tempOne()
+							},
+							'step1':function(){
+								
+							},
+							'step1finish':function(){
+								
+							},
+							'step2':function(){
+								
+							},
+							'step2finish':function(){
+								
+							},
+							'step3':function(){
+								
+							},
+							'step3finish':function(){
+								
+							}
+						};
+						
+						$.overlay();
+						GM.tools.overlay.reset(620,256);
+						var lay=todolist[todo]();
+						GM.tools.overlay.fire(lay);
+					},
 					bindEvent:function(){
+						
 						$('J_GMTask').live('click',function(){
 							G.cookie('GMTask',1,{expires:365});
 						});
-					},
-					bulidTask:function(List){
 						
-					}
+						
+						
+					},
 				}
 			}
 		}
