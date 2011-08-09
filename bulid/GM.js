@@ -405,7 +405,7 @@
 	var temp=function(){
 		
 		return{
-			//先写一个replace方法用着-copy to kissy~
+			//先写一个replace方法用着-copy for kissy~
 			substitute:function(str,o,regexp){
 	            return str.replace(regexp || /\\?\{([^{}]+)\}/g, function(match, name) {
 	                if (match.charAt(0) === '\\') {
@@ -414,15 +414,13 @@
 	                return (o[name] === undefined) ? '' : o[name];
 	            });				
 			}
-			
 		}
-		
 	}();
 	
 	//扩展到jquery对象上
 	$.extend({
 		substitute:temp.substitute
-	})
+	});
 	
 })(window,GM,jQuery);
 /**
@@ -826,9 +824,9 @@
 				if(that.bar){
 					var revise='';
 					if(that.revise) revise='<li style="float: left; display: block; margin: 0pt 10px;line-height:12px;font-size:12px;"><a style="color:#4077C7;" href="javascript:void(0);" class="J_EditMap">修订坐标</a></li>';
-					var bar='<ul style="margin: 5px 0pt;width:240px;padding:0px;">'+
-							'<li style="float: left; display: block; margin: 0pt 10px;line-height:12px;font-size:12px;"><a style="color:#4077C7;" href="javascript:void(0);" class="J_LookBigMap">查看全图</a></li>'+
-							'<li style="float: left; display: block; margin: 0pt 10px;line-height:12px;font-size:12px;"><a style="color:#4077C7;" href="javascript:void(0);" class="J_LookWay">公交/驾车</a></li>'+
+					var bar='<ul style="margin: 5px 0pt;width:210px;padding:0px;">'+
+							'<li style="float: left; display: block; margin: 0pt 10px;line-height:14px;font-size:12px;"><a style="color:#4077C7;" href="javascript:void(0);" class="J_LookBigMap">查看全图</a></li>'+
+							'<li style="float: left; display: block; margin: 0pt 10px;line-height:14px;font-size:12px;"><a style="color:#4077C7;" href="javascript:void(0);" class="J_LookWay">公交/驾车</a></li>'+
 							revise+
 							'</ul>';
 					$('#'+target).after(bar);
