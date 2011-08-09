@@ -491,6 +491,49 @@
 	
 })(window,GM,jQuery);
 /**
+ * 修复ie6的一些bug
+ */
+(function(W,G,$){
+	
+	//修复png24不透明
+	var fixpng24=function() {
+           var arVersion = navigator.appVersion.split("MSIE");
+           var version = parseFloat(arVersion[1]);
+           if ((version >= 5.5) && (document.body.filters)) {
+               for (var i = 0; i < document.images.length; i++) {
+                   var img = document.images[i];
+                   var imgName = img.src.toUpperCase();
+                   if (imgName.substring(imgName.length - 3, imgName.length) == "PNG") {
+                       var imgID = (img.id) ? "id='" + img.id + "' " : "";
+                       var imgClass = (img.className) ? "class='" + img.className + "' " : "";
+                       var imgTitle = (img.title) ? "title='" + img.title + "' " : "title='" + img.alt + "' ";
+                       var imgStyle = "display:inline-block;" + img.style.cssText;
+                       if (img.align == "left") imgStyle = "float:left;" + imgStyle;
+                       if (img.align == "right") imgStyle = "float:right;" + imgStyle;
+                       if (img.parentElement.href) imgStyle = "cursor:hand;" + imgStyle;
+                       var strNewHTML = "<span " + imgID + imgClass + imgTitle
+                               + " style=\"" + "width:" + img.width + "px; height:" + img.height + "px;" + imgStyle
+                               + "filter:progid:DXImageTransform.Microsoft.AlphaImageLoader"
+                               + "(src=\'" + img.src + "\', sizingMethod='scale');\"></span>"
+                       img.outerHTML = strNewHTML;
+                       i = i - 1;
+                   }
+               }
+           }
+      };
+    
+    $.extend({
+		fixpng24:fixpng24
+	});
+	
+	if($.browser.msie && $.browser.version==6){
+		$(function(){
+			$.fixpng24();
+		});
+	}; 
+       
+})(window,GM,jQuery);
+/**
  * @author fuqiang
  * @date 20110804
  * 内部似有方法，分享消息到新浪微博
