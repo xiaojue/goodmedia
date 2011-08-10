@@ -69,14 +69,22 @@
 						before:function(){},
 						after:function(){},
 						current:0,
-						endflg:true
+						endflg:true,
+						auto:false,
+						autointerval:3000
 					};
 
 					$.extend(_o,o);
 					
 					this.config=_o;
+					this.T=null;
 					
 					_bulid(this.config);
+					
+					if(this.config.auto){
+						this.auto();
+						this.autoEvent();
+					} 
 				}
 			}
 		}();
@@ -120,13 +128,19 @@
 					config.endflg=true;
 				});
 			},
-			stop:function(){
-				var that=this,config=that.config;
-				
-			},
 			auto:function(){
 				var that=this,config=that.config;
-				
+				that.T=setInterval(function(){
+					that.forward();
+				},config.autointerval);
+			},
+			autoEvent:function(){
+				var that=this,config=that.config;
+				$(config.wrap).live('mouseenter',function(){
+					clearInterval(that.T);
+				}).live('mouseleave',function(){
+					that.auto();
+				});
 			},
 			before:function(current){
 				var that=this,config=that.config;

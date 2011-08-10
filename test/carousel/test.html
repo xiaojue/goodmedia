@@ -26,19 +26,43 @@
 				height:500px;
 				border:red solid 1px;
 			}
+			#exs{
+				width: 250px;
+			}
 		</style>
 		
 		<div id="main">
-			<div class="item">1</div>
-			<div class="item">2</div>
-			<div class="item">3</div>
-			<div class="item">4</div>
+			<div class="item">
+				<span>1</span>
+				<span>1</span>
+				<span>1</span>
+				<span>1</span>
+			</div>
+			<div class="item">
+				<span>1</span>
+				<span>1</span>
+				<span>1</span>
+				<span>1</span>
+			</div>
+			<div class="item">
+				<span>1</span>
+				<span>1</span>
+				<span>1</span>
+				<span>1</span>
+			</div>
+			<div class="item" id="exs">
+				<span>1</span>
+				<span>1</span>
+				<span>1</span>
+				<span>1</span>
+			</div>
 		</div>
 		
 		<script>
 			var test=$.carousel({
 					wrap:'#main',
-					wrapitem:'.item'
+					wrapitem:'.item',
+					auto:true
 				});
 		</script>
 	</body>
