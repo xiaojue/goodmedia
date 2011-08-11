@@ -22,6 +22,7 @@ body{font-size:12px;font-family:Arial, Helvetica, sans-serif;background:#eaeaea 
 .tip{position:absolute;right:20px;top:54px;line-height:23px;width:150px;}
 .tip_cont{padding:0px 5px;}
 .tip p{margin:0px;padding:0px;overflow:hidden;}.members_login .tip{color:#444444;}.members_login .tip p a{color:#4077c7}
+.tip span{float:right;}
 
 .login img,.members_login img{vertical-align:middle;}
 .members_login{color:#fff;}.members_login a{color:#fff;margin:0 7px;}
@@ -34,15 +35,15 @@ body{font-size:12px;font-family:Arial, Helvetica, sans-serif;background:#eaeaea 
 .nav_bg{float:left;background:url(http://s1.ifiter.com/static/images/nav_bg.gif);height:46px;width:950px;line-height:46px;}
 .nav li{display:block;float:left;background:url(http://s1.ifiter.com/static/images/line.gif) no-repeat right;}
 .nav a{font-size:14px;color:#78a000;padding:0 34px;}
-.nav .active{font-weight:bold;}.nav .none{background:none;float:right;margin-right:10px;_margin-right:3px;}
+/*.nav .active{font-weight:bold;}*/.nav .none{background:none;float:right;margin-right:10px;_margin-right:3px;}
 .zhuti{width:141px;height:46px;background:url(http://s1.ifiter.com/static/images/zhuti.gif) no-repeat 0% 50%;margin-left:8px;text-align:center;}
 .nav .zhuti a{color:#787878;font-size:12px;padding:0px;margin:0 6px;}
 .zhuti span{color:#787878;}
 .nav .zhuti .active{color:#4077c7;font-weight:normal;}
 
 .header{margin:3px 0 5px 0px;color:#4077c7;}
-.headl{float:left;}.headr{float:right;}
-.search{width:245px;margin-left:5px;margin-top:7px;}
+.headl{float:left;height:60px;overflow:hidden;}.headr{float:right;}
+.search{width:245px;margin-left:5px;margin-top:7px;}.search img,.search input{float:left;}
 .box1{width:158px;height:23px;line-height:23px;border:1px solid #c5c5c5;margin-right:20px;_margin-right:10px;}
 .search img{vertical-align:middle;}
 .searchTxt{margin-top:5px;display:block;}
@@ -72,7 +73,7 @@ body{font-size:12px;font-family:Arial, Helvetica, sans-serif;background:#eaeaea 
 .line{width:170px;margin:auto;}
 
 .bimg{padding:4px;border:1px solid #cacaca;background:#fff;}
-.round1{float:left;height:222px;}
+.round1{float:left;height:225px;}
 .login_left{background:url(http://s1.ifiter.com/static/images/login_left.gif) no-repeat;width:6px;}
 .login_right{background:url(http://s1.ifiter.com/static/images/login_right.gif) no-repeat;width:6px;}
 .login_cont{background:url(http://s1.ifiter.com/static/images/round_bg.gif) repeat-x;width:197px;text-align:center;}
@@ -99,8 +100,9 @@ body{font-size:12px;font-family:Arial, Helvetica, sans-serif;background:#eaeaea 
 .activities_cont{background:url(http://s1.ifiter.com/static/images/activities_contbg.gif) no-repeat top;border-bottom:1px solid #ccc;padding:6px;line-height:20px;}
 .activities_cont1{background:url(http://s1.ifiter.com/static/images/activities_contbg.gif) no-repeat top;padding:6px;line-height:20px;height:auto !important;height:25px;min-height:25px;}
 .bottomleft1{position:absolute;left:-1px;bottom:0;background:url(http://s1.ifiter.com/static/images/bottomleft.gif) no-repeat;width:6px;height:6px;}
-.areaIn_title{width:573px;margin:auto;border-bottom:1px dashed #adadad;padding:2px 0;font-size:16px;}
-.areaIn_title a{float:right;font-size:12px;}
+.areaIn_title{width:573px;margin:auto;border-bottom:1px dashed #adadad;padding:2px 0;}
+.areaIn_title a{font-size:16px;color:#78a000;}
+.areaIn_title span .blue{color:#4077C7;float:right;font-size:12px;margin-right:15px;}
 .activities_txt{margin:8px auto 15px;padding:0px 10px;}
 .activities_left{float:left;}.activities_left img{padding:4px;border:1px solid #cacaca;}
 .activities_right{float:right;width:230px;}
@@ -157,8 +159,8 @@ body{font-size:12px;font-family:Arial, Helvetica, sans-serif;background:#eaeaea 
 .foot_dh ul li{float:left;}
 .foot_dh ul li a{border-right:1px solid #787878;padding:0 10px;}.foot_dh ul .none a{border:0px;}
 /*����ҳ���Ա����*/<div class="active_img">{pc:block pos="knowledge_block_7"}{/pc}</div>
-
-.active_img{margin:10px 0px;text-align:center;}
+.active_img{text-align:center;margin-top:7px;}
+.active_img{text-align:center;margin-top:7px;}
 .active_txt ul{float:left;margin:15px 0px 15px 15px;}
 .active_txt img{float:left;padding:4px;border:1px solid #cacaca;margin-top:10px;}
 .active_pic{width:573px;margin:8px auto 0;}
@@ -289,7 +291,7 @@ body{font-size:12px;font-family:Arial, Helvetica, sans-serif;background:#eaeaea 
 .pro_button1{background:url(http://s1.ifiter.com/static/images/but_bg2.gif);width:80px;height:25px;line-height:25px;text-align:center;border:0px;color:#fff;float:right;font-size:12px;text-indent:0px;cursor:pointer;}
 .pro_button2{background:url(http://s1.ifiter.com/static/images/next_bg.gif);width:50px;height:25px;line-height:25px;text-align:center;border:0px;color:#5c5c5c;font-size:12px;text-indent:0px;cursor:pointer;}
 
-.pro_txt{border-right:1px solid;border-left:1px solid;height:auto !important;height:200px;min-height:200px;border-color:#e5e5e5;padding:0 5px;}
+.pro_txt{border-right:1px solid;border-left:1px solid;height:auto !important;height:100px;min-height:100px;border-color:#e5e5e5;padding:0 5px;}
 .pro_img{border:1px solid #cacaca;width:58px;height:58px;overflow:hidden;position:absolute;top:-30px;right:-15px;}
 .pro_area{width:570px;margin:auto;border-bottom:1px dashed #d6d6d6;padding-bottom:20px;line-height:21px;}
 .pro_none{border:0px;}
@@ -341,7 +343,7 @@ body{font-size:12px;font-family:Arial, Helvetica, sans-serif;background:#eaeaea 
 .tab_box{width:58px;height:18px;line-height:18px;background:#f5f5f5;border:1px solid #c5c5c5;margin:0 5px;}
 
 .column_left{float:left;}
-.column_right{float:right;}
+.column_right{float:left;}
 .column_right ul li{display:block;float:left;margin-left:27px;}
 .column_right ul li img{padding:2px;border:1px solid #d5d5d5;display:block;}
 .column_right ul li span{display:block;margin-top:5px;}.column_right input,.column_right1 input{margin-right:5px;}
@@ -365,7 +367,7 @@ body{font-size:12px;font-family:Arial, Helvetica, sans-serif;background:#eaeaea 
 .Application2{display:block;float:right;background:url(http://s1.ifiter.com/static/images/Application_bg2.gif);width:139px;height:21px;line-height:21px;color:#e75903;text-align:center;}
 
 /*��������*/
-.prowu{width:567px;margin:50px auto;}
+.prowu{width:567px;margin:auto;padding:50px 0;}
 /*��Ƭǽ*/
 .space{margin:40px 23px 0px;}
 .space_btn{text-align:right;margin:35px 23px 20px 0px;}
@@ -527,7 +529,7 @@ body{font-size:12px;font-family:Arial, Helvetica, sans-serif;background:#eaeaea 
 .new_title .blue{float:right;font-size:12px;font-weight:normal;}
 .schedule_browse{width:571px;margin:23px auto;}
 .browse_title{width:500px;margin:5px auto 20px;font-size:14px;font-weight:bold;color:#78a000;}.browse_title a{font-size:12px;font-weight:normal;float:right;}
-.browse_title span{float:right;}
+.browse_title span{float:right;}.browse_title span select{margin-left:5px;}
 .browse_left,.browse_right{float:left;width:13px;}.browse_right{text-align:right;}
 .browse_cont{float:left;width:545px;}
 .new_txt .green{font-weight:bold;}
@@ -679,8 +681,8 @@ body{font-size:12px;font-family:Arial, Helvetica, sans-serif;background:#eaeaea 
 .fanye .mor {border-width: 0;height: 21px;line-height: 21px;padding: 0;}
 /*��ҳ�桪������֪ʶ��*/
 .main3_left{float:left;width:741px;}
-.main3_roundm{position:relative;background:#fff url(http://s1.ifiter.com/static/images/main3_roundmbg.gif) repeat 0px center;}
-.main3round_cont{background:url(http://s1.ifiter.com/static/images/main3_roundmtop.gif) no-repeat left top;border-bottom:1px solid #ccc;padding:6px;line-height:21px;}
+.main3_roundm{position:relative;background:#fff url(http://s1.ifiter.com/static/images/main3_roundmbg.gif) repeat 0px center;margin-bottom:7px;}
+.main3round_cont{background:url(http://s1.ifiter.com/static/images/main3_roundmtop.gif) no-repeat left top;border-bottom:1px solid #ccc;padding:6px;line-height:25px;}
 .main3_bottomleft{position:absolute;left:-1px;bottom:0;background:url(http://s1.ifiter.com/static/images/bottomleft.gif) no-repeat;width:6px;height:6px;}
 .main3_rounded{position:relative;background:#fff url(http://s1.ifiter.com/static/images/main3_roundbg.gif) repeat 1px center;}
 .round_cont3{background:url(http://s1.ifiter.com/static/images/main3_roundtop.gif) no-repeat top;border-bottom:1px solid #ccc;padding:6px;line-height:21px;}
@@ -691,7 +693,7 @@ body{font-size:12px;font-family:Arial, Helvetica, sans-serif;background:#eaeaea 
 .news_img{text-align:center;margin:0px 0px 35px 0px;}
 .news_img img{padding:5px;border:1px solid #cacaca;}
 .news_img span{display:block;margin-top:10px;color:#78a000;}
-.news_cont p{width:610px;margin:0 auto 10px;font-size:14px;}.news_cont .txt{text-indent:24px;}
+.news_cont p{width:610px;margin:0 auto 20px;font-size:14px;}.news_cont .txt{text-indent:24px;}
 .main_page{width:430px;margin:auto;}
 .Comment{padding:38px 20px;border-top:1px dashed #d6d6d6;}
 .Comment_left{float:left;width:306px;}
@@ -720,7 +722,7 @@ body{font-size:12px;font-family:Arial, Helvetica, sans-serif;background:#eaeaea 
 .list_cont{width:501px;margin:auto;}
 /*.list_txt{margin-top:3px;padding:15px;border-bottom:1px dashed #d6d6d6;font-size:14px;line-height:24px;}*/
 /*modtify by netseye*/
-.list_txt{margin-top:3px;padding:15px;border-bottom:0px dashed #d6d6d6;font-size:14px;}
+.list_txt{margin-top:3px;padding:15px;border-bottom:0px dashed #d6d6d6;font-size:14px;line-height:25px;}
 #list_unline{margin-top:3px;padding:15px;background: url("http://s1.ifiter.com/static/images/uline.gif") repeat-x scroll center center transparent}
 /*end*/
 .list_none{border:0px;}
@@ -741,7 +743,7 @@ body{font-size:12px;font-family:Arial, Helvetica, sans-serif;background:#eaeaea 
 
 .info_txt{padding:5px 0;border-bottom:1px dashed #d6d6d6;}
 .info_left{float:left;width:572px;border-right:1px dashed #bcbcbc;}
-.infotxt_img{float:left;width:128px;margin:12px 10px 0px 2px;_margin:12px 7px 0 2px;text-align:center;}
+.infotxt_img{float:left;width:128px;margin:12px 5px 0px 2px;_margin:12px 7px 0 2px;text-align:center;}
 .infotxt_img .tu{border:1px solid #d3d3d3;margin-bottom:10px;}.infotxt_img .tu1{border:1px solid #ffb5df;margin-bottom:10px;}
 .infotxt_txt{float:left;width:416px;margin-top:20px;}
 .info_title{margin-bottom:10px;font-size:18px;color:#78a000;}
@@ -762,8 +764,8 @@ body{font-size:12px;font-family:Arial, Helvetica, sans-serif;background:#eaeaea 
 .show_text span{float:left;width:65px;font-weight:bold;}
 .show_text p{float:right;width:513px;}
 .show_text1{margin-top:20px;overflow:hidden;}.show_text3{padding:20px 0;overflow:hidden;border-bottom:1px dashed #d6d6d6;border-top:1px dashed #d6d6d6;}
-.show_text1 ul li,.show_text3 ul li{display:block;float:left;margin-right:25px;display:inline;width:160px;height:160px;}
-.show_text1 ul li img,.show_text3 ul li img{padding:2px;border:1px solid #c2c2c2;}
+.show_text1 ul li,.show_text3 ul li{display:block;float:left;margin-right:25px;display:inline;}
+.show_text1 ul li img,.show_text3 ul li img{padding:2px;border:1px solid #c2c2c2;width:160px;height:160px;}
 
 .show_text2{padding-bottom:5px;margin-bottom:5px;}
 .show_text2 span{float:left;color:#78a000;width:120px;text-align:right;}
@@ -890,7 +892,7 @@ body{font-size:12px;font-family:Arial, Helvetica, sans-serif;background:#eaeaea 
 .club_Ctext a{float:right;color:#a40000}
 .Club_Cbtn{width:496px;margin:10px auto;text-align:right;}.Club_Cbtn input{margin-left:10px;}
 .project_title{width:500px;margin:5px auto 20px;font-size:14px;font-weight:bold;color:#78a000;}
-.project_title span{color:#000;font-size:12px;margin-left:30px;font-weight:normal;}.project_title input{margin:0 5px;}
+.project_title span{color:#000;font-size:12px;font-weight:normal;}.project_title input{margin:0 5px;}
 
 .add_room{width:510px;margin:auto;color:#78a000;}.add_room input{margin-left:10px;}
 .room_txt{width:510px;margin:30px auto;}
@@ -899,10 +901,16 @@ body{font-size:12px;font-family:Arial, Helvetica, sans-serif;background:#eaeaea 
 .room_txt a{float:right;color:#a40000;margin:0 7px 0 25px;}
 
 /*7-31首页修改*/
-.special_left{float:left;margin-right:15px;position:relative;}.special_left2{float:left;position:relative;margin-right:220px;}.special_left img,.special_left2 img{padding:4px;border:1px solid #cacaca;width:150px;height:100px;}
+/*.special_left{float:left;margin-right:15px;position:relative;}.special_left2{float:left;position:relative;margin-right:220px;}.special_left img,.special_left2 img{padding:4px;border:1px solid #cacaca;width:150px;height:100px;}
 .special_left1{float:left;font-size:14px;color:#78a000;}
 .special_title1{position:absolute;top:0;left:160px;background:#ebebeb;border-bottom:1px dashed #939194;margin-right:30px;_margin-right:10px;width:190px;padding:2px;}
 .special_title2{position:absolute;bottom:0;_bottom:4px;right:160px;background:#ebebeb;border-bottom:1px dashed #939194;margin-left:30px;_margin-left:10px;width:190px;margin-top:20px;padding:2px;}
+*/
+.special_left{float:left;margin-right:15px;}.special_left2{float:left;}.special_left img,.special_left2 img{padding:4px;border:1px solid #cacaca;width:150px;height:100px;}
+.special_left1{float:left;font-size:14px;color:#78a000;}
+.special_title1{background:#ebebeb;border-bottom:1px dashed #939194;margin-right:30px;_margin-right:10px;width:190px;padding:2px;}
+.special_title2{background:#ebebeb;border-bottom:1px dashed #939194;margin-left:30px;_margin-left:10px;width:190px;margin-top:20px;padding:2px;}
+
 .special_right{float:left;width:384px;}.special_right .green{font-size:14px;display:block;margin-bottom:10px;}
 /*课表弹出页面*/
 .popup1_rounded{position:relative;background:#fff url(http://s1.ifiter.com/static/images/popup1_bg.gif) repeat center;width:323px;}
@@ -984,3 +992,121 @@ body{font-size:12px;font-family:Arial, Helvetica, sans-serif;background:#eaeaea 
 .task_text1{text-align:center;color:#78a000;font-size:16px;line-height:25px;}
 .task_text1 .title{font-size:20px;border:0px;}
 .task_text1 p{margin:20px 0;}
+/*积分main2.integral.html*/
+.integ_title{font-size:18px;color:#78a000;}
+.integ_get{margin:15px 0px 5px;}
+.integ_get1{float:left;background:url("http://s1.ifiter.com/static/images/integral/indate_bg.gif");width:128px;height:128px;margin-right:10px;}
+.integ_get1 span{display:block;text-align:center;}
+.get_title{font-size:14px;color:#000;height:24px;line-height:24px;}
+.get_txt{font-size:30px;color:#f39800;margin-top:15px;}
+.integ_get2{float:left;margin-top:55px;}
+.integ_btn{background:url("http://s1.ifiter.com/static/images/integral/inbtn_bg.gif");width:211px;height:41px;line-height:41px;border:0px;color:#fff;font-size:18px;cursor:pointer;}
+
+.integ_cont{width:543px;margin:auto;padding:10px 0;line-height:21px;}
+.integ_txt1{width:480px;}.integ_txt1 span{color:#78a000;display:block;font-size:14px;font-weight:bold;}
+.integ_tab{margin:10px 0;}
+.integ_ctitle{color:#78a000;font-size:14px;font-weight:bold;}
+.integ_table{background:#aeaeae;line-height:21px;font-size:12px;}
+.integ_table tr td{background:#fff;text-align:center;padding:2px;padding:5px 0;}
+.integ_table .row td{background:#e6fea7;color:#78a000;text-align:center;}
+.integ_table tr .cel{text-align:left;padding-left:20px;}
+
+.integ_txt2{padding:15px 0px;border-top:1px dashed #d6d6d6;border-bottom:1px dashed #d6d6d6;}
+
+.integ_list{padding:10px;_padding:10px 10px 0px;border-bottom:1px dashed #bcbcbc;}
+.Inlist_left{float:left;}
+.number{font-size:18px;color:#f39800;width:26px;}
+.integ_list .img img{border:1px solid #cbcbcb;padding:1px;margin-right:10px;}
+.integ_list span{display:block;} 
+.integ_list .user{margin-right:70px;}.integ_list .user img{margin-top:5px;}
+/*趣味测试 text*/
+.text_body{background:url("http://s1.ifiter.com/static/images/texting/text_bg.jpg") no-repeat center top #000;}
+.text_wrap{width:800px;margin:auto;}
+.text_logo{margin:107px 0 2px 107px;}
+.text_cont{background:url("http://s1.ifiter.com/static/images/texting/text_cbg.png");width:620px;height:345px;margin-left:100px;position:relative;}
+.text_title{position:absolute;top:35px;left:30px;}
+.text_content{width:477px;margin:30px auto 0;}
+.interest{margin-bottom:10px;}
+.interest_left1{float:left;}.interest img{vertical-align:middle;}.interest input[type="radio"]{margin:0px 5px 0 10px;}
+.text_box{background:url("http://s1.ifiter.com/static/images/texting/border.gif") no-repeat;width:178px;height:47px;border:0px;line-height:47px;text-indent:10px;}
+.text_but{text-align:center;}.text_btn{background:url("http://s1.ifiter.com/static/images/texting/but_bg.gif");width:120px;height:30px;line-height:30px;color:#fff;font-size:18px;border:0px;cursor:pointer;}
+
+.interest_right{float:right;background:url("http://s1.ifiter.com/static/images/texting/comments_bg.gif");width:157px;height:33px;line-height:33px;text-align:center;color:#f00;}
+
+.text_title1{position:absolute;top:35px;right:30px;}
+.text_editor{margin:8px 0;}
+.text_editor textarea{border:1px solid #c5c5c5;height:58px;width:100%;padding:5px;color:#787878;font-size:12px;}
+.text_editor1{margin-bottom:5px;}.text_editor1 span{margin:0px 5px;}
+
+/*万里行专题 priject.html*/
+.pro_body{font-size:12px;font-family:Arial, Helvetica, sans-serif;background:#fff url("http://s1.ifiter.com/static/images/bg.gif") no-repeat top;color:#444444;}
+.body_wrap{background:url("http://s1.ifiter.com/static/images/project/wrap_bg.gif") no-repeat left 185px;}
+.pro_wrap{height:auto !important;height:382px;min-heigh:382px;background:url("http://s1.ifiter.com/static/images/project/pro_bbg.jpg") no-repeat left bottom;}
+.pro_banner{position:relative;margin-bottom:20px;background:url("http://s1.ifiter.com/static/images/project/banner.jpg");width:960px;height:201px;color:#4077c7;font-size:14px;font-weight:bold;}
+.pro_banner span{display:block;width:260px;height:125px;position:absolute;right:50px;top:45px;line-height:21px;}
+.pro_left{float:left;width:604px;}
+
+.photo{margin-bottom:15px;width:612px;margin-left:-5px;}
+.photo_cont{background:url("http://s1.ifiter.com/static/images/project/photo_bg.gif");height:180px;}
+.pl{float:left;}
+.pro_list{padding:30px 0px;}
+.pro_list ul li{float:left;margin:0 12px;display:inline;}
+.photo_ico{margin-top:90px;}
+
+.pro_roundin{background:url("http://s1.ifiter.com/static/images/project/round_bg.gif");width:603px;margin-bottom:15px;}
+.pro_cont{background:url("http://s1.ifiter.com/static/images/project/round_top.png") no-repeat left top;height:auto !important;height:29px;min-height:29px;padding:8px;}
+.pro_title{border-bottom:1px dashed #adadad;padding:2px 10px;;font-size:16px;}
+.news{}
+.new_left{float:left;margin:30px;display:inline;}.new_left img{width:150px;height:100px;padding:4px;border:1px solid #cacaca;}
+.new_right{line-height:21px;padding-top:20px;float:left;}
+.new_right ul li{background:url("http://s1.ifiter.com/static/images/project/ico.gif") no-repeat left 50%;padding-left:10px;}
+
+.pro_right{float:right;width:350px;}
+
+.activities{background:url("http://s1.ifiter.com/static/images/project/activities_bg.gif");height:auto !important;height:380px;min-height:380px;margin-bottom:15px;}
+.activities_title{background:url("http://s1.ifiter.com/static/images/project/activities_tbg.gif");height:61px;color:#fff;font-size:18px;padding:0 10px;}
+.activities_title select{margin:0 2px;display:inline;}
+.activities_content{background:url("http://s1.ifiter.com/static/images/project/activities_bbg.gif") no-repeat bottom;}
+.activities_area{width:330px;margin:10px auto 0;line-height:21px;}
+.activList_left{float:left;margin-right:7px;}
+.activList_right{float:left;width:202px;}
+.list_name span{float:left;display:block;}
+.xulie{background:url("http://s1.ifiter.com/static/images/project/xulie.png");width:42px;height:36px;}.xulie b{display:block;margin:8px 0 0 16px;font-size:24px;color:#fff;font-style:italic;}
+.list_name .green{font-size:14px;font-weight:bold;margin:15px 0px 0px 10px;}
+
+.pro_page{background:url("http://s1.ifiter.com/static/images/project/page_bg.png") no-repeat;width:319px;height:24px;line-height:24px;margin:50px auto 0;padding-bottom:20px;_margin:37px auto 0px;color:#fff;text-indent:10px;}.pro_page a{color:#fff;margin:0 10px;}.pro_page span{margin-left:30px;}
+
+.manual{border:1px solid #c3c3c3;color:#000;line-height:23px;background:#f0f0f0;}
+.manual_title{background:url("http://s1.ifiter.com/static/images/project/manual_bg.gif") repeat-x;height:31px;line-height:31px;color:#fff;text-indent:18px;}
+.manual_left{float:left;margin:25px 7px 25px 13px;width:97px;text-align:center;display:inline;}
+.manual_left span{display:block;text-align:center;margin:5px 0 15px;}
+.manual_right{float:left;margin-top:40px;width:110px;}
+
+.pro_footer{padding:10px 0px 27px;color:#000;line-height:21px;}
+.pro_foot{background:url("http://s1.ifiter.com/static/images/project/foot_bg.png");padding:20px 0;_padding:20px 0px 0px;}
+.pro_foot ul{float:left;margin:0px 25px;}
+
+.listTo_cont{background:#f0f0f0;border:1px solid #c3c3c3;}
+.listTo_title{background:url("http://s1.ifiter.com/static/images/project/list_bg.gif");height:31px;line-height:31px;color:#fff;padding:0 10px;font-size:16px;font-weight:bold;}
+.listTo_title span{float:right;}.listTo_title span select{margin:0 5px;margin-top:5px;}
+.listTo_txt{width:850px;margin:auto;padding:45px 0px;}
+.listTo_text{width:900px;overflow:hidden;}
+.listTo_area{float:left;width:400px;margin-bottom:30px;margin-right:50px;height:130px;}
+.listTo_title1{color:#78a000;font-size:14px;font-weight:bold;}
+.listTo_left{float:left;margin-right:23px;}.listTo_left img{width:120px;height:120px;}
+.listTo_right{float:left;width:252px;line-height:21px;}
+.listTo_but{text-align:right;}.listTo_but input{margin:0 5px;cursor:pointer;}
+.listTo_button{background:url("http://s1.ifiter.com/static/images/project/but_bg.gif");width:50px;height:25px;line-height:25px;color:#4077c7;font-weight:bold;text-align:center;border:0px;text-indent:0px;}
+/*8月9号修改*/
+.round_cont32{background:url(http://s1.ifiter.com/static/images/main3_roundtop.gif) no-repeat top;line-height:21px;height:auto !important;height:25px;min-height:25px;padding:7px;}
+.show_text4{margin-top:5px;}
+.show_text4 span{color:#78a000;}
+.mar{margin:10px 0 5px;font-size:14px;padding:3px;}
+/*预约小页面 appointment1.html*/
+.appo_text{margin:20px 0 10px;}
+.appo_text span{width:100px;text-align:right;display:block;float:left;margin-right:15px;height:18px;line-height:18px;color:#78a000;}
+.appo_text input{background:#f5f5f5;border:1px solid #c5c5c5;height:18px;line-height:18px;margin-right:5px;}
+.appo_but{text-align:center;margin:20px 0;}
+.appo_text1{text-align:center;font-size:18px;color:#78a000;}
+.appo_text2{width:315px;margin:30px auto;color:#787878;line-height:21px;}
+/*8-10样式*/

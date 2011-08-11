@@ -8,16 +8,27 @@
 	<property name="GM.min" value="GM-min.js"/>
 	<property name="GM.dir" value="E:/apache/htdocs/gm"/>
 	<property name="GMonline.dir" value="\\devatsport\smb\static-resource\loohou\static\GM"/>
+	<property name="CSSonline.dir" value="\\devatsport\smb\static-resource\loohou\static\"/>
+	<property name="CSS.dir" value="css"/>
 	<!-- 删除现有目录-->
 	<delete dir="${bulid.dir}"/>
+	<delete dir="${CSS.dir}"/>
 	<!-- 创建基本目录-->
 	<mkdir dir="${bulid.dir}"/>
+	<mkdir dir="${CSS.dir}"/>
+	
 	<target name="loadfile">
+		
 		<!-- 复制目录文件-->
 		<copy todir="${bulid.dir}" encoding="UTF-8" outputencoding="UTF-8">
 			<fileset dir="${src.dir}" includes="widget/*/*.js"/>
 			<fileset dir="${src.dir}" includes="tools/*/*.js"/>
 			<fileset dir="${src.dir}" includes="core/GMcore.js"/>
+		</copy>
+		
+		<!-- 复制最新的CSS到我本地-->
+		<copy todir="${CSS.dir}" encoding="UTF-8" outputencoding="UTF-8">
+			<fileset dir="${CSSonline.dir}" includes="css.css"/>
 		</copy>
 		
 		<!-- 合并源文件文件 -->
@@ -30,7 +41,6 @@
 			tools\temp\temp.js
 			tools\cookie\cookie.js
 			tools\ie6fix\ie6fix.js
-			widget\task\task.js
 			widget\sharetosina\sharetosina.js
 			widget\cityzone\cityzone.js
 			widget\detercopy\detercopy.js

@@ -572,6 +572,9 @@
 		                '<div class="course_area none">'+
 		                   '<div class="cour_date"><span class="green">课时设置</span><span>'+
 		                   '<select id="J_StartHour" class="cour_box1">'+
+		                   		'<option value="07">07</option>'+
+		                   		'<option value="08">08</option>'+
+		                   		'<option value="09">09</option>'+
 		                   		'<option value="10">10</option>'+
 		                   		'<option value="11">11</option>'+
 		                   		'<option value="12">12</option>'+
@@ -586,7 +589,10 @@
 		                   		'<option value="21">21</option>'+
 		                   	'</select>时<input type="text" class="cour_box2" id="J_StartMinute">分</span><span>'+
 		                   	'<select id="J_EndHour" class="cour_box1">'+
-		                   	'<option value="10">10</option>'+
+		                   		'<option value="07">07</option>'+
+		                   		'<option value="08">08</option>'+
+		                   		'<option value="09">09</option>'+
+		                   		'<option value="10">10</option>'+
 		                   		'<option value="11">11</option>'+
 		                   		'<option value="12">12</option>'+
 		                   		'<option value="13">13</option>'+
@@ -824,10 +830,10 @@
 							instructorid="";
 						}
 						
-						var sh=parseInt(parent$('#J_StartHour').val()),
-							sm=parseInt(parent$('#J_StartMinute').val()),
-							eh=parseInt(parent$('#J_EndHour').val()),
-							em=parseInt(parent$('#J_EndMinute').val());
+						var sh=parent$('#J_StartHour').val(),
+							sm=parent$('#J_StartMinute').val(),
+							eh=parent$('#J_EndHour').val(),
+							em=parent$('#J_EndMinute').val();
 							
 						if($.trim(sm)=="" || $.trim(em)==""){
 							alert('请填写完全时间信息');

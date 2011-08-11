@@ -5,7 +5,7 @@
  */
 (function(W,G){
 
-		//基本结构1
+		//基本结构1 baidu hi bjsolaC
 		var tempOne=function(html){
 			var str='<div class="task_top"></div>'+
 					'<div class="mid">'+
@@ -49,6 +49,22 @@
 			return tempOne(html);
 		};
 		
+		
+		var bulidbuttery=function(){
+			if(document.getElementById('J_IndexMuen')){
+				var buttery='<div class="tip tcolor" id="J_Buttery">'+
+					            '<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>'+ 
+					            '<div class="tip_cont">'+  
+					                '<p><span><a href="javascipt:void(0);" id="J_ButteryClose">&times</a></span>完成<a href="javascript:void(0);" id="J_FireStep1">新手任务</a></p>'+
+					                '<p>轻松获得大米<a href="#">（积分）</a></p>'+
+					            '</div>'+
+					            '<b class="b5"></b><b class="b6"></b><b class="b7"></b><b class="b8"></b>'+     
+					        '</div>';
+					        
+				$('#J_IndexMuen').prepend(buttery);
+			}
+		}
+		
 		var task=function(){
 			return {
 				exports:{
@@ -60,6 +76,7 @@
 						this.parameter=parameter;
 						
 						if(!GMTask){
+							bulidbuttery(); //小浮层
 							this.bulidTask(todo);
 							this.bindEvent();
 						}
@@ -169,7 +186,7 @@
 						//写入cookie，1年不再弹出
 						$('#J_GMTask').live('click',function(){
 							if($(this).attr('checked')){
-								$.cookie('GMTask',1,{expires:365});
+								$.cookie('GMTask',1,{expires:30});
 							}else{
 								$.cookie('GMTask',null);
 							}
@@ -181,7 +198,7 @@
 						});
 						
 						//欢迎页面的完成动作
-						$('#J_Todo1').live('click',function(){
+						$('#J_Todo1,#J_FireStep1').live('click',function(){
 							that.bulidTask('step1',this.parameter);
 						});
 						
@@ -191,6 +208,11 @@
 						
 						$('#J_Todo3').live('click',function(){
 							that.bulidTask('step3',this.parameter);
+						});
+						
+						//小覆层
+						$('#J_ButteryClose').live('click',function(){
+							$('J_Buttery').hide();
 						});
 						
 					},

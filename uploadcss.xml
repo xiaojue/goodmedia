@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="GBK"?>
+<project name="MyTask" basedir="." default="uploadfile">
+	<!-- 定义全局变量和需要的目录 -->
+	<property name="CSSonline.dir" value="\\devatsport\smb\static-resource\loohou\static\"/>
+	<property name="CSS.dir" value="css"/>
+	
+	<target name="uploadcss">
+		<!-- 复制css到线上-->
+		<copy todir="${CSSonline.dir}" encoding="UTF-8" outputencoding="UTF-8">
+			<fileset dir="${CSS.dir}" includes="css.css"/>
+		</copy>
+	</target>
+</project>
