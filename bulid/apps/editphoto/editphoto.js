@@ -28,7 +28,6 @@
 									    '<div class="clear"></div>'+
 									    '<div><img src="http://x.idongmi.com/static/images/popup1_bbg.png"></div>'+
 									'</div>';
-						GM.tools.overlay.reset(323,219);
 						GM.tools.overlay.fire(overlaystr);
 						var setobj={};
 						

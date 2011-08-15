@@ -23,10 +23,9 @@
 						wrapId:'J_GM_OverlayWrap', //默认的全局wrap-ID
 						wrapCls:'J_GM_OverlayWrapCls',
 						coverId:'J_GM_Cover',
-						width:400,
-						height:200,
+						width:null,
+						height:null,
 						content:'',
-						_destroy:false, 
 						cover:true,
 						drag:false
 					};
@@ -52,19 +51,16 @@
 
 				if(!doc.getElementById(config.wrapId)){
 
-					var wrap=$('<div>',{id:config.wrapId}),
-
-						close=$(config.closeCls);
+					var wrap=$('<div>',{id:config.wrapId});
 
 					wrap.appendTo('body').html(config.content);
 
-					that.reset(config.width,config.height,config.wrapCls);
-
 					if(html) $('#'+config.wrapId).html(html);
-
+					
+					//取得wrap的高宽直接传入reset
+					//that.reset(config.width,config.height,config.wrapCls);
+					
 					if(config.cover && $('#'+config.coverId).length==0) that._cover();
-
-					that._fix(wrap,that);
 
 				}else{
 					if(html) $('#'+config.wrapId).html(html);
@@ -73,7 +69,14 @@
 
 					$('#'+config.wrapId).show();
 				}
-
+				
+				$('#'+config.wrapId).css('display','inline');
+				
+				//高度的获取有时候会延迟在IE6下
+				setTimeout(function(){
+					that.reset($('#'+config.wrapId).innerWidth(),$('#'+config.wrapId).innerHeight(),config.wrapCls);
+				},10);
+				
 				if(callback) callback(wrap);
 
 			},
@@ -103,13 +106,18 @@
 				$('#'+config.coverId).hide();
 
 				$('#'+config.wrapId).hide();
+				
+				$('#'+config.wrapId).css({
+					'width':'auto',
+					'height':'auto'
+				});
 
 				if(callback) callback($('#'+config.coverId),$('#'+config.wrapId));
 
 			},
 			//拖拽
 			_drag:function(callstart,callend){
-
+				
 			},
 			//遮罩
 			_cover:function(){
@@ -141,21 +149,23 @@
 				var that=host,config=that.config,
 					ie6=($.browser.msie && $.browser.version=='6.0'),
 					scrollTop=$(doc).scrollTop();
-
+					
 				node.css({
-						'position':ie6 ? 'absolute' : 'fixed',
-						'left':'50%',
-						'top':ie6 ? ((doc.documentElement.offsetHeight-config.height)/2)+scrollTop : '50%',
-						'margin-left':-(config.width/2),
-						'margin-top':ie6 ? 0 : -(config.height/2)
+					'position':ie6 ? 'absolute' : 'fixed',
+					'zoom':1,
+					'left':'50%',
+					'top':ie6 ? ((doc.documentElement.offsetHeight-config.height)/2)+scrollTop : '50%',
+					'margin-left':-(config.width/2),
+					'margin-top':ie6 ? 0 : -(config.height/2)
 				});
-
+				
 				$('#'+config.coverId).css({
 					'position':ie6 ? 'absolute' : 'fixed',
 		            'left':0,
 		            'top':ie6 ? scrollTop : 0,
 		            'width':ie6 ?  Math.max(doc.documentElement.clientWidth,doc.body.clientWidth) : "100%"
 		        });
+				
 			},
 			_fixScroll:function(){
 				var that=this,config=that.config;
@@ -172,7 +182,7 @@
 				$('#'+config.coverId).remove();
 				$('#'+config.wrapId).remove();
 				$(W).unbind('scroll resize',that._windowBind);
-				if(G.tools.overlay) G.tools.overlay=new _overlay._init({_destroy:true});
+				if(G.tools.overlay) G.tools.overlay=null;
 			}
 		};
 

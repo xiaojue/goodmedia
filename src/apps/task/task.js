@@ -172,8 +172,6 @@
 						
 						$.overlay();
 						
-						GM.tools.overlay.reset(620,256);
-						
 						var lay=todolist[todo]();
 						
 						lay=$.substitute(lay,this.parameter);

@@ -210,7 +210,6 @@
 						
 						CreateStr=table512w('创建主课表',CreateStr);
 						
-						parentGM.tools.overlay.reset(512,285);
 						parentGM.tools.overlay.fire(CreateStr);
 						
 						
@@ -292,7 +291,6 @@
 						
 						CreateStr=table512w('复制当前周课表',CreateStr);
 						
-						parentGM.tools.overlay.reset(512,285);
 						parentGM.tools.overlay.fire(CreateStr);
 						
 						
@@ -393,7 +391,6 @@
 						
 						OtherTable=table512w('创建副课表',OtherTable);
 						
-						parentGM.tools.overlay.reset(512,250);
 						parentGM.tools.overlay.fire(OtherTable);
 						
 						//radio功能和充填select
@@ -608,7 +605,6 @@
 		                
 						addCoursestr=table512w(name,addCoursestr);
 						
-						parentGM.tools.overlay.reset(512,530);
 						parentGM.tools.overlay.fire(addCoursestr);
 						
 						Coachwrap=parent$.carousel({

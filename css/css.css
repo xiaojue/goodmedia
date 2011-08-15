@@ -340,6 +340,7 @@ _width:400px;}
 .mid_l{background:url(http://s1.ifiter.com/static/images/mid_lbg.gif) repeat-y;width:7px;}
 .mid_r{background:url(http://s1.ifiter.com/static/images/mid_rbg.gif) repeat-y;width:6px;}
 .mid_c{background:#fff url(http://s1.ifiter.com/static/images/mid_cbg.gif) repeat-x top;}
+.mid{display:inline;}
 .bottom{width:512px;height:9px;background:url(http://s1.ifiter.com/static/images/bottom.png) no-repeat;}
 
 .column{width:494px;margin:0 auto 8px;padding-bottom:9px;border-bottom:1px dashed #d7d7d7;}

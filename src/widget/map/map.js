@@ -127,7 +127,6 @@
 						'<div style="margin-top:80px;font-size:12px;color:red;text-align:center;">对不起,没有可以查看的地图信息</div>'+
 							'<a href="javascript:void(0);" class="J_OverlayClose" style="position:absolute;right:-10px;top:-10px;display:block;width:15px;height:15px;background:#000;color:#fff;line-height:15px;text-align:center;">&times</a>'+
 						'</div>';
-				GM.tools.overlay.reset(200,200);
 				GM.tools.overlay.fire(BigMap);
 			};
 			
@@ -168,7 +167,6 @@
 						'<div id="J_Map_'+diget+'" style="height:500px;"></div>'+
 							'<a href="javascript:void(0);" class="J_OverlayClose" style="position:absolute;right:-10px;top:-10px;display:block;width:15px;height:15px;background:#000;color:#fff;line-height:15px;text-align:center;">&times</a>'+
 						'</div>';
-					GM.tools.overlay.reset(500,500);
 					GM.tools.overlay.fire(BigMap);
 					var map=new GM.widget.map({
 						q:that.q,
@@ -202,7 +200,6 @@
 						'<a href="javascript:void(0);" class="J_OverlayClose" style="position:absolute;right:-10px;top:-10px;display:block;width:15px;height:15px;background:#000;color:#fff;line-height:15px;text-align:center;">&times</a>'+
 						'</div>';
 						
-					GM.tools.overlay.reset(300,100);
 					GM.tools.overlay.fire(Way);
 				}else{
 					errorClick();
@@ -222,7 +219,6 @@
 						'<div id="J_Map_'+diget+'"></div>'+
 							'<a href="javascript:void(0);" class="J_OverlayClose" style="position:absolute;right:-10px;top:-10px;display:block;width:15px;height:15px;background:#000;color:#fff;line-height:15px;text-align:center;">&times</a>'+
 						'</div>';
-					GM.tools.overlay.reset(500,500);
 					GM.tools.overlay.fire(BigMap);
 					var map=new GM.widget.map({
 						q:that.q,
