@@ -50,19 +50,17 @@
 		};
 		
 		
-		var bulidbuttery=function(){
-			if(document.getElementById('J_IndexMuen')){
-				var buttery='<div class="tip tcolor" id="J_Buttery">'+
-					            '<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>'+ 
-					            '<div class="tip_cont">'+  
-					                '<p><span><a href="javascipt:void(0);" id="J_ButteryClose">&times</a></span>完成<a href="javascript:void(0);" id="J_FireStep1">新手任务</a></p>'+
-					                '<p>轻松获得大米<a href="#">（积分）</a></p>'+
-					            '</div>'+
-					            '<b class="b5"></b><b class="b6"></b><b class="b7"></b><b class="b8"></b>'+     
-					        '</div>';
-					        
-				$('#J_IndexMuen').prepend(buttery);
-			}
+		var bulidbuttery=function(step){
+			var buttery='<div class="tip tcolor" id="J_Buttery">'+
+				            '<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>'+ 
+				            '<div class="tip_cont">'+  
+				                '<p><span><a href="javascript:void(0);" id="J_ButteryClose">&times</a></span>完成<a href="javascript:void(0);" id="J_FireStep1" data-step="'+step+'">新手任务</a></p>'+
+				                '<p>轻松获得大米<a href="http://x.idongmi.com/user/dami.jsp">（积分）</a></p>'+
+				            '</div>'+
+				            '<b class="b5"></b><b class="b6"></b><b class="b7"></b><b class="b8"></b>'+     
+				        '</div>';
+				        
+			$('#J_IndexMuen').prepend(buttery);
 		}
 		
 		var task=function(){
@@ -70,18 +68,21 @@
 				exports:{
 					fire:function(todo,parameter){
 						//如果有TaskConfig这个全局对象并且不存在flg cookie的话，则初始化任务功能
-
-						var GMTask=$.cookie('GMTask');
-						
 						this.parameter=parameter;
 						
-						if(!GMTask){
-							bulidbuttery(); //小浮层
+						var GMTask=$.cookie(this.parameter['uid']),
+							
+							ishashTips=/^NoTips$/.test(W.location.search.slice(1));
+							
+						if(!GMTask && (!ishashTips || todo=="step3finish")){ //如果不存在cookie，并且没有notips或者有notips但是是第三步的时候
+							if($.cookie(this.parameter['uid']+'over')==1) return; //如果第三步也点了确定
 							this.bulidTask(todo);
-							this.bindEvent();
 						}
+							this.bindEvent();
+						
 					},
 					bulidTask:function(todo,parameter){
+						var that=this;
 						var todolist={
 							'welcome':function(){
 								var str="<div class='task_txt'><div class='task_text1'>"+
@@ -112,14 +113,16 @@
 								return tempTwo(left,right,foot);
 							},
 							'step1finish':function(){
+								if($.cookie(that.parameter['uid']+'task1')==1){
+									return todolist['step2']();
+								}
 								var left='<img src="{coachpic}"><span>{coachname}</span>',
 									right='<div class="green">亲爱的{username}</div>'+
-										 '<p>恭喜您完成第一个任务</p>'+
-								         '<p class="yellow">您获得了{rice}大米</p>'+
-								         '<p class="green">并且获得我们为您准备的{food}食物</p>',
+										 '<p>您已完成第一个任务<span class="yellow">(已获得了{rice}大米)</span></p>',
+								         //'<p class="green">并且获得我们为您准备的{food}食物</p>',
 									foot='<a href="#" class="blue J_OverlayClose">谢谢，自己玩...</a>'+
 										 '<a class="task_button" href="#" style="display:inline-block;text-decoration:none;_display:inline;zoom:1;" id="J_Todo2">下一个任务</a>';
-								
+								$.cookie(that.parameter['uid']+'task1',1,{expires:365});
 								return tempTwo(left,right,foot);
 							},
 							'step2':function(){
@@ -131,18 +134,20 @@
 										 '<p>健身方案的申请可以发给我们的教练团哦，看看教练团会给你什么建议吧^_^</p>',
 									foot='<a href="#" class="blue J_OverlayClose">谢谢，自己玩...</a>'+
 										 '<a class="task_button" href="{todourl}" style="display:inline-block;text-decoration:none;_display:inline;zoom:1;">做任务</a>';
-										 
+									 
 								return tempTwo(left,right,foot);
 							},
 							'step2finish':function(){
+								if($.cookie(that.parameter['uid']+'task2')==1){
+									return todolist['step3']();
+								}
 								var left='<img src="{coachpic}"><span>{coachname}</span>',
 									right='<div class="green">亲爱的{username}</div>'+
-										 '<p>恭喜您完成第二个任务</p>'+
-								         '<p class="yellow">您获得了{rice}大米</p>'+
-								         '<p class="green">距离兑换{food}食物还差{gap}大米</p>',
+										 '<p>您已完成第二个任务<span class="yellow">已获得了{rice}大米</span></p>',
+								         //'<p class="green">距离兑换{food}食物还差{gap}大米</p>',
 									foot='<a href="#" class="blue J_OverlayClose">谢谢，自己玩...</a>'+
 										 '<a class="task_button" href="#" style="display:inline-block;text-decoration:none;_display:inline;zoom:1;" id="J_Todo3">下一个任务</a>';
-								
+								$.cookie(that.parameter['uid']+'task2',1,{expires:365});
 								return tempTwo(left,right,foot);
 							},
 							'step3':function(){
@@ -154,18 +159,17 @@
 										 '<p>健身方案的申请可以发给我们的教练团哦，看看教练团会给你什么建议吧^_^</p>',
 									foot='<a href="#" class="blue J_OverlayClose">谢谢，自己玩...</a>'+
 										 '<a class="task_button" href="{todourl}" style="display:inline-block;text-decoration:none;_display:inline;zoom:1;">做任务</a>';
-										 
+								
 								return tempTwo(left,right,foot);
 							},
 							'step3finish':function(){
 								var left='<img src="{coachpic}"><span>{coachname}</span>',
 									right='<div class="green">亲爱的{username}</div>'+
-										 '<p>恭喜您完成第三个任务</p>'+
-								         '<p class="yellow">您获得了{rice}大米</p>'+
-								         '<p class="green">并且获得我们为您准备的{gift}礼物</p>',
+										 '<p>您已完成第所有任务</p>'+
+								         '<p class="yellow">您获得了{rice}大米</p>',
+								         //'<p class="green">并且获得我们为您准备的{gift}礼物</p>',
 									foot='<a href="#" class="blue J_OverlayClose">谢谢，自己玩...</a>'+
-										 '<a class="task_button J_OverlayClose" href="#" style="display:inline-block;text-decoration:none;_display:inline;zoom:1;">完成</a>';
-								
+										 '<a class="task_button J_OverlayClose" id="J_FinishTask" href="javascript:void(0)" style="display:inline-block;text-decoration:none;_display:inline;zoom:1;">完成</a>';
 								return tempTwo(left,right,foot);
 							}
 						};
@@ -184,9 +188,9 @@
 						//写入cookie，1年不再弹出
 						$('#J_GMTask').live('click',function(){
 							if($(this).attr('checked')){
-								$.cookie('GMTask',1,{expires:30});
+								$.cookie(that.parameter['uid'],1,{expires:30});
 							}else{
-								$.cookie('GMTask',null);
+								$.cookie(that.parameter['uid'],null);
 							}
 						});
 						
@@ -196,23 +200,38 @@
 						});
 						
 						//欢迎页面的完成动作
-						$('#J_Todo1,#J_FireStep1').live('click',function(){
-							that.bulidTask('step1',this.parameter);
+						$('#J_Todo1').live('click',function(){
+							that.bulidTask('step1',that.parameter);
 						});
 						
 						$('#J_Todo2').live('click',function(){
-							that.bulidTask('step2',this.parameter);
+							that.bulidTask('step2',that.parameter);
 						});
 						
 						$('#J_Todo3').live('click',function(){
-							that.bulidTask('step3',this.parameter);
+							that.bulidTask('step3',that.parameter);
 						});
 						
 						//小覆层
 						$('#J_ButteryClose').live('click',function(){
-							$('J_Buttery').hide();
+							$('#J_Buttery').hide();
 						});
 						
+						$('#J_FireStep1').live('click',function(){
+							var funname=$(this).attr('data-step');
+							that.bulidTask(funname,that.parameter);
+						});
+						
+						//完成
+						$('#J_FinishTask').live('click',function(){
+							$.cookie(that.parameter['uid'],1,{expires:365});
+							$.cookie(that.parameter['uid']+'over',1,{expires:365});
+						});
+						
+					},
+					bulidbuttery:function(step){
+						if($.cookie(this.parameter['uid'])==1) return;
+						bulidbuttery(step);
 					}
 				}
 			}
