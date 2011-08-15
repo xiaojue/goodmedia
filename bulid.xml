@@ -26,9 +26,12 @@
 			<fileset dir="${src.dir}" includes="core/GMcore.js"/>
 		</copy>
 		
-		<!-- 复制最新的CSS到我本地-->
+		<!-- 下载最新的CSS到我本地-->
+		<delete dir="${CSS.dir}" includes="css.css"/>
+		<delete dir="${CSS.dir}" includes="css-min.css"/>
 		<copy todir="${CSS.dir}" encoding="UTF-8" outputencoding="UTF-8">
 			<fileset dir="${CSSonline.dir}" includes="css.css"/>
+			<fileset dir="${CSSonline.dir}" includes="css-min.css"/>
 		</copy>
 		
 		<!-- 合并源文件文件 -->

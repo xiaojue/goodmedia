@@ -1,0 +1,1 @@
+(function(a,c){var b=function(){}})(window,GM);

@@ -196,14 +196,14 @@
 						
 						var yetroom=bulidlist(W.yetroomlist,'option');
 						
-						var CreateStr='<div id="J_Calendar" class="poput_left pop_color2"></div>'+
+						var CreateStr='<div id="J_Calendar" class="poput_left pop_color2" style="_width:180px;overflow:hidden;"></div>'+
 									'<div class="poput_right">'+
 									'<div class="Kb_txt">'+
 									'<div class="Kb_text"><label for="J_Week"><span>课表周期</span><input type="text" size="8" id="J_Week" disabled="disabled"></label></div>'+
 									'<div class="Kb_text"><label for="J_Scope"><span>课表日期</span><input type="text" size="22" id="J_Scope" disabled="disabled"></label></div>'+
 									'</div>'+
 									'<div class="Kb1"><label for="J_ChooseYetRoom"><input type="radio" name="room" id="J_ChooseYetRoom"><span>选择已有的教室</span></label><select name="" class="pro_select2" id="J_YetRoom"><option value="0">已有教室列表</option>'+yetroom+'</select><div class="clear"></div></div>'+
-									'<div class="Kb1"><label for="J_ChooseNewRoom"><input type="radio" name="room" id="J_ChooseNewRoom"><span>输入新建的教室</span></label><input type="text" id="J_NewRoom" class="pro_select2"><div class="clear"></div></div>'+
+									'<div class="Kb1"><label for="J_ChooseNewRoom"><input type="radio" name="room" id="J_ChooseNewRoom"><span>输入新建的教室</span></label><input type="text" id="J_NewRoom" value="" class="pro_select2"/><div class="clear"></div></div>'+
 									'<div class="Kb2" id="J_ErrorMsg" style="visibility:hidden;">最多8个汉字，可输入中文、英文、数字</div>'+
 									'<div class="table_but"><input type="button" class="space_button" id="J_Submit" value="确认"><input type="button" class="J_OverlayClose space_button" value="取消"></div>'+
 									'</div><div class="clear"></div>';
@@ -274,15 +274,14 @@
 						
 						//radio功能和充填select
 						parent$('#J_ChooseYetRoom').attr('checked','checked');
-						parent$('#J_YetRoom').attr('disabled',false);
-						parent$('#J_NewRoom').attr('disabled',true).val('');
+						parent$('#J_NewRoom').val('');
 						
 					});
 					
 					
 					parent$('#J_CopyTable').live('click',function(){
 						
-						var CreateStr='<div id="J_Calendar" class="poput_left pop_color2"></div>'+
+						var CreateStr='<div id="J_Calendar" class="poput_left pop_color2" style="_width:180px;overflow:hidden;"></div>'+
 									'<div class="poput_right" style="height:200px;">'+
 									'<div class="Kb_txt">'+
 									'<div class="Kb_text"><label for="J_Week"><span>课表周期</span><input type="text" size="8" id="J_Week" disabled="disabled"></label></div>'+
@@ -357,26 +356,28 @@
 					
 					//确定开始复制课表
 					parent$('#J_CopyTableSub').live('click',function(){
-						parentGM.tools.overlay.close(); //关闭浮出层
-						$.ajax({
-						  url:'/course/courseAjax.jsp',
-						  data:W.copyTableObject,
-						  success:function(result){
-							  var result=$.trim(result);
-							  if(result==1){
-								alert('复制课表成功');
-							  	top.location.href='/course/index.jsp?year='+W.copyTableObject['selectyear']+'&week='+W.copyTableObject['selectweek']+'&reload=1';
-							  }else{
-								alert(result);
+						if(confirm('如果复制目标周存在课表,将进行覆盖操作,你是否确定复制?')){
+							parentGM.tools.overlay.close(); //关闭浮出层
+							$.ajax({
+							  url:'/course/courseAjax.jsp',
+							  data:W.copyTableObject,
+							  success:function(result){
+								  var result=$.trim(result);
+								  if(result==1){
+									alert('复制课表成功');
+								  	top.location.href='/course/index.jsp?year='+W.copyTableObject['selectyear']+'&week='+W.copyTableObject['selectweek']+'&reload=1';
+								  }else{
+									alert(result);
+									top.location.href='/course/index.jsp?year='+W.copyTableObject['year']+'&week='+W.copyTableObject['week']+'&reload=1';
+								  }
+							  },
+							  error:function(){
+								alert('响应超时,复制失败,请重新尝试');
 								top.location.href='/course/index.jsp?year='+W.copyTableObject['year']+'&week='+W.copyTableObject['week']+'&reload=1';
-							  }
-						  },
-						  error:function(){
-							alert('响应超时,复制失败,请重新尝试');
-							top.location.href='/course/index.jsp?year='+W.copyTableObject['year']+'&week='+W.copyTableObject['week']+'&reload=1';
-						  },
-						  timeout:5000
-						});
+							  },
+							  timeout:5000
+							});
+						}
 					});
 					
 					//添加副课表
@@ -384,8 +385,8 @@
 						
 						var yetroom=bulidlist(W.yetroomlist,'option');
 						
-						var OtherTable='<div class="popup_text"><label for="J_ChooseYetRoom"><input type="radio" name="room" id="J_ChooseYetRoom"><span>选择已有的教室</span></label><select name="" class="pro_select2" id="J_YetRoom"><option value="0">已有教室列表</option>'+yetroom+'</select><div class="clear"></div></div>'+
-									   '<div class="popup_text"><label for="J_ChooseNewRoom"><input type="radio" name="room" id="J_ChooseNewRoom"><span>输入新建的教室</span></label><input type="text" id="J_NewRoom" class="pro_select2"><div class="clear"></div></div>'+
+						var OtherTable='<div class="popup_text"><label for="J_ChooseYetRoom"><input type="radio" name="room" id="J_ChooseYetRoom"><span>选择已有的教室</span></label><select class="pro_select2" id="J_YetRoom"><option value="0">已有教室列表</option>'+yetroom+'</select><div class="clear"></div></div>'+
+									   '<div class="popup_text"><label for="J_ChooseNewRoom"><input type="radio" name="room" id="J_ChooseNewRoom"><span>输入新建的教室</span></label><input type="text" id="J_NewRoom" value="" class="pro_select2"><div class="clear"></div></div>'+
 									   '<div class="popup_text1" id="J_ErrorMsgOther" style="visibility:hidden;">最多8个汉字，可输入中文、英文、数字</div>'+
 									   '<div class="popup_but"><input type="button" class="space_button" id="J_SubmitOtherTable" value="确认"><input type="button" class="space_button J_OverlayClose" value="取消"></div>'+
 									   '<div class="clear"></div>';
@@ -397,8 +398,7 @@
 						
 						//radio功能和充填select
 						parent$('#J_ChooseYetRoom').attr('checked','checked');
-						parent$('#J_YetRoom').attr('disabled',false);
-						parent$('#J_NewRoom').attr('disabled',true).val('');
+						parent$('#J_NewRoom').val('');
 					});
 					
 					parent$('#J_SubmitOtherTable').live('click',function(){
@@ -443,15 +443,12 @@
 					});
 					
 					parent$('#J_ChooseYetRoom').live('click',function(){
-						parent$('#J_YetRoom').attr('disabled',false);
-						parent$('#J_NewRoom').attr('disabled',true).val('');
+						parent$('#J_NewRoom').val('');
 						parent$('#J_ErrorMsg').css('visibility','hidden');
 					});
 					
 					parent$('#J_ChooseNewRoom').live('click',function(){
-						parent$('#J_YetRoom').attr('disabled',true);
-						parent$('#J_YetRoom').attr('disabled',true).val('0');
-						parent$('#J_NewRoom').attr('disabled',false);
+						parent$('#J_YetRoom').val('0');
 					});
 					
 					parent$('#J_Submit').live('click',function(){
