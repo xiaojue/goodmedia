@@ -126,10 +126,10 @@
 				}).prependTo('body');
 
 		        if (ie6) {
-		            cover.append("<" + "iframe style='width:100%;" +
-		                "height:expression(this.parentNode.offsetHeight);" +
+		            cover.append("<iframe style='width:100%;" +
 		                "filter:alpha(opacity=0);" +
 		                "z-index:-1;'>");
+		            cover.find('iframe').css('height',cover.height());
 		        }
 
 		        that._fixScroll();
