@@ -1,0 +1,60 @@
+<div xmlns:ext="http://www.extjs.com" class="body-wrap"><div class="inheritance res-block"><pre class="res-block-inner"><a href="output/Xwb.ax.Shortlink.html" ext:member="" ext:cls="Xwb.ax.Shortlink">Shortlink</a>&#13;&nbsp;&nbsp;<img src="resources/elbow-end.gif">shortlink</pre></div><h1>类 <a href="source/std-doc.html#cls-Xwb.mod.shortlink">Xwb.mod.shortlink</a></h1><table cellspacing="0"><tr><td class="label">空间：</td><td class="hd-info">Xwb.mod</td></tr><tr><td class="label">定义在:</td><td class="hd-info">std-doc.js</td></tr><tr><td class="label">类:</td><td class="hd-info"><a href="source/std-doc.html#cls-Xwb.mod.shortlink">shortlink</a></td></tr><tr><td class="label">父类:</td><td class="hd-info"><a href="output/Xwb.ax.Shortlink.html" ext:cls="Xwb.ax.Shortlink" ext:member="">Shortlink</a></td></tr></table><div class="description"><br><br><i>单态类.</i></div><div class="hr"></div><a id="Xwb.mod.shortlink-configs"></a><h2>配置项</h2><table cellspacing="0" class="member-table"><tbody><tr><th colspan="2" class="sig-header">config</th><th class="msource-header">定义在</th></tr><tr class="config-row  继承自"><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.Shortlink-local"></a><b><a href="source/std-doc.html#cfg-Xwb.ax.Shortlink-local">local</a></b> : String<div class="mdesc">指定本地短链接前缀</div></td><td class="msource">Shortlink</td></tr></tbody></table><a id="Xwb.mod.shortlink-props"></a><h2>公共属性（只读）</h2><div class="no-members">This class has no public properties.</div><a id="Xwb.mod.shortlink-events"></a><h2>事件列表</h2><div class="no-members">This class has no public events.</div><a id="Xwb.mod.shortlink-methods"></a><h2>公共方法</h2><table cellspacing="0" class="member-table"><tbody><tr><th colspan="2" class="sig-header">method</th><th class="msource-header">定义在</th></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.mod.shortlink-renderWeiboShortlink"></a><b><a href="source/std-doc.html#method-Xwb.mod.shortlink-renderWeiboShortlink">renderWeiboShortlink</a></b>(&nbsp;<code>jQuery&nbsp;jqWeiboItem</code>,&nbsp;<code>Object&nbsp;weiboItemData</code>,&nbsp;<code>Object&nbsp;shortlinks</code>&nbsp;)
+    :
+                                        void<div class="mdesc"><div class="short">处理单条微博内的短链接。</div><div class="long">处理单条微博内的短链接。<div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>jqWeiboItem</code> : jQuery<div class="sub-desc"></div></li><li><code>weiboItemData</code> : Object<div class="sub-desc"></div></li><li><code>shortlinks</code> : Object<div class="sub-desc">参见<a href="output/Xwb.mod.shortlink.html#Xwb.mod.shortlink-from" ext:member="from" ext:cls="Xwb.mod.shortlink">from</a>里shortlinks格式</div></li></ul><strong>Returns:</strong><ul><li>void</li></ul></div></div></div></td><td class="msource">shortlink</td></tr><tr class="method-row expandable inherited"><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.Shortlink-getUrls"></a><b><a href="source/std-doc.html#method-Xwb.ax.Shortlink-getUrls">getUrls</a></b>()
+    :
+                                        Object<div class="mdesc"><div class="short">获得缓存中的URL信息，数据格式为{urlShortId:urlInfo}</div><div class="long">获得缓存中的URL信息，数据格式为{urlShortId:urlInfo}<div class="mdetail-params"><strong>Parameters:</strong><ul><li>None.</li></ul><strong>Returns:</strong><ul><li><code>Object</code><div class="sub-desc"></div></li></ul></div></div></div></td><td class="msource"><a href="output/Xwb.ax.Shortlink.html#getUrls" ext:member="#getUrls" ext:cls="Xwb.ax.Shortlink">Shortlink</a></td></tr><tr class="method-row expandable inherited"><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.Shortlink-search"></a><b><a href="source/std-doc.html#method-Xwb.ax.Shortlink-search">search</a></b>(&nbsp;<code>String&nbsp;text</code>&nbsp;)
+    :
+                                        Array<div class="mdesc"><div class="short">从给定文本内查找所有短链接，返回包含短链接ID字符串的数组。&#13;
+var text = 'Xweibo,2011 go go go!http://testurl.cn/xweibo_trunk/hBACWI';&#13;
+        var...</div><div class="long">从给定文本内查找所有短链接，返回包含短链接ID字符串的数组。
+<pre><code><b>var</b> text = <em>'Xweibo,2011 go go go!http:<i>//testurl.cn/xweibo_trunk/hBACWI'</em>;</i>
+        <b>var</b> urls = search(text);
+        结果：[<em>'hBACWI'</em>]</code></pre><div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>text</code> : String<div class="sub-desc"></div></li></ul><strong>Returns:</strong><ul><li><code>Array</code><div class="sub-desc"></div></li></ul></div></div></div></td><td class="msource"><a href="output/Xwb.ax.Shortlink.html#search" ext:member="#search" ext:cls="Xwb.ax.Shortlink">Shortlink</a></td></tr><tr class="method-row expandable inherited"><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.Shortlink-is"></a><b><a href="source/std-doc.html#method-Xwb.ax.Shortlink-is">is</a></b>(&nbsp;<code>String&nbsp;url</code>&nbsp;)
+    :
+                                        Boolean|String<div class="mdesc"><div class="short">判断给定的URL是否为短链接格式，如果为短链接，返回该链接接字符串ID。&#13;
+var text = 'http://testurl.cn/xweibo_trunk/hBACWI';&#13;
+            var linkId;&#13;
+ ...</div><div class="long">判断给定的URL是否为短链接格式，如果为短链接，返回该链接接字符串ID。
+<pre><code><b>var</b> text = <em>'http:<i>//testurl.cn/xweibo_trunk/hBACWI'</em>;</i>
+            <b>var</b> linkId;
+            <b>if</b>((linkId=is(text))){
+                <i>// hBACWI</i>
+                alert(linkId);
+            }</code></pre><div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>url</code> : String<div class="sub-desc"></div></li></ul><strong>Returns:</strong><ul><li><code>Boolean|String</code><div class="sub-desc"></div></li></ul></div></div></div></td><td class="msource"><a href="output/Xwb.ax.Shortlink.html#is" ext:member="#is" ext:cls="Xwb.ax.Shortlink">Shortlink</a></td></tr><tr class="method-row expandable inherited"><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.Shortlink-from"></a><b><a href="source/std-doc.html#method-Xwb.ax.Shortlink-from">from</a></b>(&nbsp;<code>Object&nbsp;weiboListDataMap</code>,&nbsp;<code>Function&nbsp;callback</code>&nbsp;)
+    :
+                                        void<div class="mdesc"><div class="short">解析来自微博列表数据的短链接，解析完毕后只回调一次callback。&#13;
+方法执行来将已解析的短链数据缓存在参数list的shortlinks属性中，它是一个数组，&#13;
+该数组内的短链可能重复，因为一微博内可存在多个重复的短链接。&#13;
+数组...</div><div class="long">解析来自微博列表数据的短链接，解析完毕后只回调一次callback。<br/>
+方法执行来将已解析的短链数据缓存在参数list的shortlinks属性中，它是一个数组，
+该数组内的短链可能重复，因为一微博内可存在多个重复的短链接。<br/>
+数组元素数据格式为
+<pre><code>{
+          shortlinks : [
+            <i>// 短链信息</i>
+            shortlinkInfo,
+            <i>// 该短链是否来自转发区</i>
+            true
+          ],
+          <i>//...</i>
+        }</code></pre>
+callback 回调的参数为(wbData, shortlinks)<br/>
+shortlinks格式为[ [shorlinkInfo, isForward], ... ],
+shortlinkInfo为上面shortlinks中的元素<br/>
+isForward 指明该短链是否来自转发内容。<br/><div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>weiboListDataMap</code> : Object<div class="sub-desc"></div></li><li><code>callback</code> : Function<div class="sub-desc"></div></li></ul><strong>Returns:</strong><ul><li>void</li></ul></div></div></div></td><td class="msource"><a href="output/Xwb.ax.Shortlink.html#from" ext:member="#from" ext:cls="Xwb.ax.Shortlink">Shortlink</a></td></tr><tr class="method-row expandable inherited"><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.Shortlink-info"></a><b><a href="source/std-doc.html#method-Xwb.ax.Shortlink-info">info</a></b>(&nbsp;<code>Array&nbsp;urls</code>,&nbsp;<code>Function&nbsp;callback</code>&nbsp;)
+    :
+                                        void<div class="mdesc"><div class="short">查询给定短链接ID数组中所有短链接的信息。&#13;
+如果短链接信息已缓存，优先使用缓存数据。</div><div class="long">查询给定短链接ID数组中所有短链接的信息。<br/>
+如果短链接信息已缓存，优先使用缓存数据。<div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>urls</code> : Array<div class="sub-desc">短链接数组，如['hBACWI','hBAWEF',...]</div></li><li><code>callback</code> : Function<div class="sub-desc">查询结束后回调，参数为库已缓存的所有短链接map数据。</div></li></ul><strong>Returns:</strong><ul><li>void</li></ul></div></div></div></td><td class="msource"><a href="output/Xwb.ax.Shortlink.html#info" ext:member="#info" ext:cls="Xwb.ax.Shortlink">Shortlink</a></td></tr><tr class="method-row expandable inherited"><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.Shortlink-render"></a><b><a href="source/std-doc.html#method-Xwb.ax.Shortlink-render">render</a></b>(&nbsp;<code>jQuery|HTMLElement&nbsp;scopeElement</code>,&nbsp;<code>Function&nbsp;renderer</code>&nbsp;)
+    :
+                                        void<div class="mdesc"><div class="short">查找给定DOM元素内所有的短链接a元素，利用renderer参数回调处理这些元素。&#13;
+方法会查找元素中中包含短链接的a标签元素，获得所有短链接，查询短链接缓存，如未缓存，&#13;
+发起API请求解析未缓存的短链接。&#13;
+方法可自行处理给定元素...</div><div class="long">查找给定DOM元素内所有的短链接a元素，利用renderer参数回调处理这些元素。<br/>
+方法会查找元素中中包含短链接的a标签元素，获得所有短链接，查询短链接缓存，如未缓存，
+发起API请求解析未缓存的短链接。<br/>
+方法可自行处理给定元素结点内所有包含短链的A元素。<br/>
+某个元素里所有的短链接加上提示真实地址：
+<pre><code>render(<em>'#divId'</em>, <b>function</b>(urlInfo, aHrefElement){
+            aHrefElement.title = urlInfo.url;
+       });</code></pre><div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>scopeElement</code> : jQuery|HTMLElement<div class="sub-desc"></div></li><li><code>renderer</code> : Function<div class="sub-desc">，调用参数为 renderer( shortlinkInfo, aHrefElement )</div></li></ul><strong>Returns:</strong><ul><li>void</li></ul></div></div></div></td><td class="msource"><a href="output/Xwb.ax.Shortlink.html#render" ext:member="#render" ext:cls="Xwb.ax.Shortlink">Shortlink</a></td></tr></tbody></table></div>

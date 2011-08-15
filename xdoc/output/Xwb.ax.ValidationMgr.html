@@ -1,0 +1,102 @@
+<div xmlns:ext="http://www.extjs.com" class="body-wrap"><div class="inheritance res-block"><pre class="res-block-inner"><a href="output/Xwb.ax.ElementValidationContext.html" ext:member="" ext:cls="Xwb.ax.ElementValidationContext">ElementValidationContext</a>&#13;&nbsp;&nbsp;<img src="resources/elbow-end.gif">ValidationMgr</pre></div><h1>类 <a href="source/std-doc.html#cls-Xwb.ax.ValidationMgr">Xwb.ax.ValidationMgr</a></h1><table cellspacing="0"><tr><td class="label">空间：</td><td class="hd-info">Xwb.ax</td></tr><tr><td class="label">定义在:</td><td class="hd-info">std-doc.js</td></tr><tr><td class="label">类:</td><td class="hd-info"><a href="source/std-doc.html#cls-Xwb.ax.ValidationMgr">ValidationMgr</a></td></tr><tr><td class="label">父类:</td><td class="hd-info"><a href="output/Xwb.ax.ElementValidationContext.html" ext:cls="Xwb.ax.ElementValidationContext" ext:member="">ElementValidationContext</a></td></tr></table><div class="description">表单验证类，对表单中所有需要验证的元素执行验证处理。<br/>
+本类提供与具体应用无关的方式验证常用的表单数据的有效性。<br/>
+支持同步与异步等验证。<br/>
+<b>建议每个表单都用form元素提交。</b><br/>
+如果表单无input提交按钮，可隐藏一个type=submit的input按钮，方便用户按回车后提交表单。<br/>
+验证表单通常需要两个步骤：
+<ul>
+<li>在元素html模板上创建验证该元素所需的属性。其中<b>vrel</b>是必须属性，引入该元素的验证器</li>
+<li>在JavaScript文件中利用本类初始化表单</li>
+</ul>
+什么是验证器？<br/>
+验证器其实就是一个回调函数，除了库提供一套通用的验证器外，也可自行注册验证器。<br/>
+每个验证器都应用一个标识，通过<a href="output/Xwb.ax.ValidationMgr.html#Xwb.ax.ValidationMgr-reg" ext:member="reg" ext:cls="Xwb.ax.ValidationMgr">reg</a>方法注册验证器。<br/>
+验证器标识字符串被HTML模板的表单元素<b>vrel</b>属性引用，指明验证该元素所需的验证器。<br/>
+如果在vrel属性里的验证器标识加下划线，那么此时的验证器就是一个预处理器，
+在表单验证管理器初始化后就会执行，而且只会执行一次。<br/>
+验证器rel属性数据格式是什么？<br/>
+rel属性最终被解析为JavaScript对象，它是一个键值对，格式为<br/>
+identifier=key:value,key:value,...|identifier=key:value,key:value,...|...<br/>
+value数据需用\转义':'，','字符，如\,表示单个','。<br/>
+属性内容由验证器自己定义。<br/>
+例：
+<pre><code>html:
+ &lt;input name=&quot;nick&quot; vrel=&quot;_f|sinan|ne=m:Name can not be empty&quot; warntip=&quot;#nickTip&quot; /&gt;
+ 上面包含元素验证的几个信息：
+ vrel -> 指明所用到的验证器有f, sina, ne，其中f是在验证管理器载入时就执行的。
+ warntip -> 指明元素验证失败时提示信息所在的HTML元素
+ -----
+ JavaScript初始例如：
+ 
+ Xwb.use(<em>'Validator'</em>, {
+     <i>// 当前表单form元素</i>
+     form:jq.find(<em>'#showForm'</em>),
+     <i>// 触发提交按钮</i>
+     trigger : jq.find(<em>'#trig'</em>),
+     onsuccess : <b>function</b>(data, next){
+         Xwb.request.updateShowProfile(data, <b>function</b>( e ){
+             <b>if</b>(e.isOk()){
+                 Xwb.ui.MsgBox.success(<em>''</em>, <em>'显示设置已保存。'</em>);
+             }<b>else</b> Xwb.ui.MsgBox.error(<em>''</em>, e.getMsg());
+                 
+             next();
+         });
+         <i>// 非FORM提交返回false</i>
+         <b>return</b> false;
+     }
+ });</code></pre>
+验证应用例子参见/mod/mysetting.js,验证器注册例子参见/mod/validators.js</div><div class="hr"></div><a id="Xwb.ax.ValidationMgr-configs"></a><h2>配置项</h2><table cellspacing="0" class="member-table"><tbody><tr><th colspan="2" class="sig-header">config</th><th class="msource-header">定义在</th></tr><tr class="config-row  "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.ValidationMgr-form"></a><b><a href="source/std-doc.html#cfg-Xwb.ax.ValidationMgr-form">form</a></b> : jQuery<div class="mdesc">html form元素</div></td><td class="msource">ValidationMgr</td></tr><tr class="config-row  "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.ValidationMgr-trigger"></a><b><a href="source/std-doc.html#cfg-Xwb.ax.ValidationMgr-trigger">trigger</a></b> : jQuery<div class="mdesc">如果触发提交的按钮不是input按钮，可以指定其它按钮元素，input按钮则不用指定</div></td><td class="msource">ValidationMgr</td></tr><tr class="config-row  "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.ValidationMgr-trigOnSubmit"></a><b><a href="source/std-doc.html#cfg-Xwb.ax.ValidationMgr-trigOnSubmit">trigOnSubmit</a></b> : Boolean<div class="mdesc">是否提交时触发验证，默认true</div></td><td class="msource">ValidationMgr</td></tr><tr class="config-row  "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.ValidationMgr-autoFocus"></a><b><a href="source/std-doc.html#cfg-Xwb.ax.ValidationMgr-autoFocus">autoFocus</a></b> : Boolean<div class="mdesc">验证失败时是否聚焦到元素上，默认true</div></td><td class="msource">ValidationMgr</td></tr><tr class="config-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.ValidationMgr-onsuccess"></a><b><a href="source/std-doc.html#cfg-Xwb.ax.ValidationMgr-onsuccess">onsuccess</a></b> : Function<div class="mdesc"><div class="short">验证结束后回调方法，调用为 onsuccess(formData, finalChain)，&#13;
+formData为表单元素经过验证处理后的数据；finalChain为onsuccess必须回调的方法，以正常结束表单的验证。&#13;
+如果是异...</div><div class="long">验证结束后回调方法，调用为 onsuccess(formData, finalChain)，
+formData为表单元素经过验证处理后的数据；finalChain为onsuccess必须回调的方法，以正常结束表单的验证。
+如果是异步提交，可以在该方法内提交表单。<br/>
+方法返回false可取消浏览器默认的表单提交。</div></div></td><td class="msource">ValidationMgr</td></tr></tbody></table><a id="Xwb.ax.ValidationMgr-props"></a><h2>公共属性（只读）</h2><table cellspacing="0" class="member-table"><tbody><tr><th colspan="2" class="sig-header">properties</th><th class="msource-header">定义在</th></tr><tr class="property-row  "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.ValidationMgr-useCache"></a><b><a href="source/std-doc.html#prop-Xwb.ax.ValidationMgr-useCache">useCache</a></b> : Boolean<div class="mdesc">是否缓存rel值</div></td><td class="msource">ValidationMgr</td></tr></tbody></table><a id="Xwb.ax.ValidationMgr-events"></a><h2>事件列表</h2><div class="no-members">This class has no public events.</div><a id="Xwb.ax.ValidationMgr-methods"></a><h2>公共方法</h2><table cellspacing="0" class="member-table"><tbody><tr><th colspan="2" class="sig-header">method</th><th class="msource-header">定义在</th></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.ValidationMgr-validateElement"></a><b><a href="source/std-doc.html#method-Xwb.ax.ValidationMgr-validateElement">validateElement</a></b>(&nbsp;<code>HtmlElement&nbsp;element</code>&nbsp;)
+    :
+                                        void<div class="mdesc"><div class="short">验证单个元素</div><div class="long">验证单个元素<div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>element</code> : HtmlElement<div class="sub-desc"></div></li></ul><strong>Returns:</strong><ul><li>void</li></ul></div></div></div></td><td class="msource">ValidationMgr</td></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.ValidationMgr-validate"></a><b><a href="source/std-doc.html#method-Xwb.ax.ValidationMgr-validate">validate</a></b>()
+    :
+                                        void<div class="mdesc"><div class="short">执行表单验证。通常不用手动调用本方法验证表单，而是由用户触发验证。</div><div class="long">执行表单验证。通常不用手动调用本方法验证表单，而是由用户触发验证。<div class="mdetail-params"><strong>Parameters:</strong><ul><li>None.</li></ul><strong>Returns:</strong><ul><li>void</li></ul></div></div></div></td><td class="msource">ValidationMgr</td></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.ValidationMgr-reg"></a><b><a href="source/std-doc.html#method-Xwb.ax.ValidationMgr-reg">reg</a></b>(&nbsp;<code>String&nbsp;name</code>,&nbsp;<code>Function&nbsp;validator</code>&nbsp;)
+    :
+                                        void<div class="mdesc"><div class="short">注册表单元素验证器。&#13;
+验证器调用格式：&#13;
+validator(element, value, data, next);&#13;
+element:当前验证元素&#13;
+value:当前验证元素值&#13;
+data:当前验证器rel数据&#13;
+next:验证...</div><div class="long">注册表单元素验证器。<br/>
+验证器调用格式：<br/>
+validator(element, value, data, next);<br/>
+element:当前验证元素<br/>
+value:当前验证元素值<br/>
+data:当前验证器rel数据<br/>
+next:验证结束后的调用函数 ，传递下一个验证<br/>
+注意：验证元素值前除了空检测外其它情况都应该认为空值是可以<b>通过</b>的。<div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>name</code> : String<div class="sub-desc">验证器名称</div></li><li><code>validator</code> : Function<div class="sub-desc">验证方法
+<pre><code>例：
+        <i>// 检查是否有效的日期格式</i>
+        reg(<em>'dt'</em>, <b>function</b>(elem, v, data, next){
+            <i>// 注意：验证元素值前除了空检测验证器外</i>
+            <i>// 其它情况都应该认为空值是可以通过的</i>
+            <i>// 所以这里忽略空检查</i>
+            <b>if</b>(v){
+                <i>// 设置默认的提示</i>
+                <b>if</b>(!data.m)
+                    data.m = <em>'不是有效的日期格式'</em>;
+                <b>var</b> d = Date.parse(v);
+                <i>// 报告验证结果</i>
+                this.report(!isNaN(d), data);
+            }<b>else</b> this.report(true, data);
+            next();
+        });</code></pre></div></li></ul><strong>Returns:</strong><ul><li>void</li></ul></div></div></div></td><td class="msource">ValidationMgr</td></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.ValidationMgr-tipWarn"></a><b><a href="source/std-doc.html#method-Xwb.ax.ValidationMgr-tipWarn">tipWarn</a></b>(&nbsp;<code>jQuery&nbsp;element</code>,&nbsp;<code>String&nbsp;message</code>&nbsp;)
+    :
+                                        void<div class="mdesc"><div class="short">显示元素错误提示</div><div class="long">显示元素错误提示<div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>element</code> : jQuery<div class="sub-desc"></div></li><li><code>message</code> : String<div class="sub-desc"></div></li></ul><strong>Returns:</strong><ul><li>void</li></ul></div></div></div></td><td class="msource">ValidationMgr</td></tr><tr class="method-row expandable inherited"><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.ElementValidationContext-nextValidatorData"></a><b><a href="source/std-doc.html#method-Xwb.ax.ElementValidationContext-nextValidatorData">nextValidatorData</a></b>(&nbsp;<code>Number&nbsp;index</code>,&nbsp;<code>HtmlElement&nbsp;element</code>&nbsp;)
+    :
+                                        void<div class="mdesc"><div class="short">获得第i个验证器,无对应下标值返回空</div><div class="long">获得第i个验证器,无对应下标值返回空<div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>index</code> : Number<div class="sub-desc"></div></li><li><code>element</code> : HtmlElement<div class="sub-desc"></div></li></ul><strong>Returns:</strong><ul><li>void</li></ul></div></div></div></td><td class="msource"><a href="output/Xwb.ax.ElementValidationContext.html#nextValidatorData" ext:member="#nextValidatorData" ext:cls="Xwb.ax.ElementValidationContext">ElementValidationContext</a></td></tr><tr class="method-row expandable inherited"><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.ElementValidationContext-report"></a><b><a href="source/std-doc.html#method-Xwb.ax.ElementValidationContext-report">report</a></b>(&nbsp;<code>Boolean&nbsp;result</code>,&nbsp;<code>Object&nbsp;data</code>,&nbsp;<code>HtmlElement&nbsp;element</code>,&nbsp;<code>Xwb.ax.ElememtValidatorChain&nbsp;elementChain</code>&nbsp;)
+    :
+                                        void<div class="mdesc"><div class="short">验证器报告验证结果</div><div class="long">验证器报告验证结果<div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>result</code> : Boolean<div class="sub-desc"></div></li><li><code>data</code> : Object<div class="sub-desc"></div></li><li><code>element</code> : HtmlElement<div class="sub-desc"></div></li><li><code>elementChain</code> : Xwb.ax.ElememtValidatorChain<div class="sub-desc"></div></li></ul><strong>Returns:</strong><ul><li>void</li></ul></div></div></div></td><td class="msource"><a href="output/Xwb.ax.ElementValidationContext.html#report" ext:member="#report" ext:cls="Xwb.ax.ElementValidationContext">ElementValidationContext</a></td></tr><tr class="method-row expandable inherited"><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.ElementValidationContext-getValidator"></a><b><a href="source/std-doc.html#method-Xwb.ax.ElementValidationContext-getValidator">getValidator</a></b>(&nbsp;<code>String&nbsp;name</code>&nbsp;)
+    :
+                                        void<div class="mdesc"><div class="short">根据名称返回验证方法</div><div class="long">根据名称返回验证方法<div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>name</code> : String<div class="sub-desc"></div></li></ul><strong>Returns:</strong><ul><li>void</li></ul></div></div></div></td><td class="msource"><a href="output/Xwb.ax.ElementValidationContext.html#getValidator" ext:member="#getValidator" ext:cls="Xwb.ax.ElementValidationContext">ElementValidationContext</a></td></tr><tr class="method-row expandable inherited"><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.ElementValidationContext-onerror"></a><b><a href="source/std-doc.html#method-Xwb.ax.ElementValidationContext-onerror">onerror</a></b>(&nbsp;<code>HtmlElement&nbsp;element</code>,&nbsp;<code>Object&nbsp;data</code>,&nbsp;<code>Xwb.ax.ElememtValidatorChain&nbsp;chain</code>&nbsp;)
+    :
+                                        void<div class="mdesc"><div class="short">callback，每个验证器验证失败后都触发一次</div><div class="long">callback，每个验证器验证失败后都触发一次<div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>element</code> : HtmlElement<div class="sub-desc"></div></li><li><code>data</code> : Object<div class="sub-desc"></div></li><li><code>chain</code> : Xwb.ax.ElememtValidatorChain<div class="sub-desc"></div></li></ul><strong>Returns:</strong><ul><li>void</li></ul></div></div></div></td><td class="msource"><a href="output/Xwb.ax.ElementValidationContext.html#onerror" ext:member="#onerror" ext:cls="Xwb.ax.ElementValidationContext">ElementValidationContext</a></td></tr><tr class="method-row expandable inherited"><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.ElementValidationContext-onpass"></a><b><a href="source/std-doc.html#method-Xwb.ax.ElementValidationContext-onpass">onpass</a></b>(&nbsp;<code>HtmlElement&nbsp;element</code>,&nbsp;<code>Xwb.ax.ElememtValidatorChain&nbsp;chain</code>&nbsp;)
+    :
+                                        void<div class="mdesc"><div class="short">callback，在验证元素过程中成功后只会触发一次</div><div class="long">callback，在验证元素过程中成功后只会触发一次<div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>element</code> : HtmlElement<div class="sub-desc"></div></li><li><code>chain</code> : Xwb.ax.ElememtValidatorChain<div class="sub-desc"></div></li></ul><strong>Returns:</strong><ul><li>void</li></ul></div></div></div></td><td class="msource"><a href="output/Xwb.ax.ElementValidationContext.html#onpass" ext:member="#onpass" ext:cls="Xwb.ax.ElementValidationContext">ElementValidationContext</a></td></tr><tr class="method-row expandable inherited"><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.ElementValidationContext-getMgr"></a><b><a href="source/std-doc.html#method-Xwb.ax.ElementValidationContext-getMgr">getMgr</a></b>(&nbsp;<code>Xwb.ax.ValidationMgr&nbsp;mgr</code>&nbsp;)
+    :
+                                        void<div class="mdesc"><div class="short">返回表单验证管理器</div><div class="long">返回表单验证管理器<div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>mgr</code> : Xwb.ax.ValidationMgr<div class="sub-desc"></div></li></ul><strong>Returns:</strong><ul><li>void</li></ul></div></div></div></td><td class="msource"><a href="output/Xwb.ax.ElementValidationContext.html#getMgr" ext:member="#getMgr" ext:cls="Xwb.ax.ElementValidationContext">ElementValidationContext</a></td></tr></tbody></table></div>

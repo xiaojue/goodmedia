@@ -1,0 +1,84 @@
+<div xmlns:ext="http://www.extjs.com" class="body-wrap"><h1>类 <a href="source/std-doc.html#cls-Xwb.ax.Pagelet">Xwb.ax.Pagelet</a></h1><table cellspacing="0"><tr><td class="label">空间：</td><td class="hd-info">Xwb.ax</td></tr><tr><td class="label">定义在:</td><td class="hd-info">std-doc.js</td></tr><tr><td class="label">类:</td><td class="hd-info"><a href="source/std-doc.html#cls-Xwb.ax.Pagelet">Pagelet</a></td></tr><tr><td class="label">子类:</td><td class="hd-info"><a href="output/Xwb.mod.pagelet.WeiboList.html" ext:cls="Xwb.mod.pagelet.WeiboList">WeiboList</a></td></tr><tr><td class="label">父类:</td><td class="hd-info">Object</td></tr></table><div class="description">表征页面内某个块（区域）的类，所有块都应该应用或继承该类。关于该类的原理参见<a href="output/Xwb.ax.PipeMgr.html" ext:cls="Xwb.ax.PipeMgr">Xwb.ax.PipeMgr</a>。
+一般来说，一个定制块只需实现<a href="output/onViewReady.html" ext:cls="onViewReady">onViewReady</a>方法即可，这个是个回调方法，
+当块视图HTML元素生成并放到页面DOM上的时候，库就会回调该方法，定制块可在该方法里作所有的初始化。<br/>
+块间的通讯可通过调用<a href="output/Xwb.fire.html" ext:cls="Xwb.fire">Xwb.fire</a>，<a href="output/Xwb.on.html" ext:cls="Xwb.on">Xwb.on</a>方法来发送与监听事件。<br/>
+一个块后端返回的配置信息为：
+<pre><code>{
+            <i>// 块ID</i>
+            id : <em>''</em>,
+            
+            <i>// 块的HTML代码，生成HTML元素后替换到页面中块所在的位置，块无HTML时该项为null</i>
+            html : <em>''</em>,
+            
+            <i>// 标识该块是属于哪种“类”，该类主要为方便后端识别</i>
+            pagelet : <em>''</em>,
+            
+            <i>// 块自身的数据</i>
+            data : {
+                <i>// 约定为使用指定的Pagelet类实例化块</i>
+                cls : <em>'wblist'</em>
+            }
+        }</code></pre>
+     pipe初始化查找块配置所在的注册类过程为：
+     <ul>
+     <li>判断pagelet属性，如果存在注册类，则用该类实例化块
+     <li>如果未找到，继续判断data.cls属性，如果存在注册类，则用该类实例化块
+     <li>如果未找到，用<a href="output/Xwb.ax.Pagelet.html" ext:cls="Xwb.ax.Pagelet">Xwb.ax.Pagelet</a>类实例化该块
+     </ul>
+     应用例子：
+<pre><code><i>// 直接应用Pagelet类</i>
+     Xwb.ax.PipeMgr.reg(<em>'TestPagelet'</em>, {
+        <i>// 实现接口，参数cfg为后台传来的pagelet属性</i>
+        onViewReady : <b>function</b>(cfg){
+            this.jq().css(<em>'background'</em>, <em>'red'</em>);
+        } 
+     });
+    
+     或继承Pagelet类
+     Xwb.ax.WeiboList = Util.create(Pagelet, {
+        ui : {cls:X.ui.WeiboList},
+        onViewReady : <b>function</b>(cfg){
+            <b>if</b>(cfg.data.attr)
+                this.doSomething();
+        },
+        doSomething : <b>function</b>(){
+            <i>// ...</i>
+        }
+     });
+     
+     Xwb.ax.PipeMgr.reg(<em>'wblist'</em>, Xwb.ax.WeiboList);
+     
+     <i>// 可直接利用Pagelet类，或通过pipe属性指定Pagelet类实例化该块</i>
+     Xwb.ax.PipeMgr.reg(<em>'plTest.pg'</em>, {
+     
+        <i>// 可指定使用某Pagelet类实例化该块</i>
+        pipe : MyPipeClass, 
+        
+        ui : {
+            <i>// 可通过cls指定该UI类，不指定时采用Xwb.ui.Base类实例化该UI</i>
+            cls:Xwb.ui.Box,
+            <i>// UI配置信息</i>
+            contextable:true
+        },
+        
+        <i>// 实现接口</i>
+        onViewReady : <b>function</b>(){
+            this.jq()
+                .css(<em>'background'</em>, <em>'#ccc'</em>);
+        }
+     });
+    
+    X.on(<em>'pipe.end'</em>, <b>function</b>(){
+        <i>// alert(<em>'end'</em>);</i>
+    });
+    
+    X.on(<em>'page.before'</em>, <b>function</b>(cfg){
+       <i>// alert(cfg.id);</i>
+    });</code></pre>
+更详细用法参见ux/ready.js</div><div class="hr"></div><a id="Xwb.ax.Pagelet-configs"></a><h2>配置项</h2><table cellspacing="0" class="member-table"><tbody><tr><th colspan="2" class="sig-header">config</th><th class="msource-header">定义在</th></tr><tr class="config-row  "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.Pagelet-pipe"></a><b><a href="source/std-doc.html#cfg-Xwb.ax.Pagelet-pipe">pipe</a></b> : Function<div class="mdesc">指定当前配置实例化时的<a href="output/Xwb.ax.Pagelet.html" ext:cls="Xwb.ax.Pagelet">Xwb.ax.Pagelet</a>类</div></td><td class="msource">Pagelet</td></tr><tr class="config-row  "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.Pagelet-ui"></a><b><a href="source/std-doc.html#cfg-Xwb.ax.Pagelet-ui">ui</a></b> : Xwb.ui.Base|Object<div class="mdesc">指定Pagelet模板中当getUI()方法调用后返回的UI类，通常这个UI封装了当前Pagelet的视图部份</div></td><td class="msource">Pagelet</td></tr><tr class="config-row  "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.Pagelet-onViewReady"></a><b><a href="source/std-doc.html#cfg-Xwb.ax.Pagelet-onViewReady">onViewReady</a></b> : Function<div class="mdesc">接口方法，在页面元素就绪后调用</div></td><td class="msource">Pagelet</td></tr></tbody></table><a id="Xwb.ax.Pagelet-props"></a><h2>公共属性（只读）</h2><table cellspacing="0" class="member-table"><tbody><tr><th colspan="2" class="sig-header">properties</th><th class="msource-header">定义在</th></tr><tr class="property-row  "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.Pagelet-id"></a><b><a href="source/std-doc.html#prop-Xwb.ax.Pagelet-id">id</a></b> : Object<div class="mdesc"></div></td><td class="msource">Pagelet</td></tr></tbody></table><a id="Xwb.ax.Pagelet-events"></a><h2>事件列表</h2><div class="no-members">This class has no public events.</div><a id="Xwb.ax.Pagelet-methods"></a><h2>公共方法</h2><table cellspacing="0" class="member-table"><tbody><tr><th colspan="2" class="sig-header">method</th><th class="msource-header">定义在</th></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.Pagelet-getUI"></a><b><a href="source/std-doc.html#method-Xwb.ax.Pagelet-getUI">getUI</a></b>()
+    :
+                                        Xwb.ui.Base<div class="mdesc"><div class="short">返回与该页面关联的UI控件，如果想通过Xwb.ui.Base的类或子类控制该块，可调用该方法返回块对应的UI类实例。&#13;
+库会根据注册块时的ui属性配置来初始化UI类。</div><div class="long">返回与该页面关联的UI控件，如果想通过<a href="output/Xwb.ui.Base.html" ext:cls="Xwb.ui.Base">Xwb.ui.Base</a>的类或子类控制该块，可调用该方法返回块对应的UI类实例。<br/>
+库会根据注册块时的ui属性配置来初始化UI类。<div class="mdetail-params"><strong>Parameters:</strong><ul><li>None.</li></ul><strong>Returns:</strong><ul><li><code>Xwb.ui.Base</code><div class="sub-desc"></div></li></ul></div></div></div></td><td class="msource">Pagelet</td></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.Pagelet-jq"></a><b><a href="source/std-doc.html#method-Xwb.ax.Pagelet-jq">jq</a></b>()
+    :
+                                        jQuery<div class="mdesc"><div class="short">等同调用 this.getUI().jq()</div><div class="long">等同调用 this.getUI().jq()<div class="mdetail-params"><strong>Parameters:</strong><ul><li>None.</li></ul><strong>Returns:</strong><ul><li><code>jQuery</code><div class="sub-desc"></div></li></ul></div></div></div></td><td class="msource">Pagelet</td></tr></tbody></table></div>

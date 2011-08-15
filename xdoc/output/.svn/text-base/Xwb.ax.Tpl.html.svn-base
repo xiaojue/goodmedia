@@ -1,0 +1,57 @@
+<div xmlns:ext="http://www.extjs.com" class="body-wrap"><h1>类 <a href="source/std-doc.html#cls-Xwb.ax.Tpl">Xwb.ax.Tpl</a></h1><table cellspacing="0"><tr><td class="label">空间：</td><td class="hd-info">Xwb.ax</td></tr><tr><td class="label">定义在:</td><td class="hd-info">std-doc.js</td></tr><tr><td class="label">类:</td><td class="hd-info"><a href="source/std-doc.html#cls-Xwb.ax.Tpl">Tpl</a></td></tr><tr><td class="label">父类:</td><td class="hd-info">Object</td></tr></table><div class="description"><p>HTML模板类，用于解析字符串HTML并生成对应的DOM元素。</p>
+<p>HTML模板字符解析依赖两个数据：
+    <ul><li>未解析的htmls字符串</li>
+    <li>map(key,value)对象数据</li>
+    </ul>
+    htmls字符串是原始的数据，通过<a href="output/Xwb.ax.Tpl.html#Xwb.ax.Tpl-parse" ext:member="parse" ext:cls="Xwb.ax.Tpl">parse</a>方法解析。
+   </p>
+   <pre>
+    模板文法描述：
+    
+    入口：
+    parse(entry, dataMap)
+    参数：
+    dataMap: {  key : value, …}
+    key : JavaScript标识符
+    value:entry
+    entry: html 文本，.keyFromDataMap，keyFromTemplates
+    html文本: &lt;tag attribute="{.keyFromDataMap}"&gt;{keyFromTemplates}&lt;/tag&gt;, IfTest, ...
+    IfTest : [?keyFromDataMap?html文本?],取反：[?!keyFromDataMap?html文本?]
+    Templates : {key : html文本}
+    
+    例子：
+    var map = { name:'Xweibo' };
+    var templates = {
+         Header : '&lt;h2&gt;{.name}&lt;/h2&gt;',
+         Box:'{Header}&lt;div&gt;名称是{.name}&lt;/div&gt;'
+    };
+    alert( parse('Box', map) );
+    结果是：&lt;h2&gt;Xweibo&lt;/h2&gt;&lt;div&gt;名称是Xweibo&lt;/div&gt;
+    </pre><br><br><i>单态类.</i></div><div class="hr"></div><a id="Xwb.ax.Tpl-props"></a><h2>公共属性（只读）</h2><div class="no-members">This class has no public properties.</div><a id="Xwb.ax.Tpl-events"></a><h2>事件列表</h2><div class="no-members">This class has no public events.</div><a id="Xwb.ax.Tpl-methods"></a><h2>公共方法</h2><table cellspacing="0" class="member-table"><tbody><tr><th colspan="2" class="sig-header">method</th><th class="msource-header">定义在</th></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.Tpl-parse"></a><b><a href="source/std-doc.html#method-Xwb.ax.Tpl-parse">parse</a></b>(&nbsp;<code>String&nbsp;htmls</code>,&nbsp;<code>Object&nbsp;map</code>&nbsp;)
+    :
+                                        void<div class="mdesc"><div class="short">键查找过程：模板 --&gt; 对象 --&gt; 模板&#13;
+ var map = { name:'Xweibo' };&#13;
+    var templates = {&#13;
+         Header : &lsquo;&amp;lt;h2&amp;gt;{.name}&amp;lt...</div><div class="long">键查找过程：模板 --> 对象 --> 模板
+ <pre><code><b>var</b> map = { name:<em>'Xweibo'</em> };
+    <b>var</b> templates = {
+         Header : ‘&lt;h2&gt;{.name}&lt;/h2&gt;<em>',
+         Box:'</em>{Header}&lt;div&gt;名称是{.name}&lt;/div&gt;<em>'
+    };
+    alert( parse(‘Box'</em>, map) );
+    结果是：&lt;h2&gt;Xweibo&lt;/h2&gt;&lt;div&gt;名称是Xweibo&lt;/div&gt;</code></pre><div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>htmls</code> : String<div class="sub-desc">模板字符串</div></li><li><code>map</code> : Object<div class="sub-desc">值键对</div></li></ul><strong>Returns:</strong><ul><li>void</li></ul></div></div></div></td><td class="msource">Tpl</td></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.Tpl-forNode"></a><b><a href="source/std-doc.html#method-Xwb.ax.Tpl-forNode">forNode</a></b>(&nbsp;<code>String&nbsp;htmls</code>,&nbsp;<code>Object|Array&nbsp;map</code>&nbsp;)
+    :
+                                        HTMLElement<div class="mdesc"><div class="short">根据html模板创建HTML元素&#13;
+    &#13;
+        var iframeElement = forNode(&#13;
+              '&amp;lt;{tag} class="{cls}" frameBorder="no"...</div><div class="long">根据html模板创建HTML元素
+    <pre>
+        <code><b>var</b> iframeElement = forNode(
+              <em>'&lt;{tag} class=<em>"{cls}"</em> frameBorder=<em>"no"</em> scrolling=<em>"auto"</em> hideFocus=<em>""</em>&gt;&lt;/iframe&gt;'</em>,
+              {tag:<em>'iframe'</em>, cls:<em>'ui-frame'</em>}
+            );</code>
+    </pre><div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>htmls</code> : String<div class="sub-desc"></div></li><li><code>map</code> : Object|Array<div class="sub-desc"></div></li></ul><strong>Returns:</strong><ul><li><code>HTMLElement</code><div class="sub-desc"></div></li></ul></div></div></div></td><td class="msource">Tpl</td></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.Tpl-get"></a><b><a href="source/std-doc.html#method-Xwb.ax.Tpl-get">get</a></b>(&nbsp;<code>String&nbsp;templateName</code>&nbsp;)
+    :
+                                        String<div class="mdesc"><div class="short">根据模板名称获得模板字符串。</div><div class="long">根据模板名称获得模板字符串。<div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>templateName</code> : String<div class="sub-desc"></div></li></ul><strong>Returns:</strong><ul><li><code>String</code><div class="sub-desc"></div></li></ul></div></div></div></td><td class="msource">Tpl</td></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.Tpl-reg"></a><b><a href="source/std-doc.html#method-Xwb.ax.Tpl-reg">reg</a></b>(&nbsp;<code>Object&nbsp;htmlTemplateMap</code>&nbsp;)
+    :
+                                        void<div class="mdesc"><div class="short">注册HTML模板</div><div class="long">注册HTML模板<div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>htmlTemplateMap</code> : Object<div class="sub-desc"></div></li></ul><strong>Returns:</strong><ul><li>void</li></ul></div></div></div></td><td class="msource">Tpl</td></tr></tbody></table></div>

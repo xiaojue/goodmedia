@@ -1,0 +1,41 @@
+<div xmlns:ext="http://www.extjs.com" class="body-wrap"><h1>类 <a href="source/std-doc.html#cls-Xwb.ax.Eventable">Xwb.ax.Eventable</a></h1><table cellspacing="0"><tr><td class="label">空间：</td><td class="hd-info">Xwb.ax</td></tr><tr><td class="label">定义在:</td><td class="hd-info">std-doc.js</td></tr><tr><td class="label">类:</td><td class="hd-info"><a href="source/std-doc.html#cls-Xwb.ax.Eventable">Eventable</a></td></tr><tr><td class="label">子类:</td><td class="hd-info"><a href="output/Xwb.html" ext:cls="Xwb">Xwb</a></td></tr><tr><td class="label">父类:</td><td class="hd-info">Object</td></tr></table><div class="description">事件处理模型的实现.</div><div class="hr"></div><a id="Xwb.ax.Eventable-props"></a><h2>公共属性（只读）</h2><div class="no-members">This class has no public properties.</div><a id="Xwb.ax.Eventable-events"></a><h2>事件列表</h2><div class="no-members">This class has no public events.</div><a id="Xwb.ax.Eventable-methods"></a><h2>公共方法</h2><table cellspacing="0" class="member-table"><tbody><tr><th colspan="2" class="sig-header">method</th><th class="msource-header">定义在</th></tr><tr class="method-row expandable"><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.Eventable-Eventable"></a><b><a href="source/std-doc.html#cls-Xwb.ax.Eventable">Eventable</a></b>(&nbsp;<code>Object&nbsp;config</code>&nbsp;)
+    <div class="mdesc"><div class="short"></div><div class="long"><div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>config</code> : Object<div class="sub-desc">config object</div></li></ul><strong>Returns:</strong><ul><li>void</li></ul></div></div></div></td><td class="msource">Eventable</td></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.Eventable-fire"></a><b><a href="source/std-doc.html#method-Xwb.ax.Eventable-fire">fire</a></b>(&nbsp;<code>Object&nbsp;eid</code>,&nbsp;<code>Object,&nbsp;Object,</code>&nbsp;)
+    :
+                                        void<div class="mdesc"><div class="short">发送对象事件.&#13;
+ var e = new Eventable();&#13;
+  e.on('selected', function(arg){&#13;
+   //handling..&#13;
+  });&#13;
+  e.fire('selected', a...</div><div class="long">发送对象事件.<br>
+ <pre><code><b>var</b> e = <b>new</b> Eventable();
+  e.on(<em>'selected'</em>, <b>function</b>(arg){
+   <i>//handling..</i>
+  });
+  e.fire(<em>'selected'</em>, arg);</code></pre><div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>eid</code> : Object<div class="sub-desc">事件名称</div></li><li><code>Object,</code> : Object,<div class="sub-desc">...} args 传递的回调参数</div></li></ul><strong>Returns:</strong><ul><li>void</li></ul></div></div></div></td><td class="msource">Eventable</td></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.Eventable-on"></a><b><a href="source/std-doc.html#method-Xwb.ax.Eventable-on">on</a></b>(&nbsp;<code>Object&nbsp;eid</code>,&nbsp;<code>Function&nbsp;callback</code>,&nbsp;<code>Object&nbsp;[ds]</code>,&nbsp;<code>Object&nbsp;[objArgs]</code>&nbsp;)
+    :
+                                        this<div class="mdesc"><div class="short">监听对象事件,如果回调函数返回false,取消后续的事件处理. &#13;
+ var self = {name:'cat'};&#13;
+   var cfg = {message:'Good boy!'};&#13;
+   var e = new Xwb....</div><div class="long">监听对象事件,如果回调函数返回false,取消后续的事件处理. <br>
+ <pre><code><b>var</b> self = {name:<em>'cat'</em>};
+   <b>var</b> cfg = {message:<em>'Good boy!'</em>};
+   <b>var</b> e = <b>new</b> Xwb.Eventable();
+   e.on(<em>'selected'</em>, <b>function</b>(item, cfg){
+    <i>//显示an item</i>
+    alert(item.title);
+
+    <i>//显示Rock</i>
+    alert(this.name);
+
+    <i>//显示Good boy!</i>
+    alert(cfg.message);
+   }, self, cfg);
+
+   <b>var</b> item = {title:<em>'an item'</em>};
+   e.fire(<em>'selected'</em>, item);</code></pre><div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>eid</code> : Object<div class="sub-desc">事件名称</div></li><li><code>callback</code> : Function<div class="sub-desc">事件回调函数</div></li><li><code>[ds]</code> : Object<div class="sub-desc">this范围对象</div></li><li><code>[objArgs]</code> : Object<div class="sub-desc">传递参数,该参数将作为回调最后一个参数传递</div></li></ul><strong>Returns:</strong><ul><li><code>this</code><div class="sub-desc"></div></li></ul></div></div></div></td><td class="msource">Eventable</td></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.Eventable-un"></a><b><a href="source/std-doc.html#method-Xwb.ax.Eventable-un">un</a></b>(&nbsp;<code>Object&nbsp;eid</code>,&nbsp;<code>Function&nbsp;callback</code>&nbsp;)
+    :
+                                        this<div class="mdesc"><div class="short">移除事件监听.</div><div class="long">移除事件监听.<div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>eid</code> : Object<div class="sub-desc"></div></li><li><code>callback</code> : Function<div class="sub-desc"></div></li></ul><strong>Returns:</strong><ul><li><code>this</code><div class="sub-desc"></div></li></ul></div></div></div></td><td class="msource">Eventable</td></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.Eventable-fireOnce"></a><b><a href="source/std-doc.html#method-Xwb.ax.Eventable-fireOnce">fireOnce</a></b>(&nbsp;<code>Object&nbsp;eid</code>&nbsp;)
+    :
+                                        this<div class="mdesc"><div class="short">发送一次后移除所有监听器,有些事件只通知一次的,此时可调用该方法发送事件</div><div class="long">发送一次后移除所有监听器,有些事件只通知一次的,此时可调用该方法发送事件<div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>eid</code> : Object<div class="sub-desc"></div></li></ul><strong>Returns:</strong><ul><li><code>this</code><div class="sub-desc"></div></li></ul></div></div></div></td><td class="msource">Eventable</td></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.Eventable-to"></a><b><a href="source/std-doc.html#method-Xwb.ax.Eventable-to">to</a></b>(&nbsp;<code>Object&nbsp;target</code>&nbsp;)
+    :
+                                        this<div class="mdesc"><div class="short">订阅当前对象所有事件</div><div class="long">订阅当前对象所有事件<div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>target</code> : Object<div class="sub-desc">订阅者,订阅者也是可Eventable的对象</div></li></ul><strong>Returns:</strong><ul><li><code>this</code><div class="sub-desc"></div></li></ul></div></div></div></td><td class="msource">Eventable</td></tr></tbody></table></div>

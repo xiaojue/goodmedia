@@ -165,11 +165,11 @@
 							'step3finish':function(){
 								var left='<img src="{coachpic}"><span>{coachname}</span>',
 									right='<div class="green">亲爱的{username}</div>'+
-										 '<p>您已完成第所有任务</p>'+
-								         '<p class="yellow">您获得了{rice}大米</p>',
+										 '<p>您已完成了动米网的所有任务</p>'+
+								         '<p class="yellow">上次任务您获得了{rice}大米</p>',
 								         //'<p class="green">并且获得我们为您准备的{gift}礼物</p>',
-									foot='<a href="#" class="blue J_OverlayClose">谢谢，自己玩...</a>'+
-										 '<a class="task_button J_OverlayClose" id="J_FinishTask" href="javascript:void(0)" style="display:inline-block;text-decoration:none;_display:inline;zoom:1;">完成</a>';
+									foot='<a href="#" class="blue J_OverlayClose J_FinishTask">谢谢，自己玩...</a>'+
+										 '<a class="task_button J_OverlayClose J_FinishTask" href="javascript:void(0)" style="display:inline-block;text-decoration:none;_display:inline;zoom:1;">完成</a>';
 								return tempTwo(left,right,foot);
 							}
 						};
@@ -223,7 +223,7 @@
 						});
 						
 						//完成
-						$('#J_FinishTask').live('click',function(){
+						$('.J_FinishTask').live('click',function(){
 							$.cookie(that.parameter['uid'],1,{expires:365});
 							$.cookie(that.parameter['uid']+'over',1,{expires:365});
 						});

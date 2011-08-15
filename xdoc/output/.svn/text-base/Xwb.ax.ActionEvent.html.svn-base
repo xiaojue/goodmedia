@@ -1,0 +1,52 @@
+<div xmlns:ext="http://www.extjs.com" class="body-wrap"><h1>类 <a href="source/std-doc.html#cls-Xwb.ax.ActionEvent">Xwb.ax.ActionEvent</a></h1><table cellspacing="0"><tr><td class="label">空间：</td><td class="hd-info">Xwb.ax</td></tr><tr><td class="label">定义在:</td><td class="hd-info">std-doc.js</td></tr><tr><td class="label">类:</td><td class="hd-info"><a href="source/std-doc.html#cls-Xwb.ax.ActionEvent">ActionEvent</a></td></tr><tr><td class="label">父类:</td><td class="hd-info">Object</td></tr></table><div class="description">当一个动作触发后，就生成一个Xwb.ax.ActionEvent实例作参数传给处理方法。
+ 本类携带了与该动作相关的数据和方法，如触发源元素，当前元素，获得当前路径数据等。
+ 类无需手动实例化，由<a href="output/Xwb.ax.ActionMgr.html" ext:cls="Xwb.ax.ActionMgr">Xwb.ax.ActionMgr</a>内部维护。
+<pre>
+技巧：
+利用该类获得动作关联元素常用方法：
+1. 给相关元素设定局部唯一ID
+2. 利用e.jq()方法或$(e.getEl())返回一定范围父元素的jq对象
+3. 根据设定的id获得元素
+例：
+在处理方法中，
+<code><b>function</b>( e ){
+    <i>// 假如事件源元素 rel=<em>"w:123765"</em></i>
+    <i>// 获得包含w属性的html元素</i>
+    <b>var</b> jqWb = e.jq(<em>'w'</em>);
+    <b>var</b> targetEl = jqWb.find(<em>'#xwb_tar'</em>);
+    <i>// ...</i>
+}</code>
+</pre></div><div class="hr"></div><a id="Xwb.ax.ActionEvent-props"></a><h2>公共属性（只读）</h2><table cellspacing="0" class="member-table"><tbody><tr><th colspan="2" class="sig-header">properties</th><th class="msource-header">定义在</th></tr><tr class="property-row  "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.ActionEvent-evt"></a><b><a href="source/std-doc.html#prop-Xwb.ax.ActionEvent-evt">evt</a></b> : DOMEvent<div class="mdesc">触发该动作的浏览器事件对象</div></td><td class="msource">ActionEvent</td></tr><tr class="property-row  "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.ActionEvent-src"></a><b><a href="source/std-doc.html#prop-Xwb.ax.ActionEvent-src">src</a></b> : HTMLElement<div class="mdesc">触发该动作的源元素</div></td><td class="msource">ActionEvent</td></tr><tr class="property-row  "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.ActionEvent-data"></a><b><a href="source/std-doc.html#prop-Xwb.ax.ActionEvent-data">data</a></b> : Object<div class="mdesc">当前处理元素的rel数据</div></td><td class="msource">ActionEvent</td></tr></tbody></table><a id="Xwb.ax.ActionEvent-events"></a><h2>事件列表</h2><div class="no-members">This class has no public events.</div><a id="Xwb.ax.ActionEvent-methods"></a><h2>公共方法</h2><table cellspacing="0" class="member-table"><tbody><tr><th colspan="2" class="sig-header">method</th><th class="msource-header">定义在</th></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.ActionEvent-get"></a><b><a href="source/std-doc.html#method-Xwb.ax.ActionEvent-get">get</a></b>(&nbsp;<code>String&nbsp;name</code>&nbsp;)
+    :
+                                        String<div class="mdesc"><div class="short">当前DOM路径内向上查找rel属性中包含name键的数据&#13;
+  // rel="w:123456"&#13;
+  var wbId = e.get('w');</div><div class="long">当前DOM路径内向上查找rel属性中包含name键的数据
+  <pre><code><i>// rel=<em>"w:123456"</em></i>
+  <b>var</b> wbId = e.get(<em>'w'</em>);</code></pre><div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>name</code> : String<div class="sub-desc"></div></li></ul><strong>Returns:</strong><ul><li><code>String</code><div class="sub-desc">value</div></li></ul></div></div></div></td><td class="msource">ActionEvent</td></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.ActionEvent-escape"></a><b><a href="source/std-doc.html#method-Xwb.ax.ActionEvent-escape">escape</a></b>(&nbsp;<code>String&nbsp;name</code>&nbsp;)
+    :
+                                        String<div class="mdesc"><div class="short">返回经escape函数转义后的字符串数据</div><div class="long">返回经escape函数转义后的字符串数据<div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>name</code> : String<div class="sub-desc"></div></li></ul><strong>Returns:</strong><ul><li><code>String</code><div class="sub-desc"></div></li></ul></div></div></div></td><td class="msource">ActionEvent</td></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.ActionEvent-getEl"></a><b><a href="source/std-doc.html#method-Xwb.ax.ActionEvent-getEl">getEl</a></b>(&nbsp;<code>String&nbsp;name</code>&nbsp;)
+    :
+                                        HTMLElement<div class="mdesc"><div class="short">当前DOM路径内向上查找含有rel以name为键的元素&#13;
+// 从当前产生事件的元素开始向上查找获得包含w字段的元素&#13;
+  var parent = e.getEl('w');</div><div class="long">当前DOM路径内向上查找含有rel以name为键的元素
+<pre><code><i>// 从当前产生事件的元素开始向上查找获得包含w字段的元素</i>
+  <b>var</b> parent = e.getEl(<em>'w'</em>);</code></pre><div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>name</code> : String<div class="sub-desc"></div></li></ul><strong>Returns:</strong><ul><li><code>HTMLElement</code><div class="sub-desc"></div></li></ul></div></div></div></td><td class="msource">ActionEvent</td></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.ActionEvent-jq"></a><b><a href="source/std-doc.html#method-Xwb.ax.ActionEvent-jq">jq</a></b>(&nbsp;<code>String&nbsp;name</code>,&nbsp;<code>Selector&nbsp;[child]</code>&nbsp;)
+    :
+                                        jQuery<div class="mdesc"><div class="short">上溯DOM获得rel含有name键元素或其子元素的jQuery对象</div><div class="long">上溯DOM获得rel含有name键元素或其子元素的jQuery对象<div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>name</code> : String<div class="sub-desc">字段名</div></li><li><code>[child]</code> : Selector<div class="sub-desc">可查找元素下的子元素</div></li></ul><strong>Returns:</strong><ul><li><code>jQuery</code><div class="sub-desc"></div></li></ul></div></div></div></td><td class="msource">ActionEvent</td></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.ActionEvent-preventDefault"></a><b><a href="source/std-doc.html#method-Xwb.ax.ActionEvent-preventDefault">preventDefault</a></b>(&nbsp;<code>Boolean&nbsp;prevented</code>&nbsp;)
+    :
+                                        void<div class="mdesc"><div class="short">是否终止浏览器默认操作，默认为终止。&#13;
+ 常见的处理完checkbox或radio元素的事件后，调用该方法使得元素改变选择状态。</div><div class="long">是否终止浏览器默认操作，<b>默认为终止</b>。<br/>
+ 常见的处理完checkbox或radio元素的事件后，调用该方法使得元素改变选择状态。<br/><div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>prevented</code> : Boolean<div class="sub-desc"></div></li></ul><strong>Returns:</strong><ul><li>void</li></ul></div></div></div></td><td class="msource">ActionEvent</td></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.ActionEvent-stopPropagation"></a><b><a href="source/std-doc.html#method-Xwb.ax.ActionEvent-stopPropagation">stopPropagation</a></b>(&nbsp;<code>Boolean&nbsp;stopPropagation</code>&nbsp;)
+    :
+                                        void<div class="mdesc"><div class="short">是否停止浏览器的事件冒泡，默认为停止。</div><div class="long">是否停止浏览器的事件冒泡，<b>默认为停止</b>。<div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>stopPropagation</code> : Boolean<div class="sub-desc"></div></li></ul><strong>Returns:</strong><ul><li>void</li></ul></div></div></div></td><td class="msource">ActionEvent</td></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.ax.ActionEvent-lock"></a><b><a href="source/std-doc.html#method-Xwb.ax.ActionEvent-lock">lock</a></b>(&nbsp;<code>Boolean&nbsp;locked</code>,&nbsp;<code>String&nbsp;[name]</code>&nbsp;)
+    :
+                                        void<div class="mdesc"><div class="short">标记当前动作，或获得当前动作标记。&#13;
+常用于标记以防止动作重复触发动作。</div><div class="long">标记当前动作，或获得当前动作标记。
+常用于标记以防止动作重复触发动作。<div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>locked</code> : Boolean<div class="sub-desc"></div></li><li><code>[name]</code> : String<div class="sub-desc">name
+<pre><code><i>// 锁定动作元素，使得不能再触发</i>
+ e.lock(1);
+ <i>// 待请求处理后恢复</i>
+ Xwb.request.post(data, <b>function</b>(){
+    <i>// 解除锁定</i>
+    e.lock(0);
+ });</code></pre></div></li></ul><strong>Returns:</strong><ul><li>void</li></ul></div></div></div></td><td class="msource">ActionEvent</td></tr></tbody></table></div>

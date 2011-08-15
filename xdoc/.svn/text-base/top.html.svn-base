@@ -1,0 +1,12 @@
+<html>
+<head>
+<title></title>
+</head>
+<body>
+<iframe id="a" src="http://demo.xweibo.cn/test.html"></iframe>
+</body>
+</html>
+<script>
+    alert(document.getElementById('a').src);
+    setTimeout(function(){ alert(document.getElementById('a').contentWindow.location); }, 5000);
+</script>

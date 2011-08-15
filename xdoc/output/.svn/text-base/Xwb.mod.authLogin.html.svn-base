@@ -1,0 +1,19 @@
+<div xmlns:ext="http://www.extjs.com" class="body-wrap"><h1>类 <a href="source/std-doc.html#cls-Xwb.mod.authLogin">Xwb.mod.authLogin</a></h1><table cellspacing="0"><tr><td class="label">空间：</td><td class="hd-info">Xwb.mod</td></tr><tr><td class="label">定义在:</td><td class="hd-info">std-doc.js</td></tr><tr><td class="label">类:</td><td class="hd-info"><a href="source/std-doc.html#cls-Xwb.mod.authLogin">authLogin</a></td></tr><tr><td class="label">父类:</td><td class="hd-info">Object</td></tr></table><div class="description">SINA账号与本站账号登录相关的处理<br><br><i>单态类.</i></div><div class="hr"></div><a id="Xwb.mod.authLogin-props"></a><h2>公共属性（只读）</h2><div class="no-members">This class has no public properties.</div><a id="Xwb.mod.authLogin-events"></a><h2>事件列表</h2><div class="no-members">This class has no public events.</div><a id="Xwb.mod.authLogin-methods"></a><h2>公共方法</h2><table cellspacing="0" class="member-table"><tbody><tr><th colspan="2" class="sig-header">method</th><th class="msource-header">定义在</th></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.mod.authLogin-open"></a><b><a href="source/std-doc.html#method-Xwb.mod.authLogin-open">open</a></b>(&nbsp;<code>String&nbsp;action</code>,&nbsp;<code>String&nbsp;redirect</code>&nbsp;)
+    :
+                                        void<div class="mdesc"><div class="short">利用window.open方法弹出auth登录框</div><div class="long">利用window.open方法弹出auth登录框<div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>action</code> : String<div class="sub-desc">请求account.sinaLogin时向后台传递的动作</div></li><li><code>redirect</code> : String<div class="sub-desc">登录后重定向的URL</div></li></ul><strong>Returns:</strong><ul><li>void</li></ul></div></div></div></td><td class="msource">authLogin</td></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.mod.authLogin-direct"></a><b><a href="source/std-doc.html#method-Xwb.mod.authLogin-direct">direct</a></b>(&nbsp;<code>HTMLElement&nbsp;[action]</code>&nbsp;)
+    :
+                                        void<div class="mdesc"><div class="short">采用系统默认的跳转URL进行登录。&#13;
+跳转URL判断方法为：&#13;
+1. 如果当前是登录页(account.login)，提取URL中loginCallBack参数值作为跳转值&#13;
+2. 其它一律采用当前页面地址作为跳转值</div><div class="long">采用系统默认的跳转URL进行登录。
+<br/>跳转URL判断方法为：<br/>
+1. 如果当前是登录页(account.login)，提取URL中loginCallBack参数值作为跳转值<br/>
+2. 其它一律采用当前页面地址作为跳转值<div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>[action]</code> : HTMLElement<div class="sub-desc"></div></li></ul><strong>Returns:</strong><ul><li>void</li></ul></div></div></div></td><td class="msource">authLogin</td></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.mod.authLogin-bind"></a><b><a href="source/std-doc.html#method-Xwb.mod.authLogin-bind">bind</a></b>(&nbsp;<code>HTMLElement&nbsp;element</code>,&nbsp;<code>String&nbsp;eventName</code>&nbsp;)
+    :
+                                        void<div class="mdesc"><div class="short">绑定open方法到元素。&#13;
+跳转URL系统会自行判断并添加。判断方法为：&#13;
+1. 如果当前是登录页(account.login)，提取URL中loginCallBack参数值作为跳转值&#13;
+2. 其它一律采用当前页面地址作为跳转值</div><div class="long">绑定<a href="output/Xwb.mod.authLogin.html#Xwb.mod.authLogin-open" ext:member="open" ext:cls="Xwb.mod.authLogin">open</a>方法到元素。<br/>
+跳转URL系统会自行判断并添加。判断方法为：<br/>
+1. 如果当前是登录页(account.login)，提取URL中loginCallBack参数值作为跳转值<br/>
+2. 其它一律采用当前页面地址作为跳转值<div class="mdetail-params"><strong>Parameters:</strong><ul><li><code>element</code> : HTMLElement<div class="sub-desc"></div></li><li><code>eventName</code> : String<div class="sub-desc"></div></li></ul><strong>Returns:</strong><ul><li>void</li></ul></div></div></div></td><td class="msource">authLogin</td></tr></tbody></table></div>

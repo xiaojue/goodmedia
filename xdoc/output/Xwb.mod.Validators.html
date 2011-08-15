@@ -1,0 +1,74 @@
+<div xmlns:ext="http://www.extjs.com" class="body-wrap"><h1>类 <a href="source/std-doc.html#cls-Xwb.mod.Validators">Xwb.mod.Validators</a></h1><table cellspacing="0"><tr><td class="label">空间：</td><td class="hd-info">Xwb.mod</td></tr><tr><td class="label">定义在:</td><td class="hd-info">std-doc.js</td></tr><tr><td class="label">类:</td><td class="hd-info"><a href="source/std-doc.html#cls-Xwb.mod.Validators">Validators</a></td></tr><tr><td class="label">父类:</td><td class="hd-info">Object</td></tr></table><div class="description">常用表单验证器集合</div><div class="hr"></div><a id="Xwb.mod.Validators-props"></a><h2>公共属性（只读）</h2><table cellspacing="0" class="member-table"><tbody><tr><th colspan="2" class="sig-header">properties</th><th class="msource-header">定义在</th></tr><tr class="property-row  "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.mod.Validators-ns"></a><b><a href="source/std-doc.html#prop-Xwb.mod.Validators-ns">ns</a></b> : Object<div class="mdesc"></div></td><td class="msource">Validators</td></tr></tbody></table><a id="Xwb.mod.Validators-events"></a><h2>事件列表</h2><table cellspacing="0" class="member-table"><tbody><tr><th colspan="2" class="sig-header">Event</th><th class="msource-header">Defined By</th></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.mod.Validators-ft"></a><b><a href="source/std-doc.html#event-Xwb.mod.Validators-ft">ft</a></b> :
+                                      ()
+    <div class="mdesc"><div class="short">获得焦点时清空提示，失去焦点时出现提示效果&#13;
+_ft|ft结合使用，_ft在表单初始化时绑定focus/blur事件。&#13;
+ft在验证时假如元素值为默认提示字符串时，设置验证元素值为空。&#13;
+_ft时调用jq.focusText方法创建效...</div><div class="long">获得焦点时清空提示，失去焦点时出现提示效果
+_ft|ft结合使用，_ft在表单初始化时绑定focus/blur事件。
+ft在验证时假如元素值为默认提示字符串时，设置验证元素值为空。<br/>
+_ft时调用jq.focusText方法创建效果
+当字段必须时，使用ne检测，
+当字段非必须时，使用ft检测
+用法可参见“意见反馈”对话框表单
+<pre><code><i>// 下面作用是，元素失焦时显示“邮箱地址”，聚焦时清空元素值。</i>
+    <i>// 当显示“邮箱地址”时，并不影响元素实际“空”值。</i>
+    &lt;input type=&quot;text&quot; value=&quot;邮箱地址&quot; name=&quot;mail&quot; class=&quot;input-define&quot; warntip=&quot;#feedbackTip&quot; vrel=&quot;_ft|ft|mail&quot;&gt;</code></pre><div class="mdetail-params"><strong style="font-weight: normal;">Listeners will be called with the following arguments:</strong><ul><li>None.</li></ul></div></div></div></td><td class="msource">Validators</td></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.mod.Validators-ne"></a><b><a href="source/std-doc.html#event-Xwb.mod.Validators-ne">ne</a></b> :
+                                      (&nbsp;<code>String&nbsp;[m]</code>&nbsp;)
+    <div class="mdesc"><div class="short">空检测，标记作为元素必须字段。&#13;
+&#13;
+   vrel="ne=w:在这里输入名称,m:请输入昵称"&#13;
+</div><div class="long">空检测，标记作为元素必须字段。
+<pre>
+   vrel="ne=w:在这里输入名称,m:请输入昵称"
+</pre><div class="mdetail-params"><strong style="font-weight: normal;">Listeners will be called with the following arguments:</strong><ul><li><code>[m]</code> : String<div class="sub-desc">出错提示文字</div></li></ul></div></div></div></td><td class="msource">Validators</td></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.mod.Validators-f"></a><b><a href="source/std-doc.html#event-Xwb.mod.Validators-f">f</a></b> :
+                                      ()
+    <div class="mdesc"><div class="short">失去焦点时验证元素&#13;
+&#13;
+    // 失去焦点时验证元素是否为空&#13;
+    vrel="_f|ne"&#13;
+</div><div class="long">失去焦点时验证元素
+<pre>
+    // 失去焦点时验证元素是否为空
+    vrel="_f|ne"
+</pre><div class="mdetail-params"><strong style="font-weight: normal;">Listeners will be called with the following arguments:</strong><ul><li>None.</li></ul></div></div></div></td><td class="msource">Validators</td></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.mod.Validators-sz"></a><b><a href="source/std-doc.html#event-Xwb.mod.Validators-sz">sz</a></b> :
+                                      (&nbsp;<code>Number&nbsp;max</code>,&nbsp;<code>Number&nbsp;min</code>,&nbsp;<code>Boolean&nbsp;ww</code>&nbsp;)
+    <div class="mdesc"><div class="short">检测输入字符长度&#13;
+属性：&#13;
+    &lt;div class="mdetail-params"&gt;&#13;
+    &#13;
+    max=number，允许最大字节长度&#13;
+    min=number，允许最小字节长度&#13;
+    ww, wide...</div><div class="long">检测输入字符长度
+属性：
+    <div class="mdetail-params">
+    <ul>
+    <li>max=number，允许最大字节长度</li>
+    <li>min=number，允许最小字节长度</li>
+    <li>ww, wide code缩写，将长度按宽字符计算，一个汉字两个字节长度</li>
+    <li></li>
+    </ul>
+    </div>
+    例：
+    <pre>
+        sz=max:6,min:4,m:最少两个汉字，最多三个汉字,ww
+    </pre><div class="mdetail-params"><strong style="font-weight: normal;">Listeners will be called with the following arguments:</strong><ul><li><code>max</code> : Number<div class="sub-desc">最大长度</div></li><li><code>min</code> : Number<div class="sub-desc">最小长度</div></li><li><code>ww</code> : Boolean<div class="sub-desc">取值1或0，指明长度单位是否按宽字符长度计算，宽字符单位为2，一个字两个字母</div></li></ul></div></div></div></td><td class="msource">Validators</td></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.mod.Validators-dt"></a><b><a href="source/std-doc.html#event-Xwb.mod.Validators-dt">dt</a></b> :
+                                      ()
+    <div class="mdesc"><div class="short">检查是否有效的日期格式
+vrel="dt"</div><div class="long">检查是否有效的日期格式
+<pre><code>vrel=<em>"dt"</em></code></pre><div class="mdetail-params"><strong style="font-weight: normal;">Listeners will be called with the following arguments:</strong><ul><li>None.</li></ul></div></div></div></td><td class="msource">Validators</td></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.mod.Validators-mail"></a><b><a href="source/std-doc.html#event-Xwb.mod.Validators-mail">mail</a></b> :
+                                      ()
+    <div class="mdesc"><div class="short">验证是否为邮箱格式
+vrel="mail"</div><div class="long">验证是否为邮箱格式
+<pre><code>vrel=<em>"mail"</em></code></pre><div class="mdetail-params"><strong style="font-weight: normal;">Listeners will be called with the following arguments:</strong><ul><li>None.</li></ul></div></div></div></td><td class="msource">Validators</td></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.mod.Validators-int"></a><b><a href="source/std-doc.html#event-Xwb.mod.Validators-int">int</a></b> :
+                                      ()
+    <div class="mdesc"><div class="short">验证是否为数字格式
+vrel="int|sz=max:5,min:1"</div><div class="long">验证是否为数字格式
+<pre><code>vrel=<em>"int|sz=max:5,min:1"</em></code></pre><div class="mdetail-params"><strong style="font-weight: normal;">Listeners will be called with the following arguments:</strong><ul><li>None.</li></ul></div></div></div></td><td class="msource">Validators</td></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.mod.Validators-bt"></a><b><a href="source/std-doc.html#event-Xwb.mod.Validators-bt">bt</a></b> :
+                                      (&nbsp;<code>Number&nbsp;max</code>,&nbsp;<code>Number&nbsp;min</code>&nbsp;)
+    <div class="mdesc"><div class="short">验证是值是否在某个整数范围内
+vrel="bt=max:1000,min:1"</div><div class="long">验证是值是否在某个整数范围内
+<pre><code>vrel=<em>"bt=max:1000,min:1"</em></code></pre><div class="mdetail-params"><strong style="font-weight: normal;">Listeners will be called with the following arguments:</strong><ul><li><code>max</code> : Number<div class="sub-desc"></div></li><li><code>min</code> : Number<div class="sub-desc"></div></li></ul></div></div></div></td><td class="msource">Validators</td></tr><tr class="method-row expandable "><td class="micon"><a href="#expand" class="exi">&nbsp;</a></td><td class="sig"><a id="Xwb.mod.Validators-sinan"></a><b><a href="source/std-doc.html#event-Xwb.mod.Validators-sinan">sinan</a></b> :
+                                      ()
+    <div class="mdesc"><div class="short">检查昵称是否为非法字符。非法字符指除中英文、数字、"_"或减号符号外的所有字符
+vrel="sinan"</div><div class="long">检查昵称是否为非法字符。非法字符指除中英文、数字、"_"或减号符号外的所有字符
+<pre><code>vrel=<em>"sinan"</em></code></pre><div class="mdetail-params"><strong style="font-weight: normal;">Listeners will be called with the following arguments:</strong><ul><li>None.</li></ul></div></div></div></td><td class="msource">Validators</td></tr></tbody></table><a id="Xwb.mod.Validators-methods"></a><h2>公共方法</h2><div class="no-members">This class has no public methods.</div></div>
