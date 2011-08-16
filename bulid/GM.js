@@ -57,7 +57,8 @@
 						height:null,
 						content:'',
 						cover:true,
-						drag:false
+						drag:false,
+						opacity:0.5
 					};
 
 					$.extend(_o,o);
@@ -110,7 +111,11 @@
 				if(callback) callback(wrap);
 
 			},
-			//可以在此处重置样式与高宽
+			//可以在此处重置样式与高宽还有透明度
+			opacity:function(opacity){
+				var that=this,config=that.config;
+				config.opacity=opacity;
+			},
 			reset:function(w,h,cls){
 
 				var that=this,config=that.config;
@@ -118,6 +123,7 @@
 				config.width=w;
 				config.height=h;
 				config.wrapCls=cls;
+				
 
 				$('#'+config.wrapId).css({
 					'width':w,
@@ -158,7 +164,7 @@
 
 				cover.css({
 					'background-color':'#ccc',
-					'opacity':'0.5',
+					'opacity':config.opacity,
 					'height': doc.documentElement.clientHeight,
 					'z-index':999
 				}).prependTo('body');
@@ -927,34 +933,27 @@
 						var infowindow = new google.maps.InfoWindow({
 					    	content:that.markerhtml
 						});
-
+						
+						infowindow.open(map,marker);
+						
 					    google.maps.event.addListener(marker,'click', function () {
 					    	infowindow.open(map,marker);
 			            });
 					}
 					
 					if(that.drag){
-						google.maps.event.addListener(marker,'dragend', function () {
+						
+						function setlatlng(){
 							var center=marker.getPosition();
-							if(confirm('指定这里为新的场馆坐标么?')){
-								G.tools.overlay.close();
-								$.ajax({
-									url:'xxx.jsp',
-									data:{
-										siteNo:siteNo,
-										lat:center['Na'],
-										lng:center['Oa']
-									},
-									success:function(){
-										alert('本次修改已经提交');
-									},
-									error:function(){
-										alert('服务响应超时，请重试');
-									},
-									timeout:5000
-								});
-							}
+							$('#J_Coord').html('lat:<span id="J_Pa">'+center['Pa']+'</span><br/>lng:<span id="J_Oa">'+center['Oa']+'</span>');
+						}
+						
+						google.maps.event.addListener(marker,'dragend', function () {
+							setlatlng();
 			            });
+			            
+			            setlatlng();
+			            
 					}
 					//构建bar
 					bulidbar(that.target);
@@ -979,7 +978,7 @@
     				geocoder.geocode( { 'address': that.q}, function(results, status) {
 				      if (status == google.maps.GeocoderStatus.OK) {
 				      	var location=results[0].geometry.location;
-				        that.center=[location['Oa'],location['Na']];
+				        that.center=[location['Pa'],location['Oa']];
 				        drawmap(target,that.center,that.name,that.siteNo);
 				      } else {
 				        error(target);
@@ -997,6 +996,12 @@
 			//查看全图
 			$.overlay();
 			
+			//卸载绑定的live事件
+			var events=['.J_LookBigMap','.J_LookWay','.J_OverlayClose','.J_EditMap','#J_SqSub','#J_Esub'];
+			
+			$.each(events,function(key,val){
+				$(val).die();
+			});
 			
 			//绑定bar的事件
 			$('.J_LookBigMap').live('click',function(){
@@ -1006,6 +1011,7 @@
 						'<div id="J_Map_'+diget+'" style="height:500px;"></div>'+
 							'<a href="javascript:void(0);" class="J_OverlayClose" style="position:absolute;right:-10px;top:-10px;display:block;width:15px;height:15px;background:#000;color:#fff;line-height:15px;text-align:center;">&times</a>'+
 						'</div>';
+					G.tools.overlay.opacity(0.5);
 					G.tools.overlay.fire(BigMap);
 					var map=new G.widget.map({
 						q:that.q,
@@ -1038,7 +1044,7 @@
 						'</form>'+
 						'<a href="javascript:void(0);" class="J_OverlayClose" style="position:absolute;right:-10px;top:-10px;display:block;width:15px;height:15px;background:#000;color:#fff;line-height:15px;text-align:center;">&times</a>'+
 						'</div>';
-						
+					G.tools.overlay.opacity(0.5);	
 					G.tools.overlay.fire(Way);
 				}else{
 					errorClick();
@@ -1050,28 +1056,57 @@
 				G.tools.overlay.close();
 			});
 			
+			//搜索更新
+			$('#J_SqSub').live('click',function(){
+				var diget=$(this).attr('data-diget');
+				var map=new G.widget.map({
+					q:$('#J_Sq').val(),
+					markerhtml:'拽我，拽我，确定准确的位置~',
+					target:'J_Map_'+diget,
+					width:600,
+					height:500,
+					bar:false,
+					drag:true,
+					name:that.name,
+					siteNo:that.siteNo
+				}).init();
+			});
+			
 			//修改坐标
 			$('.J_EditMap').live('click',function(){
-				if(that.coord){
+				if(that.coord || that.center){
 					var diget=new Date().valueOf(),
-						BigMap='<div style="position:relative;width:500px;height:500px;border:#ccc solid 2px;">'+
-						'<div id="J_Map_'+diget+'"></div>'+
+						BigMap='<div style="position:relative;width:600px;height:500px;border:#ccc solid 2px;">'+
+						'<div id="J_Map_'+diget+'" style="height:500px;""></div>'+
 							'<a href="javascript:void(0);" class="J_OverlayClose" style="position:absolute;right:-10px;top:-10px;display:block;width:15px;height:15px;background:#000;color:#fff;line-height:15px;text-align:center;">&times</a>'+
+							'<div style="background:#fff;width:150px;height:140px;padding:10px;position:absolute;left:-180px;top:150px;border:#ccc solid 1px;">'+
+								'搜索:<br><input type="text" id="J_Sq"/><br/>'+
+								'操作:<br><input type="button" data-diget="'+diget+'" id="J_SqSub" value="搜索"/> <input type="button" id="J_Esub" value="保存坐标"/><br/>'+
+								'坐标:<br><span id="J_Coord" style="color:red;"></span>'+
+							'</div>'+
 						'</div>';
-					GM.tools.overlay.fire(BigMap);
+					G.tools.overlay.opacity(0);
+					G.tools.overlay.fire(BigMap);
 					var map=new G.widget.map({
 						q:that.q,
-						markerhtml:that.markerhtml,
+						markerhtml:'拽我，拽我，确定准确的位置~',
 						target:'J_Map_'+diget,
-						width:500,
+						width:600,
 						height:500,
 						bar:false,
+						drag:true,
 						name:that.name,
 						center:that.center,
 						siteNo:that.siteNo
 					}).init();
 				}else{
 					errorClick();
+				}
+			});
+			
+			$('#J_Esub').live('click',function(){
+				if(confirm('确定保存当前标记位置为新场馆位置么？')){
+					alert('siteNo:'+that.siteNo+',lat:'+$('#J_Pa').text()+',lng:'+$('#J_Oa').text());
 				}
 			});
 			

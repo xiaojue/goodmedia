@@ -253,9 +253,9 @@ _width:400px;}
 .fitness_list a{color:#78a000;}
 
 .color2{width:318px;margin:auto;}
-.color2 .b2,.color2 .b3,.color2 .b4,.color2 .b5,.color2 .b6,.color2 .b7,.color2 .fitness_txt{border-color:#f5f5f5;}
+.color2 .b2,.color2 .b3,.color2 .b4,.color2 .b5,.color2 .b6,.color2 .b7,.color2 .fitness_txt,.color2 .action_text{border-color:#f5f5f5;}
 .color2 .b1,.color2 .b8{background:#f5f5f5;}
-.color2 .b2,.color2 .b3,.color2 .b4,.color2 .b5,.color2 .b6,.color2 .b7,.color2 .fitness_txt{background:#f5f5f5;}
+.color2 .b2,.color2 .b3,.color2 .b4,.color2 .b5,.color2 .b6,.color2 .b7,.color2 .fitness_txt,.color2 .action_text{background:#f5f5f5;}
 .fitness_txt{padding:5px;}
 .fitness_img{text-align:right;margin:15px 8px;;}
 
@@ -977,6 +977,8 @@ _width:400px;}
 /*main3_action.html动作详解*/
 .news_cont .action_txt{text-indent:0px;}
 .action_txt span{color:#78a000;font-weight:bold;}
+.actionYj{WIDTH:90%;margin-top:-10px;}
+.action_text{padding:10px;line-height:21px;}
 
 .checked{background:#2B77BC;color:#fff;}
 #J_Instructorwrap li,#J_Itemwrap li{cursor:pointer;}
@@ -1055,8 +1057,8 @@ _width:400px;}
 .pro_body{font-size:12px;font-family:Arial, Helvetica, sans-serif;background:#fff url("http://s1.ifiter.com/static/images/bg.gif") no-repeat top;color:#444444;}
 .body_wrap{background:url("http://s1.ifiter.com/static/images/project/wrap_bg.gif") no-repeat left 185px;}
 .pro_wrap{height:auto !important;height:382px;min-height:382px;background:url("http://s1.ifiter.com/static/images/project/pro_bbg.jpg") no-repeat left bottom;}
-.pro_banner{position:relative;margin-bottom:20px;background:url("http://s1.ifiter.com/static/images/project/banner.jpg");width:950px;height:201px;color:#4077c7;font-size:14px;font-weight:bold;}
-.pro_banner span{display:block;width:260px;height:125px;position:absolute;right:40px;top:45px;line-height:21px;}
+.pro_banner{position:relative;margin-bottom:20px;background:url("http://s1.ifiter.com/static/images/project/banner.jpg");width:950px;height:201px;color:#4077c7;font-weight:bold;}
+.pro_banner span{display:block;width:270px;height:125px;position:absolute;right:30px;top:45px;line-height:21px;font-size:14px;}
 .pro_left{float:left;width:604px;}
 
 .photo{margin-bottom:15px;width:612px;margin-left:-5px;}

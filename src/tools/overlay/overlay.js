@@ -27,7 +27,8 @@
 						height:null,
 						content:'',
 						cover:true,
-						drag:false
+						drag:false,
+						opacity:0.5
 					};
 
 					$.extend(_o,o);
@@ -80,7 +81,11 @@
 				if(callback) callback(wrap);
 
 			},
-			//可以在此处重置样式与高宽
+			//可以在此处重置样式与高宽还有透明度
+			opacity:function(opacity){
+				var that=this,config=that.config;
+				config.opacity=opacity;
+			},
 			reset:function(w,h,cls){
 
 				var that=this,config=that.config;
@@ -88,6 +93,7 @@
 				config.width=w;
 				config.height=h;
 				config.wrapCls=cls;
+				
 
 				$('#'+config.wrapId).css({
 					'width':w,
@@ -128,7 +134,7 @@
 
 				cover.css({
 					'background-color':'#ccc',
-					'opacity':'0.5',
+					'opacity':config.opacity,
 					'height': doc.documentElement.clientHeight,
 					'z-index':999
 				}).prependTo('body');
