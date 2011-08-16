@@ -98,7 +98,7 @@
 						google.maps.event.addListener(marker,'dragend', function () {
 							var center=marker.getPosition();
 							if(confirm('指定这里为新的场馆坐标么?')){
-								GM.tools.overlay.close();
+								G.tools.overlay.close();
 								$.ajax({
 									url:'xxx.jsp',
 									data:{
@@ -127,7 +127,7 @@
 						'<div style="margin-top:80px;font-size:12px;color:red;text-align:center;">对不起,没有可以查看的地图信息</div>'+
 							'<a href="javascript:void(0);" class="J_OverlayClose" style="position:absolute;right:-10px;top:-10px;display:block;width:15px;height:15px;background:#000;color:#fff;line-height:15px;text-align:center;">&times</a>'+
 						'</div>';
-				GM.tools.overlay.fire(BigMap);
+				G.tools.overlay.fire(BigMap);
 			};
 			
 			
@@ -167,8 +167,8 @@
 						'<div id="J_Map_'+diget+'" style="height:500px;"></div>'+
 							'<a href="javascript:void(0);" class="J_OverlayClose" style="position:absolute;right:-10px;top:-10px;display:block;width:15px;height:15px;background:#000;color:#fff;line-height:15px;text-align:center;">&times</a>'+
 						'</div>';
-					GM.tools.overlay.fire(BigMap);
-					var map=new GM.widget.map({
+					G.tools.overlay.fire(BigMap);
+					var map=new G.widget.map({
 						q:that.q,
 						markerhtml:that.markerhtml,
 						target:'J_Map_'+diget,
@@ -200,7 +200,7 @@
 						'<a href="javascript:void(0);" class="J_OverlayClose" style="position:absolute;right:-10px;top:-10px;display:block;width:15px;height:15px;background:#000;color:#fff;line-height:15px;text-align:center;">&times</a>'+
 						'</div>';
 						
-					GM.tools.overlay.fire(Way);
+					G.tools.overlay.fire(Way);
 				}else{
 					errorClick();
 				}
@@ -208,7 +208,7 @@
 			
 			//关闭覆层，注销map
 			$('.J_OverlayClose').live('click',function(){
-				GM.tools.overlay.close();
+				G.tools.overlay.close();
 			});
 			
 			//修改坐标
@@ -220,7 +220,7 @@
 							'<a href="javascript:void(0);" class="J_OverlayClose" style="position:absolute;right:-10px;top:-10px;display:block;width:15px;height:15px;background:#000;color:#fff;line-height:15px;text-align:center;">&times</a>'+
 						'</div>';
 					GM.tools.overlay.fire(BigMap);
-					var map=new GM.widget.map({
+					var map=new G.widget.map({
 						q:that.q,
 						markerhtml:that.markerhtml,
 						target:'J_Map_'+diget,
