@@ -155,8 +155,7 @@
 									right='<div class="green">亲爱的{username}</div>'+
 										 '<p>最后一个任务最简单！</p>'+
 										 '<p>绑定你的新浪微博账号吧，让动米网和新浪同事分享你的日记、健身方案、照片……</p>'+
-										 '<p>第三个任务：绑定你得新浪微博账号(礼物马上就到手拉！)</p>'+
-										 '<p>健身方案的申请可以发给我们的教练团哦，看看教练团会给你什么建议吧^_^</p>',
+										 '<p>第三个任务：<span class="blue">绑定你得新浪微博账号</span></p>',
 									foot='<a href="#" class="blue J_OverlayClose">谢谢，自己玩...</a>'+
 										 '<a class="task_button" href="{todourl}" style="display:inline-block;text-decoration:none;_display:inline;zoom:1;">做任务</a>';
 								
@@ -165,8 +164,8 @@
 							'step3finish':function(){
 								var left='<img src="{coachpic}"><span>{coachname}</span>',
 									right='<div class="green">亲爱的{username}</div>'+
-										 '<p>您已完成了动米网的所有任务</p>'+
-								         '<p class="yellow">本次任务您获得了{rice}大米</p>',
+										 '<p>动米网的三个你以全部完成！</p>'+
+								         '<p class="yellow">本共累计获得了{rice}分。</p>',
 								         //'<p class="green">并且获得我们为您准备的{gift}礼物</p>',
 									foot='<a href="#" class="blue J_OverlayClose J_FinishTask">谢谢，自己玩...</a>'+
 										 '<a class="task_button J_OverlayClose J_FinishTask" href="javascript:void(0)" style="display:inline-block;text-decoration:none;_display:inline;zoom:1;">完成</a>';

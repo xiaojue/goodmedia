@@ -397,7 +397,13 @@ _width:400px;}
 .pic_none{border:0px;}
 .pic_list ul li{display:block;float:left;margin-left:15px;position:relative;}
 .pic_list img{display:block;padding:3px;border:1px solid #cacaca;margin:0px;background:#fff;}
-.alb{position:absolute;top:1px;right:1px;background:url(http://s1.ifiter.com/static/images/album_bg.png) no-repeat;width:49px;height:48px;}
+.alb{
+	position:absolute;top:1px;right:1px;
+	width:49px;
+	height:48px;
+	background:transparent url(http://s1.ifiter.com/static/images/album_bg.png) no-repeat;
+	_background:none;
+	_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://s1.ifiter.com/static/images/album_bg.png',sizingMethod='scale');}
 .pic_list ul li .alb span{display:block;width:28px;height:48px;margin:5px 0px 0px 16px;text-align:center;}
 .pic_list span{display:block;margin:5px 0px;}
 .pic_list ul li span{display:block;margin:10px 0px;width:120px;overflow:hidden;height:18px;}

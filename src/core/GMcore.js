@@ -31,7 +31,7 @@
 		});
 	}
 	
-	//加在widget的方法
+	//加载widget的方法
 	GM.widget.usemap={};
 	
 	GM.widget.use=function(widget,callback){
