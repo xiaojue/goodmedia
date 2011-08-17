@@ -89,7 +89,7 @@
 										"<div class='title'>嗨，{username}你好，欢迎加入动米网。</div>"+
 										"<p>动米网是一个汇聚了天南海北的健身爱好者的交流社区，动米网不光能汇聚健身好友，还有很多专业的，好玩的功能。<br>"+
 										"让{coachname}带你一起来了解一下我们吧！<br>"+
-										"完成下面的三个任务，将有礼物等着你呦~~ ^_^</p>"+
+										"完成下面的三个任务，就能获得积分呦~~ ^_^</p>"+
 										"</div></div>"+
 										"<div class='task_but'>"+
 										'<input type="checkbox" id="J_GMTask">以后不在弹出'+
@@ -105,7 +105,7 @@
 								         '<p>不知道我称呼您为先生呢？还是女士？</p>'+
 								         '<p>您平时喜欢什么健身项目？在家健身还是去健身场所</p>'+
 								         '<p>您和朋友一起去散步？还是找私人健身教练指定一套健身方案？</p>'+
-								         '<p>第一个任务：<span class="blue">完善您的健身信息</span>（有意外的惊喜）</p>'+
+								         '<p>第一个任务：<span class="blue">完善您的健身信息</span></p>'+
 								         '<p>别忘了告诉我您性别</p>',
 									foot='<a href="#" class="blue J_OverlayClose">谢谢，自己玩...</a>'+
 										 '<a class="task_button" href="{todourl}" style="display:inline-block;text-decoration:none;_display:inline;zoom:1;">做任务</a>';
@@ -130,7 +130,7 @@
 									right='<div class="green">亲爱的{username}</div>'+
 								         '<p>你有私人教练吗？你有一套属于自己的健身方案吗？</p>'+
 										 '<p>快来申请，一个属于你自己的健身方案吧。</p>'+
-										 '<p>第二个任务：申请健身方案</p>'+
+										 '<p>第二个任务：<span class="blue">申请健身方案</span></p>'+
 										 '<p>健身方案的申请可以发给我们的教练团哦，看看教练团会给你什么建议吧^_^</p>',
 									foot='<a href="#" class="blue J_OverlayClose">谢谢，自己玩...</a>'+
 										 '<a class="task_button" href="{todourl}" style="display:inline-block;text-decoration:none;_display:inline;zoom:1;">做任务</a>';
@@ -166,7 +166,7 @@
 								var left='<img src="{coachpic}"><span>{coachname}</span>',
 									right='<div class="green">亲爱的{username}</div>'+
 										 '<p>您已完成了动米网的所有任务</p>'+
-								         '<p class="yellow">上次任务您获得了{rice}大米</p>',
+								         '<p class="yellow">本次任务您获得了{rice}大米</p>',
 								         //'<p class="green">并且获得我们为您准备的{gift}礼物</p>',
 									foot='<a href="#" class="blue J_OverlayClose J_FinishTask">谢谢，自己玩...</a>'+
 										 '<a class="task_button J_OverlayClose J_FinishTask" href="javascript:void(0)" style="display:inline-block;text-decoration:none;_display:inline;zoom:1;">完成</a>';

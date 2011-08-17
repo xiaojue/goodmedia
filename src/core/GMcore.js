@@ -14,14 +14,36 @@
 	//独立项目或者应用
 	GM.apps={};
 	
+	//判断使用路径
+	var ishost=(W.location.href.match('idongmi.com')),
+		uri=(ishost) ?'http://x.idongmi.com/static/GM/' : 'http://172.16.2.215/gm/';
+	
+	//根目录
+	GM.host = uri;
+	
 	//额外加载项目文件 - 项目文件目前依赖关系依靠ant维护
 	GM.apps.require=function(appname,callback){
-		var ishost=(W.location.href.match('idongmi.com')),
-		uri=(ishost) ?'http://x.idongmi.com/static/GM/' : 'http://172.16.2.215/gm/'
-		var appuri= uri + 'bulid/apps/'+appname+'/'+appname+'.js';
+		var appuri = GM.host + 'bulid/apps/'+appname+'/'+appname+'-min.js';
 		$(function(){
 			$.getScript(appuri,function(){
 				if(callback) callback(GM.apps[appname]['exports'])
+			});
+		});
+	}
+	
+	//加在widget的方法
+	GM.widget.usemap={};
+	
+	GM.widget.use=function(widget,callback){
+		if(GM.widget.usemap.hasOwnProperty(widget)){
+			if(callback) callback(GM.widget);
+			return;
+		} 
+		var widgeturi = GM.host + 'bulid/widget/'+widget+'/'+widget+'-min.js';
+		$(function(){
+			$.getScript(widgeturi,function(){
+				GM.widget.usemap[widget]=widgeturi;
+				if(callback) callback(GM.widget);
 			});
 		});
 	}

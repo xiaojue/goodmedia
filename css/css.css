@@ -723,7 +723,7 @@ _width:400px;}
 .Article_txt ul li{background:url(http://s1.ifiter.com/static/images/main3_ico.gif) no-repeat 0% 50%;text-indent:10px;height:22px;overflow:hidden;}
 .hot_txt{margin-top:10px;}
 .hot_txt ul li{background:url(http://s1.ifiter.com/static/images/main3_ico.gif) no-repeat 0% 50%;text-indent:10px;height:22px;overflow:hidden;}
-.Article_txt ul li a,.hot_txt ul li a{display:block;width:170px;overflow:hidden;}
+.Article_txt ul li a,.hot_txt ul li a{display:block;width:170px;overflow:hidden;white-space:nowrap;text-overflow: ellipsis;}
 .Article_txt ul li span{float:right;}
 /*��ҳ��--�б�ҳ��*/
 .list{width:170px;margin:2px auto;}
@@ -978,7 +978,7 @@ _width:400px;}
 .news_cont .action_txt{text-indent:0px;}
 .action_txt span{color:#78a000;font-weight:bold;}
 .actionYj{WIDTH:90%;margin-top:-10px;}
-.action_text{padding:10px;line-height:21px;}
+.action_text{padding:10px;}
 
 .checked{background:#2B77BC;color:#fff;}
 #J_Instructorwrap li,#J_Itemwrap li{cursor:pointer;}

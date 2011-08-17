@@ -44,11 +44,7 @@
 			tools\temp\temp.js
 			tools\cookie\cookie.js
 			tools\ie6fix\ie6fix.js
-			widget\sharetosina\sharetosina.js
-			widget\cityzone\cityzone.js
-			widget\detercopy\detercopy.js
-			widget\saycountdown\saycountdown.js
-			widget\map\map.js"/>
+			widget\detercopy\detercopy.js"/>
 		</concat>
 		
 		<!--删除所有合并文件，只留出最后的GMsource和GMmin文件-->
@@ -64,9 +60,12 @@
 			</fileset>
 		</delete>
 		
-		<!-- 复制apps到bulid环境 | 暂时先不压缩，方便调试-->
+		<!-- 复制apps,widget到bulid环境 | 暂时先不压缩，方便调试-->
 		<copy todir="${bulid.dir}/apps" encoding="UTF-8" outputencoding="UTF-8">
 			<fileset dir="${src.dir}/apps"/>
+		</copy>
+		<copy todir="${bulid.dir}/widget" encoding="UTF-8" outputencoding="UTF-8">
+			<fileset dir="${src.dir}/widget"/>
 		</copy>
 		
 		<!-- 压缩GM-min文件 -->
@@ -81,7 +80,7 @@
 			<targetfile/>
 		</apply>
 		
-		<!-- 压缩apps-min文件 -->
+		<!-- 压缩-min文件 -->
 		<apply executable="java" parallel="false" failonerror="true">
 			<fileset dir="${bulid.dir}/apps" includes="*/*.js" />
 			<arg line="-jar" />
@@ -93,12 +92,24 @@
 			<targetfile/>
 		</apply>
 		
+		<apply executable="java" parallel="false" failonerror="true">
+			<fileset dir="${bulid.dir}/widget" includes="*/*.js" />
+			<arg line="-jar" />
+			<arg path="${yui-compressor}" />
+			<arg line="--charset utf-8" />
+			<srcfile/>
+			<arg line="-o" />
+			<mapper type="glob" from="*.js" to="${bulid.dir}/widget/*-min.js" />
+			<targetfile/>
+		</apply>
+		
 		<!--部署-->
 		<delete dir="${GMonline.dir}"/>
 		<mkdir dir="${GMonline.dir}"/>
 		<copy todir="${GMonline.dir}" encoding="UTF-8" outputencoding="UTF-8">
 			<fileset dir="${GM.dir}" includes="bulid/*.js"/>
 			<fileset dir="${GM.dir}" includes="bulid/apps/*/*.js"/>
+			<fileset dir="${GM.dir}" includes="bulid/widget/*/*.js"/>
 			<fileset dir="${GM.dir}" includes="src/core/*.js"/>
 			<fileset dir="${GM.dir}" includes="src/tools/*/*.js"/>
 			<fileset dir="${GM.dir}" includes="src/widget/*/*.js"/>
