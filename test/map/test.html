@@ -13,13 +13,16 @@
 		<script>
 		//javascript:void(prompt('',gApplication.getMap().getCenter()));
 		(function(){
-			$(function(){
+			GM.widget.use('map',function(){
 				var map1=new GM.widget.map({
 					q:'北京市东城区东方银座48号 东直门外大街',
 					target:'J_MAP_Target',
-					width:210,
-					height:270,
-					name:'',
+					width:600,
+					height:400,
+					name:'测试地图',
+					markerhtml:'116.44880175590515,39.90786397049953',
+					bar:false,
+					type:'search',
 					siteNo:1234,
 					center:[116.44880175590515,39.90786397049953]
 				}).init();
@@ -28,3 +31,4 @@
 		</script>
 	</body>
 </html>
+

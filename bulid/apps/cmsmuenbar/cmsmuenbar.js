@@ -24,7 +24,7 @@
 						$.getScript(pmurl);
 					}else{
 						myhtml='<a href="http://bbs.idongmi.com/bbs/register.php" target="_blank">立即注册</a>'+
-								   '<a href="http://bbs.idongmi.com/bbs/logging.php?action=login&referer=http://x.idongmi.com/user/index.jsp">马上登录</a>';
+						   '<a href="http://bbs.idongmi.com/bbs/logging.php?action=login&referer=http://x.idongmi.com/user/index.jsp">马上登录</a>';
 						$('#J_Muenbar').html(myhtml);
 					}
 				}

@@ -20,7 +20,8 @@
 			bar:true,
 			revise:false,
 			center:null,
-			siteNo:null
+			siteNo:null,
+			type:null
 		};
 		
 		$.extend(_cg,cg);
@@ -75,14 +76,14 @@
 				    var map=new google.maps.Map(target,myOptions);//载入地图
 				    
 				    var marker = new google.maps.Marker({
-				    	 title:name,     
-						 position: latlng,         
-					 	 map: map,
-					 	 draggable:function(){
-					 	 	if(that.drag) return true;
-					 	 	return false;
-					 	 }()
-					});
+				    	title:name,     
+						 	position: latlng,         
+					 	 	map: map,
+					 	 	draggable:function(){
+					 	 		if(that.drag || that.type=="search") return true;
+					 	 		return false;
+					 		 }()
+						});
 					
 					if(that.markerhtml!=""){
 						var infowindow = new google.maps.InfoWindow({
@@ -105,11 +106,160 @@
 						
 						google.maps.event.addListener(marker,'dragend', function () {
 							setlatlng();
-			            });
+			      });
 			            
-			            setlatlng();
+			      setlatlng();
 			            
 					}
+					
+					if(that.type=="search"){
+						
+						var errortime=0,markersArray=[]; //10次错误之后再给提示
+
+						function getPosition(){
+							var center=marker.getPosition();
+							//这里的pa和oa用反了……囧，程序都做完了才发现精度纬度是拧着的，后台已经按照这个走了
+							//这里注释一下，切忌…… 这里Oa代表lat , Pa代表lng 搜索范围功能前台按照正常的来，后台会处理一下
+							return {
+								lat:center['Oa'],
+								lng:center['Pa']
+							}
+						};
+						
+						function postPostion(){
+							var coord=getPosition(),
+									lat=coord.lat,
+									lng=coord.lng,
+									action='/api/mi.jsp?v=geo/'+lng+'/'+lat;
+						
+							//清除已经有的maker，并且清空右侧列表的信息
+							function clearRightBar(){
+							
+							}
+							
+							function deleteMarkers() {
+  							if (markersArray) {
+   							 for (i in markersArray) {
+     							 markersArray[i].setMap(null);
+   							 }
+   							 markersArray.length = 0;
+  							}
+							}
+
+							$.ajax({
+								url:action,
+								type:'GET',
+								success:function(data){
+									//这里规定data格式
+									//{
+									//	result:[
+									//		{
+									//			lat:'',
+									//			lng:'',
+									//			name:''
+									//		},
+									//		{},{}
+									//	]
+									//}
+									//没有则返回空数组 r:0 
+									try{
+										eval('var data='+$.trim(data));
+									}catch(e){
+										console.log(e);
+									}
+									if(data['r']!=0) return; //数据有错
+
+									var dataAry=data['s']['result'];
+									if(dataAry.length==0){
+										//右侧列表增加什么也没搜索到的提示
+										return; //没数据就啥也不执行了
+									}
+
+									deleteMarkers();
+									clearRightBar();
+									
+									var darwin = new google.maps.LatLng(lat,lng); //设置新的地图中心点
+  										map.setCenter(darwin);
+											map.setZoom(13);
+
+								
+									var infowindow = new google.maps.InfoWindow({
+											content:'在此3公里范围找到了'+dataAry.length+'家健身会馆,拖动此标志可继续查找'
+									});
+
+									var infoflg=true;
+									
+									function infowindowShow(){
+										infoflg=false;
+										infowindow.open(map,marker);
+										setTimeout(function(){
+											infowindow.close();
+											infoflg=true;
+										},5000);
+									}
+									
+									infowindowShow();
+									
+									
+					   		 	google.maps.event.addListener(marker,'click', function () {
+											if(infoflg)
+											infowindowShow();
+			           	});
+
+									for(var i=0;i<dataAry.length;i++){
+										(function(i){
+											var resultlat=dataAry[i]['lat'],
+													resultlng=dataAry[i]['lng'],
+													resultname=dataAry[i]['name'];
+											var newlatlng = new google.maps.LatLng(resultlat,resultlng);
+											
+											var marker = new google.maps.Marker({
+				    						title:resultname,     
+						 						position:newlatlng,         
+					 						 	map: map,
+												icon:'http://x.idongmi.com/static/images/map/124.png'
+											});
+											
+
+										google.maps.event.addListener(marker,'click', function () {
+												var infowindow = new google.maps.InfoWindow({
+													content:resultname
+												});
+											infowindow.open(map,marker);
+			           		});
+										markersArray.push(marker);
+										})(i);
+									}
+									//结束循环添加坐标
+									//应该增加右侧增加相关列表的函数
+								},
+								error:function(){
+									errortime++;
+									if(errortime==10){
+										alert('连续请求失败,建议重新刷新页面');
+										return;
+									}
+									setTimeout(postPostion,200);
+								}
+							});
+						}
+
+						var dragflg=true,T;
+
+						postPostion(); //初始化就发送
+						google.maps.event.addListener(marker,'dragend',function(){
+								if(dragflg) T=setTimeout(postPostion,300);	
+						});
+
+						google.maps.event.addListener(marker,'drag',function(){
+								clearTimeout(T);	
+						});
+
+						
+						
+
+					}
+
 					//构建bar
 					bulidbar(that.target);
 			    }

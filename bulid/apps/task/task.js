@@ -154,7 +154,7 @@
 								var left='<img src="{coachpic}"><span>{coachname}</span>',
 									right='<div class="green">亲爱的{username}</div>'+
 										 '<p>最后一个任务最简单！</p>'+
-										 '<p>绑定你的新浪微博账号吧，让动米网和新浪同事分享你的日记、健身方案、照片……</p>'+
+										 '<p>绑定你的新浪微博账号吧，让动米网和新浪同时分享你的日记、健身方案、照片……</p>'+
 										 '<p>第三个任务：<span class="blue">绑定你得新浪微博账号</span></p>',
 									foot='<a href="#" class="blue J_OverlayClose">谢谢，自己玩...</a>'+
 										 '<a class="task_button" href="{todourl}" style="display:inline-block;text-decoration:none;_display:inline;zoom:1;">做任务</a>';
