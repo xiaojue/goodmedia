@@ -38,13 +38,13 @@
 		<concat destfile="${bulid.dir}\${GM.source}" encoding="UTF-8" outputencoding="UTF-8">
 			<filelist dir="${bulid.dir}"
 			files="core\GMcore.js
-			widget\console.js\console.js
 			tools\overlay\overlay.js
 			tools\carousel\carousel.js
 			tools\bubble\bubble.js
 			tools\temp\temp.js
 			tools\cookie\cookie.js
 			tools\ie6fix\ie6fix.js
+			widget\console.js\console.js
 			widget\detercopy\detercopy.js"/>
 		</concat>
 		

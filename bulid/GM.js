@@ -77,6 +77,12 @@
 			});
 		});
 	}
+	//debug 模式下开启debug.js并且初始化debug面板
+	if(GM.debug){
+		GM.widget.use('debug',function(widget){
+				widget.debug.init();
+		});
+	} 
 	
 	W.GM=GM;
 })(window,document,jQuery);
