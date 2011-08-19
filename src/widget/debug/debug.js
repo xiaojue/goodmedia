@@ -43,7 +43,6 @@
 					},
 					reset:function(temp){
 						var that=this;
-						console.log(that.get('script'))
 						return $.substitute(temp,{
 											js:that.get('script'),
 											css:that.get('link')

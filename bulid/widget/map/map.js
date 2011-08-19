@@ -114,7 +114,7 @@
 					
 					if(that.type=="search"){
 						
-						var errortime=0,markersArray=[]; //10次错误之后再给提示
+						var errortime=0,markersArray=[],surname; //10次错误之后再给提示
 
 						function getPosition(){
 							var center=marker.getPosition();
@@ -144,7 +144,10 @@
    							 }
    							 markersArray.length = 0;
   							}
+								if(surname) surname.setMap(null);
 							}
+							
+							var infowindow = new google.maps.InfoWindow();
 
 							$.ajax({
 								url:action,
@@ -183,14 +186,11 @@
 											map.setZoom(13);
 
 								
-									var infowindow = new google.maps.InfoWindow({
-											content:'在此3公里范围找到了'+dataAry.length+'家健身会馆,拖动此标志可继续查找'
-									});
-
 									var infoflg=true;
 									
 									function infowindowShow(){
 										infoflg=false;
+										infowindow.setContent('在此3公里范围找到了'+dataAry.length+'家健身会馆,拖动此标志可继续查找')
 										infowindow.open(map,marker);
 										setTimeout(function(){
 											infowindow.close();
@@ -222,14 +222,25 @@
 											
 
 										google.maps.event.addListener(marker,'click', function () {
-												var infowindow = new google.maps.InfoWindow({
-													content:resultname
-												});
+											infowindow.setContent(resultname);
 											infowindow.open(map,marker);
+											setTimeout(function(){
+													infowindow.close();
+											},5000)
 			           		});
 										markersArray.push(marker);
 										})(i);
 									}
+
+									
+									surname=new google.maps.Circle({
+											strokeColor:"#FF0000",
+											fillOpacity:0.0,
+											map:map,
+											strokeWeight:1,
+											radius:3000,
+											center:marker.getPosition()
+									});
 									//结束循环添加坐标
 									//应该增加右侧增加相关列表的函数
 								},
@@ -254,9 +265,6 @@
 						google.maps.event.addListener(marker,'drag',function(){
 								clearTimeout(T);	
 						});
-
-						
-						
 
 					}
 

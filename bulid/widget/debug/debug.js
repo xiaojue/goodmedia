@@ -33,11 +33,12 @@
 						});
 					},
 					get:function(tag){
-						var returnval="";
-							$(tag).each(function(){
-								var src=this.src || this.href;
-								if(src) returnval += src+'<br/>';
-							});
+						var returnval="",tags=document.getElementsByTagName(tag);
+							for(var i=0;i<tags.length;i++){
+								var tag=tags[i],
+									src=tag.src || tag.href;
+								if(src) returnval += '<a href="'+src+'" style="width:300px;display:inline-block;overflow:hidden;height:20px;background:#eee;">'+src+'</a><br/>';
+							}
 						return returnval;
 					},
 					reset:function(temp){
@@ -48,8 +49,7 @@
 									});	
 					},
 					resetdebug:function(){
-						var that=this,str=$('#J_GMDebug').html();
-							str=that.reset(str);
+						var that=this,str=that.reset(debugHtml);
 						$('#J_GMDebug').html(str);
 					}
 				}

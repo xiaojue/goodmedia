@@ -87,8 +87,8 @@
 							'welcome':function(){
 								var str="<div class='task_txt'><div class='task_text1'>"+
 										"<div class='title'>嗨，{username}你好，欢迎加入动米网。</div>"+
-										"<p>动米网是一个汇聚了天南海北的健身爱好者的交流社区，动米网不光能汇聚健身好友，还有很多专业的，好玩的功能。<br>"+
-										"让{coachname}带你一起来了解一下我们吧！<br>"+
+										"<p>动米网是一个汇聚了天南海北的健身爱好者的交流社区，<br>动米网不光能汇聚健身好友，<br>还有很多专业、好玩的功能。<br>"+
+										"让{coachname}带你一起来了解我们吧！<br>"+
 										"完成下面的三个任务，就能获得积分呦~~ ^_^</p>"+
 										"</div></div>"+
 										"<div class='task_but'>"+
@@ -118,7 +118,8 @@
 								}
 								var left='<img src="{coachpic}"><span>{coachname}</span>',
 									right='<div class="green">亲爱的{username}</div>'+
-										 '<p>您已完成第一个任务<span class="yellow">(已获得了{rice}大米)</span></p>',
+										 '<p>恭喜你完成了第一个任务！</p>'+
+										 '<p class="yellow">已获得了{rice}大米</p>',
 								         //'<p class="green">并且获得我们为您准备的{food}食物</p>',
 									foot='<a href="#" class="blue J_OverlayClose">谢谢，自己玩...</a>'+
 										 '<a class="task_button" href="#" style="display:inline-block;text-decoration:none;_display:inline;zoom:1;" id="J_Todo2">下一个任务</a>';
@@ -143,7 +144,8 @@
 								}
 								var left='<img src="{coachpic}"><span>{coachname}</span>',
 									right='<div class="green">亲爱的{username}</div>'+
-										 '<p>您已完成第二个任务<span class="yellow">已获得了{rice}大米</span></p>',
+										 '<p>恭喜你完成了第二个任务！</p>'+
+										 '<p class="yellow">已获得了{rice}大米</p>',
 								         //'<p class="green">距离兑换{food}食物还差{gap}大米</p>',
 									foot='<a href="#" class="blue J_OverlayClose">谢谢，自己玩...</a>'+
 										 '<a class="task_button" href="#" style="display:inline-block;text-decoration:none;_display:inline;zoom:1;" id="J_Todo3">下一个任务</a>';
@@ -164,8 +166,8 @@
 							'step3finish':function(){
 								var left='<img src="{coachpic}"><span>{coachname}</span>',
 									right='<div class="green">亲爱的{username}</div>'+
-										 '<p>动米网的三个你以全部完成！</p>'+
-								         '<p class="yellow">本共累计获得了{rice}分。</p>',
+										 '<p>动米网的三个任务你已全部完成！</p>'+
+								         '<p class="yellow">共累计获得了{rice}分。</p>',
 								         //'<p class="green">并且获得我们为您准备的{gift}礼物</p>',
 									foot='<a href="#" class="blue J_OverlayClose J_FinishTask">谢谢，自己玩...</a>'+
 										 '<a class="task_button J_OverlayClose J_FinishTask" href="javascript:void(0)" style="display:inline-block;text-decoration:none;_display:inline;zoom:1;">完成</a>';
@@ -225,11 +227,12 @@
 						$('.J_FinishTask').live('click',function(){
 							$.cookie(that.parameter['uid'],1,{expires:365});
 							$.cookie(that.parameter['uid']+'over',1,{expires:365});
+							$('#J_Buttery').hide();
 						});
 						
 					},
 					bulidbuttery:function(step){
-						if($.cookie(this.parameter['uid'])==1) return;
+						if($.cookie(this.parameter['uid'])==1 || $.cookie(this.parameter['uid']+'over')==1) return;
 						bulidbuttery(step);
 					}
 				}
