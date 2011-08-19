@@ -5,7 +5,7 @@
  * Goodmedia前端js库core文件，负责创建GM对象和构建命名空间
  */
 (function(W,doc,$){
-	if(!window.GM) var GM={};
+	if(!W.GM) var GM={};
 	
 	//与业务紧密相关的-挂件
 	GM.widget={};
