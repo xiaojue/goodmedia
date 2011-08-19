@@ -114,7 +114,7 @@
 					
 					if(that.type=="search"){
 						
-						var errortime=0,markersArray=[]; //10次错误之后再给提示
+						var errortime=0,markersArray=[],surname; //10次错误之后再给提示
 
 						function getPosition(){
 							var center=marker.getPosition();
@@ -144,6 +144,7 @@
    							 }
    							 markersArray.length = 0;
   							}
+								if(surname) surname.setMap(null);
 							}
 
 							$.ajax({
@@ -226,10 +227,23 @@
 													content:resultname
 												});
 											infowindow.open(map,marker);
+											setTimeout(function(){
+													infowindow.close();
+											},3000)
 			           		});
 										markersArray.push(marker);
 										})(i);
 									}
+
+									
+									surname=new google.maps.Circle({
+											strokeColor:"#FF0000",
+											fillOpacity:0.0,
+											map:map,
+											strokeWeight:1,
+											radius:3000,
+											center:marker.getPosition()
+									});
 									//结束循环添加坐标
 									//应该增加右侧增加相关列表的函数
 								},
@@ -254,9 +268,6 @@
 						google.maps.event.addListener(marker,'drag',function(){
 								clearTimeout(T);	
 						});
-
-						
-						
 
 					}
 
