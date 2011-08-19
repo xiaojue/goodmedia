@@ -14,16 +14,45 @@
 	//独立项目或者应用
 	GM.apps={};
 	
+	//是否是debug模式
+	GM.debug=function(){
+		var isdebug=(W.location.href.match('debug'));
+		return isdebug;
+	}();
+
 	//判断使用路径
-	var ishost=(W.location.href.match('idongmi.com')),
-		uri=(ishost) ?'http://x.idongmi.com/static/GM/' : 'http://172.16.2.215/gm/';
-	
-	//根目录
-	GM.host = uri;
+	//先找到当前的路径
+	GM.host=function(){
+		var scripts=doc.getElementsByTagName('script'),i,base;
+		for(i=0;i<scripts.length;i++){
+			var src=scripts[i].src,
+					namereg=/(GM-min|GM).js/;
+			if(namereg.test(src)){
+				base=src.slice(0,src.lastIndexOf('/')+1)
+			}
+		}
+		return base;
+	}();
+
+	if(GM.debug){
+		GM.host='http://172.16.2.215/gm/bulid/';
+		$(function(){
+				$('a').each(function(){
+					var href=$(this).attr('href');
+						$(this).attr('href',href+'&debug');
+				});
+		});
+	}
+
+	//转换到本地非压缩路径
+	function locality(uri){
+		return uri.replace('bulid','src').replace('-min','');
+	} 
 	
 	//额外加载项目文件 - 项目文件目前依赖关系依靠ant维护
 	GM.apps.require=function(appname,callback){
-		var appuri = GM.host + 'bulid/apps/'+appname+'/'+appname+'-min.js';
+		var appuri = GM.host + 'apps/'+appname+'/'+appname+'-min.js';
+		if(GM.debug) appuri=locality(appuri);
 		$(function(){
 			$.getScript(appuri,function(){
 				if(callback) callback(GM.apps[appname]['exports'])
@@ -39,7 +68,8 @@
 			if(callback) callback(GM.widget);
 			return;
 		} 
-		var widgeturi = GM.host + 'bulid/widget/'+widget+'/'+widget+'-min.js';
+		var widgeturi = GM.host + 'widget/'+widget+'/'+widget+'-min.js';
+		if(GM.debug) widgeturi=locality(widgeturi);
 		$(function(){
 			$.getScript(widgeturi,function(){
 				GM.widget.usemap[widget]=widgeturi;
