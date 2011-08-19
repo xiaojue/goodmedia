@@ -1,7 +1,7 @@
 /**
  * 修复ie6的一些bug
  */
-(function(W,G,$){
+(function(W,G,$,doc){
 	
 	//修复png24不透明
 	var fixpng24=function() {
@@ -29,8 +29,9 @@
 	
 	if($.browser.msie && $.browser.version==6){
 		$(function(){
-			$.fixpng24();
+			$.fixpng24(); //修复ie6 png24
+			doc.execCommand("BackgroundImageCache", false, true); //修复ie6 不缓存背景图
 		});
 	};
        
-})(window,GM,jQuery);
+})(window,GM,jQuery,document);
