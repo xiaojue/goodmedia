@@ -95,6 +95,17 @@
 		</apply>
 		
 		<apply executable="java" parallel="false" failonerror="true">
+			<fileset dir="${bulid.dir}/apps" includes="*/*.css" />
+			<arg line="-jar" />
+			<arg path="${yui-compressor}" />
+			<arg line="--charset utf-8" />
+			<srcfile/>
+			<arg line="-o" />
+			<mapper type="glob" from="*.css" to="${bulid.dir}/apps/*-min.css" />
+			<targetfile/>
+		</apply>
+		
+		<apply executable="java" parallel="false" failonerror="true">
 			<fileset dir="${bulid.dir}/widget" includes="*/*.js" />
 			<arg line="-jar" />
 			<arg path="${yui-compressor}" />
@@ -102,6 +113,17 @@
 			<srcfile/>
 			<arg line="-o" />
 			<mapper type="glob" from="*.js" to="${bulid.dir}/widget/*-min.js" />
+			<targetfile/>
+		</apply>
+		
+		<apply executable="java" parallel="false" failonerror="true">
+			<fileset dir="${bulid.dir}/widget" includes="*/*.css" />
+			<arg line="-jar" />
+			<arg path="${yui-compressor}" />
+			<arg line="--charset utf-8" />
+			<srcfile/>
+			<arg line="-o" />
+			<mapper type="glob" from="*.css" to="${bulid.dir}/widget/*-min.css" />
 			<targetfile/>
 		</apply>
 		

@@ -34,10 +34,13 @@
 	
 	
 	map.prototype= {
+		//加载css
 		_loadcss:function(){
-			var host=GM.widget.host;
-			$.loadcss(host+'map/map.css');
+			var host=GM.widget.host,place='-min';
+			if(GM.debug) place='';
+			$.loadcss(host+'map/map'+place+'.css');
 		},
+		//绘制地图的主函数
 		drawmap:function(target,center,name,siteNo){
 			if(google) {
 					var that=this,
