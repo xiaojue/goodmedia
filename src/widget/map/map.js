@@ -97,17 +97,18 @@
 							clearRightBar:function(){
 								
 							},
-							infoshow:function(info,msg){
+							infoshow:function(info,msg,position){
 								clearTimeout(T);
-								info.setContent(msg)
-								info.open(map,marker);
+								info.setContent(msg);
+								if(position) info.setPosition(position)
+								info.open(map);
 								T=setTimeout( function() {
 									info.close();
 								},5000);
 							},
 							//显示地图浮出层
 							infowindowShow:function(info,l){
-								_fn.infoshow(info,'在此3公里范围找到了'+l+'家健身会馆,拖动此标志可继续查找');
+								_fn.infoshow(info,'在此3公里范围找到了'+l+'家健身会馆,拖动此标志可继续查找',marker.getPosition());
 							},
 							//给周边场馆增加坐标和事件
 							addrimmarkers:function(ary,map,info,markAry){
@@ -128,7 +129,7 @@
 										markAry.push(marker);
 										//给找到的场馆marker对象绑定点击事件
 										Gevent.addListener(marker,'click',function (){
-											_fn.infoshow(info,resultname);
+											_fn.infoshow(info,resultname,newlatlng);
 										});
 										
 									})(i);
