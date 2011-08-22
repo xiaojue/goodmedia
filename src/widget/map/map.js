@@ -142,7 +142,6 @@
 									darwin = new Gmap.LatLng(lat,lng);	
 								marker.setPosition(darwin);
 								_fn.postPostion(marker);
-								that._sharehash(lat,lng);
 							},
 							postPostionSuccess:function(data,lat,lng){
 								var darwin = new Gmap.LatLng(lat,lng); //设置新的地图中心点
@@ -206,7 +205,8 @@
 									url:action,
 									type:'GET',
 									success:function(data){
-										_fn.postPostionSuccess(data,lat,lng)
+										_fn.postPostionSuccess(data,lat,lng);
+										that._sharehash(lat,lng);
 									},
 									error:_fn.postPostionError
 								});
