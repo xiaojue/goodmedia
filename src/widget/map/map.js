@@ -344,20 +344,20 @@
 				G.tools.overlay.close();
 			});
 			
-			//搜索更新
+			//搜索之后的更新动作
 			$('#J_SqSub').live('click', function() {
-				var diget=$(this).attr('data-diget');
-				var map=new G.widget.map({
-					q:$('#J_Sq').val(),
-					markerhtml:'拽我，拽我，确定准确的位置~',
-					target:'J_Map_'+diget,
-					width:600,
-					height:500,
-					bar:false,
-					drag:true,
-					name:that.name,
-					siteNo:that.siteNo
-				}).init();
+				var diget=$(this).attr('data-diget'),
+					map=new G.widget.map({
+						q:$('#J_Sq').val(),
+						markerhtml:'拽我，拽我，确定准确的位置~',
+						target:'J_Map_'+diget,
+						width:600,
+						height:500,
+						bar:false,
+						drag:true,
+						name:that.name,
+						siteNo:that.siteNo
+					}).init();
 			});
 			
 			//修改坐标
