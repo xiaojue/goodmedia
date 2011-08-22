@@ -142,6 +142,7 @@
 									darwin = new Gmap.LatLng(lat,lng);	
 								marker.setPosition(darwin);
 								_fn.postPostion(marker);
+								that._sharehash(lat,lng);
 							},
 							postPostionSuccess:function(data,lat,lng){
 								var darwin = new Gmap.LatLng(lat,lng); //设置新的地图中心点
@@ -170,7 +171,7 @@
 										fillOpacity:0.0,
 										map:map,
 										strokeWeight:1,
-										radius:3500,
+										radius:3200,
 										center:marker.getPosition()
 									});
 									
@@ -186,13 +187,13 @@
 							//坐标10次连续错误，说明网络确实不行……
 							postPostionError:function(){
 								errortime++;
-								if(errortime==10) {
+								if(errortime==3) {
 									alert('连续请求失败,建议重新刷新页面');
 									return;
 								}
 								setTimeout(function(){
 									_fn.postPostion(marker)
-								},200);
+								},1000);
 							},
 							//发送当前坐标到搜索api，返回周边场馆
 							postPostion:function(m){
@@ -278,14 +279,26 @@
 		_Initerror:function(target){
 			target.parentNode.removeChild(target);
 		},
+		//为了便于分享,实时更改hash值,来标记坐标
+		_sharehash:function(lat,lng){
+			var that=this;
+			W.location.hash='lat='+lat+'&lng='+lng;
+		},
 		//初始化地图
 		init: function() {
 			
 			var that=this,
-				target=document.getElementById(that.target);
+				target=document.getElementById(that.target),
+				hashval=W.location.hash.slice(1),
+				Initlatlng=$.analyse(hashval);
 				
 			//加载相关css
 			that._loadcss();
+			
+			//如果hash里存在经纬度，则根据url里的经纬来初始化
+			if(Initlatlng['lat'] && Initlatlng['lng']){
+				that.center=[Initlatlng['lng'],Initlatlng['lat']] //这是反的……
+			}
 
 			//不给坐标的情况下，给关键字q，自己搜索绘制
 			if(!that.center) {

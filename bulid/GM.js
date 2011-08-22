@@ -216,10 +216,16 @@
 
 			},
 			//拖拽
-			_drag:function(callstart,callend){
+			_drag:function(){
+				var that=this;
+				//存放自定义事件
+				if(that.dragstart) that.dragstart();
 				
+				
+				
+				if(that.dragend) that.dragend();
 			},
-			//遮罩
+			//遮罩+拖拽把手
 			_cover:function(){
 
 				var that=this,config=that.config,
@@ -238,6 +244,11 @@
 		                "filter:alpha(opacity=0);" +
 		                "z-index:-1;'>");
 		            cover.find('iframe').css('height',cover.height());
+		        }
+		        
+		        if(that.drag){
+		        	
+		        	that._drag();
 		        }
 
 		        that._fixScroll();
@@ -507,13 +518,25 @@
 	                }
 	                return (o[name] === undefined) ? '' : o[name];
 	            });				
+			},
+			//传入xx=oo&aa=bb，返回相应object
+			analyse:function(str){
+				var str=$.trim(str);
+				if(str=="" || !str) return {};
+				var tempary=str.split('&'),i,returnobj={};
+					for(i=0;i<tempary.length;i++){
+						var data=tempary[i].split('=');
+						returnobj[data[0]]=data[1];
+					}
+				return returnobj;
 			}
 		}
 	}();
 	
 	//扩展到jquery对象上
 	$.extend({
-		substitute:temp.substitute
+		substitute:temp.substitute,
+		analyse:temp.analyse
 	});
 	
 })(window,GM,jQuery);

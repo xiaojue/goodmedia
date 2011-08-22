@@ -871,7 +871,7 @@ _width:400px;}
 .Rank_title{font-size:18px;color:#78a000;margin:2px 0px 13px 8px;}
 .frist{padding:0 10px 15px 10px;border-bottom:1px dashed #bcbcbc;}
 .frist_left{float:left;color:#f39800;font-size:18px;}.frist_left img{margin:0 12px;padding:1px;border:1px solid #cccccc;}
-.frist_right{float:left;margin-top:-10px;}.frist_right span{display:block;margin:3px 0;}
+.frist_right{float:left;margin-top:-10px;word-wrap: break-word; word-break: normal;width:180px;}.frist_right span{display:block;margin:3px 0;}
 .Rank_rcont .list{width:284px;margin:8px auto;}.Rank_rcont .list img{vertical-align:middle;margin:0 10px;}
 .list span{float:right;}
 /*我的教练 Coach_myIndex.html*/

@@ -16,13 +16,25 @@
 	                }
 	                return (o[name] === undefined) ? '' : o[name];
 	            });				
+			},
+			//传入xx=oo&aa=bb，返回相应object
+			analyse:function(str){
+				var str=$.trim(str);
+				if(str=="" || !str) return {};
+				var tempary=str.split('&'),i,returnobj={};
+					for(i=0;i<tempary.length;i++){
+						var data=tempary[i].split('=');
+						returnobj[data[0]]=data[1];
+					}
+				return returnobj;
 			}
 		}
 	}();
 	
 	//扩展到jquery对象上
 	$.extend({
-		substitute:temp.substitute
+		substitute:temp.substitute,
+		analyse:temp.analyse
 	});
 	
 })(window,GM,jQuery);
