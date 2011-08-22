@@ -1,4 +1,157 @@
 /**
  * @author fuqiang[designsor@gmail.com]
  * @date 20110822
+ * map.css 相关模板的css样式
  */
+
+.map_bar{
+	margin: 5px 0px;
+	width:210px;
+	padding:0px;
+}
+
+.map_bar li{
+	float: left;
+	display: block;
+	margin: 0px 10px;
+	line-height:14px;
+	font-size:12px;
+}
+
+.map_bar li a{
+	color:#4077C7;
+}
+
+.emersion{
+	position:relative;
+	border:#ccc solid 2px;
+	background:#fff;
+}
+
+.error{
+	width:200px;
+	height:200px;
+}
+
+.bigmap{
+	width:500px;
+	height:500px;
+}
+
+.lookway{
+	width:300px;
+	height:100px;
+}
+
+.edit{
+	width:600px;
+	height:500px;
+}
+
+.lookway form{
+	padding: 10px; 
+	text-align: center;
+}
+
+.error .msg{
+	margin-top:80px;
+	font-size:12px;
+	color:red;
+	text-align:center;
+}
+
+.mapclose{
+	position:absolute;
+	right:-10px;
+	top:-10px;
+	display:block;
+	width:15px;
+	height:15px;
+	background:#000;
+	color:#fff;
+	line-height:15px;
+	text-align:center;
+}
+
+.lookway_title{
+	color:#78A000; 
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.lookway_content{
+	margin: 10px 0px;
+}
+
+
+
+.lookway_content span{
+	margin-right: 10px;
+	font-size:12px;
+}
+
+.editbox{
+	background:#fff;
+	width:150px;
+	height:140px;
+	padding:10px;
+	position:absolute;
+	left:-180px;
+	top:150px;
+	border:#ccc solid 1px;
+}
+
+#J_Coord{
+	color:red;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

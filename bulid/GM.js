@@ -34,8 +34,13 @@
 		return base;
 	}();
 	
+	GM.widget.host=GM.host + 'widget/';
+	GM.apps.host=GM.host + 'apps/';
+	
 	if(GM.debug){
 		GM.host='http://172.16.2.215/gm/bulid/';
+		GM.widget.host=locality(GM.host) + 'widget/';
+		GM.apps.host=locality(GM.host) + 'apps/';
 		$(function(){
 				$('a').each(function(){
 					var href=$(this).attr('href');
@@ -44,9 +49,6 @@
 		});
 	}
 	
-	GM.widget.host=GM.host + 'widget/';
-	GM.apps.host=GM.host + 'apps/';
-
 	//转换到本地非压缩路径
 	function locality(uri){
 		return uri.replace('bulid','src').replace('-min','');
