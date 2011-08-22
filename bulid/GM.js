@@ -33,7 +33,7 @@
 		}
 		return base;
 	}();
-
+	
 	if(GM.debug){
 		GM.host='http://172.16.2.215/gm/bulid/';
 		$(function(){
@@ -43,6 +43,9 @@
 				});
 		});
 	}
+	
+	GM.widget.host=GM.host + 'widget/';
+	GM.apps.host=GM.host + 'apps/';
 
 	//转换到本地非压缩路径
 	function locality(uri){
@@ -55,7 +58,7 @@
 		if(GM.debug) appuri=locality(appuri);
 		$(function(){
 			$.getScript(appuri,function(){
-				if(callback) callback(GM.apps[appname]['exports'])
+				if(callback) callback(GM.apps[appname]['exports']);
 			});
 		});
 	}
@@ -77,6 +80,7 @@
 			});
 		});
 	}
+	
 	//debug 模式下开启debug.js并且初始化debug面板
 	if(GM.debug){
 		GM.widget.use('debug',function(widget){
@@ -578,6 +582,27 @@
 	});
 	
 })(window,GM,jQuery);
+/**
+ * @author fuqiang[designsor@gmail.com]
+ * @date 20110822
+ * 补充jquery不能loadcss
+ */
+(function(W,$){
+	
+	var loadcss=function(file){
+		var link=$('<link>').attr({
+					type:'text/css',
+					rel:'stylesheet',
+					href:file
+				});
+		$('head').prepend(link);
+	}
+	
+	$.extend({
+		loadcss:loadcss
+	})
+	
+})(window,jQuery);
 /**
  * @author fuqiang
  * @date 20110726
