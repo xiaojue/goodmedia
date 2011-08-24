@@ -121,16 +121,6 @@
 				if(callback) callback($('#'+config.coverId),$('#'+config.wrapId));
 
 			},
-			//拖拽
-			_drag:function(){
-				var that=this;
-				//存放自定义事件
-				if(that.dragstart) that.dragstart();
-				
-				
-				
-				if(that.dragend) that.dragend();
-			},
 			//遮罩+拖拽把手
 			_cover:function(){
 
@@ -152,11 +142,6 @@
 		            cover.find('iframe').css('height',cover.height());
 		        }
 		        
-		        if(that.drag){
-		        	
-		        	that._drag();
-		        }
-
 		        that._fixScroll();
 
 			},

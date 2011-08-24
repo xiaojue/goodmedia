@@ -31,6 +31,12 @@
 		$(function(){
 			$.fixpng24(); //修复ie6 png24
 			doc.execCommand("BackgroundImageCache", false, true); //修复ie6 不缓存背景图
+			//一天提醒一次
+			if(!$.cookie('ie6tips') || $.cookie('ie6tips')!=1){
+				G.apps.require('ie6tips',function(exports){
+					exports.init();
+				});
+			}
 		});
 	};
        

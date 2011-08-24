@@ -306,6 +306,7 @@ var inst = X.use('Dlg', {
             Inputor : this.jqInputor,
             autoRender : true
         });
+        alert('ready');
     },
     
     onInputorKeyup : function(e){

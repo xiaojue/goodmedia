@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>add style</title>
+		<script src="../../jquery/jquery-1.6.2.js" charset=”utf-8″></script>
+	</head>
+	
+	<body>
+		<div class="abc" style="cursor:crosshair">12</div>
+		<script>
+		var style=$('<div>').html('<style>.abc{color:red;}</style>');
+		$('body').prepend(style);
+	
+		</script>
+	</body>
+</html>

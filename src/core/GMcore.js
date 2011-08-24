@@ -34,30 +34,24 @@
 		return base;
 	}();
 	
+	//转换到本地非压缩路径
+	GM.locality=function(uri){
+		return uri.replace('bulid','src').replace('-min','');
+	}
+	
 	GM.widget.host=GM.host + 'widget/';
 	GM.apps.host=GM.host + 'apps/';
 	
 	if(GM.debug){
 		GM.host='http://172.16.2.215/gm/bulid/';
-		GM.widget.host=locality(GM.host) + 'widget/';
-		GM.apps.host=locality(GM.host) + 'apps/';
-		$(function(){
-				$('a').each(function(){
-					var href=$(this).attr('href');
-						$(this).attr('href',href+'&debug');
-				});
-		});
+		GM.widget.host=GM.locality(GM.host) + 'widget/';
+		GM.apps.host=GM.locality(GM.host) + 'apps/';
 	}
-	
-	//转换到本地非压缩路径
-	function locality(uri){
-		return uri.replace('bulid','src').replace('-min','');
-	} 
 	
 	//额外加载项目文件 - 项目文件目前依赖关系依靠ant维护
 	GM.apps.require=function(appname,callback){
 		var appuri = GM.host + 'apps/'+appname+'/'+appname+'-min.js';
-		if(GM.debug) appuri=locality(appuri);
+		if(GM.debug) appuri=GM.locality(appuri);
 		$(function(){
 			$.getScript(appuri,function(){
 				if(callback) callback(GM.apps[appname]['exports']);
@@ -74,7 +68,7 @@
 			return;
 		} 
 		var widgeturi = GM.host + 'widget/'+widget+'/'+widget+'-min.js';
-		if(GM.debug) widgeturi=locality(widgeturi);
+		if(GM.debug) widgeturi=GM.locality(widgeturi);
 		$(function(){
 			$.getScript(widgeturi,function(){
 				GM.widget.usemap[widget]=widgeturi;

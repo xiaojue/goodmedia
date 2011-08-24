@@ -72,7 +72,12 @@
 						
 						var GMTask=$.cookie(this.parameter['uid']),
 							
-							ishashTips=/^NoTips$/.test(W.location.search.slice(1));
+							ishashTips=/^NoTips$/.test(W.location.search.slice(1)),
+							isopen=/^opendiv$/.test(W.location.hash.slice(1))
+							
+							if(isopen){
+								if(toggle) toggle('div1');
+							}
 							
 						if(!GMTask && (!ishashTips || todo=="step3finish")){ //如果不存在cookie，并且没有notips或者有notips但是是第三步的时候
 							if($.cookie(this.parameter['uid']+'over')==1) return; //如果第三步也点了确定
@@ -89,7 +94,6 @@
 										"<div class='title'>嗨，{username}你好，欢迎加入动米网。</div>"+
 										"<p>动米网是一个汇聚了天南海北的健身爱好者的交流社区，<br>动米网不光能汇聚健身好友，<br>还有很多专业、好玩的功能。<br>"+
 										"让{coachname}带你一起来了解我们吧！<br>"+
-										"完成下面的三个任务，就能获得积分呦~~ ^_^</p>"+
 										"</div></div>"+
 										"<div class='task_but'>"+
 										'<input type="checkbox" id="J_GMTask">以后不在弹出'+
@@ -105,8 +109,7 @@
 								         '<p>不知道我称呼您为先生呢？还是女士？</p>'+
 								         '<p>您平时喜欢什么健身项目？在家健身还是去健身场所</p>'+
 								         '<p>您和朋友一起去散步？还是找私人健身教练指定一套健身方案？</p>'+
-								         '<p>第一个任务：<span class="blue">完善您的健身信息</span></p>'+
-								         '<p>别忘了告诉我您性别</p>',
+								         '<p><span class="blue">完善健身信息</span>让有同样爱好的朋友能轻松找到你。</p>',
 									foot='<a href="#" class="blue J_OverlayClose">谢谢，自己玩...</a>'+
 										 '<a class="task_button" href="{todourl}" style="display:inline-block;text-decoration:none;_display:inline;zoom:1;">做任务</a>';
 										 
@@ -118,8 +121,8 @@
 								}
 								var left='<img src="{coachpic}"><span>{coachname}</span>',
 									right='<div class="green">亲爱的{username}</div>'+
-										 '<p>恭喜你完成了第一个任务！</p>'+
-										 '<p class="yellow">已获得了{rice}大米</p>',
+										 '<p>感谢你填写的健身信息，<span class="yellow">我们送你{rice}大米！</span></p>'+
+										 '<p>大米是动米网的积分，随着动米网的成长，我们将提供大米换礼功能。</p>',
 								         //'<p class="green">并且获得我们为您准备的{food}食物</p>',
 									foot='<a href="#" class="blue J_OverlayClose">谢谢，自己玩...</a>'+
 										 '<a class="task_button" href="#" style="display:inline-block;text-decoration:none;_display:inline;zoom:1;" id="J_Todo2">下一个任务</a>';
@@ -130,9 +133,9 @@
 								var left='<img src="{coachpic}"><span>{coachname}</span>',
 									right='<div class="green">亲爱的{username}</div>'+
 								         '<p>你有私人教练吗？你有一套属于自己的健身方案吗？</p>'+
-										 '<p>快来申请，一个属于你自己的健身方案吧。</p>'+
-										 '<p>第二个任务：<span class="blue">申请健身方案</span></p>'+
-										 '<p>健身方案的申请可以发给我们的教练团哦，看看教练团会给你什么建议吧^_^</p>',
+										 '<p>输入身高、体重及你的目标，就能立刻得到一个属于你自己的健身方案。</p>'+
+										 '<p><span class="blue">申请健身方案</span>看看哪些动作可以帮你实现健身目标。</p>'+
+										 '<p>也可以把你的健身申请发给动米网教练团，与教练一对一沟通。</p>',
 									foot='<a href="#" class="blue J_OverlayClose">谢谢，自己玩...</a>'+
 										 '<a class="task_button" href="{todourl}" style="display:inline-block;text-decoration:none;_display:inline;zoom:1;">做任务</a>';
 									 
@@ -144,8 +147,9 @@
 								}
 								var left='<img src="{coachpic}"><span>{coachname}</span>',
 									right='<div class="green">亲爱的{username}</div>'+
-										 '<p>恭喜你完成了第二个任务！</p>'+
-										 '<p class="yellow">已获得了{rice}大米</p>',
+										 '<p>恭喜你申请到一个属于自己的健身方案，<span class="yellow">并且获得了{rice}大米。</span></p>'+
+										 '<p style="font-size:12px;color:#666;">请在按方案健身时穿合脚的运动鞋，柔软易吸汗的衣服。如方案中有需要进行躺、卧、跪等动作要求时，请准备一个瑜伽垫或不影响运动的防滑的薄垫子，以避免身体受损。</p>'+
+										 '<p style="font-size:12px;color:#666;">友情提示：此方案仅供参考，请根据自身实际情况量力而行。动米网建议您去健身会所，让有资质的健身教练为您调整方案，以达到最佳健身效果。</p>',
 								         //'<p class="green">距离兑换{food}食物还差{gap}大米</p>',
 									foot='<a href="#" class="blue J_OverlayClose">谢谢，自己玩...</a>'+
 										 '<a class="task_button" href="#" style="display:inline-block;text-decoration:none;_display:inline;zoom:1;" id="J_Todo3">下一个任务</a>';
@@ -155,9 +159,8 @@
 							'step3':function(){
 								var left='<img src="{coachpic}"><span>{coachname}</span>',
 									right='<div class="green">亲爱的{username}</div>'+
-										 '<p>最后一个任务最简单！</p>'+
-										 '<p>绑定你的新浪微博账号吧，让动米网和新浪同时分享你的日记、健身方案、照片……</p>'+
-										 '<p>第三个任务：<span class="blue">绑定你得新浪微博账号</span></p>',
+										 '<p>申请的健身方案自己练？没意思！</p>'+
+										 '<p><span class="blue">绑定新浪微博</span>分享给好友，大家一起练吧！</p>',
 									foot='<a href="#" class="blue J_OverlayClose">谢谢，自己玩...</a>'+
 										 '<a class="task_button" href="{todourl}" style="display:inline-block;text-decoration:none;_display:inline;zoom:1;">做任务</a>';
 								
@@ -166,11 +169,11 @@
 							'step3finish':function(){
 								var left='<img src="{coachpic}"><span>{coachname}</span>',
 									right='<div class="green">亲爱的{username}</div>'+
-										 '<p>动米网的三个任务你已全部完成！</p>'+
-								         '<p class="yellow">共累计获得了{rice}分。</p>',
+										 '<p>绑定新浪微博成功！<span class="yellow">你轻松带走了{rice}大米。</span></p>'+
+								         '<p>来看看你一共得到了多少大米吧！也许你已经是“地主”喽~~~</p>',
 								         //'<p class="green">并且获得我们为您准备的{gift}礼物</p>',
 									foot='<a href="#" class="blue J_OverlayClose J_FinishTask">谢谢，自己玩...</a>'+
-										 '<a class="task_button J_OverlayClose J_FinishTask" href="javascript:void(0)" style="display:inline-block;text-decoration:none;_display:inline;zoom:1;">完成</a>';
+										 '<a class="task_button J_OverlayClose J_FinishTask" href="/user/dami.jsp" target="_self" style="display:inline-block;text-decoration:none;_display:inline;zoom:1;">完成</a>';
 								return tempTwo(left,right,foot);
 							}
 						};

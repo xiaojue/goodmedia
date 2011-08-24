@@ -34,30 +34,24 @@
 		return base;
 	}();
 	
+	//转换到本地非压缩路径
+	GM.locality=function(uri){
+		return uri.replace('bulid','src').replace('-min','');
+	}
+	
 	GM.widget.host=GM.host + 'widget/';
 	GM.apps.host=GM.host + 'apps/';
 	
 	if(GM.debug){
 		GM.host='http://172.16.2.215/gm/bulid/';
-		GM.widget.host=locality(GM.host) + 'widget/';
-		GM.apps.host=locality(GM.host) + 'apps/';
-		$(function(){
-				$('a').each(function(){
-					var href=$(this).attr('href');
-						$(this).attr('href',href+'&debug');
-				});
-		});
+		GM.widget.host=GM.locality(GM.host) + 'widget/';
+		GM.apps.host=GM.locality(GM.host) + 'apps/';
 	}
-	
-	//转换到本地非压缩路径
-	function locality(uri){
-		return uri.replace('bulid','src').replace('-min','');
-	} 
 	
 	//额外加载项目文件 - 项目文件目前依赖关系依靠ant维护
 	GM.apps.require=function(appname,callback){
 		var appuri = GM.host + 'apps/'+appname+'/'+appname+'-min.js';
-		if(GM.debug) appuri=locality(appuri);
+		if(GM.debug) appuri=GM.locality(appuri);
 		$(function(){
 			$.getScript(appuri,function(){
 				if(callback) callback(GM.apps[appname]['exports']);
@@ -74,7 +68,7 @@
 			return;
 		} 
 		var widgeturi = GM.host + 'widget/'+widget+'/'+widget+'-min.js';
-		if(GM.debug) widgeturi=locality(widgeturi);
+		if(GM.debug) widgeturi=GM.locality(widgeturi);
 		$(function(){
 			$.getScript(widgeturi,function(){
 				GM.widget.usemap[widget]=widgeturi;
@@ -215,16 +209,6 @@
 				if(callback) callback($('#'+config.coverId),$('#'+config.wrapId));
 
 			},
-			//拖拽
-			_drag:function(){
-				var that=this;
-				//存放自定义事件
-				if(that.dragstart) that.dragstart();
-				
-				
-				
-				if(that.dragend) that.dragend();
-			},
 			//遮罩+拖拽把手
 			_cover:function(){
 
@@ -246,11 +230,6 @@
 		            cover.find('iframe').css('height',cover.height());
 		        }
 		        
-		        if(that.drag){
-		        	
-		        	that._drag();
-		        }
-
 		        that._fixScroll();
 
 			},
@@ -612,22 +591,94 @@
  * @date 20110822
  * 补充jquery不能loadcss
  */
-(function(W,$){
-	
+(function(W,$,doc){
+	//加载css
 	var loadcss=function(file){
+		if(GM.debug) file=GM.locality(file);
 		var link=$('<link>').attr({
 					type:'text/css',
 					rel:'stylesheet',
-					href:file
+					href:file+'?t='+new Date().valueOf()+'.css'
 				});
 		$('head').prepend(link);
 	}
 	
+	//增加style行内样式
+	var insertstyle=function(name,value){
+		
+	}
+	
 	$.extend({
-		loadcss:loadcss
+		loadcss:loadcss,
+		insertstyle:insertstyle
 	})
 	
-})(window,jQuery);
+})(window,jQuery,document);
+/**
+ * 修复ie6的一些bug
+ */
+(function(W,G,$,doc){
+	
+	//修复png24不透明
+	var fixpng24=function() {
+		$('img').each(function(){
+			var imgName = this.src.toUpperCase();
+            if (imgName.substring(imgName.length - 3, imgName.length) == "PNG") {
+            	var $img=$('<span>').css({
+					width: this.offsetWidth,
+	                height: this.offsetHeight,
+	                display:'inline-block',
+	                cursor:(this.parentElement.href) ? 'hand' : ''
+				}).attr({
+					'title':this.alt || this.title || '',
+					'class':this.className
+				});						
+	            $img[0].style.filter = 'progid:DXImageTransform.Microsoft.AlphaImageLoader(src="'+this.src+'", sizingMethod="scale")';                        
+	            $(this).replaceWith($img);
+            }
+		});	          
+    };
+    
+    $.extend({
+		fixpng24:fixpng24
+	});
+	
+	if($.browser.msie && $.browser.version==6){
+		$(function(){
+			$.fixpng24(); //修复ie6 png24
+			doc.execCommand("BackgroundImageCache", false, true); //修复ie6 不缓存背景图
+			//一天提醒一次
+			if(!$.cookie('ie6tips') || $.cookie('ie6tips')!=1){
+				G.apps.require('ie6tips',function(exports){
+					exports.init();
+				});
+			}
+		});
+	};
+       
+})(window,GM,jQuery,document);
+/**
+ * @author fuqiang [designsor@gmail.com]
+ * @date 20110819
+ * 全局的console对象，对其扩展之后，拥有自带调试的走自带，没有的，则返回空
+ * 避免调试代码污染  方便进行调试的开发模式
+ */
+(function(W,G,$){
+	
+	if(!W.console){
+		W.console={}
+		var method=['log','debug','info','warn','exception','assert','dir','dirxml','trace','group','groupEnd','groupCollapsed','time','timeEnd','profile','profileEnd','count','clear','table','error','notifyFirebug','firebug','userObjects'];
+			options=function(){
+				var i,options={};
+				for(i=0;i<method.length;i++){
+					options[method[i]]==$.noop;
+				}
+			}();
+			
+		$.extend(W.console,options);
+	};
+	
+})(window,GM,jQuery);
 /**
  * @author fuqiang
  * @date 20110726

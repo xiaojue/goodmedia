@@ -21,6 +21,7 @@
 					init:function(){
 						var that=this;
 						$(function(){
+								/*
 								var temp=that.reset(debugHtml),T;
 								$('body').append(temp);
 								
@@ -30,6 +31,7 @@
 								});
 								
 								T=setInterval(function(){that.resetdebug()},800);
+								*/
 						});
 					},
 					get:function(tag){

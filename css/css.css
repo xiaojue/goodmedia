@@ -12,8 +12,17 @@ body{font-size:12px;font-family:Arial, Helvetica, sans-serif;background:#eaeaea 
 .logo{float:left;margin:20px 0 0 15px;}.logo img{width:294px;height:99px;}
 .login,.members_login{float:right;margin:75px 10px 0 0;}.login a{color:#fff;margin-left:4px;}
 .members_login1{text-align:right;}
-.members_login2{text-align:right;background:url("http://s1.ifiter.com/static/images/members_loginbg.png") no-repeat right bottom;height:25px;line-height:25px;margin-top:5px;padding-right:10px;position:relative;
-_width:400px;}
+.members_login2{
+	text-align:right;
+	background:url("http://s1.ifiter.com/static/images/members_loginbg.png") no-repeat right bottom;
+	height:25px;
+	line-height:25px;
+	margin-top:5px;
+	padding-right:10px;
+	position:relative;
+	_display:inline;
+	_zoom:1;
+}
 .members_login2 span{position:absolute;left:-99px;top:0;}
 .members_login2 span a{color:#fff;margin:0 7px 0 0;}.members_login2 span img{vertical-align:top;}
 .members_login{position:relative;}
@@ -268,13 +277,13 @@ _width:400px;}
 .calendar_txt ul li .active{background:#b3dd80;}
 .calendar_txt ul li .date{background:url(http://s1.ifiter.com/static/images/calendar_datebg.gif) no-repeat 50% 50%;}
 
-.recipes{background:url(http://s1.ifiter.com/static/images/recipes_img1.jpg) no-repeat right top;margin:2px 0px 10px 10px;}
-.recipes0{background:url(http://s1.ifiter.com/static/images/recipes_img3.jpg) no-repeat right top;margin:2px 0px 10px 10px;}
-.recipes1{background:url(http://s1.ifiter.com/static/images/recipes_img2.jpg) no-repeat right top;margin:2px 0px 10px 10px;}
-.recipes2{background:url(http://s1.ifiter.com/static/images/recipes_img3.jpg) no-repeat right top;margin:2px 0px 10px 10px;}
-.recipes3{background:url(http://s1.ifiter.com/static/images/recipes_img3.jpg) no-repeat right top;margin:2px 0px 10px 10px;}
+.recipes{_width:340px;background:url(http://s1.ifiter.com/static/images/recipes_img1.jpg) no-repeat right top;margin:2px 0px 10px 10px;}
+.recipes0{_width:340px;background:url(http://s1.ifiter.com/static/images/recipes_img3.jpg) no-repeat right top;margin:2px 0px 10px 10px;}
+.recipes1{_width:340px;background:url(http://s1.ifiter.com/static/images/recipes_img2.jpg) no-repeat right top;margin:2px 0px 10px 10px;}
+.recipes2{_width:340px;background:url(http://s1.ifiter.com/static/images/recipes_img3.jpg) no-repeat right top;margin:2px 0px 10px 10px;}
+.recipes3{_width:340px;background:url(http://s1.ifiter.com/static/images/recipes_img3.jpg) no-repeat right top;margin:2px 0px 10px 10px;}
 .recipes img,.recipes0 img,.recipes1 img,.recipes2 img,.recipes3 img{float:left;padding:5px;border:1px solid #cacaca;margin:10px 10px 0 0;width:152px;}
-.recipes_txt{float:left;width:156px;margin-top:5px;}
+.recipes_txt{float:left;width:156px;margin-top:5px;background:transparent;}
 .recipes_txt span{display:block;font-weight:bold;font-size:14px;margin-bottom:5px;overflow:hidden;width:90px;height:40px;}
 
 
@@ -376,7 +385,7 @@ _width:400px;}
 .Application2{display:block;float:right;background:url(http://s1.ifiter.com/static/images/Application_bg2.gif);width:139px;height:21px;line-height:21px;color:#e75903;text-align:center;}
 
 /*��������*/
-.prowu{width:567px;margin:auto;padding:50px 0;}
+.prowu{width:567px;margin:auto;padding:20px 0;}
 /*��Ƭǽ*/
 .space{margin:40px 23px 0px;}
 .space_btn{text-align:right;margin:35px 23px 20px 0px;}
@@ -517,7 +526,7 @@ _width:400px;}
 .cafe_right{float:left;width:360px;}
 .cafe_title{margin:15px 0px 15px;}
 .cafe_title span{font-size:18px;margin-right:12px;}
-.cafe_txt{margin-bottom:20px;}
+.cafe_txt{margin-bottom:10px;}
 
 .cafe_bottom .blue{float:right;}
 .cafe_bottom .xian{margin:0 15px;}
@@ -1045,19 +1054,28 @@ _width:400px;}
 .text_wrap{width:800px;margin:auto;}
 .text_logo{margin:107px 0 2px 107px;}
 .text_cont{background:url("http://s1.ifiter.com/static/images/texting/text_cbg.png");width:620px;height:345px;margin-left:100px;position:relative;}
+.text_cont1{background:url("http://s1.ifiter.com/static/images/texting/text_cbg1.png");width:620px;height:407px;margin-left:100px;position:relative;}
 .text_title{position:absolute;top:35px;left:30px;}
-.text_content{width:477px;margin:30px auto 0;}
+.text_content{width:477px;margin:30px auto 0;}.text_content1{width:495px;margin:30px auto 0;}
 .interest{margin-bottom:10px;}
 .interest_left1{float:left;}.interest img{vertical-align:middle;}.interest input[type="radio"]{margin:0px 5px 0 10px;}
 .text_box{background:url("http://s1.ifiter.com/static/images/texting/border.gif") no-repeat;width:178px;height:47px;border:0px;line-height:47px;text-indent:10px;}
 .text_but{text-align:center;}.text_btn{background:url("http://s1.ifiter.com/static/images/texting/but_bg.gif");width:120px;height:30px;line-height:30px;color:#fff;font-size:18px;border:0px;cursor:pointer;}
+.text_but1{text-align:right;margin-top:10px;}
 
 .interest_right{float:right;background:url("http://s1.ifiter.com/static/images/texting/comments_bg.gif");width:157px;height:33px;line-height:33px;text-align:center;color:#f00;}
 
 .text_title1{position:absolute;top:35px;right:30px;}
-.text_editor{margin:8px 0;}
-.text_editor textarea{border:1px solid #c5c5c5;height:58px;width:100%;padding:5px;color:#787878;font-size:12px;}
+.text_head{margin-top:40px;}
+.text_editor{margin:5px 0;}
+.text_editor textarea{border:1px solid #c5c5c5;height:60px;width:100%;padding:5px;color:#787878;font-size:12px;margin-top:2px;}
 .text_editor1{margin-bottom:5px;}.text_editor1 span{margin:0px 5px;}
+.text_headl{float:left;margin-right:5px;}.text_headl img{border:1px solid #d1d1d1;padding:2px;}
+.text_headr{float:right;width:310px;margin-top:70px;}.text_headr{font-size:24px;}.text_headr .red{font-size:18px;line-height:32px;}
+
+.text_return{margin-top:150px;}
+.text_title2{position:absolute;top:35px;left:30px;}
+.text_but2{margin-bottom:30px;text-align:center;font-size:14px;}
 
 /*万里行专题 priject.html*/
 .pro_body{font-size:12px;font-family:Arial, Helvetica, sans-serif;background:#fff url("http://s1.ifiter.com/static/images/bg.gif") no-repeat top;color:#444444;}
@@ -1156,3 +1174,10 @@ _width:400px;}
 .recom_img img{width:94px;height:126px;padding:4px;border:1px solid #cacaca;}
 .recom_text{float:right;width:150px;margin:0 8px;}
 .recom_text span{display:block;margin-bottom:10px;}
+/*8-24用户关注*/
+.attention{display:block;width:54px;height:21px;background:url("http://s1.ifiter.com/static/images/skin_bg.png") 0 -40px}
+.attention:hover{display:block;width:54px;height:21px;background:url("http://s1.ifiter.com/static/images/skin_bg.png") -72px -40px;}
+.attention1{width:54px;height:21px;background:url("http://s1.ifiter.com/static/images/skin_bg.png") -144px -40px;}
+
+.interest_lefts{float:left;width:135px;margin-bottom:10px;}
+.interest3{float:left;width:70px;margin-left:10px;word-wrap:break-word;word-break:normal;}
