@@ -1,7 +1,7 @@
 /**
- * @author fuqiang [designsor@gmail.com]
- * @date 20110807
- * 动米网任务浮出层管理
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110807
+ * @fileoverview 动米网任务浮出层管理
  */
 (function(W,G){
 

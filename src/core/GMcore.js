@@ -1,10 +1,12 @@
 /**
- * @author fuqiang [designsor@gmail.com]
- * @date 20110726
- * 基于jquery1.6.2
- * Goodmedia前端js库core文件，负责创建GM对象和构建命名空间
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110726
+ * @fileoverview Goodmedia前端js库core文件，负责创建GM对象和构建命名空间 基于jquery1.6.2
  */
 (function(W,doc,$){
+	/**
+	 * @namespace GM
+	 */
 	if(!W.GM) var GM={};
 	
 	//与业务紧密相关的-挂件
@@ -28,7 +30,7 @@
 			var src=scripts[i].src,
 					namereg=/(GM-min|GM).js/;
 			if(namereg.test(src)){
-				base=src.slice(0,src.lastIndexOf('/')+1)
+				base=src.slice(0,src.lastIndexOf('/')+1);
 			}
 		}
 		return base;

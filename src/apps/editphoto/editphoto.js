@@ -1,7 +1,7 @@
 /**
- * @author fuqiang [designsor@gmail.com]
- * @date 20110727
- * 照片墙编辑照片部分的交互应用
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110727
+ * @fileoverview 照片墙编辑照片部分的交互应用
  */
 (function(W,doc,$,G){
 	

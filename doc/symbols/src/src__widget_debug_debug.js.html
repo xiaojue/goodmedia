@@ -1,0 +1,70 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="COMM">/**
+<span class='line'>  2</span>  * @author fuqiang [designsor@gmail.com]
+<span class='line'>  3</span>  * @date 20110819
+<span class='line'>  4</span>  * debug模式下增加debug工具
+<span class='line'>  5</span>  * 应该包含统计，效率，测试等扩展面板
+<span class='line'>  6</span>  */</span><span class="WHIT">
+<span class='line'>  7</span> </span><span class="PUNC">(</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">W</span><span class="PUNC">,</span><span class="NAME">G</span><span class="PUNC">,</span><span class="NAME">$</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>  8</span> </span><span class="WHIT">	 </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">debug</span><span class="PUNC">=</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>  9</span> </span><span class="WHIT">	 		
+<span class='line'> 10</span> 		 </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">debugHtml</span><span class="PUNC">=</span><span class="STRN">'&lt;div id="J_GMDebug" style="z-index:1500;position:absolute;right:0px;top:0px;background:#fff;border:#ccc solid 1px;">'</span><span class="PUNC">+</span><span class="WHIT">
+<span class='line'> 11</span> </span><span class="WHIT">		 								</span><span class="STRN">'&lt;h3>debugbar&lt;/h3>'</span><span class="PUNC">+</span><span class="WHIT">
+<span class='line'> 12</span> </span><span class="WHIT">										</span><span class="STRN">'&lt;h4>js&lt;/h4>'</span><span class="PUNC">+</span><span class="WHIT">
+<span class='line'> 13</span> </span><span class="WHIT">										</span><span class="STRN">'&lt;p style="line-height:20px;">{js}&lt;/p>'</span><span class="PUNC">+</span><span class="WHIT">
+<span class='line'> 14</span> </span><span class="WHIT">										</span><span class="STRN">'&lt;h4>css&lt;/h4>'</span><span class="PUNC">+</span><span class="WHIT">
+<span class='line'> 15</span> </span><span class="WHIT">										</span><span class="STRN">'&lt;p style="line-height:20px;">{css}&lt;/p>'</span><span class="PUNC">+</span><span class="WHIT">
+<span class='line'> 16</span> </span><span class="WHIT">										</span><span class="STRN">'&lt;p>&lt;a class="J_DebugClose" href="javascript:void(0);">关闭&lt;/a>&lt;/p>'</span><span class="PUNC">+</span><span class="WHIT">
+<span class='line'> 17</span> </span><span class="WHIT">		 						</span><span class="STRN">'&lt;/div>'</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 18</span> 
+<span class='line'> 19</span> 
+<span class='line'> 20</span> </span><span class="WHIT">		 		</span><span class="KEYW">return</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 21</span> </span><span class="WHIT">					</span><span class="NAME">init</span><span class="PUNC">:</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 22</span> </span><span class="WHIT">						</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">that</span><span class="PUNC">=</span><span class="KEYW">this</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 23</span> </span><span class="WHIT">						</span><span class="NAME">$</span><span class="PUNC">(</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 24</span> </span><span class="WHIT">								</span><span class="COMM">/*
+<span class='line'> 25</span> 								var temp=that.reset(debugHtml),T;
+<span class='line'> 26</span> 								$('body').append(temp);
+<span class='line'> 27</span> 								
+<span class='line'> 28</span> 								$('.J_DebugClose').live('click',function(){
+<span class='line'> 29</span> 									$('#J_GMDebug').hide();
+<span class='line'> 30</span> 									clearInterval(T);
+<span class='line'> 31</span> 								});
+<span class='line'> 32</span> 								
+<span class='line'> 33</span> 								T=setInterval(function(){that.resetdebug()},800);
+<span class='line'> 34</span> 								*/</span><span class="WHIT">
+<span class='line'> 35</span> </span><span class="WHIT">						</span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 36</span> </span><span class="WHIT">					</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 37</span> </span><span class="WHIT">					</span><span class="NAME">get</span><span class="PUNC">:</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">tag</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 38</span> </span><span class="WHIT">						</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">returnval</span><span class="PUNC">=</span><span class="STRN">""</span><span class="PUNC">,</span><span class="NAME">tags</span><span class="PUNC">=</span><span class="NAME">document.getElementsByTagName</span><span class="PUNC">(</span><span class="NAME">tag</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 39</span> </span><span class="WHIT">							</span><span class="KEYW">for</span><span class="PUNC">(</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">i</span><span class="PUNC">=</span><span class="NUMB">0</span><span class="PUNC">;</span><span class="NAME">i</span><span class="PUNC">&lt;</span><span class="NAME">tags.length</span><span class="PUNC">;</span><span class="NAME">i</span><span class="PUNC">++</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 40</span> </span><span class="WHIT">								</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">tag</span><span class="PUNC">=</span><span class="NAME">tags</span><span class="PUNC">[</span><span class="NAME">i</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 41</span> </span><span class="WHIT">									</span><span class="NAME">src</span><span class="PUNC">=</span><span class="NAME">tag.src</span><span class="WHIT"> </span><span class="PUNC">||</span><span class="WHIT"> </span><span class="NAME">tag.href</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 42</span> </span><span class="WHIT">								</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">src</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="NAME">returnval</span><span class="WHIT"> </span><span class="PUNC">+</span><span class="PUNC">=</span><span class="WHIT"> </span><span class="STRN">'&lt;a href="'</span><span class="PUNC">+</span><span class="NAME">src</span><span class="PUNC">+</span><span class="STRN">'" style="width:300px;display:inline-block;overflow:hidden;height:20px;background:#eee;">'</span><span class="PUNC">+</span><span class="NAME">src</span><span class="PUNC">+</span><span class="STRN">'&lt;/a>&lt;br/>'</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 43</span> </span><span class="WHIT">							</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 44</span> </span><span class="WHIT">						</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">returnval</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 45</span> </span><span class="WHIT">					</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 46</span> </span><span class="WHIT">					</span><span class="NAME">reset</span><span class="PUNC">:</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">temp</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 47</span> </span><span class="WHIT">						</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">that</span><span class="PUNC">=</span><span class="KEYW">this</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 48</span> </span><span class="WHIT">						</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">$.substitute</span><span class="PUNC">(</span><span class="NAME">temp</span><span class="PUNC">,</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 49</span> </span><span class="WHIT">											</span><span class="NAME">js</span><span class="PUNC">:</span><span class="NAME">that.get</span><span class="PUNC">(</span><span class="STRN">'script'</span><span class="PUNC">)</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 50</span> </span><span class="WHIT">											</span><span class="NAME">css</span><span class="PUNC">:</span><span class="NAME">that.get</span><span class="PUNC">(</span><span class="STRN">'link'</span><span class="PUNC">)</span><span class="WHIT">
+<span class='line'> 51</span> </span><span class="WHIT">									</span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">	
+<span class='line'> 52</span> 					</span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'> 53</span> </span><span class="WHIT">					</span><span class="NAME">resetdebug</span><span class="PUNC">:</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 54</span> </span><span class="WHIT">						</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">that</span><span class="PUNC">=</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="NAME">str</span><span class="PUNC">=</span><span class="NAME">that.reset</span><span class="PUNC">(</span><span class="NAME">debugHtml</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 55</span> </span><span class="WHIT">						</span><span class="NAME">$</span><span class="PUNC">(</span><span class="STRN">'#J_GMDebug'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">html</span><span class="PUNC">(</span><span class="NAME">str</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 56</span> </span><span class="WHIT">					</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 57</span> </span><span class="WHIT">				</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 58</span> </span><span class="WHIT">		</span><span class="PUNC">}</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 59</span> </span><span class="WHIT">	
+<span class='line'> 60</span> 	 </span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">G</span><span class="WHIT"> </span><span class="PUNC">&&</span><span class="WHIT"> </span><span class="NAME">G.widget</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="NAME">G.widget.debug</span><span class="PUNC">=</span><span class="NAME">debug</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 61</span> </span><span class="WHIT">		
+<span class='line'> 62</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">(</span><span class="NAME">window</span><span class="PUNC">,</span><span class="NAME">GM</span><span class="PUNC">,</span><span class="NAME">jQuery</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 63</span> </span></pre></body></html>

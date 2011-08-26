@@ -276,7 +276,90 @@ body{font-size:12px;font-family:Arial, Helvetica, sans-serif;background:#eaeaea 
 .calendar_txt ul li a{display:block;float:left;width:24px;height:24px;text-decoration:none;margin:0 7px;text-align:center;}
 .calendar_txt ul li .active{background:#b3dd80;}
 .calendar_txt ul li .date{background:url(http://s1.ifiter.com/static/images/calendar_datebg.gif) no-repeat 50% 50%;}
+/*8-25日历修改*/
+.calendarDate{
+	background:#f1f1f1;
+	width:326px;
+	margin:10px auto;
+	overflow:hidden;
+	zoom:1;
+}
+.calender_bg{
+	background:url("http://s1.ifiter.com/static/images/calendar.png");
+}
+.calendarDate_cont{
+	width:314px;
+	margin:5px auto;
+	border:1px solid #b6b6b6;
+	height:226px;
+	background-position:0 0;
+}
+.calendarDate_title{
+	text-align:center;
+	padding:1.5px 0;
+	width:290px;
+	margin:auto;
+	color:#000;
+	font-weight:bold;
+}
+.calen_t1{
+	float:left;
+}
+.calen_t2{
+	float:left;
+	display:block;
+	width:260px;
+	_width:250px;
+}
+.front1{
+	border:0px;
+	cursor:pointer;
+	width:14px;
+	height:16px;
+	margin-top:3px;
+	background-position:-85px -229px;
+}
+.next1{
+	border:0px;
+	cursor:pointer;
+	width:14px;
+	height:16px;
+	margin-top:3px;
+	background-position:-281px -229px;
+}
+.week span{
+	float:left;
+	width:44.8px;
+	text-align:center;
+}
+.date_txt span{
+	display: block;
+	float:left;
+	width:45px;
+	height:29.8px;
+	_height:30px;
+	_width:44.9px;
+	line-height:29.8px;
+	text-align:center;
+	color:#000;
+	font-weight:bold;
+	_width:45.5px;
+}
 
+.date_txt .ln{
+	width:44px;
+}
+.date_diary{
+	width:12px;
+	height:13px;
+    background-position:8px -230px;
+}
+.date_diary a{color:#4077c7;}
+.date_active{
+	height:31px;
+	background-position:-167px -227px;
+}
+/*8-25日历修改结束*/
 .recipes{_width:340px;background:url(http://s1.ifiter.com/static/images/recipes_img1.jpg) no-repeat right top;margin:2px 0px 10px 10px;}
 .recipes0{_width:340px;background:url(http://s1.ifiter.com/static/images/recipes_img3.jpg) no-repeat right top;margin:2px 0px 10px 10px;}
 .recipes1{_width:340px;background:url(http://s1.ifiter.com/static/images/recipes_img2.jpg) no-repeat right top;margin:2px 0px 10px 10px;}
@@ -1059,7 +1142,7 @@ body{font-size:12px;font-family:Arial, Helvetica, sans-serif;background:#eaeaea 
 .text_content{width:477px;margin:30px auto 0;}.text_content1{width:495px;margin:30px auto 0;}
 .interest{margin-bottom:10px;}
 .interest_left1{float:left;}.interest img{vertical-align:middle;}.interest input[type="radio"]{margin:0px 5px 0 10px;}
-.text_box{background:url("http://s1.ifiter.com/static/images/texting/border.gif") no-repeat;width:178px;height:47px;border:0px;line-height:47px;text-indent:10px;}
+.text_box{background:url("http://s1.ifiter.com/static/images/texting/border.gif") no-repeat;width:178px;height:46px;border:0px;line-height:46px;text-indent:15px;}
 .text_but{text-align:center;}.text_btn{background:url("http://s1.ifiter.com/static/images/texting/but_bg.gif");width:120px;height:30px;line-height:30px;color:#fff;font-size:18px;border:0px;cursor:pointer;}
 .text_but1{text-align:right;margin-top:10px;}
 

@@ -1,7 +1,7 @@
 /**
- * @author fuqiang
- * @date 20110725
- * 联动地区菜单
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110725
+ * @fileoverview 联动地区菜单
  */
 (function(W,G){
 	

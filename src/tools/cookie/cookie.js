@@ -1,30 +1,31 @@
 /**
- * @author fuqiang [designsor@gmail.com]
- * @date 20110807
- * 直接引用jquery 开源cookie插件
- * https://github.com/carhartl/jquery-cookie
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110807
+ * @fileoverview
+ * <p>直接引用jquery 开源cookie插件
+ * <a href="https://github.com/carhartl/jquery-cookie" target="_blank">jquery-cookie</a></p>
  *
- *	 使用方法
- *	Create session cookie:
+ *	<h3>使用方法</h3>
+ *	<p>Create session cookie:<br>
  *	
- *	GM.cookie('the_cookie', 'the_value');
+ *	$.cookie('the_cookie', 'the_value');<br>
  *	
- *	Create expiring cookie, 7 days from then:
+ *	Create expiring cookie, 7 days from then:<br>
  *	
- *	GM.cookie('the_cookie', 'the_value', { expires: 7 });
+ *	$.cookie('the_cookie', 'the_value', { expires: 7 });<br>
  *	
- *	Create expiring cookie, valid across entire page:
+ *	Create expiring cookie, valid across entire page:<br>
  *	
- *	GM.cookie('the_cookie', 'the_value', { expires: 7, path: '/' });
+ *	$.cookie('the_cookie', 'the_value', { expires: 7, path: '/' });<br>
  *	
- *	Read cookie:
+ *	Read cookie:<br>
  *	
- *	GM.cookie('the_cookie'); // => 'the_value'
- *	GM.cookie('not_existing'); // => null
+ *	$.cookie('the_cookie'); // => 'the_value'<br>
+ *	$.cookie('not_existing'); // => null<br>
  *	
- *	Delete cookie by passing null as value:
+ *	Delete cookie by passing null as value:<br>
  *	
- *	GM.cookie('the_cookie', null);
+ *	$.cookie('the_cookie', null);</p>
  */
 (function(W,G,$){
 	

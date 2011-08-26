@@ -1,7 +1,7 @@
 /**
- * @author fuqiang[designsor@gmail.com]
- * @date 20110822
- * 补充jquery不能loadcss
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110822
+ * @fileoverview 补充jquery不能$.loadcss,行内插入样式$.insertstyle
  */
 (function(W,$,doc){
 	//加载css

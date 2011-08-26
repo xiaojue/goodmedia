@@ -1,8 +1,9 @@
 /**
- * @author fuqiang [designsor@gmail.com]
- * @date 20110819
- * 全局的console对象，对其扩展之后，拥有自带调试的走自带，没有的，则返回空
- * 避免调试代码污染  方便进行调试的开发模式
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110819
+ * @fileoverview
+ * <p>全局的console对象，对其扩展之后，拥有自带调试的走自带，没有的，则返回空<br>
+ * 避免调试代码污染  方便进行调试的开发模式</p>
  */
 (function(W,G,$){
 	

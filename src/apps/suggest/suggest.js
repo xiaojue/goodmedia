@@ -1,7 +1,7 @@
 /**
- * @author fuqiang [designsor@gmail]
- * @date 20110812
- * search  guess apps组件
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110812
+ * @fileoverview <p>search guess apps组件</p>
  */
 (function(W,G){
 	

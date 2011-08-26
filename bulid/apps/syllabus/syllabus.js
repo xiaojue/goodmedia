@@ -1,13 +1,16 @@
 /**
- * @author fuqiang [designsor@gmail.com]
- * @date 20110727
- * 课程表应用的js功能部分
- * 使用reuqire加载然后用exports的方式暴露接口，init组织初始化,
- * 这个文件是在iframe中被调用的，回引用window.parent的jQuery对象和GM对象，实现通讯。
- * 主要功能为3个大部分:
- * 1,数据的通讯，主要是浮出层和iframe之间的数据交流。
- * 2,四个不同tab的各种交互功能
- * 3，四个不同tab的通用功能
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110727
+ * @fileoverview
+ * <p>课程表应用的js功能部分<br>
+ * 使用reuqire加载然后用exports的方式暴露接口，init组织初始化,<br>
+ * 这个文件是在iframe中被调用的，回引用window.parent的jQuery对象和GM对象，实现通讯。<br>
+ * 主要功能为3个大部分:</p>
+ * <ol>
+ * <li>数据的通讯，主要是浮出层和iframe之间的数据交流.</li>
+ * <li>四个不同tab的各种交互功能.</li>
+ * <li>四个不同tab的通用功能.</li>
+ * </ol>
  */
 (function(W,doc,$,G,top){
 	

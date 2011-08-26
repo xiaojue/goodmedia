@@ -1,7 +1,7 @@
 /**
- * @author fuqiang
- * @date 20110726
- * 滚动木马组件，支持上下左右，自动延迟滚动
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110726
+ * @fileoverview 滚动木马组件，支持上下左右，自动延迟滚动
  */
 (function(W,doc,$,G){
 	

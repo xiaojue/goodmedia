@@ -1,7 +1,7 @@
 /**
- * @author fuqiang
- * @date 20110804
- * 内部似有方法，分享消息到新浪微博
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110804
+ * @fileoverview 分享消息到新浪微博使用内置xweibo的接口
  * 
  */
 (function(W,G){

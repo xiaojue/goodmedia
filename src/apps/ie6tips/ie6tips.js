@@ -1,7 +1,7 @@
 /**
- * @author fuqiang [designsor@gmail]
- * @date 20110812
- * IE6以下用户
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110812
+ * @fileoverview IE6以下用户友情提示升级或者更换浏览器
  */
 (function(W,G){
 	

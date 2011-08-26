@@ -1,0 +1,54 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="COMM">/**
+<span class='line'>  2</span>  * @author fuqiang [designsor@gmail]
+<span class='line'>  3</span>  * @date 20110812
+<span class='line'>  4</span>  * IE6以下用户
+<span class='line'>  5</span>  */</span><span class="WHIT">
+<span class='line'>  6</span> </span><span class="PUNC">(</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">W</span><span class="PUNC">,</span><span class="NAME">G</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>  7</span> </span><span class="WHIT">	</span><span class="WHIT">
+<span class='line'>  8</span> </span><span class="WHIT">	</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">ie6tips</span><span class="PUNC">=</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>  9</span> </span><span class="WHIT">		</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">temp</span><span class="PUNC">=</span><span class="WHIT"> </span><span class="STRN">'&lt;div id="ie6-warning">'</span><span class="PUNC">+</span><span class="WHIT">
+<span class='line'> 10</span> </span><span class="WHIT">					</span><span class="STRN">'您正在使用 Internet Explorer 6，本站部分效果和功能可能有损。建议您升级到 '</span><span class="PUNC">+</span><span class="WHIT">
+<span class='line'> 11</span> </span><span class="WHIT">					</span><span class="STRN">'&lt;a href="http://www.microsoft.com/china/windows/internet-explorer/" target="_blank">Internet Explorer 8&lt;/a>'</span><span class="PUNC">+</span><span class="WHIT">
+<span class='line'> 12</span> </span><span class="WHIT">					</span><span class="STRN">'/ &lt;a href="http://www.mozillaonline.com/">Firefox&lt;/a>'</span><span class="PUNC">+</span><span class="WHIT">
+<span class='line'> 13</span> </span><span class="WHIT">					</span><span class="STRN">'/ &lt;a href="http://www.google.com/chrome/?hl=zh-CN">Chrome&lt;/a>'</span><span class="PUNC">+</span><span class="WHIT">
+<span class='line'> 14</span> </span><span class="WHIT">					</span><span class="STRN">'/ &lt;a href="http://www.apple.com.cn/safari/">Safari&lt;/a>'</span><span class="PUNC">+</span><span class="WHIT">
+<span class='line'> 15</span> </span><span class="WHIT">					</span><span class="STRN">'/ &lt;a href="http://www.operachina.com/">Opera&lt;/a> 以获得更好的体验与速度。'</span><span class="PUNC">+</span><span class="WHIT">
+<span class='line'> 16</span> </span><span class="WHIT">				 </span><span class="STRN">'&lt;/div>'</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 17</span> </span><span class="WHIT">		</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 18</span> </span><span class="WHIT">			</span><span class="NAME">exports</span><span class="PUNC">:</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 19</span> </span><span class="WHIT">				</span><span class="NAME">init</span><span class="PUNC">:</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 20</span> </span><span class="WHIT">					</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">T</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 21</span> </span><span class="WHIT">					</span><span class="NAME">$.loadcss</span><span class="PUNC">(</span><span class="NAME">GM.apps.host</span><span class="PUNC">+</span><span class="STRN">'ie6tips/ie6tips.css'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 22</span> </span><span class="WHIT">					</span><span class="NAME">$</span><span class="PUNC">(</span><span class="STRN">'body'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">append</span><span class="PUNC">(</span><span class="NAME">temp</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 23</span> </span><span class="WHIT">					</span><span class="NAME">$</span><span class="PUNC">(</span><span class="STRN">'#ie6-warning'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">hide</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">fadeIn</span><span class="PUNC">(</span><span class="STRN">'slow'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 24</span> </span><span class="WHIT">					</span><span class="WHIT">
+<span class='line'> 25</span> </span><span class="WHIT">					</span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">hide</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 26</span> </span><span class="WHIT">						</span><span class="NAME">T</span><span class="PUNC">=</span><span class="NAME">setTimeout</span><span class="PUNC">(</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 27</span> </span><span class="WHIT">							</span><span class="NAME">$</span><span class="PUNC">(</span><span class="STRN">'#ie6-warning'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">fadeOut</span><span class="PUNC">(</span><span class="STRN">'slow'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 28</span> </span><span class="WHIT">						  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="NUMB">8000</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 29</span> </span><span class="WHIT">					</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 30</span> </span><span class="WHIT">					</span><span class="WHIT">
+<span class='line'> 31</span> </span><span class="WHIT">					</span><span class="NAME">hide</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 32</span> </span><span class="WHIT">						</span><span class="WHIT">
+<span class='line'> 33</span> </span><span class="WHIT">					</span><span class="NAME">$</span><span class="PUNC">(</span><span class="STRN">'#ie6-warning'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">mouseover</span><span class="PUNC">(</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 34</span> </span><span class="WHIT">						</span><span class="NAME">clearTimeout</span><span class="PUNC">(</span><span class="NAME">T</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 35</span> </span><span class="WHIT">					</span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 36</span> </span><span class="WHIT">					</span><span class="WHIT">
+<span class='line'> 37</span> </span><span class="WHIT">					</span><span class="NAME">$</span><span class="PUNC">(</span><span class="STRN">'#ie6-warning'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">mouseout</span><span class="PUNC">(</span><span class="NAME">hide</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 38</span> </span><span class="WHIT">					</span><span class="WHIT">
+<span class='line'> 39</span> </span><span class="WHIT">					</span><span class="NAME">$.cookie</span><span class="PUNC">(</span><span class="STRN">'ie6tips'</span><span class="PUNC">,</span><span class="NUMB">1</span><span class="PUNC">,</span><span class="PUNC">{</span><span class="NAME">expires</span><span class="PUNC">:</span><span class="NUMB">1</span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 40</span> </span><span class="WHIT">				</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 41</span> </span><span class="WHIT">			</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 42</span> </span><span class="WHIT">		</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 43</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 44</span> </span><span class="WHIT">	</span><span class="WHIT">
+<span class='line'> 45</span> </span><span class="WHIT">	</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">G</span><span class="WHIT"> </span><span class="PUNC">&&</span><span class="WHIT"> </span><span class="NAME">G.apps</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="NAME">G.apps.ie6tips</span><span class="PUNC">=</span><span class="NAME">ie6tips</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 46</span> </span><span class="WHIT">	</span><span class="WHIT">
+<span class='line'> 47</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">(</span><span class="NAME">window</span><span class="PUNC">,</span><span class="NAME">GM</span><span class="PUNC">)</span><span class="PUNC">;</span></pre></body></html>

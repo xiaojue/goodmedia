@@ -1,5 +1,7 @@
 /**
- * 修复ie6的一些bug
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110826
+ * @fileoverview 主要负责修复ie6的一些bug
  */
 (function(W,G,$,doc){
 	

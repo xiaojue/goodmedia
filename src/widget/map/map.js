@@ -1,7 +1,7 @@
 /**
- * @author fuqiang [designsor@gmail.com]
- * @date 20110805
- * google map api 接口实现地理定位
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110805
+ * @fileoverview google map api 接口实现地理定位
  */
 (function(W,G) {
 
@@ -88,7 +88,7 @@
 							//设置坐标值
 							setlatlng:function(m,c){
 								var center=m.getPosition();
-								$('#J_Coord').html('lat:<span id="J_Pa">'+c['Pa']+'</span><br/>lng:<span id="J_Oa">'+c['Oa']+'</span>');
+								$('#J_Coord').html('lat:<span id="J_Pa">'+center['Pa']+'</span><br/>lng:<span id="J_Oa">'+center['Oa']+'</span>');
 							},
 							//取坐标
 							//这里的pa和oa用反了……囧，程序都做完了才发现精度纬度是拧着的，后台已经按照这个走了
@@ -138,14 +138,34 @@
 										var result=ary[i],
 											resultlat=result['lat'],
 											resultlng=result['lng'],
-											resultname=result['name'],
-											newlatlng = new Gmap.LatLng(resultlat,resultlng),
-											marker = new Gmap.Marker({
-												title:resultname,
-												position:newlatlng,
-												map: map,
-												icon:'http://s1.ifiter.com/static/images/map/124.png'
-											});
+											resultname=result['name'];
+											
+											function addMarker(name,lat,lng){
+												var	newlatlng = new Gmap.LatLng(lat,lng),
+													marker = new Gmap.Marker({
+													title:name,
+													position:newlatlng,
+													map: map,
+													icon:'http://s1.ifiter.com/static/images/map/124.png'
+												});
+												
+												markAry.push(marker);
+												
+												var msg=$.substitute(infotemp,result);
+												
+												//给找到的场馆marker对象绑定点击事件
+												Gevent.addListener(marker,'click',function (){
+													var	current=i+1,
+														max=10,
+														page=Math.ceil(current/max);
+													_fn.infoshow(info,msg,newlatlng);
+													_fn.flip(page,$('#J_MAP_RightBar li'),i); //指定哪个打开
+												});
+												//暂存这个动作
+												_fn.infoopen[i]=function(){
+													_fn.infoshow(info,msg,newlatlng)
+												};
+											};
 											
 											result['coaches']=function(){
 												var tempary=result['coaches'],returnstr="";
@@ -157,22 +177,17 @@
 													return returnstr;
 											}();
 											
-										var msg=$.substitute(infotemp,result);
 											
-										markAry.push(marker);
-										//给找到的场馆marker对象绑定点击事件
-										Gevent.addListener(marker,'click',function (){
-											var	current=i+1,
-												max=10,
-												page=Math.ceil(current/max);
-											_fn.infoshow(info,msg,newlatlng);
-											_fn.flip(page,$('#J_MAP_RightBar li'),i); //指定哪个打开
-										});
-										
-										//暂存这个动作
-										_fn.infoopen[i]=function(){
-											_fn.infoshow(info,msg,newlatlng)
-										};
+											//如果场馆坐标为0.0 就是数据库没有
+											if(resultlat=="0.0" && resultlng=="0.0"){
+												that._searchQ(result['cityZone'],function(location){
+													if(location){
+														addMarker(resultname,location['Oa'],location['Pa']);
+													}
+												});
+											}else{
+												addMarker(resultname,resultlat,resultlng);
+											}
 										
 									})(i);
 									
@@ -201,6 +216,7 @@
 							                      '<p><span>会馆特色：</span>{feature}</p>'+
 							                      '<p><span>特色项目：</span>{items}</p>'+
 							                      '<p><span>热线电话：</span>{tel}</p>'+
+							                      '<p><span>所在城市：</span>{cityZone}</p>'+
 							                      '<p class="map_pic"><a href="/s/{siteno}" target="_blank"><img src="{logo}" width="120" height="120" title="{name}" alt="{name}" onerror="'+errorhandle+'"></a></p>'+
 							                      '<p class="map_more"><a href="/s/{siteno}" target="_blank">会所详细介绍&gt;&gt;</a></p>'+
 						                      '</li>';
@@ -299,11 +315,12 @@
 									}catch(e){
 										console.log(e);
 									}
-									var dataAry=data['s']['result'];
 									
 									//_fn.infowindowShow(infowindow,dataAry.length);
 									
 									if(data['r']!=0) return; //数据有错
+									
+									var dataAry=data['s']['result'];
 									
 									_fn.deleteMarkers(markersArray,Circle);
 									
@@ -317,20 +334,66 @@
 										radius:3200,
 										center:marker.getPosition()
 									});
+									//给范围圈绑定点击事件
+									Gevent.addListener(Circle,'click',_fn.clickseach);
 									
-									if(dataAry.length==0) {
-										//右侧列表增加什么也没搜索到的提示
-										$('#J_MAP_RightBar').html('附近没有找到相应的场馆');
-										return;
-									}
-									
+										
 									_fn.addrimmarkers(dataAry,map,infowindow,markersArray);
+									_fn.pagallfire(dataAry);
+									
+									if(dataAry.length==0) $('#J_MAP_RightBar').html('附近没有找到相应的场馆');
+									//给中心点绑定点击事件
+									/*
+									Gevent.addListener(marker,'click', function () {
+										_fn.infowindowShow(infowindow,dataAry.length);
+									});
+									*/
+									
+							},
+							tosearch:function(){
+								var q=$.trim($('#J_SearchMapText').val());
+								if(q==""){
+									alert('请输入搜索地址，比如:北京市 朝阳区');
+									return;
+								}
+								that._searchQ(q,function(location){
+									if(location){
+										var darwin = new Gmap.LatLng(location['Oa'],location['Pa']);
+										map.setCenter(darwin);
+										marker.setPosition(darwin);
+										_fn.postPostion(marker);
+									}else{
+										//alert('地址解析有误,尝试换一下地名搜索');
+										//如果地址google解析有问题，再传本站接口进行一次查询，再找不到，再提示错误 - 未找到相关地址
+										//我回传2个参数 城市名_关键字
+										_fn.getourcoord({city:that.q,q:q},function(data){
+											if(data && data['r']==0){
+												var dataAry=data['s']['result'];
+												if(dataAry.length==0){
+													alert('对不起，没有找到你想搜索的地名或场馆');
+													return;
+												} 
+												_fn.deleteMarkers(markersArray,Circle);
+												_fn.addrimmarkers(dataAry,map,infowindow,markersArray);
+												_fn.pagallfire(dataAry);
+												var darwin = new Gmap.LatLng(dataAry[0]['lat'],dataAry[0]['lng']);//设置新的地图中心点
+												map.setCenter(darwin);
+												map.setZoom(11);
+											}else{
+												alert('系统错误');
+											}
+										});
+									}
+								});
+							},
+							//分页事件以及增加相关场馆标记
+							pagallfire:function(dataAry){
 									//右侧栏目和分页
 									var Rightlist=_fn.createRightlist(dataAry),
 										pag=_fn.paglist(dataAry);
 										$('#J_MAP_RightBar').html(Rightlist+pag);
 									
-									var dieary=['#J_Paglist span','#J_PagBack','#J_PagNext','#J_SearchSub','#J_ShareSina'];
+									var dieary=['#J_Paglist span','#J_PagBack','#J_PagNext',"#J_SearchSub","#J_SearchMapText","#J_ShareSina"];
 									
 									$.each(dieary,function(index,val){
 										$(val).die();
@@ -355,34 +418,12 @@
 									
 									
 									//先分出第一页
-									_fn.flip(1,$('#J_MAP_RightBar li'));
+									if(dataAry.length!=0) _fn.flip(1,$('#J_MAP_RightBar li'));
 									
-									
-									//给中心点绑定点击事件
-									/*
-									Gevent.addListener(marker,'click', function () {
-										_fn.infowindowShow(infowindow,dataAry.length);
-									});
-									*/
-									//给范围圈绑定点击事件
-									Gevent.addListener(Circle,'click',_fn.clickseach);
 									//给搜索绑定事件
-									$('#J_SearchSub').live('click',function(){
-										var q=$.trim($('#J_SearchMapText').val());
-										if(q==""){
-											alert('请输入搜索地址，比如:北京市 朝阳区');
-											return;
-										}
-										that._searchQ(q,function(location){
-											if(location){
-												var darwin = new Gmap.LatLng(location['Oa'],location['Pa']);
-												map.setCenter(darwin);
-												marker.setPosition(darwin);
-												_fn.postPostion(marker);
-											}else{
-												alert('地址解析有误,尝试换一下地名搜索');
-											}
-										});
+									$('#J_SearchSub').live('click',_fn.tosearch);
+									$('#J_SearchMapText').live('keydown',function(e){
+										if(e.keyCode==13) _fn.tosearch();
 									});
 									//分享到新浪微博
 									$('#J_ShareSina').live('click',function(){
@@ -393,6 +434,35 @@
 											});
 										$(this).attr('href',href);
 									});
+							},
+							//获取自己数据库的模糊查询信息
+							getourcoord:function(data,callback){
+								var coordurl='/api/mi.jsp?v=geokey/'+data.q,
+									c=0,mc=3,t=1000;
+								$.ajax({
+									type:'GET',
+									url:coordurl,
+									success:function(result){
+										try{
+											eval('var r='+$.trim(result));
+										}catch(e){
+											console.log(e);
+											var r=null;
+										}
+										if(callback) callback(r);
+									},
+									error:function(){
+										if(c==mc){
+											alert('网络延迟请重新查询');
+											c=0;
+											return;
+										}
+										setTimeout(function(){
+											_fn.getourcoord(data,callback);
+											c++;
+										},t);
+									}
+								})
 							},
 							//坐标10次连续错误，说明网络确实不行……
 							postPostionError:function(){
@@ -426,7 +496,7 @@
 						
 					//如果存在markerhtml初始值直接初始化infowindow
 					if(that.markerhtml!="") {
-						infowindow.setContent(markerhtml);
+						infowindow.setContent(that.markerhtml);
 						infowindow.open(map,marker);
 						Gevent.addListener(marker,'click', function () {
 							infowindow.open(map,marker);

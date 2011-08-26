@@ -1,7 +1,7 @@
 /**
- * @author fuqiang
- * @date 20110726
- * 通用浮出层功能部分,最后扩展成为jquery插件形式被调用
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110726
+ * @fileoverview 通用浮出层功能部分,最后扩展成为jquery插件形式被调用
  */
 (function(W,doc,$,G){
 	/**

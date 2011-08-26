@@ -1,8 +1,9 @@
 /**
- * @author fuqiang
- * @date 20110726
- * 阻止用户复制区域文本 | IE阻止全部复制，非IE阻止局部复制
- * IE下如果不全部屏蔽功能，则可以通过ctrl+a或者从其他节点复制过来，造成影响。这里封装为IE下强制屏蔽复制，什么都不可以选，不可以复制。
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110726
+ * @fileoverview
+ * <p>阻止用户复制区域文本 | IE阻止全部复制，非IE阻止局部复制<br>
+ * IE下如果不全部屏蔽功能，则可以通过ctrl+a或者从其他节点复制过来，造成影响。这里封装为IE下强制屏蔽复制，什么都不可以选，不可以复制。</p>
  */
 (function(W,doc,G){
 	

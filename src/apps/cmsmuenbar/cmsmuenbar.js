@@ -1,7 +1,7 @@
 /**
- * @author fuqiang
- * @date 20110817
- * cms 欢迎导航 根据cookie判断
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110817
+ * @fileoverview cms 欢迎导航 根据cookie判断
  */
 (function(W,$,G){
 	

@@ -1,7 +1,7 @@
 /**
- * @author fuqiang
- * @dete 20110725
- * 为GM对象添加widget空间下的countdown组件
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110725
+ * @fileoverview 为GM对象添加widget空间下的countdown组件,我说倒计时
  */
 (function(W,G){
 	

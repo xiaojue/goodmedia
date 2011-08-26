@@ -1,8 +1,9 @@
 /**
- * @author fuqiang [designsor@gmail.com]
- * @date 20110819
- * debug模式下增加debug工具
- * 应该包含统计，效率，测试等扩展面板
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110819
+ * @fileoverview
+ * <p>debug模式下增加debug工具<br>
+ * 应该包含统计，效率，测试等扩展面板</p>
  */
 (function(W,G,$){
 	 var debug=function(){

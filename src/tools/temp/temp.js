@@ -1,7 +1,7 @@
 /**
- * @author fuqiang [designsor@gmail.com]
- * @date 20110808
- * 模板替换，操作模板字符串等方法集合
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110808
+ * @fileoverview 模板替换，操作模板字符串等方法集合$.substitute,$.analyse
  */
 (function(W,G,$){
 	

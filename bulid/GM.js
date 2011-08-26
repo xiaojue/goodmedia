@@ -1,10 +1,12 @@
 /**
- * @author fuqiang [designsor@gmail.com]
- * @date 20110726
- * 基于jquery1.6.2
- * Goodmedia前端js库core文件，负责创建GM对象和构建命名空间
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110726
+ * @fileoverview Goodmedia前端js库core文件，负责创建GM对象和构建命名空间 基于jquery1.6.2
  */
 (function(W,doc,$){
+	/**
+	 * @namespace GM
+	 */
 	if(!W.GM) var GM={};
 	
 	//与业务紧密相关的-挂件
@@ -28,7 +30,7 @@
 			var src=scripts[i].src,
 					namereg=/(GM-min|GM).js/;
 			if(namereg.test(src)){
-				base=src.slice(0,src.lastIndexOf('/')+1)
+				base=src.slice(0,src.lastIndexOf('/')+1);
 			}
 		}
 		return base;
@@ -87,9 +89,9 @@
 	W.GM=GM;
 })(window,document,jQuery);
 /**
- * @author fuqiang
- * @date 20110726
- * 通用浮出层功能部分,最后扩展成为jquery插件形式被调用
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110726
+ * @fileoverview 通用浮出层功能部分,最后扩展成为jquery插件形式被调用
  */
 (function(W,doc,$,G){
 	/**
@@ -292,9 +294,9 @@
 
 })(window,document,jQuery,GM);
 /**
- * @author fuqiang
- * @date 20110726
- * 滚动木马组件，支持上下左右，自动延迟滚动
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110726
+ * @fileoverview 滚动木马组件，支持上下左右，自动延迟滚动
  */
 (function(W,doc,$,G){
 	
@@ -454,9 +456,9 @@
 	
 })(window,document,jQuery,GM);
 /**
- * @author fuqiang
- * @date 20110726
- * 气泡功能，自定义划过气泡，提供一些对外的接口和方法
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110726
+ * @fileoverview 气泡功能，自定义划过气泡，提供一些对外的接口和方法
  */
 (function(W,doc,$,G){
 	
@@ -480,9 +482,9 @@
 	
 })(window,document,jQuery,GM);
 /**
- * @author fuqiang [designsor@gmail.com]
- * @date 20110808
- * 模板替换，操作模板字符串等方法集合
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110808
+ * @fileoverview 模板替换，操作模板字符串等方法集合$.substitute,$.analyse
  */
 (function(W,G,$){
 	
@@ -520,32 +522,33 @@
 	
 })(window,GM,jQuery);
 /**
- * @author fuqiang [designsor@gmail.com]
- * @date 20110807
- * 直接引用jquery 开源cookie插件
- * https://github.com/carhartl/jquery-cookie
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110807
+ * @fileoverview
+ * <p>直接引用jquery 开源cookie插件
+ * <a href="https://github.com/carhartl/jquery-cookie" target="_blank">jquery-cookie</a></p>
  *
- *	 使用方法
- *	Create session cookie:
+ *	<h3>使用方法</h3>
+ *	<p>Create session cookie:<br>
  *	
- *	GM.cookie('the_cookie', 'the_value');
+ *	$.cookie('the_cookie', 'the_value');<br>
  *	
- *	Create expiring cookie, 7 days from then:
+ *	Create expiring cookie, 7 days from then:<br>
  *	
- *	GM.cookie('the_cookie', 'the_value', { expires: 7 });
+ *	$.cookie('the_cookie', 'the_value', { expires: 7 });<br>
  *	
- *	Create expiring cookie, valid across entire page:
+ *	Create expiring cookie, valid across entire page:<br>
  *	
- *	GM.cookie('the_cookie', 'the_value', { expires: 7, path: '/' });
+ *	$.cookie('the_cookie', 'the_value', { expires: 7, path: '/' });<br>
  *	
- *	Read cookie:
+ *	Read cookie:<br>
  *	
- *	GM.cookie('the_cookie'); // => 'the_value'
- *	GM.cookie('not_existing'); // => null
+ *	$.cookie('the_cookie'); // => 'the_value'<br>
+ *	$.cookie('not_existing'); // => null<br>
  *	
- *	Delete cookie by passing null as value:
+ *	Delete cookie by passing null as value:<br>
  *	
- *	GM.cookie('the_cookie', null);
+ *	$.cookie('the_cookie', null);</p>
  */
 (function(W,G,$){
 	
@@ -587,9 +590,9 @@
 	
 })(window,GM,jQuery);
 /**
- * @author fuqiang[designsor@gmail.com]
- * @date 20110822
- * 补充jquery不能loadcss
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110822
+ * @fileoverview 补充jquery不能$.loadcss,行内插入样式$.insertstyle
  */
 (function(W,$,doc){
 	//加载css
@@ -615,7 +618,9 @@
 	
 })(window,jQuery,document);
 /**
- * 修复ie6的一些bug
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110826
+ * @fileoverview 主要负责修复ie6的一些bug
  */
 (function(W,G,$,doc){
 	
@@ -658,10 +663,11 @@
        
 })(window,GM,jQuery,document);
 /**
- * @author fuqiang [designsor@gmail.com]
- * @date 20110819
- * 全局的console对象，对其扩展之后，拥有自带调试的走自带，没有的，则返回空
- * 避免调试代码污染  方便进行调试的开发模式
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110819
+ * @fileoverview
+ * <p>全局的console对象，对其扩展之后，拥有自带调试的走自带，没有的，则返回空<br>
+ * 避免调试代码污染  方便进行调试的开发模式</p>
  */
 (function(W,G,$){
 	
@@ -680,10 +686,11 @@
 	
 })(window,GM,jQuery);
 /**
- * @author fuqiang
- * @date 20110726
- * 阻止用户复制区域文本 | IE阻止全部复制，非IE阻止局部复制
- * IE下如果不全部屏蔽功能，则可以通过ctrl+a或者从其他节点复制过来，造成影响。这里封装为IE下强制屏蔽复制，什么都不可以选，不可以复制。
+ * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
+ * @version 20110726
+ * @fileoverview
+ * <p>阻止用户复制区域文本 | IE阻止全部复制，非IE阻止局部复制<br>
+ * IE下如果不全部屏蔽功能，则可以通过ctrl+a或者从其他节点复制过来，造成影响。这里封装为IE下强制屏蔽复制，什么都不可以选，不可以复制。</p>
  */
 (function(W,doc,G){
 	
