@@ -5,11 +5,14 @@
  */
 (function(W,doc,$){
 	/**
-	 * @namespace GM
+	 * @class
+	 * @name GM
 	 */
 	if(!W.GM) var GM={};
 	
-	//与业务紧密相关的-挂件
+	/**
+	 * @namespace 与业务紧密相关的-挂件
+	 */
 	GM.widget={};
 	//与业务无关的比如overlay组件,最后扩展到jquery上，使用jquery的扩展机制进行最后的封装
 	GM.tools={};

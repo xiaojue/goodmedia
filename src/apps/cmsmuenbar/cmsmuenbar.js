@@ -4,11 +4,23 @@
  * @fileoverview cms 欢迎导航 根据cookie判断
  */
 (function(W,$,G){
-	
+	/**
+	 * @name GM.apps.cmsmuenbar
+	 * @private
+	 */
 	var cmsmuenbar=function(){
 		
 		return {
+			/**
+			 * @name GM.apps.cmsmuenbar.exports
+			 * @class
+			 */
 			exports:{
+				/**
+				 * @name GM.apps.cmsmuenbar.exports.init
+				 * @function
+				 * @description cms欢迎导航根据cookie判断来初始化登录头
+				 */
 				init:function(){
 					var user=$.cookie('ATsport'),myhtml;
 					if(user){

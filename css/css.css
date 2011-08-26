@@ -1264,3 +1264,8 @@ body{font-size:12px;font-family:Arial, Helvetica, sans-serif;background:#eaeaea 
 
 .interest_lefts{float:left;width:135px;margin-bottom:10px;}
 .interest3{float:left;width:70px;margin-left:10px;word-wrap:break-word;word-break:normal;}
+
+/*通用样式*/
+.hidden{
+	display:none;
+}	

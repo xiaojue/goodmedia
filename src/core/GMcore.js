@@ -5,25 +5,45 @@
  */
 (function(W,doc,$){
 	/**
-	 * @namespace GM
+	 * @class
+	 * @name GM
+	 * @description 全局的GM对象
 	 */
+	
+	/**
+	 * @class
+	 * @name jQuery
+	 * @description 这里只对私自扩展的jQuery进行doc描述
+	 */
+	
 	if(!W.GM) var GM={};
-	
-	//与业务紧密相关的-挂件
+	/**
+	 * @namespace
+	 * @description 与业务紧密相关的-挂件
+	 */
 	GM.widget={};
-	//与业务无关的比如overlay组件,最后扩展到jquery上，使用jquery的扩展机制进行最后的封装
+	/**
+	 * @namespace
+	 * @description 与业务无关的比如overlay组件,最后扩展到jquery上，使用jquery的扩展机制进行最后的封装
+	 */
 	GM.tools={};
-	//独立项目或者应用
+	/**
+	 * @namespace
+	 * @description 独立项目或者应用
+	 */
 	GM.apps={};
-	
-	//是否是debug模式
+	/**
+	 * @constant
+	 * @description 根据href里德debug关键字确定是否为debug模式
+	 */
 	GM.debug=function(){
 		var isdebug=(W.location.href.match('debug'));
 		return isdebug;
 	}();
-
-	//判断使用路径
-	//先找到当前的路径
+	/**
+	 * @constant
+	 * @description 获取当前js的根目录
+	 */
 	GM.host=function(){
 		var scripts=doc.getElementsByTagName('script'),i,base;
 		for(i=0;i<scripts.length;i++){
@@ -35,22 +55,40 @@
 		}
 		return base;
 	}();
-	
-	//转换到本地非压缩路径
+	/**
+	 * @static
+	 * @description 转换到本地非压缩路径
+	 * @function
+	 * @param {string} uri
+	 * @returns {string} 处理过的路径
+	 */
 	GM.locality=function(uri){
-		return uri.replace('bulid','src').replace('-min','');
+		return uri.replace(/bulid/g,'src').replace(/\-min/g,'');
 	}
-	
+	/**
+	 * @constant
+	 * @description widget的根目录
+	 */
 	GM.widget.host=GM.host + 'widget/';
+	/**
+	 * @constant
+	 * @description apps的根目录
+	 */
 	GM.apps.host=GM.host + 'apps/';
 	
+	//debug模式下处理路径
 	if(GM.debug){
 		GM.host='http://172.16.2.215/gm/bulid/';
 		GM.widget.host=GM.locality(GM.host) + 'widget/';
 		GM.apps.host=GM.locality(GM.host) + 'apps/';
 	}
-	
-	//额外加载项目文件 - 项目文件目前依赖关系依靠ant维护
+	/**
+	 * @static
+	 * @description 额外加载项目文件 - 项目文件目前依赖关系依靠ant维护
+	 * @function
+	 * @param {string} appname
+	 * @param {function} callback
+	 */
 	GM.apps.require=function(appname,callback){
 		var appuri = GM.host + 'apps/'+appname+'/'+appname+'-min.js';
 		if(GM.debug) appuri=GM.locality(appuri);
@@ -60,10 +98,19 @@
 			});
 		});
 	}
-	
-	//加载widget的方法
+	/**
+	 * @static
+	 * @description 把用过的widget储存，再次use则不再调用
+	 * @private
+	 */
 	GM.widget.usemap={};
-	
+	/**
+	 * @static
+	 * @description 加载widget的方法
+	 * @function
+	 * @param {string} widget
+	 * @param {function} callback
+	 */
 	GM.widget.use=function(widget,callback){
 		if(GM.widget.usemap.hasOwnProperty(widget)){
 			if(callback) callback(GM.widget);
@@ -84,7 +131,7 @@
 		GM.widget.use('debug',function(widget){
 				widget.debug.init();
 		});
-	} 
+	}
 	
 	W.GM=GM;
 })(window,document,jQuery);

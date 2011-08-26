@@ -4,12 +4,27 @@
  * @fileoverview 滚动木马组件，支持上下左右，自动延迟滚动
  */
 (function(W,doc,$,G){
-	
+	/**
+	 * @memberOf jQuery
+	 * @constructor
+	 * @description 控制指定容器里的元素，上下左右滚动的组件
+	 * @param {objcet} cg
+	 * @property {element} wrap <p>#wrap外部包裹容器</p>
+	 * @property {element} wrapitem <p>.wrapitem内部包裹元素</p>
+	 * @property {string} [direction="left"] left|top方向
+	 * @property {number} [current=0] 当前指定滚动到第几页
+	 * @property {boolen} [auto=false] 是否自动滚动
+	 * @property {number} [autointerval=3000] 自动滚动间隔 毫秒
+	 */
 	var carousel=function(cg){
 		
 		var _carousel=function(){
-			
-			
+			/**
+			 * @private
+			 * @function
+			 * @param {object} cg 初始化carousel的参数
+			 * @description 根据config构建需要的dom结构
+			 */
 			var _bulid=function(cg){
 				var wrap=cg.wrap,wrapitem=cg.wrapitem;
 				if(wrap=="" || wrapitem=="") return;
@@ -52,16 +67,6 @@
 			
 			return {
 				_init:function(o){
-					/* HTML Structure
-					 * <div id="wrapCls">
-					 * 	<div>
-					 * 		<div class="Wrapitem"></div>
-					 * 		<div class="Wrapitem"></div>
-					 * 		<div class="Wrapitem"></div>
-					 * 		<div class="Wrapitem"></div>
-					 * 	</div>
-					 * </div>
-					 */			
 					var _o={
 						wrap:'',
 						wrapitem:'',
@@ -90,6 +95,11 @@
 		}();
 		
 		_carousel._init.prototype={
+			/**
+			 * @name jQuery.carousel#forward
+			 * @function
+			 * @description 向前翻一页
+			 */
 			forward:function(){
 				var that=this,config=that.config,
 					l=$(config.wrap).find(config.wrapitem).length;
@@ -100,6 +110,11 @@
 					that.to(config.current);
 				}
 			},
+			/**
+			 * @name jQuery.carousel#backward
+			 * @function
+			 * @description 向后翻一页
+			 */
 			backward:function(){
 				var that=this,config=that.config,
 					l=$(config.wrap).find(config.wrapitem).length;
@@ -110,6 +125,12 @@
 					that.to(config.current);
 				}
 			},
+			/**
+			 * @name jQuery.carousel#to
+			 * @function
+			 * @description 翻到第几页
+			 * @param {number} guide 页数指针
+			 */
 			to:function(guide){
 				var that=this,config=that.config,moveObj={},
 					Realwrap=$(config.wrap).find('.fixclear'),
@@ -128,12 +149,24 @@
 					config.endflg=true;
 				});
 			},
+			/**
+			 * @private
+			 * @name jQuery.carousel-auto
+			 * @function
+			 * @description 激活自动滚动 |配置项没激活的话，这里可以唤醒
+			 */
 			auto:function(){
 				var that=this,config=that.config;
 				that.T=setInterval(function(){
 					that.forward();
 				},config.autointerval);
 			},
+			/**
+			 * @private
+			 * @function
+			 * @name jQuery.carousel-autoEvent
+			 * @description 绑定自动滚动需要的事件
+			 */
 			autoEvent:function(){
 				var that=this,config=that.config;
 				$(config.wrap).live('mouseenter',function(){
@@ -142,10 +175,22 @@
 					that.auto();
 				});
 			},
+			/**
+			 * @name jQuery.carousel#before
+			 * @event
+			 * @param {number} current 当前到第几页了
+			 * @description 翻页之前触发
+			 */
 			before:function(current){
 				var that=this,config=that.config;
 				config.before(current);
 			},
+			/**
+			 * @name jQuery.carousel#after
+			 * @event
+			 * @param {number} current 当前到第几页了
+			 * @description 翻页之后触发
+			 */
 			after:function(current){
 				var that=this,config=that.config;
 				config.after(current);
