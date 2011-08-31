@@ -5,19 +5,20 @@
  */
 (function(W,$,G){
 	/**
-	 * @name GM.apps.cmsmuenbar
-	 * @private
+	 * @memberOf GM.apps
+	 * @description cms欢迎导航根据cookie判断来初始化登录头
 	 */
 	var cmsmuenbar=function(){
 		
 		return {
 			/**
-			 * @name GM.apps.cmsmuenbar.exports
-			 * @class
+			 * @namespace
+			 * @memberOf GM.apps.cmsmuenbar
 			 */
 			exports:{
 				/**
-				 * @name GM.apps.cmsmuenbar.exports.init
+				 * @memberOf GM.apps.cmsmuenbar.exports
+				 * @static
 				 * @function
 				 * @description cms欢迎导航根据cookie判断来初始化登录头
 				 */

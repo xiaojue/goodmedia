@@ -4,7 +4,15 @@
  * @fileoverview 联动地区菜单
  */
 (function(W,G){
-	
+	/**
+	 * @name GM.widget.cityzone
+	 * @class
+	 * @description 2级联动的城市菜单，val和text都是中文城市字符
+	 * @param {string} pbid 市selectid
+	 * @param {string} pserid 区selectid
+	 * @param {string} [cityname] 初始化的市名
+	 * @param {string} [districtname] 初始化的区名
+	 */
 	var Cityzone=function(pbid,pserid,cityname,districtname){
 		
 		var pb_arr=["北京|昌平区,朝阳区,崇文区,大兴区,东城区,丰台区,海淀区,门头沟区,石景山区,通州区,西城区,宣武区",
@@ -67,6 +75,14 @@
 		};
 		
 		return {
+			/**
+			 * @name GM.widget.cityzone.init_city
+			 * @function
+			 * @private
+			 * @description 初始化2个select框，私有
+			 * @param {string} [city] 是否指定city
+			 * @param {string} [district] 是否指定district
+			 */
 			init_city:function(city,district){
 				var that=this;
 				
@@ -88,6 +104,12 @@
 					selectOption(pserid,district);
 				}
 			},
+			/**
+			 * @name GM.widget.cityzone.init_cityzone
+			 * @function
+			 * @private
+			 * @description 切换城市的时候城区触发的function
+			 */
 			init_cityzone:function(){
 				if($(pbid).val()!=0){
 					 removeFiret(pbid);
@@ -106,6 +128,13 @@
 					}
 				 }
 			},
+			/**
+			 * @name GM.widget.cityzone.init
+			 * @function
+			 * @description 初始化2个select框，公有
+			 * @param {function} selectfn 选择完之后触发，参数为当前的城市值+空格+城区值
+			 * @param {function} callback 初始化之后回调
+			 */
 			init:function(selectfn,callback){
 				var that=this;
 				that.init_city(cityname,districtname);

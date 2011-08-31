@@ -5,8 +5,8 @@
  */
 (function(W,G){
 	/**
-	 * @name GM.apps.ie6tips
-	 * @private
+	 * @memberOf GM.apps
+	 * @description IE6以下用户友情提示升级或者更换浏览器
 	 */
 	var ie6tips=function(){
 		var temp= '<div id="ie6-warning">'+
@@ -19,12 +19,12 @@
 				 '</div>';
 		return {
 			/**
-			 * @name GM.apps.ie6tips.exports
-			 * @class
+			 * @namespace
+			 * @memberOf GM.apps.ie6tips
 			 */
 			exports:{
 				/**
-				 * @name GM.apps.ie6tips.exports.init
+				 * @memberOf GM.apps.ie6tips.exports
 				 * @function
 				 * @description IE6以下用户友情提示升级或者更换浏览器
 				 */

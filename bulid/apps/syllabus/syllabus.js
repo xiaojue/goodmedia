@@ -24,7 +24,10 @@
 	}
 	
 	var ST;
-	
+	/**
+	 * @memberOf GM.apps
+	 * @description 课程表应用的js功能部分，这部分代码比较乱，详细内容较多，建议直接看源代码
+	 */
 	var syllabus=function(){
 		
 		
@@ -46,7 +49,7 @@
 						'<div class="bottom"></div>';
 			return Str;
 		};
-		
+		//获取时间
 		var getTime=function(time){
 			$.ajax({
 				url:'/course/courseAjax.jsp?op=getweek&date='+time,
@@ -153,8 +156,15 @@
 		
 		
 		return {
-			'exports':{
-				//创建主课表
+			/**
+			 * @namespace
+			 * @memberOf GM.apps.syllabus
+			 */
+			exports:{
+				/**
+				 * @memberOf GM.apps.syllabus.exports
+				 * @description 创建新课表，包含了覆层交互，iframe之间通讯，日历的获取调用等
+				 */
 				CreateSyllabus:function(){
 					
 					parent$.overlay();
@@ -256,7 +266,6 @@
 								}	
 							}
 						};
-						
 						
 						function findtable(){
 							var tables=CalendarWindow.document.getElementsByTagName('table');

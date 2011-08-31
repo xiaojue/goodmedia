@@ -5,28 +5,45 @@
  */
 (function(W,doc,$){
 	/**
-	 * @class
+	 * @namespace
 	 * @name GM
+	 * @description 全局的GM对象
 	 */
-	if(!W.GM) var GM={};
 	
 	/**
-	 * @namespace 与业务紧密相关的-挂件
+	 * @namespace
+	 * @name jQuery
+	 * @description 这里只对私自扩展的jQuery进行doc描述
+	 */
+	
+	if(!W.GM) var GM={};
+	/**
+	 * @namespace
+	 * @description 与业务紧密相关的-挂件
 	 */
 	GM.widget={};
-	//与业务无关的比如overlay组件,最后扩展到jquery上，使用jquery的扩展机制进行最后的封装
+	/**
+	 * @namespace
+	 * @description 与业务无关的比如overlay组件,最后扩展到jquery上，使用jquery的扩展机制进行最后的封装
+	 */
 	GM.tools={};
-	//独立项目或者应用
+	/**
+	 * @namespace
+	 * @description 独立项目或者应用
+	 */
 	GM.apps={};
-	
-	//是否是debug模式
+	/**
+	 * @constant
+	 * @description 根据href里德debug关键字确定是否为debug模式
+	 */
 	GM.debug=function(){
 		var isdebug=(W.location.href.match('debug'));
 		return isdebug;
 	}();
-
-	//判断使用路径
-	//先找到当前的路径
+	/**
+	 * @constant
+	 * @description 获取当前js的根目录
+	 */
 	GM.host=function(){
 		var scripts=doc.getElementsByTagName('script'),i,base;
 		for(i=0;i<scripts.length;i++){
@@ -38,22 +55,40 @@
 		}
 		return base;
 	}();
-	
-	//转换到本地非压缩路径
+	/**
+	 * @static
+	 * @description 转换到本地非压缩路径
+	 * @function
+	 * @param {string} uri
+	 * @returns {string} 处理过的路径
+	 */
 	GM.locality=function(uri){
-		return uri.replace('bulid','src').replace('-min','');
+		return uri.replace(/bulid/g,'src').replace(/\-min/g,'');
 	}
-	
+	/**
+	 * @constant
+	 * @description widget的根目录
+	 */
 	GM.widget.host=GM.host + 'widget/';
+	/**
+	 * @constant
+	 * @description apps的根目录
+	 */
 	GM.apps.host=GM.host + 'apps/';
 	
+	//debug模式下处理路径
 	if(GM.debug){
 		GM.host='http://172.16.2.215/gm/bulid/';
 		GM.widget.host=GM.locality(GM.host) + 'widget/';
 		GM.apps.host=GM.locality(GM.host) + 'apps/';
 	}
-	
-	//额外加载项目文件 - 项目文件目前依赖关系依靠ant维护
+	/**
+	 * @static
+	 * @description 额外加载项目文件 - 项目文件目前依赖关系依靠ant维护
+	 * @function
+	 * @param {string} appname
+	 * @param {function} callback
+	 */
 	GM.apps.require=function(appname,callback){
 		var appuri = GM.host + 'apps/'+appname+'/'+appname+'-min.js';
 		if(GM.debug) appuri=GM.locality(appuri);
@@ -63,10 +98,19 @@
 			});
 		});
 	}
-	
-	//加载widget的方法
+	/**
+	 * @static
+	 * @description 把用过的widget储存，再次use则不再调用
+	 * @private
+	 */
 	GM.widget.usemap={};
-	
+	/**
+	 * @static
+	 * @description 加载widget的方法
+	 * @function
+	 * @param {string} widget
+	 * @param {function} callback
+	 */
 	GM.widget.use=function(widget,callback){
 		if(GM.widget.usemap.hasOwnProperty(widget)){
 			if(callback) callback(GM.widget);
@@ -87,7 +131,7 @@
 		GM.widget.use('debug',function(widget){
 				widget.debug.init();
 		});
-	} 
+	}
 	
 	W.GM=GM;
 })(window,document,jQuery);
@@ -302,12 +346,27 @@
  * @fileoverview 滚动木马组件，支持上下左右，自动延迟滚动
  */
 (function(W,doc,$,G){
-	
+	/**
+	 * @memberOf jQuery
+	 * @constructor
+	 * @description 控制指定容器里的元素，上下左右滚动的组件
+	 * @param {objcet} cg
+	 * @property {string} wrap <p>#wrap外部包裹容器</p>
+	 * @property {string} wrapitem <p>.wrapitem内部包裹元素</p>
+	 * @property {string} [direction="left"] left|top方向
+	 * @property {number} [current=0] 当前指定滚动到第几页
+	 * @property {boolen} [auto=false] 是否自动滚动
+	 * @property {number} [autointerval=3000] 自动滚动间隔 毫秒
+	 */
 	var carousel=function(cg){
 		
 		var _carousel=function(){
-			
-			
+			/**
+			 * @private
+			 * @function
+			 * @param {object} cg 初始化carousel的参数
+			 * @description 根据config构建需要的dom结构
+			 */
 			var _bulid=function(cg){
 				var wrap=cg.wrap,wrapitem=cg.wrapitem;
 				if(wrap=="" || wrapitem=="") return;
@@ -350,16 +409,6 @@
 			
 			return {
 				_init:function(o){
-					/* HTML Structure
-					 * <div id="wrapCls">
-					 * 	<div>
-					 * 		<div class="Wrapitem"></div>
-					 * 		<div class="Wrapitem"></div>
-					 * 		<div class="Wrapitem"></div>
-					 * 		<div class="Wrapitem"></div>
-					 * 	</div>
-					 * </div>
-					 */			
 					var _o={
 						wrap:'',
 						wrapitem:'',
@@ -388,6 +437,11 @@
 		}();
 		
 		_carousel._init.prototype={
+			/**
+			 * @name jQuery.carousel#forward
+			 * @function
+			 * @description 向前翻一页
+			 */
 			forward:function(){
 				var that=this,config=that.config,
 					l=$(config.wrap).find(config.wrapitem).length;
@@ -398,6 +452,11 @@
 					that.to(config.current);
 				}
 			},
+			/**
+			 * @name jQuery.carousel#backward
+			 * @function
+			 * @description 向后翻一页
+			 */
 			backward:function(){
 				var that=this,config=that.config,
 					l=$(config.wrap).find(config.wrapitem).length;
@@ -408,6 +467,12 @@
 					that.to(config.current);
 				}
 			},
+			/**
+			 * @name jQuery.carousel#to
+			 * @function
+			 * @description 翻到第几页
+			 * @param {number} guide 页数指针
+			 */
 			to:function(guide){
 				var that=this,config=that.config,moveObj={},
 					Realwrap=$(config.wrap).find('.fixclear'),
@@ -426,12 +491,24 @@
 					config.endflg=true;
 				});
 			},
+			/**
+			 * @private
+			 * @name jQuery.carousel-auto
+			 * @function
+			 * @description 激活自动滚动 |配置项没激活的话，这里可以唤醒
+			 */
 			auto:function(){
 				var that=this,config=that.config;
 				that.T=setInterval(function(){
 					that.forward();
 				},config.autointerval);
 			},
+			/**
+			 * @private
+			 * @function
+			 * @name jQuery.carousel-autoEvent
+			 * @description 绑定自动滚动需要的事件
+			 */
 			autoEvent:function(){
 				var that=this,config=that.config;
 				$(config.wrap).live('mouseenter',function(){
@@ -440,10 +517,22 @@
 					that.auto();
 				});
 			},
+			/**
+			 * @name jQuery.carousel#before
+			 * @event
+			 * @param {number} current 当前到第几页了
+			 * @description 翻页之前触发
+			 */
 			before:function(current){
 				var that=this,config=that.config;
 				config.before(current);
 			},
+			/**
+			 * @name jQuery.carousel#after
+			 * @event
+			 * @param {number} current 当前到第几页了
+			 * @description 翻页之后触发
+			 */
 			after:function(current){
 				var that=this,config=that.config;
 				config.after(current);
@@ -530,31 +619,34 @@
  * @fileoverview
  * <p>直接引用jquery 开源cookie插件
  * <a href="https://github.com/carhartl/jquery-cookie" target="_blank">jquery-cookie</a></p>
- *
- *	<h3>使用方法</h3>
- *	<p>Create session cookie:<br>
- *	
- *	$.cookie('the_cookie', 'the_value');<br>
- *	
- *	Create expiring cookie, 7 days from then:<br>
- *	
- *	$.cookie('the_cookie', 'the_value', { expires: 7 });<br>
- *	
- *	Create expiring cookie, valid across entire page:<br>
- *	
- *	$.cookie('the_cookie', 'the_value', { expires: 7, path: '/' });<br>
- *	
- *	Read cookie:<br>
- *	
- *	$.cookie('the_cookie'); // => 'the_value'<br>
- *	$.cookie('not_existing'); // => null<br>
- *	
- *	Delete cookie by passing null as value:<br>
- *	
- *	$.cookie('the_cookie', null);</p>
  */
 (function(W,G,$){
-	
+	/**
+	 * @memberOf jQuery
+	 * @class
+	 * @description 存取改cookie值
+	 * @param {string} key cookie的键值
+	 * @param {string} value 设置cookie的新值
+	 * @param {objcet} options
+	 * @property {boolen} [raw=false] 是否encodeURIComponent
+	 * @property {number} [expires=-1] 过期时间，天为单位
+	 * @property {string} [path=""] cookie路径
+	 * @property {string} [domain=""] domain设置
+	 * @property {boolen} [secure="secure"] 默认是secure的
+	 * @example
+	 *  <h3>使用方法</h3>
+	 *	<p>Create session cookie:<br>
+	 *	$.cookie('the_cookie', 'the_value');<br>
+	 *	Create expiring cookie, 7 days from then:<br>
+	 *	$.cookie('the_cookie', 'the_value', { expires: 7 });<br>
+	 *	Create expiring cookie, valid across entire page:<br>
+	 *	$.cookie('the_cookie', 'the_value', { expires: 7, path: '/' });<br>
+	 *	Read cookie:<br>
+	 *	$.cookie('the_cookie'); // => 'the_value'<br>
+	 *	$.cookie('not_existing'); // => null<br>
+	 *	Delete cookie by passing null as value:<br>
+	 *	$.cookie('the_cookie', null);</p> 
+	 */
 	var cookie = function (key, value, options) {
 	    // key and at least value given, set cookie...
 	    if (arguments.length > 1 && String(value) !== "[object Object]") {

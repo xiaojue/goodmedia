@@ -12,46 +12,47 @@
 <span class='line'>  5</span>  */</span><span class="WHIT">
 <span class='line'>  6</span> </span><span class="PUNC">(</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">W</span><span class="PUNC">,</span><span class="NAME">$</span><span class="PUNC">,</span><span class="NAME">G</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
 <span class='line'>  7</span> </span><span class="WHIT">	</span><span class="COMM">/**
-<span class='line'>  8</span> 	 * @name GM.apps.cmsmuenbar
-<span class='line'>  9</span> 	 * @private
+<span class='line'>  8</span> 	 * @memberOf GM.apps
+<span class='line'>  9</span> 	 * @description cms欢迎导航根据cookie判断来初始化登录头
 <span class='line'> 10</span> 	 */</span><span class="WHIT">
 <span class='line'> 11</span> </span><span class="WHIT">	</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">cmsmuenbar</span><span class="PUNC">=</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
 <span class='line'> 12</span> </span><span class="WHIT">		</span><span class="WHIT">
 <span class='line'> 13</span> </span><span class="WHIT">		</span><span class="KEYW">return</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
 <span class='line'> 14</span> </span><span class="WHIT">			</span><span class="COMM">/**
-<span class='line'> 15</span> 			 * @name GM.apps.cmsmuenbar.exports
-<span class='line'> 16</span> 			 * @class
+<span class='line'> 15</span> 			 * @namespace
+<span class='line'> 16</span> 			 * @memberOf GM.apps.cmsmuenbar
 <span class='line'> 17</span> 			 */</span><span class="WHIT">
 <span class='line'> 18</span> </span><span class="WHIT">			</span><span class="NAME">exports</span><span class="PUNC">:</span><span class="PUNC">{</span><span class="WHIT">
 <span class='line'> 19</span> </span><span class="WHIT">				</span><span class="COMM">/**
-<span class='line'> 20</span> 				 * @name GM.apps.cmsmuenbar.exports.init
-<span class='line'> 21</span> 				 * @function
-<span class='line'> 22</span> 				 * @description cms欢迎导航根据cookie判断来初始化登录头
-<span class='line'> 23</span> 				 */</span><span class="WHIT">
-<span class='line'> 24</span> </span><span class="WHIT">				</span><span class="NAME">init</span><span class="PUNC">:</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'> 25</span> </span><span class="WHIT">					</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">user</span><span class="PUNC">=</span><span class="NAME">$.cookie</span><span class="PUNC">(</span><span class="STRN">'ATsport'</span><span class="PUNC">)</span><span class="PUNC">,</span><span class="NAME">myhtml</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 26</span> </span><span class="WHIT">					</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">user</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'> 27</span> </span><span class="WHIT">						</span><span class="NAME">myhtml</span><span class="PUNC">=</span><span class="STRN">'&lt;div class="members_login2">'</span><span class="PUNC">+</span><span class="WHIT">
-<span class='line'> 28</span> </span><span class="WHIT">						              </span><span class="STRN">'&lt;span>&lt;a href="http://www.idongmi.com/">&lt;img src="http://s2.ifiter.com/static/images/head_index.gif">&lt;/a>&lt;/span>'</span><span class="PUNC">+</span><span class="WHIT">
-<span class='line'> 29</span> </span><span class="WHIT">						               </span><span class="STRN">'&lt;a target="_blank" href="http://x.idongmi.com/user/index.jsp">我的首页&lt;/a>'</span><span class="PUNC">+</span><span class="WHIT">
-<span class='line'> 30</span> </span><span class="WHIT">						               </span><span class="STRN">'&lt;a target="_blank" href="http://bbs.idongmi.com/bbs/pm.php?filter=privatepm">消息(&lt;font id="pmnew">0&lt;/font>)&lt;/a>'</span><span class="PUNC">+</span><span class="WHIT">
-<span class='line'> 31</span> </span><span class="WHIT">						               </span><span class="STRN">'&lt;a href="http://x.idongmi.com/user/edit.jsp">账号设置&lt;/a>&lt;a href="http://bbs.idongmi.com/bbs/logging.php?action=logout&formhash=a9886807&referer=http://www.idongmi.com">退出&lt;/a>'</span><span class="PUNC">+</span><span class="WHIT">
-<span class='line'> 32</span> </span><span class="WHIT">						           </span><span class="STRN">'&lt;/div>'</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 33</span> </span><span class="WHIT">						</span><span class="NAME">$</span><span class="PUNC">(</span><span class="STRN">'#J_Muenbar'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">html</span><span class="PUNC">(</span><span class="NAME">myhtml</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 34</span> </span><span class="WHIT">						 </span><span class="COMM">//取消息</span><span class="WHIT">
-<span class='line'> 35</span> </span><span class="WHIT">						</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">pmurl</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="STRN">"http://bbs.idongmi.com/java/bg_pm.php"</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 36</span> </span><span class="WHIT">						</span><span class="NAME">$.getScript</span><span class="PUNC">(</span><span class="NAME">pmurl</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 37</span> </span><span class="WHIT">					</span><span class="PUNC">}</span><span class="KEYW">else</span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'> 38</span> </span><span class="WHIT">						</span><span class="NAME">myhtml</span><span class="PUNC">=</span><span class="STRN">'&lt;a href="http://bbs.idongmi.com/bbs/register.php" target="_blank">立即注册&lt;/a>'</span><span class="PUNC">+</span><span class="WHIT">
-<span class='line'> 39</span> </span><span class="WHIT">						   </span><span class="STRN">'&lt;a href="http://bbs.idongmi.com/bbs/logging.php?action=login&referer=http://x.idongmi.com/user/index.jsp">马上登录&lt;/a>'</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 40</span> </span><span class="WHIT">						</span><span class="NAME">$</span><span class="PUNC">(</span><span class="STRN">'#J_Muenbar'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">html</span><span class="PUNC">(</span><span class="NAME">myhtml</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 41</span> </span><span class="WHIT">					</span><span class="PUNC">}</span><span class="WHIT">
-<span class='line'> 42</span> </span><span class="WHIT">				</span><span class="PUNC">}</span><span class="WHIT">
-<span class='line'> 43</span> </span><span class="WHIT">			</span><span class="PUNC">}</span><span class="WHIT">
-<span class='line'> 44</span> </span><span class="WHIT">		</span><span class="PUNC">}</span><span class="WHIT">
-<span class='line'> 45</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 46</span> </span><span class="WHIT">	</span><span class="WHIT">
-<span class='line'> 47</span> </span><span class="WHIT">	</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">G</span><span class="WHIT"> </span><span class="PUNC">&&</span><span class="WHIT"> </span><span class="NAME">G.apps</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="NAME">G.apps.cmsmuenbar</span><span class="PUNC">=</span><span class="NAME">cmsmuenbar</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 48</span> </span><span class="WHIT">		</span><span class="WHIT">
-<span class='line'> 49</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">(</span><span class="NAME">window</span><span class="PUNC">,</span><span class="NAME">jQuery</span><span class="PUNC">,</span><span class="NAME">GM</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 50</span> </span></pre></body></html>
+<span class='line'> 20</span> 				 * @memberOf GM.apps.cmsmuenbar.exports
+<span class='line'> 21</span> 				 * @static
+<span class='line'> 22</span> 				 * @function
+<span class='line'> 23</span> 				 * @description cms欢迎导航根据cookie判断来初始化登录头
+<span class='line'> 24</span> 				 */</span><span class="WHIT">
+<span class='line'> 25</span> </span><span class="WHIT">				</span><span class="NAME">init</span><span class="PUNC">:</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 26</span> </span><span class="WHIT">					</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">user</span><span class="PUNC">=</span><span class="NAME">$.cookie</span><span class="PUNC">(</span><span class="STRN">'ATsport'</span><span class="PUNC">)</span><span class="PUNC">,</span><span class="NAME">myhtml</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 27</span> </span><span class="WHIT">					</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">user</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 28</span> </span><span class="WHIT">						</span><span class="NAME">myhtml</span><span class="PUNC">=</span><span class="STRN">'&lt;div class="members_login2">'</span><span class="PUNC">+</span><span class="WHIT">
+<span class='line'> 29</span> </span><span class="WHIT">						              </span><span class="STRN">'&lt;span>&lt;a href="http://www.idongmi.com/">&lt;img src="http://s2.ifiter.com/static/images/head_index.gif">&lt;/a>&lt;/span>'</span><span class="PUNC">+</span><span class="WHIT">
+<span class='line'> 30</span> </span><span class="WHIT">						               </span><span class="STRN">'&lt;a target="_blank" href="http://x.idongmi.com/user/index.jsp">我的首页&lt;/a>'</span><span class="PUNC">+</span><span class="WHIT">
+<span class='line'> 31</span> </span><span class="WHIT">						               </span><span class="STRN">'&lt;a target="_blank" href="http://bbs.idongmi.com/bbs/pm.php?filter=privatepm">消息(&lt;font id="pmnew">0&lt;/font>)&lt;/a>'</span><span class="PUNC">+</span><span class="WHIT">
+<span class='line'> 32</span> </span><span class="WHIT">						               </span><span class="STRN">'&lt;a href="http://x.idongmi.com/user/edit.jsp">账号设置&lt;/a>&lt;a href="http://bbs.idongmi.com/bbs/logging.php?action=logout&formhash=a9886807&referer=http://www.idongmi.com">退出&lt;/a>'</span><span class="PUNC">+</span><span class="WHIT">
+<span class='line'> 33</span> </span><span class="WHIT">						           </span><span class="STRN">'&lt;/div>'</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 34</span> </span><span class="WHIT">						</span><span class="NAME">$</span><span class="PUNC">(</span><span class="STRN">'#J_Muenbar'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">html</span><span class="PUNC">(</span><span class="NAME">myhtml</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 35</span> </span><span class="WHIT">						 </span><span class="COMM">//取消息</span><span class="WHIT">
+<span class='line'> 36</span> </span><span class="WHIT">						</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">pmurl</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="STRN">"http://bbs.idongmi.com/java/bg_pm.php"</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 37</span> </span><span class="WHIT">						</span><span class="NAME">$.getScript</span><span class="PUNC">(</span><span class="NAME">pmurl</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 38</span> </span><span class="WHIT">					</span><span class="PUNC">}</span><span class="KEYW">else</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 39</span> </span><span class="WHIT">						</span><span class="NAME">myhtml</span><span class="PUNC">=</span><span class="STRN">'&lt;a href="http://bbs.idongmi.com/bbs/register.php" target="_blank">立即注册&lt;/a>'</span><span class="PUNC">+</span><span class="WHIT">
+<span class='line'> 40</span> </span><span class="WHIT">						   </span><span class="STRN">'&lt;a href="http://bbs.idongmi.com/bbs/logging.php?action=login&referer=http://x.idongmi.com/user/index.jsp">马上登录&lt;/a>'</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 41</span> </span><span class="WHIT">						</span><span class="NAME">$</span><span class="PUNC">(</span><span class="STRN">'#J_Muenbar'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">html</span><span class="PUNC">(</span><span class="NAME">myhtml</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 42</span> </span><span class="WHIT">					</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 43</span> </span><span class="WHIT">				</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 44</span> </span><span class="WHIT">			</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 45</span> </span><span class="WHIT">		</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 46</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 47</span> </span><span class="WHIT">	</span><span class="WHIT">
+<span class='line'> 48</span> </span><span class="WHIT">	</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">G</span><span class="WHIT"> </span><span class="PUNC">&&</span><span class="WHIT"> </span><span class="NAME">G.apps</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="NAME">G.apps.cmsmuenbar</span><span class="PUNC">=</span><span class="NAME">cmsmuenbar</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 49</span> </span><span class="WHIT">		</span><span class="WHIT">
+<span class='line'> 50</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">(</span><span class="NAME">window</span><span class="PUNC">,</span><span class="NAME">jQuery</span><span class="PUNC">,</span><span class="NAME">GM</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 51</span> </span></pre></body></html>

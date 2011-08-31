@@ -32,6 +32,7 @@
 
 	};
 	
+	var centerflg=true;
 	
 	map.prototype= {
 		//加载css
@@ -68,27 +69,30 @@
 						Gmap=google.maps,
 						Gevent=Gmap.event,
 						infowindow=new Gmap.InfoWindow(),
-						latlng = new Gmap.LatLng(center[1],center[0]), //首次加载定义的中心点
+						latlng = new Gmap.LatLng(center[0],center[1],true), //首次加载定义的中心点
 						myOptions = {
 							zoom:15,
-							center:latlng,
+							center: latlng,
 							mapTypeId: Gmap.MapTypeId.ROADMAP
-						},
-						map=new Gmap.Map(target,myOptions),	//载入地图
-						marker = new Gmap.Marker({
+						};
+						
+						var map=new Gmap.Map(target,myOptions);//载入地图
+						
+						var marker = new Gmap.Marker({
 							title:name,
-							position: latlng,
+							position:latlng,
 							map: map,
 							draggable: function() {
 								if(that.drag || that.type=="search") return true;
 								return false;
 							}()
-						}),
-						_fn={
+						});
+						
+						var _fn={
 							//设置坐标值
 							setlatlng:function(m,c){
 								var center=m.getPosition();
-								$('#J_Coord').html('lat:<span id="J_Pa">'+center['Pa']+'</span><br/>lng:<span id="J_Oa">'+center['Oa']+'</span>');
+								$('#J_Coord').html('lat:<span id="J_Pa">'+center['Pa']+'</span><br/>lng:<span id="J_Oa">'+center['Qa']+'</span>');
 							},
 							//取坐标
 							//这里的pa和oa用反了……囧，程序都做完了才发现精度纬度是拧着的，后台已经按照这个走了
@@ -96,7 +100,7 @@
 							getPosition:function(m){
 								var center=m.getPosition();
 								return {
-									lat:center['Oa'],
+									lat:center['Qa'],
 									lng:center['Pa']
 								}
 							},
@@ -139,22 +143,21 @@
 											resultlat=result['lat'],
 											resultlng=result['lng'],
 											resultname=result['name'];
-											
 											function addMarker(name,lat,lng){
-												var	newlatlng = new Gmap.LatLng(lat,lng),
-													marker = new Gmap.Marker({
+												var	newlatlng = new Gmap.LatLng(lat,lng,true),
+													newmarker = new Gmap.Marker({
 													title:name,
 													position:newlatlng,
 													map: map,
 													icon:'http://s1.ifiter.com/static/images/map/124.png'
 												});
 												
-												markAry.push(marker);
+												markAry.push(newmarker);
 												
 												var msg=$.substitute(infotemp,result);
 												
 												//给找到的场馆marker对象绑定点击事件
-												Gevent.addListener(marker,'click',function (){
+												Gevent.addListener(newmarker,'click',function (){
 													var	current=i+1,
 														max=10,
 														page=Math.ceil(current/max);
@@ -182,7 +185,7 @@
 											if(resultlat=="0.0" && resultlng=="0.0"){
 												that._searchQ(result['cityZone'],function(location){
 													if(location){
-														addMarker(resultname,location['Oa'],location['Pa']);
+														addMarker(resultname,location['Qa'],location['Pa']);
 													}
 												});
 											}else{
@@ -300,14 +303,14 @@
 							},
 							//map和圈点击的handle
 							clickseach:function(e){
-								var lat=e['latLng']['Oa'],
+								var lat=e['latLng']['Qa'],
 									lng=e['latLng']['Pa'],
-									darwin = new Gmap.LatLng(lat,lng);	
+									darwin = new Gmap.LatLng(lng,lat);	
 								marker.setPosition(darwin);
 								_fn.postPostion(marker);
 							},
 							postPostionSuccess:function(data,lat,lng){
-								var darwin = new Gmap.LatLng(lat,lng); //设置新的地图中心点
+								var darwin = new Gmap.LatLng(lat,lng,true); //设置新的地图中心点
 									map.setCenter(darwin);
 									map.setZoom(13);
 									try{
@@ -358,7 +361,7 @@
 								}
 								that._searchQ(q,function(location){
 									if(location){
-										var darwin = new Gmap.LatLng(location['Oa'],location['Pa']);
+										var darwin = new Gmap.LatLng(location['Pa'],location['Qa'],true);
 										map.setCenter(darwin);
 										marker.setPosition(darwin);
 										_fn.postPostion(marker);
@@ -376,7 +379,7 @@
 												_fn.deleteMarkers(markersArray,Circle);
 												_fn.addrimmarkers(dataAry,map,infowindow,markersArray);
 												_fn.pagallfire(dataAry);
-												var darwin = new Gmap.LatLng(dataAry[0]['lat'],dataAry[0]['lng']);//设置新的地图中心点
+												var darwin = new Gmap.LatLng(dataAry[0]['lat'],dataAry[0]['lng'],true);//设置新的地图中心点
 												map.setCenter(darwin);
 												map.setZoom(11);
 											}else{
@@ -478,22 +481,20 @@
 							//发送当前坐标到搜索api，返回周边场馆
 							postPostion:function(m){
 								var coord=_fn.getPosition(m),
-									lat=coord.lat,
-									lng=coord.lng,
-									action='/api/mi.jsp?v=geo/'+lng+'/'+lat;
-								
+									action='/api/mi.jsp?v=geo/'+coord.lat+'/'+coord.lng;
+									
 								$.ajax({
 									url:action,
 									type:'GET',
 									success:function(data){
-										_fn.postPostionSuccess(data,lat,lng);
-										that._sharehash(lat,lng);
+										_fn.postPostionSuccess(data,coord.lng,coord.lat);
+										that._sharehash(coord.lng,coord.lat);
 									},
 									error:_fn.postPostionError
 								});
 							}
 						};
-						
+					
 					//如果存在markerhtml初始值直接初始化infowindow
 					if(that.markerhtml!="") {
 						infowindow.setContent(that.markerhtml);
@@ -528,7 +529,7 @@
 						//点击地图的时候也进行查找
 						Gevent.addListener(map,'click',_fn.clickseach);
 					}
-
+				
 					//构建bar
 					if(that.bar) that._bulidbar(that.target);
 				}
@@ -576,18 +577,16 @@
 				
 			//加载相关css
 			that._loadcss();
-			
 			//如果hash里存在经纬度，则根据url里的经纬来初始化
 			if(Initlatlng['lat'] && Initlatlng['lng']){
-				that.center=[Initlatlng['lng'],Initlatlng['lat']] //这是反的……
+				that.center=[Initlatlng['lat'],Initlatlng['lng']] //这是反的……
 			}
-
 			//不给坐标的情况下，给关键字q，自己搜索绘制
 			if(!that.center) {
 				//没有坐标的时候，用内置反查询搜索q的位置，如果q还没有搜到，则不显示
 				that._searchQ(that.q,function(location){
 					if(location){
-						that.center=[location['Pa'],location['Oa']];
+						that.center=[location['Pa'],location['Qa']];
 						that.drawmap(target,that.center,that.name,that.siteNo);
 					}else{
 						that._Initerror(target);
@@ -595,6 +594,10 @@
 				});
 			} else if(that.center) {
 				//给了坐标，直接根据坐标绘制地图，name为场馆名字
+				if(centerflg && !Initlatlng['lat'] && !Initlatlng['lng']){
+					that.center=[that.center[1],that.center[0]]
+					centerflg=false;
+				}
 				that.drawmap(target,that.center,that.name,that.siteNo);
 			}
 
@@ -739,8 +742,8 @@
 					url:'/gestion/map.jsp',
 					data: {
 						siteno:that.siteNo,
-						latitude:$('#J_Pa').text(),
-						longitude:$('#J_Oa').text(),
+						latitude:$('#J_Oa').text(),
+						longitude:$('#J_Pa').text(),
 						act:'update'
 					},
 					success: function(str) {

@@ -4,11 +4,23 @@
  * @fileoverview 照片墙编辑照片部分的交互应用
  */
 (function(W,doc,$,G){
-	
+	/**
+	 * @memberOf GM.apps
+	 * @description 照片墙编辑照片部分的交互应用
+	 */
 	var editphoto=function(){
 		
 		return {
+			/**
+			 * @namespace
+			 * @memberOf GM.apps.editphoto
+			 */
 			exports:{
+				/**
+				 * @memberOf GM.apps.editphoto.exports
+				 * @function
+				 * @description 照片墙编辑照片部分的交互应用
+				 */
 				init:function(){
 					
 					$.overlay();

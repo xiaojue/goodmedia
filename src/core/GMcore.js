@@ -5,13 +5,13 @@
  */
 (function(W,doc,$){
 	/**
-	 * @class
+	 * @namespace
 	 * @name GM
 	 * @description 全局的GM对象
 	 */
 	
 	/**
-	 * @class
+	 * @namespace
 	 * @name jQuery
 	 * @description 这里只对私自扩展的jQuery进行doc描述
 	 */

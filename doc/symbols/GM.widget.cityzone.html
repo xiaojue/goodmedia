@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - GM.apps</title>
+		<title>JsDoc Reference - GM.widget.cityzone</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -228,7 +228,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Namespace GM.apps
+				Class GM.widget.cityzone
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -239,14 +239,14 @@ ul.inheritsList
 				
 				
 				
-					<br /><i>Defined in: </i> <a href="../symbols/src/E__apache_htdocs_gm_src__core_GMcore.js.html">GMcore.js</a>.
+					<br /><i>Defined in: </i> <a href="../symbols/src/E__apache_htdocs_gm_src__widget_cityzone_cityzone.js.html">cityzone.js</a>.
 				
 			</p>
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class GM.apps.">
-				<caption>Namespace Summary</caption>
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class GM.widget.cityzone.">
+				<caption>Class Summary</caption>
 				<thead>
 					<tr>
 						<th scope="col">Constructor Attributes</th>
@@ -258,9 +258,9 @@ ul.inheritsList
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/GM.apps.html#constructor">GM.apps</a></b>
+								<b><a href="../symbols/GM.widget.cityzone.html#constructor">GM.widget.cityzone</a></b>(pbid, pserid, cityname, districtname)
 							</div>
-							<div class="description">独立项目或者应用</div>
+							<div class="description">2级联动的城市菜单，val和text都是中文城市字符</div>
 						</td>
 					</tr>
 				</tbody>
@@ -269,90 +269,12 @@ ul.inheritsList
 
 <!-- ============================== properties summary ===================== -->
 			
-				
-				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class GM.apps.">
-					<caption>Field Summary</caption>
-					<thead>
-						<tr>
-							<th scope="col">Field Attributes</th>
-							<th scope="col">Field Name and Description</th>
-						</tr>
-					</thead>
-					<tbody>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								GM.apps.<b><a href="../symbols/GM.apps.html#.cmsmuenbar">cmsmuenbar</a></b>
-								</div>
-								<div class="description">cms欢迎导航根据cookie判断来初始化登录头</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								GM.apps.<b><a href="../symbols/GM.apps.html#.editphoto">editphoto</a></b>
-								</div>
-								<div class="description">照片墙编辑照片部分的交互应用</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &lt;constant&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								GM.apps.<b><a href="../symbols/GM.apps.html#.host">host</a></b>
-								</div>
-								<div class="description">apps的根目录</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								GM.apps.<b><a href="../symbols/GM.apps.html#.ie6tips">ie6tips</a></b>
-								</div>
-								<div class="description">IE6以下用户友情提示升级或者更换浏览器</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								GM.apps.<b><a href="../symbols/GM.apps.html#.syllabus">syllabus</a></b>
-								</div>
-								<div class="description">课程表应用的js功能部分，这部分代码比较乱，详细内容较多，建议直接看源代码</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">
-								GM.apps.<b><a href="../symbols/GM.apps.html#.task">task</a></b>
-								</div>
-								<div class="description">动米网任务浮出层管理</div>
-							</td>
-						</tr>
-					
-					</tbody>
-				</table>
-				
-				
-				
-			
 
 <!-- ============================== methods summary ======================== -->
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class GM.apps.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class GM.widget.cityzone.">
 					<caption>Method Summary</caption>
 					<thead>
 						<tr>
@@ -365,9 +287,9 @@ ul.inheritsList
 						<tr>
 							<td class="attributes">&lt;static&gt; &nbsp;</td>
 							<td class="nameDescription">
-								<div class="fixedFont">GM.apps.<b><a href="../symbols/GM.apps.html#.require">require</a></b>(appname, callback)
+								<div class="fixedFont">GM.widget.cityzone.<b><a href="../symbols/GM.widget.cityzone.html#.init">init</a></b>(selectfn, callback)
 								</div>
-								<div class="description">额外加载项目文件 - 项目文件目前依赖关系依靠ant维护</div>
+								<div class="description">初始化2个select框，公有</div>
 							</td>
 						</tr>
 					
@@ -384,21 +306,50 @@ ul.inheritsList
 			
 			<div class="details"><a name="constructor"> </a>
 				<div class="sectionTitle">
-					Namespace Detail
+					Class Detail
 				</div>
 				
 				<div class="fixedFont">
-						<b>GM.apps</b>
+						<b>GM.widget.cityzone</b>(pbid, pserid, cityname, districtname)
 				</div>
 				
 				<div class="description">
-					独立项目或者应用
+					2级联动的城市菜单，val和text都是中文城市字符
 					
 				</div>
 				
 				
 				
 				
+					
+						<dl class="detailList">
+						<dt class="heading">Parameters:</dt>
+						
+							<dt>
+								<span class="light fixedFont">{string}</span>  <b>pbid</b>
+								
+							</dt>
+								<dd>市selectid</dd>
+						
+							<dt>
+								<span class="light fixedFont">{string}</span>  <b>pserid</b>
+								
+							</dt>
+								<dd>区selectid</dd>
+						
+							<dt>
+								<span class="light fixedFont">{string}</span>  <b>cityname</b>
+								<i>Optional</i>
+							</dt>
+								<dd>初始化的市名</dd>
+						
+							<dt>
+								<span class="light fixedFont">{string}</span>  <b>districtname</b>
+								<i>Optional</i>
+							</dt>
+								<dd>初始化的区名</dd>
+						
+						</dl>
 					
 					
 					
@@ -412,158 +363,6 @@ ul.inheritsList
 
 <!-- ============================== field details ========================== -->		
 			
-				<div class="sectionTitle">
-					Field Detail
-				</div>
-				
-					<a name=".cmsmuenbar"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">GM.apps.</span><b>cmsmuenbar</b>
-					
-					</div>
-					<div class="description">
-						cms欢迎导航根据cookie判断来初始化登录头
-						
-							<br />
-							<i>Defined in: </i> <a href="../symbols/src/E__apache_htdocs_gm_src__apps_cmsmuenbar_cmsmuenbar.js.html">cmsmuenbar.js</a>.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".editphoto"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">GM.apps.</span><b>editphoto</b>
-					
-					</div>
-					<div class="description">
-						照片墙编辑照片部分的交互应用
-						
-							<br />
-							<i>Defined in: </i> <a href="../symbols/src/E__apache_htdocs_gm_src__apps_editphoto_editphoto.js.html">editphoto.js</a>.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".host"> </a>
-					<div class="fixedFont">&lt;static&gt; &lt;constant&gt; 
-					
-					
-					<span class="light">GM.apps.</span><b>host</b>
-					
-					</div>
-					<div class="description">
-						apps的根目录
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".ie6tips"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">GM.apps.</span><b>ie6tips</b>
-					
-					</div>
-					<div class="description">
-						IE6以下用户友情提示升级或者更换浏览器
-						
-							<br />
-							<i>Defined in: </i> <a href="../symbols/src/E__apache_htdocs_gm_src__apps_ie6tips_ie6tips.js.html">ie6tips.js</a>.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".syllabus"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">GM.apps.</span><b>syllabus</b>
-					
-					</div>
-					<div class="description">
-						课程表应用的js功能部分，这部分代码比较乱，详细内容较多，建议直接看源代码
-						
-							<br />
-							<i>Defined in: </i> <a href="../symbols/src/E__apache_htdocs_gm_src__apps_syllabus_syllabus.js.html">syllabus.js</a>.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".task"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">GM.apps.</span><b>task</b>
-					
-					</div>
-					<div class="description">
-						动米网任务浮出层管理
-						
-							<br />
-							<i>Defined in: </i> <a href="../symbols/src/E__apache_htdocs_gm_src__apps_task_task.js.html">task.js</a>.
-						
-						
-					</div>
-					
-					
-
-						
-						
-						
-						
-
-					
-				
-			
 
 <!-- ============================== method details ========================= -->		
 			
@@ -571,15 +370,15 @@ ul.inheritsList
 					Method Detail
 				</div>
 				
-					<a name=".require"> </a>
+					<a name=".init"> </a>
 					<div class="fixedFont">&lt;static&gt; 
 					
 					
-					<span class="light">GM.apps.</span><b>require</b>(appname, callback)
+					<span class="light">GM.widget.cityzone.</span><b>init</b>(selectfn, callback)
 					
 					</div>
 					<div class="description">
-						额外加载项目文件 - 项目文件目前依赖关系依靠ant维护
+						初始化2个select框，公有
 						
 						
 					</div>
@@ -591,16 +390,16 @@ ul.inheritsList
 							<dt class="heading">Parameters:</dt>
 							
 								<dt>
-									<span class="light fixedFont">{string}</span> <b>appname</b>
+									<span class="light fixedFont">{function}</span> <b>selectfn</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>选择完之后触发，参数为当前的城市值+空格+城区值</dd>
 							
 								<dt>
 									<span class="light fixedFont">{function}</span> <b>callback</b>
 									
 								</dt>
-								<dd></dd>
+								<dd>初始化之后回调</dd>
 							
 							</dl>
 						

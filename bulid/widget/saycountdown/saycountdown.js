@@ -4,7 +4,11 @@
  * @fileoverview 为GM对象添加widget空间下的countdown组件,我说倒计时
  */
 (function(W,G){
-	
+	/**
+	 * @memberOf GM.widget
+	 * @class
+	 * @description 
+	 */
 	var saycountdown=function(cg){
 		
 		var fn={

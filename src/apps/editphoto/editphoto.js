@@ -5,19 +5,19 @@
  */
 (function(W,doc,$,G){
 	/**
-	 * @name GM.apps.editphoto
-	 * @private
+	 * @memberOf GM.apps
+	 * @description 照片墙编辑照片部分的交互应用
 	 */
 	var editphoto=function(){
 		
 		return {
 			/**
-			 * @name GM.apps.editphoto.exports
-			 * @class
+			 * @namespace
+			 * @memberOf GM.apps.editphoto
 			 */
 			exports:{
 				/**
-				 * @name GM.apps.editphoto.exports.init
+				 * @memberOf GM.apps.editphoto.exports
 				 * @function
 				 * @description 照片墙编辑照片部分的交互应用
 				 */

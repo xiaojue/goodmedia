@@ -1,11 +1,16 @@
 /**
  * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
  * @version 20110804
- * @fileoverview 分享消息到新浪微博使用内置xweibo的接口
+ * @fileoverview 分享课表信息到新浪微博使用内置xweibo的接口
  * 
  */
 (function(W,G){
-	
+	/**
+	 * @memberOf GM.widget
+	 * @class
+	 * @param {object} data 分享课表信息到微博的其他参数,对象形式存放在ajax.data里
+	 * @description 分享课表信息到新浪微博使用内置xweibo的接口
+	 */
 	var sharetosina=function(data){
 		
 		if(!data) return;

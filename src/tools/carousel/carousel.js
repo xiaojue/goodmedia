@@ -9,8 +9,8 @@
 	 * @constructor
 	 * @description 控制指定容器里的元素，上下左右滚动的组件
 	 * @param {objcet} cg
-	 * @property {element} wrap <p>#wrap外部包裹容器</p>
-	 * @property {element} wrapitem <p>.wrapitem内部包裹元素</p>
+	 * @property {string} wrap <p>#wrap外部包裹容器</p>
+	 * @property {string} wrapitem <p>.wrapitem内部包裹元素</p>
 	 * @property {string} [direction="left"] left|top方向
 	 * @property {number} [current=0] 当前指定滚动到第几页
 	 * @property {boolen} [auto=false] 是否自动滚动

@@ -4,31 +4,34 @@
  * @fileoverview
  * <p>直接引用jquery 开源cookie插件
  * <a href="https://github.com/carhartl/jquery-cookie" target="_blank">jquery-cookie</a></p>
- *
- *	<h3>使用方法</h3>
- *	<p>Create session cookie:<br>
- *	
- *	$.cookie('the_cookie', 'the_value');<br>
- *	
- *	Create expiring cookie, 7 days from then:<br>
- *	
- *	$.cookie('the_cookie', 'the_value', { expires: 7 });<br>
- *	
- *	Create expiring cookie, valid across entire page:<br>
- *	
- *	$.cookie('the_cookie', 'the_value', { expires: 7, path: '/' });<br>
- *	
- *	Read cookie:<br>
- *	
- *	$.cookie('the_cookie'); // => 'the_value'<br>
- *	$.cookie('not_existing'); // => null<br>
- *	
- *	Delete cookie by passing null as value:<br>
- *	
- *	$.cookie('the_cookie', null);</p>
  */
 (function(W,G,$){
-	
+	/**
+	 * @memberOf jQuery
+	 * @class
+	 * @description 存取改cookie值
+	 * @param {string} key cookie的键值
+	 * @param {string} value 设置cookie的新值
+	 * @param {objcet} options
+	 * @property {boolen} [raw=false] 是否encodeURIComponent
+	 * @property {number} [expires=-1] 过期时间，天为单位
+	 * @property {string} [path=""] cookie路径
+	 * @property {string} [domain=""] domain设置
+	 * @property {boolen} [secure="secure"] 默认是secure的
+	 * @example
+	 *  <h3>使用方法</h3>
+	 *	<p>Create session cookie:<br>
+	 *	$.cookie('the_cookie', 'the_value');<br>
+	 *	Create expiring cookie, 7 days from then:<br>
+	 *	$.cookie('the_cookie', 'the_value', { expires: 7 });<br>
+	 *	Create expiring cookie, valid across entire page:<br>
+	 *	$.cookie('the_cookie', 'the_value', { expires: 7, path: '/' });<br>
+	 *	Read cookie:<br>
+	 *	$.cookie('the_cookie'); // => 'the_value'<br>
+	 *	$.cookie('not_existing'); // => null<br>
+	 *	Delete cookie by passing null as value:<br>
+	 *	$.cookie('the_cookie', null);</p> 
+	 */
 	var cookie = function (key, value, options) {
 	    // key and at least value given, set cookie...
 	    if (arguments.length > 1 && String(value) !== "[object Object]") {

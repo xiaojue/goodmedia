@@ -62,10 +62,25 @@
 				        
 			$('#J_IndexMuen').prepend(buttery);
 		}
-		
+		/**
+		 * @memberOf GM.apps
+		 * @description 动米网任务浮出层管理
+		 */
 		var task=function(){
 			return {
+				/**
+				 * @namespace
+				 * @memberOf GM.apps.task
+				 */
 				exports:{
+					/**
+					 * @memberOf GM.apps.task.exports
+					 * @function
+					 * @description 触发浮出层弹出
+					 * @public
+					 * @param {string} todo 触发哪个任务
+					 * @param {object} parameter 任务所需要的变量参数
+					 */
 					fire:function(todo,parameter){
 						//如果有TaskConfig这个全局对象并且不存在flg cookie的话，则初始化任务功能
 						this.parameter=parameter;
@@ -86,6 +101,14 @@
 							this.bindEvent();
 						
 					},
+					/**
+					 * @memberOf GM.apps.task.exports
+					 * @function
+					 * @description 构建任务DOM结构
+					 * @private
+					 * @param {string} todo 任务名
+					 * @param {object} parameter 任务所需变量
+					 */
 					bulidTask:function(todo,parameter){
 						var that=this;
 						var todolist={
@@ -96,7 +119,7 @@
 										"让{coachname}带你一起来了解我们吧！<br>"+
 										"</div></div>"+
 										"<div class='task_but'>"+
-										'<input type="checkbox" id="J_GMTask">以后不在弹出'+
+										'<input type="checkbox" id="J_GMTask">以后不再弹出'+
 										'<span><a class="blue J_OverlayClose" href="#">谢谢，自己玩...</a></span>'+
 										'<input type="button" class="task_button" style="cursor:pointer;" value="完成" id="J_Todo1">'+
 										'</div>';
@@ -126,7 +149,10 @@
 								         //'<p class="green">并且获得我们为您准备的{food}食物</p>',
 									foot='<a href="#" class="blue J_OverlayClose">谢谢，自己玩...</a>'+
 										 '<a class="task_button" href="#" style="display:inline-block;text-decoration:none;_display:inline;zoom:1;" id="J_Todo2">下一个任务</a>';
-								$.cookie(that.parameter['uid']+'task1',1,{expires:365});
+								$.cookie(that.parameter['uid']+'task1',1,{
+									expires:365,
+									path:"/"
+								});
 								return tempTwo(left,right,foot);
 							},
 							'step2':function(){
@@ -153,7 +179,10 @@
 								         //'<p class="green">距离兑换{food}食物还差{gap}大米</p>',
 									foot='<a href="#" class="blue J_OverlayClose">谢谢，自己玩...</a>'+
 										 '<a class="task_button" href="#" style="display:inline-block;text-decoration:none;_display:inline;zoom:1;" id="J_Todo3">下一个任务</a>';
-								$.cookie(that.parameter['uid']+'task2',1,{expires:365});
+								$.cookie(that.parameter['uid']+'task2',1,{
+									expires:365,
+									path:"/"
+								});
 								return tempTwo(left,right,foot);
 							},
 							'step3':function(){
@@ -187,12 +216,18 @@
 						GM.tools.overlay.fire(lay);
 						
 					},
+					/**
+					 * @memberOf GM.apps.task.exports
+					 * @function
+					 * @description 绑定所有任务里的事件
+					 * @private
+					 */
 					bindEvent:function(){
 						var that=this;
 						//写入cookie，1年不再弹出
 						$('#J_GMTask').live('click',function(){
 							if($(this).attr('checked')){
-								$.cookie(that.parameter['uid'],1,{expires:30});
+								$.cookie(that.parameter['uid'],1,{expires:365,path:"/"});
 							}else{
 								$.cookie(that.parameter['uid'],null);
 							}
@@ -228,12 +263,22 @@
 						
 						//完成
 						$('.J_FinishTask').live('click',function(){
-							$.cookie(that.parameter['uid'],1,{expires:365});
-							$.cookie(that.parameter['uid']+'over',1,{expires:365});
+							//cookie 保存完成状态
+							$.cookie(that.parameter['uid'],1,{expires:365,path:"/"});
+							$.cookie(that.parameter['uid']+'over',1,{expires:365,path:"/"});
 							$('#J_Buttery').hide();
+							//ajax 告诉服务器，已经全部完成
+							$.get('/user/taskAjax.jsp');
 						});
 						
 					},
+					/**
+					 * @memberOf GM.apps.task.exports
+					 * @function
+					 * @description 创建登录条下部的提示条
+					 * @public
+					 * @param {number} step 到底第几步任务
+					 */
 					bulidbuttery:function(step){
 						if($.cookie(this.parameter['uid'])==1 || $.cookie(this.parameter['uid']+'over')==1) return;
 						bulidbuttery(step);

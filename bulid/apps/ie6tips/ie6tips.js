@@ -4,7 +4,10 @@
  * @fileoverview IE6以下用户友情提示升级或者更换浏览器
  */
 (function(W,G){
-	
+	/**
+	 * @memberOf GM.apps
+	 * @description IE6以下用户友情提示升级或者更换浏览器
+	 */
 	var ie6tips=function(){
 		var temp= '<div id="ie6-warning">'+
 					'您正在使用 Internet Explorer 6，本站部分效果和功能可能有损。建议您升级到 '+
@@ -15,7 +18,16 @@
 					'/ <a href="http://www.operachina.com/">Opera</a> 以获得更好的体验与速度。'+
 				 '</div>';
 		return {
+			/**
+			 * @namespace
+			 * @memberOf GM.apps.ie6tips
+			 */
 			exports:{
+				/**
+				 * @memberOf GM.apps.ie6tips.exports
+				 * @function
+				 * @description IE6以下用户友情提示升级或者更换浏览器
+				 */
 				init:function(){
 					var T;
 					$.loadcss(GM.apps.host+'ie6tips/ie6tips.css');
