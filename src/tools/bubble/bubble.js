@@ -5,22 +5,52 @@
  */
 (function(W,doc,$,G){
 	
-	var bubble=function(){
+	var bubble=function(config){
+		var _config={
+			width:200,
+			height:200,
+			cls:'',
+			postion:'bottom', //left right top bottom {left:,top:} 上下左右或者自己定义屏幕位置
+			target:'#xxx'
+		}
 		
-		var _bubble=function(){
+		$.extend(_config,config);
+		
+		function createWarp(){
 			
-			return {
-				_init:function(){
-					
-				}
-			}
 		};
 		
-		_bubble.prototype={
+		function getpostion(){
 			
 		};
 		
-		return new _bubble._init(cg);
-	};
+		function setpostion(){
+			
+		};
+		
+		function hideWarp(){
+			
+		};
+		
+		function showWarp(){
+			
+		};
+		
+		return {
+			init:function(){
+				
+			},
+			destroy:function(){
+				
+			},
+			show:showWarp,
+			hide:hideWarp
+		}
+		
+	}();
+	
+	$.extend({
+		bubble:bubble
+	});
 	
 })(window,document,jQuery,GM);

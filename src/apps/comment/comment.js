@@ -11,7 +11,10 @@
 			islogin:0, //默认没登录
 			Nowuid:null //当前用户的的uid，默认为null 就是没有-谁的也删不了
 		};
-		this.config=$.extend(config,_config);
+		
+		$.extend(_config,config);
+		
+		this.config=_config;
 	}
 	
 	comment.prototype={
@@ -94,6 +97,12 @@
 		}
 	}
 	
-	
+	if(G && G.apps){
+		G.apps.comment={
+			exports:{
+				init:comment
+			}
+		}
+	}
 	
 })(window,jQuery,GM);
