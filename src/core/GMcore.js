@@ -114,7 +114,7 @@
 	GM.widget.use=function(widget,callback){
 		//如果use过这个widget，则不再加载，只是添加一个callback，等待widget加载完毕，把所有callback全部执行
 		if(GM.widget.usemap.hasOwnProperty(widget)){
-			GM.widget.usemap[widget]['callback'].push(callback);
+			callback(GM.widget);
 			return;
 		}else{
 			GM.widget.usemap[widget]={

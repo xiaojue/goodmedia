@@ -45,7 +45,6 @@
 									b=(sex==1)? weight*0.082+44.74 : weight*0.082+34.89,
 									fat=a-b,
 									BFRIndices=((fat/weight)*100).toFixed(2)+'%';
-									
 								$('#J_BFRIndices').val(BFRIndices);
 							}
 						});

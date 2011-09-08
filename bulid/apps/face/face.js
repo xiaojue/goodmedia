@@ -110,7 +110,6 @@
 				root=cg.facebag.root,
 				format=cg.facebag.format,
 				result=str.replace(/\[(.*?)\]/g,function($0,$1){
-					console.log($0)
 					if(data[$1]){
 						return ' <img src="'+root+data[$1]+'.'+format+'" alt="'+$1+'" title="'+$1+'"> ';
 					}else{
