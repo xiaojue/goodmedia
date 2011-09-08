@@ -138,14 +138,17 @@
 				
 				if(guide>l || guide<0) return;
 				
+				config.current=guide;
+				
 				if(config.direction=='left'){
 					moveObj={'left':'-'+$(config.wrap).width()*guide}
 				}else if(config.direction=='top'){
 					moveObj={'top':'-'+$(config.wrap).height()*guide}
 				}
-				that.before(guide);			
+				
+				that.before(config.current);			
 				Realwrap.animate(moveObj,500,function(){
-					that.after(guide);
+					that.after(config.current);
 					config.endflg=true;
 				});
 			},
@@ -161,6 +164,10 @@
 					that.forward();
 				},config.autointerval);
 			},
+			stopauto:function(){
+				var that=this;
+				clearInterval(that.T);
+			},
 			/**
 			 * @private
 			 * @function
@@ -170,7 +177,7 @@
 			autoEvent:function(){
 				var that=this,config=that.config;
 				$(config.wrap).live('mouseenter',function(){
-					clearInterval(that.T);
+					that.stopauto();
 				}).live('mouseleave',function(){
 					that.auto();
 				});
@@ -194,6 +201,9 @@
 			after:function(current){
 				var that=this,config=that.config;
 				config.after(current);
+			},
+			getcurrent:function(){
+				return this.current;
 			}
 		};
 		

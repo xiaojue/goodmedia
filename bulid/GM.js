@@ -112,16 +112,25 @@
 	 * @param {function} callback
 	 */
 	GM.widget.use=function(widget,callback){
+		//如果use过这个widget，则不再加载，只是添加一个callback，等待widget加载完毕，把所有callback全部执行
 		if(GM.widget.usemap.hasOwnProperty(widget)){
-			if(callback) callback(GM.widget);
+			GM.widget.usemap[widget]['callback'].push(callback);
 			return;
-		} 
+		}else{
+			GM.widget.usemap[widget]={
+				uri:widgeturi,
+				callback:[]
+			}
+			GM.widget.usemap[widget]['callback'].push(callback);
+		}
+		
 		var widgeturi = GM.host + 'widget/'+widget+'/'+widget+'-min.js';
 		if(GM.debug) widgeturi=GM.locality(widgeturi);
 		$(function(){
 			$.getScript(widgeturi,function(){
-				GM.widget.usemap[widget]=widgeturi;
-				if(callback) callback(GM.widget);
+				for(var i=0;i<GM.widget.usemap[widget]['callback'].length;i++){
+					GM.widget.usemap[widget]['callback'][i](GM.widget);
+				}
 			});
 		});
 	}
@@ -129,9 +138,13 @@
 	//debug 模式下开启debug.js并且初始化debug面板
 	if(GM.debug){
 		GM.widget.use('debug',function(widget){
-				widget.debug.init();
+			widget.debug.init();
 		});
 	}
+	
+	GM.apps.require('idongmi',function(exports){
+		exports.init();
+	});
 	
 	W.GM=GM;
 })(window,document,jQuery);
@@ -480,14 +493,17 @@
 				
 				if(guide>l || guide<0) return;
 				
+				config.current=guide;
+				
 				if(config.direction=='left'){
 					moveObj={'left':'-'+$(config.wrap).width()*guide}
 				}else if(config.direction=='top'){
 					moveObj={'top':'-'+$(config.wrap).height()*guide}
 				}
-				that.before(guide);			
+				
+				that.before(config.current);			
 				Realwrap.animate(moveObj,500,function(){
-					that.after(guide);
+					that.after(config.current);
 					config.endflg=true;
 				});
 			},
@@ -503,6 +519,10 @@
 					that.forward();
 				},config.autointerval);
 			},
+			stopauto:function(){
+				var that=this;
+				clearInterval(that.T);
+			},
 			/**
 			 * @private
 			 * @function
@@ -512,7 +532,7 @@
 			autoEvent:function(){
 				var that=this,config=that.config;
 				$(config.wrap).live('mouseenter',function(){
-					clearInterval(that.T);
+					that.stopauto();
 				}).live('mouseleave',function(){
 					that.auto();
 				});
@@ -536,6 +556,9 @@
 			after:function(current){
 				var that=this,config=that.config;
 				config.after(current);
+			},
+			getcurrent:function(){
+				return this.current;
 			}
 		};
 		
@@ -554,26 +577,144 @@
  */
 (function(W,doc,$,G){
 	
-	var bubble=function(){
+	var bubble=function(config){
+		var _config={
+			width:0,
+			height:0,
+			cls:'',
+			postion:'bottom', //left right top bottom 上下左右
+			target:'',
+			id:'#J_Bubble'+new Date().valueOf().toString().slice(3)
+		}
 		
-		var _bubble=function(){
-			
-			return {
-				_init:function(){
-					
-				}
-			}
-		};
+		$.extend(_config,config);
 		
-		_bubble.prototype={
-			
-		};
-		
-		return new _bubble._init(cg);
+		this.config=_config;
 	};
+	
+	
+	bubble.prototype={
+		init:function(){
+			var that=this,cg=that.config;
+			that.createWrap(cg.target);
+		},
+		remove:function(){
+			var that=this,cg=that.config;
+			$(cg.id).remove();
+		},
+		show:function(){
+			var that=this,cg=that.config;
+			$(cg.id).show();
+		},
+		hide:function(){
+			var that=this,cg=that.config;
+			$(cg.id).hide();
+		},
+		setcontent:function(html){
+			var that=this,cg=that.config;
+			$(cg.id).html(html);
+		},
+		createWrap:function(target){
+			var cg=this.config,
+				postion=$(target).offset(),
+				boxH=$(target).height(),
+				boxW=$(target).width(),
+				postionsign={
+				bottom:{
+					left:postion.left-(cg.width/2),
+					top:postion.top+boxH
+				},
+				top:{
+					left:postion.left-(cg.width/2),
+					top:postion.top-cg.height
+				},
+				right:{
+					left:postion.left+boxW,
+					top:postion.top-(cg.width/2)
+				},
+				left:{
+					left:postion.left-cg.width,
+					top:postion.top-(cg.width/2)
+				}
+			};
+			
+			//根据位置进行创建wrap
+			if(postionsign.hasOwnProperty(cg.postion)){
+				var wrap=$('<div>')
+					.height(cg.height)
+					.width(cg.width)
+					.addClass(cg.cls)
+					.offset({
+					left:postionsign[cg.postion].left,
+					top:postionsign[cg.postion].top
+					})
+					.css({
+						'z-index':50,
+						'position':'absolute',
+						'display':'none'
+					})
+					.attr('id',cg.id.slice(1));
+				$('body').prepend(wrap);
+			}else{
+				console.log('config.postion is error puts left,right,top or bottom');
+			}
+		}
+	}
+	
+	$.extend({
+		bubble:bubble
+	});
 	
 })(window,document,jQuery,GM);
 /**
+ * @author fuqiang[designsor@gmail.com]
+ * @version 20110906
+ * @fileoverview switchable组件，哥实在扛不住挨个页面写一堆了……
+ */
+(function(W,G,$){
+	
+	var switchable=function(cg){
+		
+		function _switch(cg){
+			var _cg={
+				shownu:0, //默认第一个显示
+				targets:null, //elements
+				wraps:null, //elements
+				action:'click',
+				switchafter:function(){}
+			}
+			
+			$.extend(_cg,cg);
+			
+			this.config=_cg;
+		};
+		
+		_switch.prototype={
+			init:function(){
+				var that=this,cg=that.config;
+				$(cg.wraps).hide();
+				$(cg.wraps).eq(cg.shownu).show();
+				$(cg.targets).live(cg.action,function(){
+					var ele=$(this),
+						index=ele.index(cg.targets),
+						wrap=$(cg.wraps).eq(index);
+						$(cg.wraps).hide();
+						wrap.show();
+						cg.shownu=index;
+						cg.switchafter(index,ele,wrap);
+				});
+			}
+		}
+		
+		return new _switch(cg).init();
+		
+	};
+	
+	$.extend({
+		switchable:switchable
+	})
+	
+})(window,GM,jQuery);/**
  * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
  * @version 20110808
  * @fileoverview 模板替换，操作模板字符串等方法集合$.substitute,$.analyse
@@ -715,7 +856,7 @@
 /**
  * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
  * @version 20110826
- * @fileoverview 主要负责修复ie6的一些bug
+ * @fileoverview 主要负责修复ie6的一些bug，去你妈的IE6 -_-||
  */
 (function(W,G,$,doc){
 	
@@ -728,6 +869,7 @@
 					width: this.offsetWidth,
 	                height: this.offsetHeight,
 	                display:'inline-block',
+	                overflow:'hidden',
 	                cursor:(this.parentElement.href) ? 'hand' : ''
 				}).attr({
 					'title':this.alt || this.title || '',

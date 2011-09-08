@@ -112,16 +112,25 @@
 	 * @param {function} callback
 	 */
 	GM.widget.use=function(widget,callback){
+		//如果use过这个widget，则不再加载，只是添加一个callback，等待widget加载完毕，把所有callback全部执行
 		if(GM.widget.usemap.hasOwnProperty(widget)){
-			if(callback) callback(GM.widget);
+			GM.widget.usemap[widget]['callback'].push(callback);
 			return;
-		} 
+		}else{
+			GM.widget.usemap[widget]={
+				uri:widgeturi,
+				callback:[]
+			}
+			GM.widget.usemap[widget]['callback'].push(callback);
+		}
+		
 		var widgeturi = GM.host + 'widget/'+widget+'/'+widget+'-min.js';
 		if(GM.debug) widgeturi=GM.locality(widgeturi);
 		$(function(){
 			$.getScript(widgeturi,function(){
-				GM.widget.usemap[widget]=widgeturi;
-				if(callback) callback(GM.widget);
+				for(var i=0;i<GM.widget.usemap[widget]['callback'].length;i++){
+					GM.widget.usemap[widget]['callback'][i](GM.widget);
+				}
 			});
 		});
 	}
@@ -129,9 +138,13 @@
 	//debug 模式下开启debug.js并且初始化debug面板
 	if(GM.debug){
 		GM.widget.use('debug',function(widget){
-				widget.debug.init();
+			widget.debug.init();
 		});
 	}
+	
+	GM.apps.require('idongmi',function(exports){
+		exports.init();
+	});
 	
 	W.GM=GM;
 })(window,document,jQuery);

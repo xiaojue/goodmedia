@@ -2,6 +2,24 @@
  * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
  * @version 20110725
  * @fileoverview 联动地区菜单
+ * ..	┏┓      ┏┓
+	┏┛┻━━━┛┻┓
+	┃              ┃
+	┃      ━      ┃
+	┃  ┳┛  ┗┳  ┃
+	┃              ┃
+	┃      ┻      ┃
+	┃              ┃
+	┗━┓      ┏━┛
+	    ┃      ┃
+	    ┃      ┃
+	    ┃      ┗━━━┓
+	    ┃              ┣┓
+	    ┃              ┏┛
+	    ┗┓┓┏━┳┓┏┛
+	      ┃┫┫  ┃┫┫
+	      ┗┻┛  ┗┻┛      
+	这城市联动我都重写过3次了啊。。能不能行了还。。      
  */
 (function(W,G){
 	/**
@@ -144,6 +162,65 @@
 					if(selectfn) selectfn(str);
 				});
 				if(callback) callback();
+			},
+			/**
+			 * @description 次噢,我没什么想说的了!!!!!!!!!!!!!!!改吧。
+			 */
+			putscity:function(citywrap,zonewrap,current,currentzone,cls,citycallback,zonecallback){
+				var that=this,nowcity=current,nowzone=currentzone;
+				
+				if(current=='' && nowzone==''){
+					$(zonewrap).parent().hide();
+				}
+				
+				$(citywrap).prepend('<li class="all">全部</li>');
+				
+				for(var i=0;i<pb_arr.length;i++){
+					var cityname=pb_arr[i].split('|')[0];
+					if(cityname==current){
+						$(citywrap).append('<li><a href="javascript:void(0);" class="'+cls+'">'+cityname+'</a></li>');
+					}else{
+						$(citywrap).append('<li><a href="javascript:void(0);">'+cityname+'</a></li>');
+					}
+				}
+				
+				function bulidzone(wrap,city,nowzone,cls){
+					for(var i=0;i<pb_arr.length;i++){
+						var cityname=pb_arr[i].split('|')[0],zones=pb_arr[i].split('|')[1].split(',');
+						if(cityname==city){
+							for(var j=0;j<zones.length;j++){
+								if(zones[j]==nowzone){
+									$(wrap).append('<li><a href="javascript:void(0);" class="'+cls+'">'+zones[j]+'</a></li>');
+								}else{
+									$(wrap).append('<li><a href="javascript:void(0);">'+zones[j]+'</a></li>');
+								}
+							}
+							break;
+						}
+					}
+					$(wrap).prepend('<li class="all">全部</li>');
+				}
+				
+				bulidzone(zonewrap,current,currentzone,cls);
+				
+				$(citywrap+'>li>a').live('click',function(){
+					var that=this,
+						city=$(that).text();
+					$(zonewrap).html('');
+					$(citywrap+'>li>a').removeClass(cls);
+					$(that).addClass(cls);
+					nowcity=city;
+					bulidzone(zonewrap,city,0,cls);
+					if(citycallback) citycallback(that);
+				});
+				
+				$(zonewrap+'>li>a').live('click',function(){
+					var that=this;
+					nowzone=$(that).text();
+					$(zonewrap+'>li>a').removeClass(cls);
+					$(that).addClass(cls);
+					if(zonecallback) zonecallback(that);
+				});
 			}
 		}
 		

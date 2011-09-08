@@ -440,7 +440,7 @@
 							},
 							//获取自己数据库的模糊查询信息
 							getourcoord:function(data,callback){
-								var coordurl='/api/mi.jsp?v=geokey/'+data.q,
+								var coordurl='/api/mi.jsp?v=geokey/'+encodeURI(data.q),
 									c=0,mc=3,t=1000;
 								$.ajax({
 									type:'GET',
@@ -622,6 +622,18 @@
 					that._errorClick();
 				}
 			});
+			
+			//查看大图 ，监听参数
+			if(/jsmap\=lookmap/.test(W.location.href)){
+				$(window).load(function(){
+					if(that.coord || that.center) {
+						that._BigMapaction();
+					} else {
+						that._errorClick();
+					}
+				})
+			}
+			
 			//查询路线
 			$('.J_LookWay').live('click', function() {
 				if(that.coord || that.center) {

@@ -1,7 +1,7 @@
 /**
  * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
  * @version 20110826
- * @fileoverview 主要负责修复ie6的一些bug
+ * @fileoverview 主要负责修复ie6的一些bug，去你妈的IE6 -_-||
  */
 (function(W,G,$,doc){
 	
@@ -14,6 +14,7 @@
 					width: this.offsetWidth,
 	                height: this.offsetHeight,
 	                display:'inline-block',
+	                overflow:'hidden',
 	                cursor:(this.parentElement.href) ? 'hand' : ''
 				}).attr({
 					'title':this.alt || this.title || '',

@@ -52,9 +52,9 @@
 						putout='已超出<font>'+(l-max)+'</font>字';
 					}
 					
-					holdTarget.unbind('click');
+					holdTarget.die('click');
 					
-					holdTarget.bind('click',function(){
+					holdTarget.live('click',function(){
 						if(l<=max) that.holdAction();
 					});
 					
@@ -63,6 +63,8 @@
 					
 				holdfn();
 				main.keyup(holdfn);
+				
+				this.update=holdfn;
 			}
 		};
 		

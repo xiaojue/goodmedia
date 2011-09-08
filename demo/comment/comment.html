@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>comment</title>
+		<script src="../../jquery/jquery-1.6.2.js" charset=”utf-8″></script>
+		<script src="../../bulid/GM.js" type="text/javascript" charset=”UTF-8″></script>
+		<link type="text/css" rel="stylesheet" href="http://s1.ifiter.com/static/css.css">
+	</head>
+	<body>
+		<div style="background:#000;width:50px;height:40px;margin:30px;">
+			<a href="javascript:void(0);" id="test">bubble</a>
+		</div>
+		
+		<div id="J_Comment"></div>
+		
+		<script>
+		/*
+		var test=new $.bubble({target:'#test',postion:"right"});
+			test.init();
+		$('#test').click(function(e){
+			e.stopPropagation();
+			test.setcontent('sdajdsajdjh');
+			test.show();
+		});
+		
+		$(document).click(function(e){
+			var id=e.target.id;
+			if(test.config.id.slice(1)!=id) test.hide();
+		});
+		*/
+		GM.apps.require('comment',function(exports){
+			var comment=new exports.comment_init({
+				target:'#J_Comment'
+			});
+			comment.init();
+		});
+		</script>
+	</body>
+</html>

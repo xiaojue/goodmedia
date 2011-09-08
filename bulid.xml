@@ -41,6 +41,7 @@
 			tools\overlay\overlay.js
 			tools\carousel\carousel.js
 			tools\bubble\bubble.js
+			tools\switchable\switchable.js
 			tools\temp\temp.js
 			tools\cookie\cookie.js
 			tools\loadcss\loadcss.js
@@ -127,7 +128,7 @@
 			<targetfile/>
 		</apply>
 		
-		<!--²¿Êð-->
+		<!--²¿Êð -->
 		<delete dir="${GMonline.dir}"/>
 		<mkdir dir="${GMonline.dir}"/>
 		<copy todir="${GMonline.dir}" encoding="UTF-8" outputencoding="UTF-8">
