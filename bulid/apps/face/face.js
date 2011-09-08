@@ -132,14 +132,12 @@
 						target:cg.target,
 						postion:"bottom"
 					});
-					
 					face.init();
 					
 				var data=cg.facebag.data,
 					root=cg.facebag.root,
 					format=cg.facebag.format,
 					lis="";
-					
 				for(var i in data){
 					lis += '<li><a class="'+cg.cls.slice(1)+'" href="javascript:void(0);" data-meaning="'+i+'"><img src="'+root+data[i]+'.'+format+'"></a></li>';
 				}

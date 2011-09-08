@@ -89,12 +89,22 @@
 	 * @param {string} appname
 	 * @param {function} callback
 	 */
+	
+	GM.apps.map={};
+
 	GM.apps.require=function(appname,callback){
+		if(GM.apps.map.hasOwnProperty(appname)){
+			callback(GM.apps[appname]['exports']);
+			return;
+		}
 		var appuri = GM.host + 'apps/'+appname+'/'+appname+'-min.js';
 		if(GM.debug) appuri=GM.locality(appuri);
 		$(function(){
 			$.getScript(appuri,function(){
-				if(callback) callback(GM.apps[appname]['exports']);
+				if(callback){
+					GM.apps.map[appname]=true;
+					callback(GM.apps[appname]['exports']);
+				}
 			});
 		});
 	}

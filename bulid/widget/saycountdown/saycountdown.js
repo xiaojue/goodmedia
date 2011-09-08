@@ -40,7 +40,6 @@
 					holdTarget=$(that.holdTarget),
 					error=that.errorCls,
 					max=that.max;
-					
 				var	holdfn=function(){
 					var l=parseInt(main.val().length),putout;
 					
@@ -51,7 +50,6 @@
 						wrap.addClass(error);
 						putout='已超出<font>'+(l-max)+'</font>字';
 					}
-					
 					holdTarget.die('click');
 					
 					holdTarget.live('click',function(){

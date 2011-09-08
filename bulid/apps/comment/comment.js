@@ -266,7 +266,7 @@
 						eval('var result='+result);
 						if(callback) callback(result);
 					}catch(e){
-						alert(e)
+					console.log(e)
 					}
 				},
 				error:function(){
@@ -384,7 +384,6 @@
 		 */
 		Eventaction:function(){
 			var that=this,cg=that.config,T;
-			
 			//提交评论
 			G.widget.use('saycountdown',function(widget){
 				var mysay=widget.saycountdown({
@@ -488,9 +487,7 @@
 						CountTxt=that.createCount(result['cunt']),
 						PagTxt=that.createPag(result['cunt'],result['max'],cg.region),
 						endhtml=CountTxt+CommentWrap+PagTxt;
-						
 					cg.count=result['cunt'];
-					
 					$(cg.target).html(endhtml);
 					//实例face包
 					cg.myface=new exports.face({
@@ -498,7 +495,6 @@
 						main:cg.textid
 					});
 					cg.myface.init();
-					
 					//插入评论
 					$(cg.ulid).html(that.createComment(result['actList']));
 					//init的时候live一次 且仅live一次
