@@ -10,9 +10,10 @@
 		function sole(tag){
 			return tag+new Date().valueOf().toString().slice(3);
 		};
-		
+
 		var _config={
 			islogin:false, //默认没登录
+			showcount:true,
 			Nowuid:0, //当前用户的的uid，默认为0 就是没有-谁的也删不了
 			ulid:sole('#J_UL'),
 			pagid:sole('#J_PAG'),
@@ -113,7 +114,8 @@
 		createCount:function(count){
 			var that=this,cg=that.config,
 				count='<div class="pcomment_text" id="'+cg.pco.slice(1)+'"><span class="blue">评论(<span id="'+cg.countid.slice(1)+'">'+count+'</span>)</span></div>';
-			return count;
+				if(cg.showcount) return count;
+				else return '';
 		},
 		/**
 		 * @function

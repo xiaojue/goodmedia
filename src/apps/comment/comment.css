@@ -7,13 +7,13 @@
 	position: relative;
 }
 .pcmment_color .b2,.pcmment_color .b3,.pcmment_color .b4,.pcmment_color .b5,.pcmment_color .b6,.pcmment_color .b7,.pcmment_color .pc_content{
-	border-color:#e7e7e7;
+	border-color:#e7e7e7!important;
 }
 .pcmment_color .b1,.pcmment_color .b8{
-	background:#e7e7e7;
+	background:#e7e7e7!important;
 }
 .pcmment_color .b2,.pcmment_color .b3,.pcmment_color .b4,.pcmment_color .b5,.pcmment_color .b6,.pcmment_color .b7,.pcmment_color .pc_content{
-	background:#f8f8f8;
+	background:#f8f8f8!important;
 }
 .pc_content{
 	border-right:1px solid;
