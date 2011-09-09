@@ -11,10 +11,10 @@
 	var cmsmuenbarv2=function(){
 		
 		return {
-			111
 			/**
 			 * @namespace
 			 * @memberOf GM.apps.cmsmuenbar
+			 * 12
 			 */
 			exports:{
 				/**
