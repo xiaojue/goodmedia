@@ -151,6 +151,14 @@
 	GM.apps.require('idongmi',function(exports){
 		exports.init();
 	});
+
+	$(function(){
+	if($('#J_MuenbarV2').length>0){
+		GM.apps.require('cmsmuenbarv2',function(exports){
+			exports.init();
+		});
+	}
+	})	
 	
 	W.GM=GM;
 })(window,document,jQuery);

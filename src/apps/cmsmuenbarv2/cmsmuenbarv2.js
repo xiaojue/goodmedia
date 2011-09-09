@@ -8,7 +8,7 @@
 	 * @memberOf GM.apps
 	 * @description cms欢迎导航根据cookie判断来初始化登录头
 	 */
-	var cmsmuenbar=function(){
+	var cmsmuenbarv2=function(){
 		
 		return {
 			/**
@@ -26,22 +26,22 @@
 				init:function(){
 					var user=$.cookie('ATsport'),myhtml;
 					if(user){
-						myhtml='<li><a href="http://x.idongmi.com/">我的首页</a></li>'+
-										'<li><a href="http://x.idongmi.com/user/edit.jsp">个人资料</a></li>'+
+						myhtml='<li><a href="http://x.idongmi.com/" target="_blank">我的首页</a></li>'+
+										'<li><a href="http://x.idongmi.com/user/edit.jsp" target="_blank">个人资料</a></li>'+
 										'<li><a href="http://bbs.idongmi.com/bbs/logging.php?action=logout&formhash=a9886807&referer=http://www.idongmi.com">退出</a></li>';
 
-						$('#J_Muenbar').html(myhtml);
+						$('#J_MuenbarV2').html(myhtml);
 					}else{
 						myhtml='<li><a href="http://bbs.idongmi.com/bbs/register.php" target="_blank">注册</a></li>'+
 										'<li><a href="http://bbs.idongmi.com/bbs/logging.php?action=login&referer=http://x.idongmi.com/user/index.jsp" target="_blank">登录</a></li>'+
-										'<li><a href="http://bbs.idongmi.com/bbs/xwb.php?m=xwbAuth.login&referer=http://x.idongmi.com/" class="sina_accounts none index_bg"></a></li>';
-						$('#J_Muenbar').html(myhtml);
+										'<li><a href="http://bbs.idongmi.com/bbs/xwb.php?m=xwbAuth.login&referer=http://x.idongmi.com/" class="sina_accounts none index_bg" target="_blank"></a></li>';
+						$('#J_MuenbarV2').html(myhtml);
 					}
 				}
 			}
 		}
 	}();
 	
-	if(G && G.apps) G.apps.cmsmuenbar=cmsmuenbar;
+	if(G && G.apps) G.apps.cmsmuenbarv2=cmsmuenbarv2;
 		
 })(window,jQuery,GM);
