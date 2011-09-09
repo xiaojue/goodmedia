@@ -242,6 +242,7 @@
 				});
 				//清空评论框
 				$(cg.textid).val('');
+				that.updatecount(1);
 			});
 		},
 		/**
@@ -403,7 +404,6 @@
 								if(cg.deadlock){
 									cg.deadlock=false;
 									that.commit();
-									that.updatecount(1);
 								}
 							}
 						}).init();
