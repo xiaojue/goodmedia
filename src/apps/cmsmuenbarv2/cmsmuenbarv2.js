@@ -14,7 +14,6 @@
 			/**
 			 * @namespace
 			 * @memberOf GM.apps.cmsmuenbar
-			 * 12
 			 */
 			exports:{
 				/**
