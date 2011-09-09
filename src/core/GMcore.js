@@ -102,7 +102,9 @@
 		$(function(){
 			$.getScript(appuri,function(){
 				if(callback){
-					GM.apps.map[appname]=true;
+					GM.apps.map[appname]={
+						uri:appuri
+					};
 					callback(GM.apps[appname]['exports']);
 				}
 			});
@@ -122,25 +124,19 @@
 	 * @param {function} callback
 	 */
 	GM.widget.use=function(widget,callback){
-		//如果use过这个widget，则不再加载，只是添加一个callback，等待widget加载完毕，把所有callback全部执行
 		if(GM.widget.usemap.hasOwnProperty(widget)){
 			callback(GM.widget);
 			return;
-		}else{
-			GM.widget.usemap[widget]={
-				uri:widgeturi,
-				callback:[]
-			}
-			GM.widget.usemap[widget]['callback'].push(callback);
 		}
 		
 		var widgeturi = GM.host + 'widget/'+widget+'/'+widget+'-min.js';
 		if(GM.debug) widgeturi=GM.locality(widgeturi);
 		$(function(){
 			$.getScript(widgeturi,function(){
-				for(var i=0;i<GM.widget.usemap[widget]['callback'].length;i++){
-					GM.widget.usemap[widget]['callback'][i](GM.widget);
-				}
+					GM.widget.usemap[widget]={
+						uri:widgeturi
+					}
+					callback(GM.widget);
 			});
 		});
 	}
