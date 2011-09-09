@@ -48,6 +48,63 @@
 									return false;
 								}
 							});
+						//公告首尾相接
+						$('.J_Roll').css('position','absolute').parent().css({'overflow':'hidden','width':300,'position':'relative'});
+						$('.J_Roll').wrap('<div style="position:relative;width:'+1000*1000+'px;height:29px;"></div>');
+						
+						var width=$('.J_Roll').width(),
+							innerWidth=$('.J_Roll>span:first').width(),
+							parentWidth=300,
+							clone=$('.J_Roll>span:first').clone(),timer,nowleft=0;
+							
+							$('.J_Roll').append(clone);
+							
+							if(innerWidth<=parentWidth){
+								$('.J_Roll span').css({
+									width:parentWidth,
+									display:'inline-block',
+									zoom:'1',
+									'text-align':'left'
+								});
+							}
+							
+							parentWidth=0;
+							
+							width=$('.J_Roll>span:first').width();
+							
+						function moveleft(node,speed,end,callback){
+							var left=parseInt($(node).css('left')); //0
+							if(left<=end){
+								if(callback) callback();
+								return;
+							};
+							nowleft=left-1;
+							$(node).css('left',nowleft);
+							timer=setTimeout(function(){
+								moveleft(node,speed,end,callback);
+							},speed);
+						};
+						
+						function run(left){
+							if(left) parentWidth=left;
+							$('.J_Roll').css('left',parentWidth);
+							moveleft('.J_Roll',30,-width,run);
+						}
+						
+						function stop(){
+							clearTimeout(timer);
+						}
+						run();
+						
+						$('.J_Roll').mouseover(function(){
+							stop();
+						});
+						
+						$('.J_Roll').mouseout(function(){
+							run(nowleft);
+						});
+						
+						
 					});
 				}
 			}
