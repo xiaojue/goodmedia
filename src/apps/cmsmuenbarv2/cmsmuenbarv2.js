@@ -24,10 +24,23 @@
 				 */
 				
 				init:function(){
-					var user=$.cookie('ATsport'),myhtml;
+					var user=$.cookie('ATsport'),idmrole=$.cookie('IDMROLE'),myhtml,bar='';
 					if(user){
+						if(idmrole==0){
+							bar ='<li><a href="http://x.idongmi.com/plan/index.jsp" target="_blank">健身方案</a></li>'+
+										'<li><a href="http://x.idongmi.com/diary/index.jsp" target="_blank">日记</a></li>'+
+										'<li><a href="http://x.idongmi.com/photo/index.jsp" target="_blank">照片墙</a></li>';
+						}else if(idmrole==1){
+							bar='<li><a href="http://x.idongmi.com/course/index.jsp" target="_blank">课 表</a></li>'+
+								'<li><a href="http://x.idongmi.com/user/edit.jsp" target="_blank">个人资料</a></li>'+
+							'<li><a href="http://x.idongmi.com/photo/index.jsp" target="_blank">照片墙</a></li>';
+						}else if(idmrole==2){
+							bar='<li><a href="http://x.idongmi.com/course/index.jsp" target="_blank">课 表</a></li>'+
+								'<li><a href="http://x.idongmi.com/user/edit_site.jsp" target="_blank">场馆资料</a></li>'+
+							'<li><a href="http://x.idongmi.com/photo/index.jsp" target="_blank">照片墙</a></li>';
+						}
 						myhtml='<li><a href="http://x.idongmi.com/" target="_blank">我的首页</a></li>'+
-										'<li><a href="http://x.idongmi.com/user/edit.jsp" target="_blank">个人资料</a></li>'+
+										bar+
 										'<li><a href="http://bbs.idongmi.com/bbs/logging.php?action=logout&formhash=a9886807&referer=http://www.idongmi.com">退出</a></li>';
 
 						$('#J_MuenbarV2').html(myhtml);
