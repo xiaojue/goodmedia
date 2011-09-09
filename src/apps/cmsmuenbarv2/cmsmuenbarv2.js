@@ -20,7 +20,7 @@
 				 * @memberOf GM.apps.cmsmuenbar.exports
 				 * @static
 				 * @function
-				 * @description cms欢迎导航根据cookie判断来初始化登录头
+				 * @description cms欢迎导航根据cookie判断来初始化登录头第二版
 				 */
 				
 				init:function(){
