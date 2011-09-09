@@ -75,6 +75,7 @@
 						function moveleft(node,speed,end,callback){
 							var left=parseInt($(node).css('left')); //0
 							if(left<=end){
+								parentWidth=0;
 								if(callback) callback();
 								return;
 							};
@@ -88,7 +89,11 @@
 						function run(left){
 							if(left) parentWidth=left;
 							$('.J_Roll').css('left',parentWidth);
-							moveleft('.J_Roll',30,-width,run);
+							moveleft('.J_Roll',30,-width,function(){
+									if(left) run(parentWidth);
+									else
+										run();
+							});
 						}
 						
 						function stop(){
