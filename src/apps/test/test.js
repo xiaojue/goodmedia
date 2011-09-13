@@ -25,6 +25,7 @@
 									BMIIndices=weight/Math.pow(Mheight,2);
 								$('#J_BMIIdealWeight').val(BMIIdealWeight.toFixed(2));
 								$('#J_BMIIndices').val(BMIIndices.toFixed(2));
+								$('#J_BMIIdealWeight').closest('.trends').show();
 							}
 						});
 						BMI.init();
@@ -46,6 +47,7 @@
 									fat=a-b,
 									BFRIndices=((fat/weight)*100).toFixed(2)+'%';
 								$('#J_BFRIndices').val(BFRIndices);
+								$('#J_BFRIndices').closest('.trends').show();
 							}
 						});
 						BFR.init();
@@ -62,6 +64,7 @@
 									sex=$('#J_BMRSex').val();
 									BFRIndices=(sex==1)?(weight*24)-(age*10):(weight*22)-(age*10);
 									$('#J_BMREtabolize').val(BFRIndices);
+								  $('#J_BMREtabolize').closest('.trends').show();
 							}
 						});
 						BFR.init();
@@ -76,6 +79,7 @@
 								var height=data['height'],
 									WomenWeight=(height-70)*0.6;
 									$('#J_WomenWeight').val(WomenWeight);
+								  $('#J_WomenWeight').closest('.trends').show();
 							}
 						});
 						BFR.init();

@@ -28,9 +28,8 @@
 					
 					$(function(){
 						//头部搜索部分
-						var txt=$('#J_Q'),msg="请输入关键字",
-							s=$.analyse(W.location.search.slice(1))['s'];
-							if(s) txt.val(decodeURIComponent(s));
+						var txt=$('#J_Q'),msg="请输入关键字";
+							if(window.GLOBALskey) txt.val(GLOBALskey);
 							else
 							txt.val(msg);
 							txt.focus(function(){
