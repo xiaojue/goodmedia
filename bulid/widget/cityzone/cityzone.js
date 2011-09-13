@@ -169,11 +169,7 @@
 			putscity:function(citywrap,zonewrap,current,currentzone,cls,citycallback,zonecallback){
 				var that=this,nowcity=current,nowzone=currentzone;
 				
-				if(current=='' && nowzone==''){
-					$(zonewrap).parent().hide();
-				}
-				
-				$(citywrap).prepend('<li class="all">全部</li>');
+				$(citywrap).prepend('<li><a href="javascript:void(0);" class="J_AllCity">全部城市</a></li>');
 				
 				for(var i=0;i<pb_arr.length;i++){
 					var cityname=pb_arr[i].split('|')[0];
@@ -182,6 +178,11 @@
 					}else{
 						$(citywrap).append('<li><a href="javascript:void(0);">'+cityname+'</a></li>');
 					}
+				}
+
+				if(current=='' && nowzone==''){
+					$('.J_AllCity').addClass(cls);
+					$(zonewrap).parent().hide();
 				}
 				
 				function bulidzone(wrap,city,nowzone,cls){
@@ -198,12 +199,20 @@
 							break;
 						}
 					}
-					$(wrap).prepend('<li class="all">全部</li>');
+					$(wrap).prepend('<li><a class="J_AllZone" href="javascript:void(0);">全部城区</a></li>');
 				}
 				
 				bulidzone(zonewrap,current,currentzone,cls);
 				
-				$(citywrap+'>li>a').live('click',function(){
+				if(current!='' && nowzone==''){
+					$('.J_AllZone').addClass(cls);
+				}
+
+				$('.J_AllCity').live('click',function(){
+						$(zonewrap).parent().hide();
+				});
+
+			$(citywrap+'>li>a').live('click',function(){
 					var that=this,
 						city=$(that).text();
 					$(zonewrap).html('');
@@ -211,10 +220,11 @@
 					$(that).addClass(cls);
 					nowcity=city;
 					bulidzone(zonewrap,city,0,cls);
+					$('.J_AllZone').addClass(cls);
 					if(citycallback) citycallback(that);
 				});
 				
-				$(zonewrap+'>li>a').live('click',function(){
+			$(zonewrap+'>li>a').live('click',function(){
 					var that=this;
 					nowzone=$(that).text();
 					$(zonewrap+'>li>a').removeClass(cls);
