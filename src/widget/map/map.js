@@ -100,8 +100,8 @@
 							getPosition:function(m){
 								var center=m.getPosition();
 								return {
-									lat:center['Qa'],
-									lng:center['Pa']
+									lat:center['La'],
+									lng:center['Ka']
 								}
 							},
 							//删除标记和圆圈
@@ -303,9 +303,9 @@
 							},
 							//map和圈点击的handle
 							clickseach:function(e){
-								var lat=e['latLng']['Qa'],
-									lng=e['latLng']['Pa'],
-									darwin = new Gmap.LatLng(lng,lat);	
+								var lat=e['latLng']['La'],
+									lng=e['latLng']['Ka'],
+									darwin = new Gmap.LatLng(lng,lat,true);	
 								marker.setPosition(darwin);
 								_fn.postPostion(marker);
 							},
@@ -361,7 +361,7 @@
 								}
 								that._searchQ(q,function(location){
 									if(location){
-										var darwin = new Gmap.LatLng(location['Pa'],location['Qa'],true);
+										var darwin = new Gmap.LatLng(location['Ka'],location['La'],true);
 										map.setCenter(darwin);
 										marker.setPosition(darwin);
 										_fn.postPostion(marker);
@@ -565,7 +565,7 @@
 		//为了便于分享,实时更改hash值,来标记坐标
 		_sharehash:function(lat,lng){
 			var that=this;
-			W.location.hash='lat='+lat+'&lng='+lng;
+			//W.location.hash='lat='+lat+'&lng='+lng;
 		},
 		//初始化地图
 		init: function() {
@@ -586,7 +586,7 @@
 				//没有坐标的时候，用内置反查询搜索q的位置，如果q还没有搜到，则不显示
 				that._searchQ(that.q,function(location){
 					if(location){
-						that.center=[location['Pa'],location['Qa']];
+						that.center=[location['Ka'],location['La']];
 						that.drawmap(target,that.center,that.name,that.siteNo);
 					}else{
 						that._Initerror(target);
