@@ -33,9 +33,69 @@
 	};
 	
 	var centerflg=true,
-			Ka='Ka',La='La';
+			Ka='Ka',La='La',
+			citycenter={
+					'北京':[39.904214,116.40741300000002],
+					'上海':[31.230393,121.473704],
+					'广州':[23.129163,113.26443500000005],
+					'深圳':[22.543099,114.05786799999998],
+					'南京':[32.060255,118.796877],
+					'杭州':[30.274089,120.15506900000003],
+					'成都':[30.658601,104.06485599999996],
+					'天津':[39.084158,117.20098299999995],
+					'西安':[34.264987,108.94426900000008],
+					'重庆':[29.56301,106.551557],
+					'昆明':[25.037721,102.72220199999992],
+					'武汉':[30.593087,114.30535699999996],
+					'郑州':[34.746985,113.62489900000003],
+					'长沙':[28.228209,112.93881399999998],
+					'福州':[26.074508,119.29649399999994],
+					'石家庄':[38.042307,114.51486],
+					'济南':[36.665282,116.99491699999999],
+					'沈阳':[41.80572,123.43146999999999],
+					'珠海':[22.270715,113.57672600000001],
+					'大连':[38.914024,121.61467700000003],
+					'青岛':[36.06722,120.38250399999993],
+					'长春':[43.817084,125.32354199999997],
+					'无锡':[31.566145,120.30302699999993],
+					'常州':[31.810077,119.97445399999992],
+					'温州':[27.994267,120.69936699999994],
+					'太原':[37.870662,112.55061899999998],
+					'佛山':[23.021548,113.12141599999995],
+					'东莞':[23.020536,113.75176499999998],
+					'哈尔滨':[45.80377499999999,126.53496700000005],
+					'呼和浩特':[40.84231,111.74884700000007],
+					'兰州':[36.061255,103.83437700000002],
+					'宁波':[29.868336,121.54399000000001],
+					'苏州':[31.298886,120.58531600000003],
+					'厦门':[24.479836,118.08942000000002],
+					'烟台':[37.463819,121.44792600000005]
+				};
+
 	
 	map.prototype= {
+		__putoutKL:function(){
+			var that=this;
+			var cityAry=['北京','上海',
+                  '广州','深圳','南京','杭州',
+                  '成都','天津','西安','重庆',
+                  '昆明','武汉','郑州','长沙',
+                  '福州','石家庄','济南','沈阳',
+                  '珠海','大连','青岛','长春','无锡',
+                  '常州','温州','太原','佛山','东莞',
+                  '哈尔滨','呼和浩特','兰州','宁波',
+                  '苏州','厦门','烟台'];
+								//只能10个10个读
+								for(var i=0;i<cityAry.length;i++){
+								(function(i){
+									that._searchQ(cityAry[i],function(results){
+											if(results){
+											console.log(cityAry[i]+':'+results.Ka+','+results.La);
+											}
+										})			
+								})(i);
+								}
+		},
 		//加载css
 		_loadcss:function(){
 			var host=GM.widget.host,place='-min';
@@ -47,12 +107,23 @@
 			if(google) {
 				var Gmap=google.maps,
 					geocoder = new Gmap.Geocoder();
+					if(citycenter.hasOwnProperty(q)){
+						if (callback) callback({
+								Ka:citycenter[q][0],
+								La:citycenter[q][1]
+							});
+						return;
+					}
 					geocoder.geocode({
 					'address': q
 					}, function(results, status) {
 						if (status == Gmap.GeocoderStatus.OK) {
 							var location=results[0].geometry.location;
-							if(callback) callback(location);
+							if(location.hasOwnProperty(Ka) && location.hasOwnProperty(La)){
+									if(callback) callback(location);
+							}else{
+								alert(Ka+' and '+La+' is undef,that\'s google\'s mistake,please contact the web administrator!');
+							}
 						} else {
 							if(callback) callback(null);
 						}
@@ -184,7 +255,7 @@
 											
 											//如果场馆坐标为0.0 就是数据库没有
 											if(resultlat=="0.0" && resultlng=="0.0"){
-												that._searchQ(result['cityZone'],function(location){
+												that._searchQ(resulr['cityZone'],function(location){
 													if(location){
 														addMarker(resultname,location[La],location[Ka]);
 													}
@@ -604,7 +675,7 @@
 
 			//设置容器高宽
 			that._setwrap(target);
-
+			//that.__putoutKL();
 			//查看全图-生成全局overlay对象
 			$.overlay();
 
