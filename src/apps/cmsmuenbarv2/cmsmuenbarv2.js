@@ -29,15 +29,16 @@
 						if(idmrole==0){
 							bar ='<li><a class="white" href="http://x.idongmi.com/plan/index.jsp" target="_blank">健身方案</a></li>'+
 										'<li><a class="white" href="http://x.idongmi.com/diary/index.jsp" target="_blank">日记</a></li>'+
-										'<li><a class="white" href="http://x.idongmi.com/photo/index.jsp" target="_blank">照片墙</a></li>';
+										'<li><a class="white" href="http://x.idongmi.com/photo/index.jsp" target="_blank">照片墙</a></li>'+
+							'<li><a class="white" href="http://x.idongmi.com/user/edit.jsp" target="_blank">个人资料</a></li>';
 						}else if(idmrole==1){
 							bar='<li><a class="white" href="http://x.idongmi.com/course/index.jsp" target="_blank">课 表</a></li>'+
-								'<li><a class="white" href="http://x.idongmi.com/user/edit.jsp" target="_blank">个人资料</a></li>'+
-							'<li><a class="white" href="http://x.idongmi.com/photo/index.jsp" target="_blank">照片墙</a></li>';
+							'<li><a class="white" href="http://x.idongmi.com/photo/index.jsp" target="_blank">照片墙</a></li>'+
+							'<li><a class="white" href="http://x.idongmi.com/user/edit.jsp" target="_blank">个人资料</a></li>';
 						}else if(idmrole==2){
 							bar='<li><a class="white" href="http://x.idongmi.com/course/index.jsp" target="_blank">课 表</a></li>'+
-								'<li><a class="white" href="http://x.idongmi.com/user/edit_site.jsp" target="_blank">场馆资料</a></li>'+
-							'<li><a class="white" href="http://x.idongmi.com/photo/index.jsp" target="_blank">照片墙</a></li>';
+							'<li><a class="white" href="http://x.idongmi.com/photo/index.jsp" target="_blank">照片墙</a></li>'+
+							'<li><a class="white" href="http://x.idongmi.com/user/edit_site.jsp" target="_blank">场馆资料</a></li>';
 						}
 						myhtml='<li><a class="white" href="http://x.idongmi.com/" target="_blank">我的首页</a></li>'+
 										bar+

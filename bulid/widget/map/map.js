@@ -92,7 +92,7 @@
 							//设置坐标值
 							setlatlng:function(m,c){
 								var center=m.getPosition();
-								$('#J_Coord').html('lat:<span id="J_Pa">'+center['Pa']+'</span><br/>lng:<span id="J_Oa">'+center['Qa']+'</span>');
+								$('#J_Coord').html('lat:<span id="J_Pa">'+center['Ka']+'</span><br/>lng:<span id="J_Oa">'+center['La']+'</span>');
 							},
 							//取坐标
 							//这里的pa和oa用反了……囧，程序都做完了才发现精度纬度是拧着的，后台已经按照这个走了
@@ -185,7 +185,7 @@
 											if(resultlat=="0.0" && resultlng=="0.0"){
 												that._searchQ(result['cityZone'],function(location){
 													if(location){
-														addMarker(resultname,location['Qa'],location['Pa']);
+														addMarker(resultname,location['La'],location['Ka']);
 													}
 												});
 											}else{
@@ -565,7 +565,7 @@
 		//为了便于分享,实时更改hash值,来标记坐标
 		_sharehash:function(lat,lng){
 			var that=this;
-			//W.location.hash='lat='+lat+'&lng='+lng;
+			W.location.hash='lat='+lat+'&lng='+lng;
 		},
 		//初始化地图
 		init: function() {

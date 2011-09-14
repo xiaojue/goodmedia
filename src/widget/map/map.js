@@ -32,7 +32,8 @@
 
 	};
 	
-	var centerflg=true;
+	var centerflg=true,
+			Ka='Ka',La='La';
 	
 	map.prototype= {
 		//加载css
@@ -92,7 +93,7 @@
 							//设置坐标值
 							setlatlng:function(m,c){
 								var center=m.getPosition();
-								$('#J_Coord').html('lat:<span id="J_Pa">'+center['Pa']+'</span><br/>lng:<span id="J_Oa">'+center['Qa']+'</span>');
+								$('#J_Coord').html('lat:<span id="J_Pa">'+center[Ka]+'</span><br/>lng:<span id="J_Oa">'+center[La]+'</span>');
 							},
 							//取坐标
 							//这里的pa和oa用反了……囧，程序都做完了才发现精度纬度是拧着的，后台已经按照这个走了
@@ -100,8 +101,8 @@
 							getPosition:function(m){
 								var center=m.getPosition();
 								return {
-									lat:center['La'],
-									lng:center['Ka']
+									lat:center[La],
+									lng:center[Ka]
 								}
 							},
 							//删除标记和圆圈
@@ -185,7 +186,7 @@
 											if(resultlat=="0.0" && resultlng=="0.0"){
 												that._searchQ(result['cityZone'],function(location){
 													if(location){
-														addMarker(resultname,location['Qa'],location['Pa']);
+														addMarker(resultname,location[La],location[Ka]);
 													}
 												});
 											}else{
@@ -303,8 +304,8 @@
 							},
 							//map和圈点击的handle
 							clickseach:function(e){
-								var lat=e['latLng']['La'],
-									lng=e['latLng']['Ka'],
+								var lat=e['latLng'][La],
+									lng=e['latLng'][Ka],
 									darwin = new Gmap.LatLng(lng,lat,true);	
 								marker.setPosition(darwin);
 								_fn.postPostion(marker);
@@ -361,7 +362,7 @@
 								}
 								that._searchQ(q,function(location){
 									if(location){
-										var darwin = new Gmap.LatLng(location['Ka'],location['La'],true);
+										var darwin = new Gmap.LatLng(location[Ka],location[La],true);
 										map.setCenter(darwin);
 										marker.setPosition(darwin);
 										_fn.postPostion(marker);
@@ -565,7 +566,7 @@
 		//为了便于分享,实时更改hash值,来标记坐标
 		_sharehash:function(lat,lng){
 			var that=this;
-			//W.location.hash='lat='+lat+'&lng='+lng;
+			W.location.hash='lat='+lat+'&lng='+lng;
 		},
 		//初始化地图
 		init: function() {
@@ -586,7 +587,7 @@
 				//没有坐标的时候，用内置反查询搜索q的位置，如果q还没有搜到，则不显示
 				that._searchQ(that.q,function(location){
 					if(location){
-						that.center=[location['Ka'],location['La']];
+						that.center=[location[Ka],location[La]];
 						that.drawmap(target,that.center,that.name,that.siteNo);
 					}else{
 						that._Initerror(target);
