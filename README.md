@@ -1,4 +1,4 @@
-﻿goodmedia 动米网 内部前端js组件库基于jquery1.6.2 [designsor@gmail.com]
+﻿goodmedia 动米网 js组件库 基于jquery1.6.2 [designsor@gmail.com]
 ==============================================================
 bulid
 -----
