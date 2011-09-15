@@ -34,6 +34,7 @@ xwb
 ---
 	xwb的js全部文件，偶尔打开看看……
 
-#Email
-	designsor@gmail.com
+Email
+=====
+	* designsor@gmail.com
 
