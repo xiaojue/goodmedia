@@ -34,7 +34,10 @@ xwb
 ---
 	xwb的js全部文件，偶尔打开看看……
 
-Email
-=====
-	designsor@gmail.com
+contact author
+==============
+	Email:designsor@gmail.com
+	Blog:<a href="http://www.designsor.com/">www.designsor.com</a>
+	Gtalk:designsor@gmail.com
+	douban:<a href="http://www.douban.com/people/D-o-m-o/">xiaojue</a>
 
