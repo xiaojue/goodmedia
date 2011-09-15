@@ -37,7 +37,7 @@ xwb
 contact author
 ==============
 	Email:designsor@gmail.com
-	Blog:<a href="http://www.designsor.com/">www.designsor.com</a>
+	Blog:[linkref]:http://www.designsor.com/ "www.designsor.com"
 	Gtalk:designsor@gmail.com
 	douban:<a href="http://www.douban.com/people/D-o-m-o/">xiaojue</a>
 
