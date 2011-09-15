@@ -36,10 +36,7 @@
 	 * @constant
 	 * @description 根据href里德debug关键字确定是否为debug模式
 	 */
-	GM.debug=function(){
-		var isdebug=(W.location.href.match('debug'));
-		return isdebug;
-	}();
+	GM.debug=W.GMDEBUG.aver;
 	/**
 	 * @constant
 	 * @description 获取当前js的根目录
@@ -78,7 +75,7 @@
 	
 	//debug模式下处理路径
 	if(GM.debug){
-		GM.host='http://172.16.2.215/gm/bulid/';
+		GM.host=W.GMDEBUG.host+'bulid/';
 		GM.widget.host=GM.locality(GM.host) + 'widget/';
 		GM.apps.host=GM.locality(GM.host) + 'apps/';
 	}

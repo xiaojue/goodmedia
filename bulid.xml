@@ -70,8 +70,11 @@
 		<copy todir="${bulid.dir}/widget" encoding="UTF-8" outputencoding="UTF-8">
 			<fileset dir="${src.dir}/widget"/>
 		</copy>
+		<copy todir="${bulid.dir}" encoding="UTF-8" outputencoding="UTF-8">
+			<fileset dir="${src.dir}/seed/"/>
+		</copy>
 		
-		<!-- 压缩GM-min文件 -->
+		<!-- 压缩根目录的js-min文件 -->
 		<apply executable="java" parallel="false" failonerror="true">
 			<fileset dir="${bulid.dir}" includes="*.js" />
 			<arg line="-jar" />
@@ -83,7 +86,7 @@
 			<targetfile/>
 		</apply>
 		
-		<!-- 压缩-min文件 -->
+		<!-- 压缩apps -min文件 -->
 		<apply executable="java" parallel="false" failonerror="true">
 			<fileset dir="${bulid.dir}/apps" includes="*/*.js" />
 			<arg line="-jar" />
@@ -129,6 +132,7 @@
 		</apply>
 		
 		<!--部署 -->
+		<!--
 		<delete dir="${GMonline.dir}"/>
 		<mkdir dir="${GMonline.dir}"/>
 		<copy todir="${GMonline.dir}" encoding="UTF-8" outputencoding="UTF-8">
@@ -140,5 +144,6 @@
 			<fileset dir="${GM.dir}" includes="jquery/jquery-1.6.2.js"/>
 			<fileset dir="${GM.dir}" includes="jquery/jquery-1.6.2.min.js"/>
 		</copy>
+		-->
 	</target>
 </project>
