@@ -14,7 +14,7 @@
 	 		 debughost=W.GMDEBUG.host+'src/',
 	 		 version='20110915',
 	 		 loadtype='normal',
-	 		 scripts=$('script');
+	 		 scripts=$('script'),
 			 onlinejs='GM-min.js',
 			 debuglist=[
 			 	'core/GMcore.js',
