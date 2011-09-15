@@ -36,5 +36,5 @@ xwb
 
 Email
 =====
-	* designsor@gmail.com
+	designsor@gmail.com
 
