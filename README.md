@@ -1,4 +1,4 @@
-﻿goodmedia 动米网 js组件库 基于jquery1.6.2 [designsor@gmail.com]
+﻿goodmedia 动米网 javascript组件库 基于jquery1.6.2
 ==============================================================
 bulid
 -----
@@ -33,3 +33,7 @@ xdoc
 xwb
 ---
 	xwb的js全部文件，偶尔打开看看……
+
+#Email
+	designsor@gmail.com
+
