@@ -41,5 +41,3 @@ contact author
 	Blog:http://www.designsor.com/
 
 	Gtalk:designsor@gmail.com
-
-	Douban:http://www.douban.com/people/D-o-m-o/
