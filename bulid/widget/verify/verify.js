@@ -12,7 +12,10 @@
 			target:null, //form和target只能写一个
 			cls:null,
 			success:null,
+			blur:false,
 			batchcallback:null,
+			batchafter:null,
+			focusfn:null,
 			attrname:'data-v' //data-v functionname:msg:arg.arg|functionname:msg:arg.arg
 		}
 		
@@ -62,6 +65,18 @@
 			}else if(cg.target){
 				that._target(cg.target)
 			}
+			
+			if(cg.blur){
+				$(cg.cls).live('blur',function(){
+						var node=$(this);
+						that._bacthone(node);
+				});
+				$(cg.cls).live('focus',function(){
+						var node=$(this);
+						if(cg.focusfn) cg.focusfn(node);
+				})
+			}
+
 		},
 		_form:function(form){
 			var that=this,cg=that.config;
@@ -99,6 +114,20 @@
 			return returnobj;
 			
 		},
+		_bacthone:function(node){
+			var that=this,cg=that.config,
+					val=$.trim(node.val()),
+					vstr=node.attr(cg.attrname),
+					rulevalobj=that._translate(vstr);
+					for(var i in rulevalobj){
+						rulevalobj[i]['arg'].splice(0,0,val);
+						var examine=that.rule[i].apply(this,rulevalobj[i]['arg']);
+						if(!examine){
+							if(cg.batchcallback) cg.batchcallback(val,rulevalobj[i]['msg'],node);
+							break;
+						}
+					}
+		},
 		_batch:function(cls){
 			var that=this,cg=that.config,flg=true,j=0;
 			
@@ -116,7 +145,7 @@
 					rulevalobj[i]['arg'].splice(0,0,val);
 					var examine=that.rule[i].apply(this,rulevalobj[i]['arg']);
 					if(!examine){
-						if(cg.batchcallback) cg.batchcallback(val,rulevalobj[i]['msg']);
+						if(cg.batchcallback) cg.batchcallback(val,rulevalobj[i]['msg'],node);
 						flg=false;
 						break;
 					}
