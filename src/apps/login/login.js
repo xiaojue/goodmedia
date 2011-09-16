@@ -43,23 +43,6 @@
 						var parent=node.parent();
 						if(parent.next().hasClass('J_checked')) parent.next().hide();
 					},
-					loadxml:function(url,callback){
-						$('#J_LoadXML').die();
-						$('#J_LoadXML').live('load',function(){
-									if(callback) callback();
-						});
-						var iframe=$('<iframe>');
-								iframe.attr({
-										src:'http://x.idongmi.com/api/api_getURL2js.jsp?url='+encodeURIComponent(url),
-									style:'display:none;',
-									id:'J_LoadXML'
-								});
-							if($('#J_LoadXML').length>0){
-								$('#J_LoadXML').attr('src','http://x.idongmi.com/api/api_getURL2js.jsp?url='+encodeURIComponent(url));
-							}else{
-								$('body').append(iframe);
-							}
-					},
 				 checkedLogin:function(){
 						var loginV=new G.widget.verify({
 								form:'#J_LoginForm',
@@ -83,9 +66,25 @@
 
 											action+='&'+$.param(data);
 											
-											_fn.loadxml(action,function(doc){
-											});
-
+									$.ajax({
+											url:'/api/api_getURL2js.jsp?url='+encodeURIComponent(action),
+											datatype:'xml',
+											success:function(ret){
+												var root=$(ret).find('root')[0],
+														result=$(root).text();
+														if(result!='' && !(/\<script/.test(result))){
+															$('#J_Status').text(result);
+														}else{
+															$('#J_Status').html('欢迎您,'+data['username']+',2秒后自动<a href="http://x.idongmi.com/">返回首页</a>')
+															setTimeout(function(){
+																	window.location.href='http://x.idongmi.com/';
+															},2000)
+														}
+											},
+											error:function(){
+												$('#J_Status').html('网络超时，请重试');
+											}
+										})
 								},
 								batchcallback:_fn.bathcallbackhand,
 								focusfn:_fn.focushand
