@@ -18,7 +18,7 @@
 			 onlinejs='GM-min.js',
 			 debuglist=[
 			 	'core/GMcore.js',
-				'tooloverlay/overlay.js',
+				'tools/overlay/overlay.js',
 				'tools/carousel/carousel.js',
 				'tools/bubble/bubble.js',
 				'tools/switchable/switchable.js',
