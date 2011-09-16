@@ -43,14 +43,49 @@
 						var parent=node.parent();
 						if(parent.next().hasClass('J_checked')) parent.next().hide();
 					},
+					loadxml:function(url,callback){
+						$('#J_LoadXML').die();
+						$('#J_LoadXML').live('load',function(){
+									if(callback) callback();
+						});
+						var iframe=$('<iframe>');
+								iframe.attr({
+										src:'http://x.idongmi.com/api/api_getURL2js.jsp?url='+encodeURIComponent(url),
+									style:'display:none;',
+									id:'J_LoadXML'
+								});
+							if($('#J_LoadXML').length>0){
+								$('#J_LoadXML').attr('src','http://x.idongmi.com/api/api_getURL2js.jsp?url='+encodeURIComponent(url));
+							}else{
+								$('body').append(iframe);
+							}
+					},
 				 checkedLogin:function(){
 						var loginV=new G.widget.verify({
 								form:'#J_LoginForm',
 								cls:'.Gverify',
 								blur:true,
 								success:function(data){
-									var username=data['username'],
-											pwd=data['pwd'];
+									var action='http://bbs.idongmi.com/bbs/logging.php?action=login&loginsubmit=yes&inajax=1',
+											username=data['username'],
+											pwd=data['password'],
+											data={
+													username:username,
+													password:pwd,
+													loginfield:'username',
+													questionid:0,
+													referer:'',
+													answer:'',
+													formhash:'52c87683'
+											};
+
+											if(data['cookietime']) data.cookietime=data['cookietime'];
+
+											action+='&'+$.param(data);
+											
+											_fn.loadxml(action,function(doc){
+											});
+
 								},
 								batchcallback:_fn.bathcallbackhand,
 								focusfn:_fn.focushand
