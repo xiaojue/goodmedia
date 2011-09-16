@@ -102,8 +102,37 @@
 								cls:'.J_FindPwdverify',
 								blur:true,
 								success:function(data){
-									var username=data['username'],
-											email=data['email'];
+									var action='http://bbs.idongmi.com/bbs/member.php?action=lostpasswd&lostpwsubmit=yes&infloat=yes&inajax=1',
+											username=data['username'],
+											email=data['email'],
+											data={
+												email:email,
+												formhash:'52c87683',
+												handlekey:'lostpwform',
+												username:username	
+											}
+
+									action+='&'+$.param(data);
+									alert(action)
+									$.ajax({
+											url:'/api/api_getURL2js.jsp?op=lostpw&username='+encodeURIComponent(data['username'])+'&email='+data['email']+'&url='+encodeURIComponent(action),
+											datatype:'xml',
+											success:function(ret){
+												var root=$(ret).find('root')[0],
+														result=$(root).text();
+														if(result!='' && /地址或安全提问不匹配/g.test(result)){
+															$('#J_Status').text('用户名，Email 地址或安全提问不匹配，请修改。');
+														}else if(result!='' && /取回密码的方法发送到您的信箱中/g.test(result)){
+															$('#J_Status').text('取回密码的方法发送到您的信箱中');
+														}else if(result!='' && /您的请求来路不正确，无法提交。/g.test(result)){
+															$('#J_Status').text('您的请求来路不正确，无法提交。');
+														}
+											},
+											error:function(){
+												$('#J_Status').html('网络超时，请重试');
+											}
+									})
+											
 								},
 								batchcallback:_fn.bathcallbackhand,
 								focusfn:_fn.focushand

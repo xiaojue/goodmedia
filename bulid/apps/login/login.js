@@ -75,6 +75,11 @@
 														if(result!='' && !(/\<script/.test(result))){
 															$('#J_Status').text(result);
 														}else{
+															var scripts=result.match(/src="(.+?)"/g);
+															for(var i=0;i<scripts.length;i++){
+																var src=scripts[i].slice(5,scripts[i].length-1);
+																$.getScript(src);
+															}
 															$('#J_Status').html('欢迎您,'+data['username']+',2秒后自动<a href="http://x.idongmi.com/">返回首页</a>')
 															setTimeout(function(){
 																	window.location.href='http://x.idongmi.com/';
