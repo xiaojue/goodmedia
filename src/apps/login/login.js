@@ -30,7 +30,6 @@
 											username=data['username'],
 											pwd=data['password'],
 											data={
-													username:username,
 													password:pwd,
 													loginfield:'username',
 													questionid:0,
@@ -44,11 +43,12 @@
 											action+='&'+$.param(data);
 											
 									$.ajax({
-											url:'/api/api_getURL2js.jsp?op=login&username='+encodeURIComponent(data['username'])+'&pwd='+data['password']+'&url='+encodeURIComponent(action),
+											url:'/api/api_getURL2js.jsp?op=login&username='+username+'&pwd='+data['password']+'&url='+encodeURIComponent(action),
 											datatype:'xml',
 											success:function(ret){
 												var root=$(ret).find('root')[0],
 														result=$(root).text();
+													try{
 														if(result!='' && !(/\<script/.test(result))){
 															$('#J_Status').text(result);
 														}else{
@@ -56,12 +56,24 @@
 															for(var i=0;i<scripts.length;i++){
 																var src=scripts[i].slice(5,scripts[i].length-1);
 																$.getScript(src);
-															}
-															$('#J_Status').html('欢迎您,'+data['username']+',2秒后自动<a href="http://x.idongmi.com/">返回首页</a>')
+															};
+															var search=$.analyse(window.location.search.slice(1)),
+																  referer=search['referer'];
+															if(!referer) referer='http://x.idongmi.com/';
+															$('#J_Status').html('欢迎您,'+username+',2秒后自动<a href="'+decodeURIComponent(referer)+'">返回</a>')
+															$.cookie('CNAME',username,{
+																	domain:'.idongmi.com',
+																	path:'/',
+																	expires:5
+															});
+														alert($.cookie('CNAME'))
 															setTimeout(function(){
-																	window.location.href='http://x.idongmi.com/';
+																	window.location.href=decodeURIComponent(referer);
 																},2000);
 														}
+													}catch(e){
+														alert(e);
+													}
 											},
 											error:function(){
 												$('#J_Status').html('网络超时，请重试');
@@ -156,6 +168,7 @@
 					login_init:function(){
 						G.widget.use('verify',function(widget){
 							_fn.checkedLogin();
+							if($.cookie('CNAME')) $('#J_Name').val($.cookie('CNAME'));
 						});
 					},
 					register_init:function(){

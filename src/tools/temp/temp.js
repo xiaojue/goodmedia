@@ -23,8 +23,16 @@
 				if(str=="" || !str) return {};
 				var tempary=str.split('&'),i,returnobj={};
 					for(i=0;i<tempary.length;i++){
-						var data=tempary[i].split('=');
-						returnobj[data[0]]=data[1];
+						var data=tempary[i].split('='),val='';
+						if(data.length>2){
+							for(var i=1;i<data.length;i++){
+								val+=data[i]+'=';
+							}
+							val=val.slice(0,val.length-1);
+						}else{
+							val=data[1];
+						}
+						returnobj[data[0]]=val;
 					}
 				return returnobj;
 			}
