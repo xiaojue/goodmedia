@@ -3,34 +3,11 @@
  * @version 20110915
  * @fileoverview x-dongmi登录 and 注册页面……唉。又和媳妇吵架了。
  */
-(function(W,G,$){
+(function(W,G,$,doc){
     var login=function(){
 
 			//私有方法	
 			var _fn={
-				 bulidFindPwd:function(){
-					 
-					 $('#J_FindPwd').live('click',function(){
-							 $('#J_LoginForm,#J_FindPwdForm').toggle();
-					 });
-
-				 	 $('#J_BackLogin').live('click',function(){
-							 $('#J_LoginForm,#J_FindPwdForm').toggle(); 
-					 });
-
-				 var findpwdhtml='<form id="J_FindPwdForm" style="display:none;">'+
-					 	 '<div class="login_text"><span>昵 称：</span>'+
-						 '<p><input id="J_FindName" data-v="empty:昵称不能为空" class="login_box J_FindPwdverify" type="text" name="username">'+
-						 '<a id="J_BackLogin" href="javascript:void(0);">返回登录</a></p><div class="clear"></div>'+
-						 '</div>'+
-					 	 '<div class="login_text"><span>邮 箱：</span>'+
-						 '<p><input id="J_FindEmail" data-v="empty:邮箱不能为空|email:请输入正确的邮箱地址" class="login_box J_FindPwdverify" name="email" type="text"></p><div class="clear"></div>'+
-						 '</div>'+
-					 	 '<div class="login_text"><span></span><input type="image" src="http://s1.ifiter.com/v2/static/images/rpassword.gif"/></div>'+
-						 '</form>';
-						
-					 $('#J_LoginForm').after(findpwdhtml);
-				 },
 					bathcallbackhand:function(val,msg,ele){
 						var parent=$(ele).parent();
 							if(parent.next().hasClass('J_checked')){
@@ -83,7 +60,7 @@
 															$('#J_Status').html('欢迎您,'+data['username']+',2秒后自动<a href="http://x.idongmi.com/">返回首页</a>')
 															setTimeout(function(){
 																	window.location.href='http://x.idongmi.com/';
-															},2000)
+																},2000);
 														}
 											},
 											error:function(){
@@ -96,19 +73,80 @@
 							});	
 						loginV.init();
 				 },
-				 checkedFindPwd:function(){
-						var FindV=new G.widget.verify({
-								form:'#J_FindPwdForm',
-								cls:'.J_FindPwdverify',
+				 batchcallbackReghand:function(val,msg,ele){
+					var parent=$(ele).parent();
+					if(parent.children().last().hasClass('J_checked')){
+						parent.children().last().show().html(msg);
+					}else{
+						parent.append('<em class="J_checked red" style="font-style:normal;">'+msg+'</em>');
+					}
+				 },
+				 checkname:function(val,callback){
+								 var action = 'http://bbs.idongmi.com/bbs/ajax.php?infloat=register&handlekey=register&action=checkusername&username='+val+'&inajax=1&ajaxtarget=returnmessage4',
+								 		 baseapi = '/api/api_getURL2js.jsp?op=get&url=';
+										 $.ajax({
+												 url:baseapi+encodeURIComponent(action),
+												 datatype:'xml',
+												 type:'get',
+												 success:function(ret){
+													 var root=$(ret).find('root')[0],
+														   result=$(root).text();
+															 if(/'1', '用户名已经被他人使用'/.test(result)){
+																	_fn.batchcallbackReghand('','用户名已经被他人使用',doc.getElementById('J_UserName'));
+															 }else{
+																 if(callback) callback();
+															 }
+												 },
+												 error:function(){
+													 _fn.batchcallbackReghand('','响应超时，请重新填写',doc.getElementById('J_UserName'));
+												 }
+											 });
+										 return true; //都返回true，因为是异步，在success中判断异步处理;
+				 },
+				 checkeml:function(val,callback){
+								 var action='http://bbs.idongmi.com/bbs/ajax.php?infloat=register&handlekey=register&action=checkemail&email='+val+'&inajax=1&ajaxtarget=returnmessage4',
+								 		 baseapi= '/api/api_getURL2js.jsp?op=get&url=';
+										 $.ajax({
+												url:baseapi+encodeURIComponent(action),
+												datatype:'xml',
+												type:'get',
+												success:function(ret){
+													var root=$(ret).find('root')[0],
+														result=$(root).text();
+														if(/'1', '该 Email 地址已经被注册'/.test(result)){
+															_fn.batchcallbackReghand('','该 Email 地址已经被注册',doc.getElementById('J_Email'));
+														}else{
+															if(callback) callback();
+														}
+												},
+												error:function(){
+													 _fn.batchcallbackReghand('','响应超时，请重新填写',doc.getElementById('J_Email'));
+												}
+											});
+									return true;
+				 },
+				 checkedReg:function(){
+					 var RegV=new G.widget.verify({
+								form:'#J_RegForm',
+								cls:'.J_Regverify',
 								blur:true,
 								success:function(data){
-									var username=data['username'],
-											email=data['email'];
+									_fn.checkname($('#J_UserName').val(),function(){
+											_fn.checkeml($('#J_Email').val(),function(){
+												$('#J_RegForm').die();	
+												$('#J_RegForm').submit();	
+											});
+									});
 								},
-								batchcallback:_fn.bathcallbackhand,
-								focusfn:_fn.focushand
-							});
-						FindV.init();
+								batchcallback:_fn.batchcallbackReghand,
+								focusfn:function(node){
+									if(node.parent().children().last().hasClass('J_checked')) node.parent().children().last().hide();
+								}
+						 },{
+							 checkusername:_fn.checkname,
+							 checkemail:_fn.checkeml
+						 });
+					 RegV.init();
 				 }
 			}
 
@@ -117,13 +155,13 @@
 				exports:{
 					login_init:function(){
 						G.widget.use('verify',function(widget){
-							_fn.bulidFindPwd();
 							_fn.checkedLogin();
-							_fn.checkedFindPwd();
 						});
 					},
 					register_init:function(){
-
+						G.widget.use('verify',function(widget){
+							_fn.checkedReg();
+						});
 					}
 				}
 			}
@@ -131,4 +169,4 @@
 
 		if(G && G.apps) G.apps.login=login;
 
-})(window,GM,jQuery)
+})(window,GM,jQuery,document)

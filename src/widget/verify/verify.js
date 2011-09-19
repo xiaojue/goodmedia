@@ -41,6 +41,14 @@
 			},
 			email:function(val){
 				return (/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/).test(val);
+			},
+			equal:function(val,selected){
+				if(val!=$(selected).val()) return false;
+				return true;
+			},
+			checked:function(val,node){
+				if(!$(node).attr('checked')) return false;
+				return true;
 			}
 		}
 		
