@@ -24,7 +24,7 @@
 				 */
 				
 				init:function(){
-					var user=$.cookie('ATsport'),idmrole=$.cookie('IDMROLE'),myhtml,bar='';
+					var user=$.cookie('ATsport'),idmrole=$.cookie('IDMROLE'),myhtml,bar='',indextext='我的首页';
 					if(user){
 						if(idmrole==0){
 							bar ='<li><a class="white" href="http://x.idongmi.com/plan/index.jsp" target="_blank">健身方案</a></li>'+
@@ -40,7 +40,10 @@
 							'<li><a class="white" href="http://x.idongmi.com/photo/index.jsp" target="_blank">照片墙</a></li>'+
 							'<li><a class="white" href="http://x.idongmi.com/user/edit_site.jsp" target="_blank">场馆资料</a></li>';
 						}
-						myhtml='<li><a class="white" href="http://x.idongmi.com/" target="_blank">我的首页</a></li>'+
+						if($.cookie('CNAME')){
+							indextext=$.cookie('CNAME')+'的首页';
+						}
+						myhtml='<li><a class="white" href="http://x.idongmi.com/" target="_blank">'+indextext+'</a></li>'+
 										bar+
 										'<li><a class="white" href="http://bbs.idongmi.com/bbs/logging.php?action=logout&formhash=a9886807&referer=http://www.idongmi.com">退出</a></li>';
 
