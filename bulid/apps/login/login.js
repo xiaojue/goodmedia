@@ -59,7 +59,7 @@
 															};
 															var search=$.analyse(window.location.search.slice(1)),
 																  referer=search['referer'];
-															if(!referer) referer='http://x.idongmi.com/';
+															if(!referer) referer=(window.ref!='null') ? window.ref : 'http://x.idongmi.com/';
 															$('#J_Status').html('欢迎您,'+username+',2秒后自动<a href="'+decodeURIComponent(referer)+'">返回</a>')
 															$('#J_Status').closest('.login_text').show();
 															$.cookie('CNAME',username,{

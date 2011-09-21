@@ -51,6 +51,7 @@
 													try{
 														if(result!='' && !(/\<script/.test(result))){
 															$('#J_Status').text(result);
+															$('#J_Status').closest('.login_text').show();
 														}else{
 															var scripts=result.match(/src="(.+?)"/g);
 															for(var i=0;i<scripts.length;i++){
@@ -59,7 +60,7 @@
 															};
 															var search=$.analyse(window.location.search.slice(1)),
 																  referer=search['referer'];
-															if(!referer) referer=(window.ref!='null') ? window.ref : 'http://x.idongmi.com/';
+															if(!referer) referer=(window.ref!='null' || window.ref=="http://x.idongmi.com/reg.jsp") ? window.ref : 'http://x.idongmi.com/';
 															$('#J_Status').html('欢迎您,'+username+',2秒后自动<a href="'+decodeURIComponent(referer)+'">返回</a>')
 															$('#J_Status').closest('.login_text').show();
 															$.cookie('CNAME',username,{

@@ -49,8 +49,8 @@
 
 						$('#J_MuenbarV2').html(myhtml);
 					}else{
-						myhtml='<li><a href="http://bbs.idongmi.com/bbs/register.php" target="_blank">注册</a></li>'+
-										'<li><a href="http://bbs.idongmi.com/bbs/logging.php?action=login&referer=http://x.idongmi.com/user/index.jsp" target="_blank">登录</a></li>'+
+						myhtml='<li><a href="http://x.idongmi.com/user/reg.jsp" target="_blank">注册</a></li>'+
+									 '<li><a href="http://x.idongmi.com/user/login.jsp" target="_blank">登录</a></li>'+
 										'<li><a href="http://bbs.idongmi.com/bbs/xwb.php?m=xwbAuth.login&referer=http://x.idongmi.com/" class="sina_accounts none index_bg" target="_blank"></a></li>';
 						$('#J_MuenbarV2').html(myhtml);
 					}
