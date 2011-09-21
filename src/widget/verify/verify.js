@@ -132,7 +132,7 @@
 					val=$.trim(node.val()),
 					vstr=node.attr(cg.attrname),
 					rulevalobj=that._translate(vstr);
-					if(cg.trim) node.val(val);
+          if(cg.trim) $(node).val(val);
 					for(var i in rulevalobj){
 						rulevalobj[i]['arg'].splice(0,0,val);
 						var examine=that.rule[i].apply(this,rulevalobj[i]['arg']);
@@ -149,7 +149,7 @@
 				var val=$.trim($(this).val()),
 					vstr=$(this).attr(cg.attrname),
 					rulevalobj=that._translate(vstr);
-					if(cg.trim) node.val(val);
+          if(cg.trim) $(node).val(val);
 					j++; //用做data标示，有name用name，没name用j
 					/*
 					rulevalobj={

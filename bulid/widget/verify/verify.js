@@ -15,6 +15,7 @@
 			blur:false,
 			batchcallback:null,
 			batchafter:null,
+			trim:true,
 			focusfn:null,
 			attrname:'data-v' //data-v functionname:msg:arg.arg|functionname:msg:arg.arg
 		}
@@ -48,6 +49,11 @@
 			},
 			checked:function(val,node){
 				if(!$(node).attr('checked')) return false;
+				return true;
+			},
+			sp:function(val){
+				var reg=/[\~|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\,|\s|\\|\||>|<|\?|\/|\;|\:|\"|\'|\{|\}|\[|\]|\`]/g;
+				if(val.match(reg)) return false;
 				return true;
 			}
 		}
@@ -84,7 +90,6 @@
 						if(cg.focusfn) cg.focusfn(node);
 				})
 			}
-
 		},
 		_form:function(form){
 			var that=this,cg=that.config;
@@ -127,6 +132,7 @@
 					val=$.trim(node.val()),
 					vstr=node.attr(cg.attrname),
 					rulevalobj=that._translate(vstr);
+          if(cg.trim) $(node).val(val);
 					for(var i in rulevalobj){
 						rulevalobj[i]['arg'].splice(0,0,val);
 						var examine=that.rule[i].apply(this,rulevalobj[i]['arg']);
@@ -143,6 +149,7 @@
 				var val=$.trim($(this).val()),
 					vstr=$(this).attr(cg.attrname),
 					rulevalobj=that._translate(vstr);
+          if(cg.trim) $(node).val(val);
 					j++; //用做data标示，有name用name，没name用j
 					/*
 					rulevalobj={
