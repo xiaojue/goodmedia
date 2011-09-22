@@ -16,6 +16,7 @@
 			batchcallback:null,
 			batchafter:null,
 			trim:true,
+      checktrue:null,
 			focusfn:null,
 			attrname:'data-v' //data-v functionname:msg:arg.arg|functionname:msg:arg.arg
 		}
@@ -139,7 +140,9 @@
 						if(!examine){
 							if(cg.batchcallback) cg.batchcallback(val,rulevalobj[i]['msg'],node);
 							break;
-						}
+						}else{
+              if(cg.checktrue) cg.checktrue(node);
+            }
 					}
 		},
 		_batch:function(cls){
@@ -163,17 +166,20 @@
 						if(cg.batchcallback) cg.batchcallback(val,rulevalobj[i]['msg'],node);
 						flg=false;
 						break;
-					}
+					}else{
+            var node=$(this);
+            if(cg.checktrue) cg.checktrue(node);
+          }
 				}
-				if(!flg){
-					return false;
+				
+        if(!flg){
+					return false; //中断each循环
 				}else{
 					if($(this).attr('name')){
 						that.data[$(this).attr('name')]=val;
 					}else{
 						that.data[j]=val;
 					}
-					
 				} 
 			});
 			return flg;

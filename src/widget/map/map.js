@@ -33,7 +33,7 @@
 	};
 	
 	var centerflg=true,
-			Ka='Ka',La='La',
+			Ka='Ja',La='Ka',
 			citycenter={
 					'北京':[39.904214,116.40741300000002],
 					'上海':[31.230393,121.473704],
@@ -90,7 +90,7 @@
 								(function(i){
 									that._searchQ(cityAry[i],function(results){
 											if(results){
-											console.log(cityAry[i]+':'+results.Ka+','+results.La);
+											console.log(cityAry[i]+':'+results[Ka]+','+results[La]);
 											}
 										})			
 								})(i);
@@ -108,11 +108,13 @@
 				var Gmap=google.maps,
 					geocoder = new Gmap.Geocoder();
 					if(citycenter.hasOwnProperty(q)){
-						if (callback) callback({
-								Ka:citycenter[q][0],
-								La:citycenter[q][1]
-							});
+						if (callback){
+              var obj={};
+              obj[Ka]=citycenter[q][0];
+              obj[La]=citycenter[q][1];
+              callback(obj);
 						return;
+            }
 					}
 					geocoder.geocode({
 					'address': q
@@ -201,7 +203,7 @@
 							},
 							//给周边场馆增加坐标和事件
 							addrimmarkers:function(ary,map,info,markAry){
-								var infotemp='<div class="info-window">'+
+                var infotemp='<div class="info-window" style="height:90px;">'+
 										 '<p><a href="/s/{siteno}" target="_blank" class="green">{name}</a></p>'+
 										 '<p class="coaches">入驻教练：{coaches}</p>'+
 										 '<p>热线电话：{tel}</p>'+
@@ -521,7 +523,8 @@
 										try{
 											eval('var r='+$.trim(result));
 										}catch(e){
-											console.log(e);
+											//console.log(e);
+                      alert(e)
 											var r=null;
 										}
 										if(callback) callback(r);

@@ -86,12 +86,15 @@
 							});	
 						loginV.init();
 				 },
-				 batchcallbackReghand:function(val,msg,ele){
+				 batchcallbackReghand:function(val,msg,ele,cls){
 					var parent=$(ele).parent();
 					if(parent.children().last().hasClass('J_checked')){
 						parent.children().last().show().html(msg);
+            if(!cls) parent.children().last().addClass('red');
+            else parent.children().last().removeClass('red');
 					}else{
-						parent.append('<em class="J_checked red" style="font-style:normal;">'+msg+'</em>');
+            cls=(cls=='normal')? '' : 'red';
+						parent.append('<em class="J_checked '+cls+'" style="font-style:normal;">'+msg+'</em>');
 					}
 				 },
 				 checkname:function(val,callback){
@@ -139,10 +142,18 @@
 									return true;
 				 },
 				 checkedReg:function(){
+           //增加提示
+           $('.J_Regverify').each(function(){
+               var that=this,msg=$(that).attr('data-tips');
+               if(msg)_fn.batchcallbackReghand('',msg,that,'normal');
+           });
 					 var RegV=new G.widget.verify({
 								form:'#J_RegForm',
 								cls:'.J_Regverify',
 								blur:true,
+                checktrue:function(ele){
+                  _fn.batchcallbackReghand('','<img src="http://s1.ifiter.com/static/images/reg/fatcow.png" alt="可以注册"/>',ele,'normal');
+                },
 								success:function(data){
 									_fn.checkname($('#J_UserName').val(),function(){
 											_fn.checkeml($('#J_Email').val(),function(){
@@ -153,7 +164,8 @@
 								},
 								batchcallback:_fn.batchcallbackReghand,
 								focusfn:function(node){
-									if(node.parent().children().last().hasClass('J_checked')) node.parent().children().last().hide();
+                  var msg=node.attr('data-tips');
+                  if(msg)_fn.batchcallbackReghand('',msg,node,'normal');
 								}
 						 },{
 							 checkusername:_fn.checkname,
