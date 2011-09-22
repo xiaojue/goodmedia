@@ -335,7 +335,7 @@
 								if(!guide) guide=(current-2)*max+max; //不存在指定打开哪一个，找到当前页的第一个
 								_fn.Rightfold(guide);
 								//打开对应的map info
-								_fn.infoopen[guide]();
+                if(_fn.infoopen[guide])_fn.infoopen[guide]();
 								//根据当前状态判断是否显示上下页
 								var l=$('#J_PagLength').val();
 								if(current==1) $('#J_PagBack').hide();
@@ -564,6 +564,7 @@
 									success:function(data){
 										_fn.postPostionSuccess(data,coord.lng,coord.lat);
 										that._sharehash(coord.lng,coord.lat);
+                    marker.setPosition(new  Gmap.LatLng(coord.lng,coord.lat,true));
 									},
 									error:_fn.postPostionError
 								});
