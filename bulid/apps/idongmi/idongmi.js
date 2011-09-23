@@ -30,10 +30,10 @@
 						//头部搜索部分
             if($.browser.msie && $.browser.version==6){
             var chlids=$('#J_Search').parent().children(),
+                cls=$('#J_Search').parent().attr('class'),
                 clone=chlids.clone();
-                $('#J_Search').parent().after($('<div class="search" style="filter:none;">').append(clone));
+                $('#J_Search').parent().after($('<div class="'+cls+'" style="filter:none;">').append(clone));
                 chlids.remove();
-                
             }
 						var txt=$('#J_Q'),msg="请输入关键字";
 							if(window.GLOBALskey) txt.val(GLOBALskey);
