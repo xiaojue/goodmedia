@@ -43,7 +43,7 @@
 											action+='&'+$.param(data);
 											
 									$.ajax({
-											url:'/api/api_getURL2js.jsp?op=login&username='+username+'&pwd='+data['password']+'&url='+encodeURIComponent(action),
+                      url:'/api/api_getURL2js.jsp?op=login&username='+encodeURIComponent(username)+'&pwd='+data['password']+'&url='+encodeURIComponent(action),
 											datatype:'xml',
 											success:function(ret){
 												var root=$(ret).find('root')[0],
@@ -181,7 +181,7 @@
 					login_init:function(){
 						G.widget.use('verify',function(widget){
 							_fn.checkedLogin();
-							if($.cookie('CNAME')) $('#J_Name').val($.cookie('CNAME'));
+              if($.cookie('CNAME')) $('#J_Name').val($.cookie('CNAME'));
 						});
 					},
 					register_init:function(){
