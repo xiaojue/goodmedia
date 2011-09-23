@@ -28,6 +28,13 @@
 					
 					$(function(){
 						//头部搜索部分
+            if($.browser.msie && $.browser.version==6){
+            var chlids=$('#J_Search').parent().children(),
+                clone=chlids.clone();
+                $('#J_Search').parent().after($('<div class="search" style="filter:none;">').append(clone));
+                chlids.remove();
+                
+            }
 						var txt=$('#J_Q'),msg="请输入关键字";
 							if(window.GLOBALskey) txt.val(GLOBALskey);
 							else
@@ -47,6 +54,7 @@
 									return false;
 								}
 							});
+
 						//公告首尾相接
 						$('.J_Roll').css('position','absolute').parent().css({'overflow':'hidden','width':300,'position':'relative'});
 						$('.J_Roll').wrap('<div style="position:relative;width:'+1000*1000+'px;height:29px;"></div>');
