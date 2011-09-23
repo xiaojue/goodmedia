@@ -69,6 +69,7 @@
 																	expires:5
 															});
 															setTimeout(function(){
+                                  if(referer=='null') referer='http://x.idongmi.com/';
 																	window.location.href=decodeURIComponent(referer);
 																},2000);
 														}

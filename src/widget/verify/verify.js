@@ -186,7 +186,6 @@
 		}
 	}
 	
-	
 	if(G && G.widget) G.widget.verify=verify;
 	
 })(jQuery,window,GM);
