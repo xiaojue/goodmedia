@@ -1,6 +1,7 @@
 /**
  * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
  * @version 20110805
+ * @fileoverview google map api 接口实现地理定位
  */
 (function(W,G) {
 
@@ -32,7 +33,8 @@
 	};
 	
 	var centerflg=true,
-			Ka='Ja',La='Ka',
+			Ka='Ja', //纬度
+      La='Ka', //经度
 			citycenter={
 					'北京':[39.904214,116.40741300000002],
 					'上海':[31.230393,121.473704],
@@ -111,6 +113,12 @@
               var obj={};
               obj[Ka]=citycenter[q][0];
               obj[La]=citycenter[q][1];
+              obj.lat=function(){
+                return obj[Ka];
+              },
+              obj.lng=function(){
+                return obj[La];
+              }
               callback(obj);
 						return;
             }
@@ -120,11 +128,7 @@
 					}, function(results, status) {
 						if (status == Gmap.GeocoderStatus.OK) {
 							var location=results[0].geometry.location;
-							if(location.hasOwnProperty(Ka) && location.hasOwnProperty(La)){
-									if(callback) callback(location);
-							}else{
-								alert(Ka+' and '+La+' is undef,that\'s google\'s mistake,please contact the web administrator!');
-							}
+							if(callback) callback(location);
 						} else {
 							if(callback) callback(null);
 						}
@@ -133,6 +137,7 @@
 		},
 		//绘制地图的主函数
 		drawmap:function(target,center,name,siteNo){
+      //center 为一个数组，而非object
 			if(google) {
 					var that=this,
 						T,
@@ -142,7 +147,7 @@
 						Gmap=google.maps,
 						Gevent=Gmap.event,
 						infowindow=new Gmap.InfoWindow(),
-						latlng = new Gmap.LatLng(center[0],center[1],true), //首次加载定义的中心点
+						latlng = new Gmap.LatLng(center[0],center[1]), //首次加载定义的中心点
 						myOptions = {
 							zoom:15,
 							center: latlng,
@@ -165,17 +170,7 @@
 							//设置坐标值
 							setlatlng:function(m,c){
 								var center=m.getPosition();
-								$('#J_Coord').html('lat:<span id="J_Pa">'+center[Ka]+'</span><br/>lng:<span id="J_Oa">'+center[La]+'</span>');
-							},
-							//取坐标
-							//这里的pa和oa用反了……囧，程序都做完了才发现精度纬度是拧着的，后台已经按照这个走了
-							//这里注释一下，切忌…… 这里Oa代表lat , Pa代表lng 搜索范围功能前台按照正常的来，后台会处理一下
-							getPosition:function(m){
-								var center=m.getPosition();
-								return {
-									lat:center[La],
-									lng:center[Ka]
-								}
+                $('#J_Coord').html('lat:<span id="J_Pa">'+center.lat()+'</span><br/>lng:<span id="J_Oa">'+center.lng()+'</span>');
 							},
 							//删除标记和圆圈
 							deleteMarkers:function(ary,cle){
@@ -217,7 +212,7 @@
 											resultlng=result['lng'],
 											resultname=result['name'];
 											function addMarker(name,lat,lng){
-												var	newlatlng = new Gmap.LatLng(lat,lng,true),
+												var	newlatlng = new Gmap.LatLng(lat,lng),
 													newmarker = new Gmap.Marker({
 													title:name,
 													position:newlatlng,
@@ -258,7 +253,7 @@
 											if(resultlat=="0.0" && resultlng=="0.0"){
 												that._searchQ(resulr['cityZone'],function(location){
 													if(location){
-														addMarker(resultname,location[La],location[Ka]);
+                            addMarker(resultname,location.lat(),location.lng());
 													}
 												});
 											}else{
@@ -376,14 +371,14 @@
 							},
 							//map和圈点击的handle
 							clickseach:function(e){
-								var lat=e['latLng'][La],
-									lng=e['latLng'][Ka],
-									darwin = new Gmap.LatLng(lng,lat,true);	
+                var lat=e['latLng'].lat(),
+                lng=e['latLng'].lng(),
+								darwin = new Gmap.LatLng(lat,lng);	
 								marker.setPosition(darwin);
 								_fn.postPostion(marker);
 							},
 							postPostionSuccess:function(data,lat,lng){
-								var darwin = new Gmap.LatLng(lat,lng,true); //设置新的地图中心点
+								var darwin = new Gmap.LatLng(lat,lng); //设置新的地图中心点
 									map.setCenter(darwin);
 									map.setZoom(13);
 									try{
@@ -434,7 +429,7 @@
 								}
 								that._searchQ(q,function(location){
 									if(location){
-										var darwin = new Gmap.LatLng(location[Ka],location[La],true);
+                    var darwin = new Gmap.LatLng(location.lat(),location.lng());
 										map.setCenter(darwin);
 										marker.setPosition(darwin);
 										_fn.postPostion(marker);
@@ -554,16 +549,16 @@
 							},
 							//发送当前坐标到搜索api，返回周边场馆
 							postPostion:function(m){
-								var coord=_fn.getPosition(m),
-									action='/api/mi.jsp?v=geo/'+coord.lat+'/'+coord.lng;
+                var coord=m.getPosition();
+                    action='/api/mi.jsp?v=geo/'+coord.lng()+'/'+coord.lat();
 									
 								$.ajax({
 									url:action,
 									type:'GET',
 									success:function(data){
-										_fn.postPostionSuccess(data,coord.lng,coord.lat);
-										that._sharehash(coord.lng,coord.lat);
-                    marker.setPosition(new  Gmap.LatLng(coord.lng,coord.lat,true));
+                    _fn.postPostionSuccess(data,coord.lat(),coord.lng());
+                    that._sharehash(coord.lat(),coord.lng());
+                    marker.setPosition(new  Gmap.LatLng(coord.lat(),coord.lng(),true));
 									},
 									error:_fn.postPostionError
 								});
@@ -652,6 +647,7 @@
 				
 			//加载相关css
 			that._loadcss();
+      //经度 lng，纬度 lat
 			//如果hash里存在经纬度，则根据url里的经纬来初始化
 			if(Initlatlng['lat'] && Initlatlng['lng']){
 				that.center=[Initlatlng['lat'],Initlatlng['lng']] //这是反的……
@@ -661,7 +657,7 @@
 				//没有坐标的时候，用内置反查询搜索q的位置，如果q还没有搜到，则不显示
 				that._searchQ(that.q,function(location){
 					if(location){
-						that.center=[location[Ka],location[La]];
+            that.center=[location.lat(),location.lng()];
 						that.drawmap(target,that.center,that.name,that.siteNo);
 					}else{
 						that._Initerror(target);
