@@ -4,11 +4,20 @@
  * @fileoverview 模板替换，操作模板字符串等方法集合$.substitute,$.analyse
  */
 (function(W,G,$){
-	
+  /**
+   * @memberOf jQuery
+   * @description temp方法集合
+   */
 	var temp=function(){
 		
 		return{
-			//先写一个replace方法用着-copy for kissy~
+      /**
+       * @name jQuery.substitute
+       * @param {String} str 替换的字符串
+       * @param {Object} o 匹配的object
+       * @param {regexp} regexp 附属匹配的正则
+       * @description 先写一个replace方法用着-copy for kissy~
+       */
 			substitute:function(str,o,regexp){
 	            return str.replace(regexp || /\\?\{([^{}]+)\}/g, function(match, name) {
 	                if (match.charAt(0) === '\\') {
@@ -17,7 +26,12 @@
 	                return (o[name] === undefined) ? '' : o[name];
 	            });				
 			},
-			//传入xx=oo&aa=bb，返回相应object
+      /**
+       * @name jQuery.analyse
+       * @param {String} str 传入xx=oo&aa=b
+       * @return {Object}
+       * @description 根据传入的xxx=oo&aa=vv的url返回对应键值的object
+       */
 			analyse:function(str){
 				var str=$.trim(str);
 				if(str=="" || !str) return {};

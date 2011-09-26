@@ -4,7 +4,10 @@
  * @fileoverview 动米网评论模块
  */
 (function(W,$,G){
-	
+  /**
+   * @memberOf GM.apps
+   * @class
+   */
 	var comment=function(config){
 		
 		function sole(tag){
@@ -75,7 +78,7 @@
 	  		return CommentTemp;	
 		},
 		/**
-		 * 
+		 *  
 		 */
 		createBar:function(uid){
 			var that=this,cg=that.config,

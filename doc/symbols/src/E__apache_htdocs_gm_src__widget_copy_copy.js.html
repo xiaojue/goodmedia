@@ -1,0 +1,48 @@
+<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"> <style>
+	.KEYW {color: #933;}
+	.COMM {color: #bbb; font-style: italic;}
+	.NUMB {color: #393;}
+	.STRN {color: #393;}
+	.REGX {color: #339;}
+	.line {border-right: 1px dotted #666; color: #666; font-style: normal;}
+	</style></head><body><pre><span class='line'>  1</span> <span class="COMM">/**
+<span class='line'>  2</span>  * @author fuqiang
+<span class='line'>  3</span>  * @version 20110902
+<span class='line'>  4</span>  * @fileoverview 复制文本到剪切板，不支持的非IE则做焦点移上手动复制
+<span class='line'>  5</span>  */</span><span class="WHIT">
+<span class='line'>  6</span> </span><span class="PUNC">(</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">W</span><span class="PUNC">,</span><span class="NAME">$</span><span class="PUNC">,</span><span class="NAME">G</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>  7</span> </span><span class="WHIT">  </span><span class="COMM">/**
+<span class='line'>  8</span>    * @name GM.widget.copy
+<span class='line'>  9</span>    * @class
+<span class='line'> 10</span>    * @description 复制到剪切板的功能
+<span class='line'> 11</span>    * @param {Element} btn 触发的按钮
+<span class='line'> 12</span>    * @param {String} txt 复制的文本
+<span class='line'> 13</span>    * @param {Element} target 需要显示复制文本的区域
+<span class='line'> 14</span>    */</span><span class="WHIT">
+<span class='line'> 15</span> </span><span class="WHIT">	</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">copy</span><span class="PUNC">=</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">btn</span><span class="PUNC">,</span><span class="NAME">txt</span><span class="PUNC">,</span><span class="NAME">target</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 16</span> </span><span class="WHIT">		</span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">_copy</span><span class="PUNC">=</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">txt</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 17</span> </span><span class="WHIT">			   </span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">$.browser.msie</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">   
+<span class='line'> 18</span> 	            	</span><span class="NAME">clipboardData.setData</span><span class="PUNC">(</span><span class="STRN">'Text'</span><span class="PUNC">,</span><span class="NAME">txt</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">   
+<span class='line'> 19</span> 	            	</span><span class="NAME">alert</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="STRN">"该地址已复制到剪切板！"</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">   
+<span class='line'> 20</span> 	        	</span><span class="PUNC">}</span><span class="WHIT"> </span><span class="KEYW">else</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 21</span> </span><span class="WHIT">	        		</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">target</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 22</span> </span><span class="WHIT">	        			</span><span class="NAME">$</span><span class="PUNC">(</span><span class="NAME">target</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">show</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">val</span><span class="PUNC">(</span><span class="NAME">txt</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">focus</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">select</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">click</span><span class="PUNC">(</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 23</span> </span><span class="WHIT">	        				</span><span class="NAME">$</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">select</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 24</span> </span><span class="WHIT">	        			</span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 25</span> </span><span class="WHIT">	        			</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">$</span><span class="PUNC">(</span><span class="STRN">'#J_CopyFuck'</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">length</span><span class="PUNC">==</span><span class="NUMB">0</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 26</span> </span><span class="WHIT">	        				</span><span class="NAME">$</span><span class="PUNC">(</span><span class="NAME">target</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">after</span><span class="PUNC">(</span><span class="STRN">'&lt;div class="red" id="J_CopyFuck">非IE浏览器请手动CTRL+C复制地址&lt;/div>'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 27</span> </span><span class="WHIT">	        			</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 28</span> </span><span class="WHIT">	        		</span><span class="PUNC">}</span><span class="KEYW">else</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 29</span> </span><span class="WHIT">		            	</span><span class="NAME">prompt</span><span class="PUNC">(</span><span class="STRN">"非IE内核浏览器，请复制以下地址："</span><span class="PUNC">,</span><span class="NAME">txt</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT"> </span><span class="COMM">//去你妈的非IE内核...  </span><span class="WHIT">
+<span class='line'> 30</span> </span><span class="WHIT">	        		</span><span class="PUNC">}</span><span class="WHIT">   
+<span class='line'> 31</span> 	        	</span><span class="PUNC">}</span><span class="WHIT">  
+<span class='line'> 32</span> 		</span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 33</span> </span><span class="WHIT">		</span><span class="NAME">$</span><span class="PUNC">(</span><span class="NAME">btn</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">live</span><span class="PUNC">(</span><span class="STRN">'click'</span><span class="PUNC">,</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 34</span> </span><span class="WHIT">			</span><span class="NAME">_copy</span><span class="PUNC">(</span><span class="NAME">txt</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 35</span> </span><span class="WHIT">		</span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 36</span> </span><span class="WHIT">	</span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'> 37</span> </span><span class="WHIT">	
+<span class='line'> 38</span> 	</span><span class="KEYW">if</span><span class="PUNC">(</span><span class="NAME">G</span><span class="WHIT"> </span><span class="PUNC">&&</span><span class="WHIT"> </span><span class="NAME">G.widget</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="NAME">G.widget.copy</span><span class="PUNC">=</span><span class="NAME">copy</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 39</span> </span><span class="WHIT">	
+<span class='line'> 40</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">(</span><span class="NAME">window</span><span class="PUNC">,</span><span class="NAME">jQuery</span><span class="PUNC">,</span><span class="NAME">GM</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 41</span> </span></pre></body></html>

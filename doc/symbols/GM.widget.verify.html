@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - GM.widget</title>
+		<title>JsDoc Reference - GM.widget.verify</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -242,7 +242,7 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Namespace GM.widget
+				Class GM.widget.verify
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
@@ -253,14 +253,14 @@ ul.inheritsList
 				
 				
 				
-					<br /><i>Defined in: </i> <a href="../symbols/src/E__apache_htdocs_gm_src__core_GMcore.js.html">GMcore.js</a>.
+					<br /><i>Defined in: </i> <a href="../symbols/src/E__apache_htdocs_gm_src__widget_verify_verify.js.html">verify.js</a>.
 				
 			</p>
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class GM.widget.">
-				<caption>Namespace Summary</caption>
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class GM.widget.verify.">
+				<caption>Class Summary</caption>
 				<thead>
 					<tr>
 						<th scope="col">Constructor Attributes</th>
@@ -272,9 +272,9 @@ ul.inheritsList
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/GM.widget.html#constructor">GM.widget</a></b>
+								<b><a href="../symbols/GM.widget.verify.html#constructor">GM.widget.verify</a></b>(config, rule)
 							</div>
-							<div class="description">与业务紧密相关的-挂件</div>
+							<div class="description">表单校验组件，包含的校验规则存在rule中，自己查看源文件看吧</div>
 						</td>
 					</tr>
 				</tbody>
@@ -285,7 +285,7 @@ ul.inheritsList
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class GM.widget.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class GM.widget.verify.">
 					<caption>Field Summary</caption>
 					<thead>
 						<tr>
@@ -296,12 +296,12 @@ ul.inheritsList
 					<tbody>
 					
 						<tr>
-							<td class="attributes">&lt;static&gt; &lt;constant&gt; &nbsp;</td>
+							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								GM.widget.<b><a href="../symbols/GM.widget.html#.host">host</a></b>
+								<b><a href="../symbols/GM.widget.verify.html#init">init</a></b>
 								</div>
-								<div class="description">widget的根目录</div>
+								<div class="description">目前对外的结构就只有一个init方法，所有回调和自定义事件都在cfg里体现</div>
 							</td>
 						</tr>
 					
@@ -314,42 +314,6 @@ ul.inheritsList
 
 <!-- ============================== methods summary ======================== -->
 			
-				
-				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class GM.widget.">
-					<caption>Method Summary</caption>
-					<thead>
-						<tr>
-							<th scope="col">Method Attributes</th>
-							<th scope="col">Method Name and Description</th>
-						</tr>
-					</thead>
-					<tbody>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">GM.widget.<b><a href="../symbols/GM.widget.html#.detercopy">detercopy</a></b>()
-								</div>
-								<div class="description">阻止用户勾选与复制，ie非ie通用</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&lt;static&gt; &nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont">GM.widget.<b><a href="../symbols/GM.widget.html#.use">use</a></b>(widget, callback)
-								</div>
-								<div class="description">加载widget的方法</div>
-							</td>
-						</tr>
-					
-					</tbody>
-				</table>
-				
-				
-				
-			
 <!-- ============================== events summary ======================== -->
 			
 
@@ -357,21 +321,38 @@ ul.inheritsList
 			
 			<div class="details"><a name="constructor"> </a>
 				<div class="sectionTitle">
-					Namespace Detail
+					Class Detail
 				</div>
 				
 				<div class="fixedFont">
-						<b>GM.widget</b>
+						<b>GM.widget.verify</b>(config, rule)
 				</div>
 				
 				<div class="description">
-					与业务紧密相关的-挂件
+					表单校验组件，包含的校验规则存在rule中，自己查看源文件看吧
 					
 				</div>
 				
 				
 				
 				
+					
+						<dl class="detailList">
+						<dt class="heading">Parameters:</dt>
+						
+							<dt>
+								<span class="light fixedFont">{Object}</span>  <b>config</b>
+								
+							</dt>
+								<dd>配置，详细看源文件……有默认的都写了。</dd>
+						
+							<dt>
+								<span class="light fixedFont">{Object}</span>  <b>rule</b>
+								
+							</dt>
+								<dd>[accessLevel] 如果有新增的校验或者独特的校验需求，在这里进行增加</dd>
+						
+						</dl>
 					
 					
 					
@@ -389,15 +370,15 @@ ul.inheritsList
 					Field Detail
 				</div>
 				
-					<a name=".host"> </a>
-					<div class="fixedFont">&lt;static&gt; &lt;constant&gt; 
+					<a name="init"> </a>
+					<div class="fixedFont">
 					
 					
-					<span class="light">GM.widget.</span><b>host</b>
+					<b>init</b>
 					
 					</div>
 					<div class="description">
-						widget的根目录
+						目前对外的结构就只有一个init方法，所有回调和自定义事件都在cfg里体现
 						
 						
 					</div>
@@ -414,81 +395,6 @@ ul.inheritsList
 			
 
 <!-- ============================== method details ========================= -->		
-			
-				<div class="sectionTitle">
-					Method Detail
-				</div>
-				
-					<a name=".detercopy"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">GM.widget.</span><b>detercopy</b>()
-					
-					</div>
-					<div class="description">
-						阻止用户勾选与复制，ie非ie通用
-						
-							<br />
-							<i>Defined in: </i> <a href="../symbols/src/E__apache_htdocs_gm_src__widget_detercopy_detercopy.js.html">detercopy.js</a>.
-						
-						
-					</div>
-					
-					
-					
-						
-						
-						
-						
-						
-						
-						
-
-					<hr />
-				
-					<a name=".use"> </a>
-					<div class="fixedFont">&lt;static&gt; 
-					
-					
-					<span class="light">GM.widget.</span><b>use</b>(widget, callback)
-					
-					</div>
-					<div class="description">
-						加载widget的方法
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{string}</span> <b>widget</b>
-									
-								</dt>
-								<dd></dd>
-							
-								<dt>
-									<span class="light fixedFont">{function}</span> <b>callback</b>
-									
-								</dt>
-								<dd></dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-						
-						
-
-					
-				
 			
 			
 <!-- ============================== event details ========================= -->		

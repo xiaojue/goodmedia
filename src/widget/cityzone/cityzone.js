@@ -2,24 +2,6 @@
  * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
  * @version 20110725
  * @fileoverview 联动地区菜单
- * ..	┏┓      ┏┓
-	┏┛┻━━━┛┻┓
-	┃              ┃
-	┃      ━      ┃
-	┃  ┳┛  ┗┳  ┃
-	┃              ┃
-	┃      ┻      ┃
-	┃              ┃
-	┗━┓      ┏━┛
-	    ┃      ┃
-	    ┃      ┃
-	    ┃      ┗━━━┓
-	    ┃              ┣┓
-	    ┃              ┏┛
-	    ┗┓┓┏━┳┓┏┛
-	      ┃┫┫  ┃┫┫
-	      ┗┻┛  ┗┻┛      
-	这城市联动我都重写过3次了啊。。能不能行了还。。      
  */
 (function(W,G){
 	/**

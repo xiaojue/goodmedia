@@ -5,7 +5,9 @@
  */
 (function(W,doc,$,G){
 	/**
-	 * 对IE6进行兼容shade fixed
+   * @memberOf jQuery
+   * @constructor
+	 * @description 对IE6进行兼容shade fixed
 	 */
 	var overlay=function(cg){
 
@@ -44,7 +46,12 @@
 		 * 开放出去的通用api
 		 */
 		_overlay._init.prototype={
-			//触发
+      /**
+       * @name jQuery.overlay#fire
+       * @param {String} html [accessLevel] 覆盖掉覆盖层内部区域的字符串
+       * @param {Function} callback [accessLevel] 触发浮出层后的回调
+       * @description 触发覆盖层浮出
+       */
 			fire:function(html,callback){
 				var that=this,config=that.config;
 
@@ -81,11 +88,22 @@
 				if(callback) callback(wrap);
 
 			},
-			//可以在此处重置样式与高宽还有透明度
+      /**
+       * @name jQuery.overlay#opacity
+       * @param {Number} opacity 透明度值 
+       * @description 可以重新设置透明
+       */
 			opacity:function(opacity){
 				var that=this,config=that.config;
 				config.opacity=opacity;
 			},
+      /**
+       * @name jquery.overlay#reset
+       * @param {Number} w 宽度
+       * @param {Number} h 高度
+       * @param {Number} cls 样式名
+       * @description 重写设置高宽和样式
+       */
 			reset:function(w,h,cls){
 
 				var that=this,config=that.config;
@@ -104,7 +122,11 @@
 				that._fix($('#'+config.wrapId),that);
 				
 			},
-			//关闭
+      /**
+       * @name jQuery.overlay#close
+       * @description 关闭覆盖层
+       * @param {Function} callback 关闭后的回调
+       */
 			close:function(callback){
 
 				var that=this,config=that.config;
@@ -178,7 +200,10 @@
 				host._fix($('#'+host.config.wrapId),host);
 				$('#'+host.config.coverId).css({'height': doc.documentElement.clientHeight});
 			},
-			//注销
+      /**
+       * @name jQuery.overlay#destroy
+       * @description 注销覆盖层
+       */
 			destroy:function(){
 				var that=this;config=that.config;
 				$('#'+config.coverId).remove();

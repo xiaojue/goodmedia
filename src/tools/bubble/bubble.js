@@ -4,7 +4,11 @@
  * @fileoverview 气泡功能，自定义划过气泡，提供一些对外的接口和方法
  */
 (function(W,doc,$,G){
-	
+  /**
+   * @memberOf jQuery
+   * @constructor
+   * @description 气泡浮出层管理，可以指定上下左右4个方向进行弹出
+   */
 	var bubble=function(config){
 		var _config={
 			width:0,
@@ -22,26 +26,52 @@
 	
 	
 	bubble.prototype={
+    /**
+     * @name jQuery.bubble#init
+     * @description 初始化bubble功能
+     */
 		init:function(){
 			var that=this,cg=that.config;
 			that.createWrap(cg.target);
 		},
+    /**
+     * @name jQuery.bubble#remove
+     * @description 删除这个bubble
+     */
 		remove:function(){
 			var that=this,cg=that.config;
 			$(cg.id).remove();
 		},
+    /**
+     * @name jQuery.bubble#show
+     * @description 显示 
+     */
 		show:function(){
 			var that=this,cg=that.config;
 			$(cg.id).show();
 		},
+    /**
+     * @name jQuery.bubble#hide
+     * @description 隐藏
+     */
 		hide:function(){
 			var that=this,cg=that.config;
 			$(cg.id).hide();
 		},
+    /**
+     * @name jQuery.bubble#setcontent
+     * @description 设置气泡层内部html
+     * @param {string} html 需要设置的内容
+     */
 		setcontent:function(html){
 			var that=this,cg=that.config;
 			$(cg.id).html(html);
 		},
+    /**
+     * @name jQuery.bubble#createWrap
+     * @private
+     * @designsor 内部私有方法，构造整个bubble结构
+     */
 		createWrap:function(target){
 			var cg=this.config,
 				postion=$(target).offset(),

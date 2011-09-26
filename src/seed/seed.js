@@ -1,10 +1,13 @@
 /**
  * @author fuqiang[designsor@gmail.com]
  * @version 20110915
- * @fileoverview 动米网种子文件
+ * @fileoverview 动米网种子文件，负责加载和初始化整个js库
  */
 (function(W,$,doc){
-
+   /**
+    * @static
+    * @description debug的信息，host保存调试机器项目路径
+    */
 	 W.GMDEBUG={
 		 host:'http://172.16.2.215/gm/',
 		 aver:W.location.href.match('debug')

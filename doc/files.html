@@ -192,6 +192,10 @@ ul.inheritsList
 	
 	<li><a href="symbols/GM.apps.cmsmuenbar.exports.html">GM.apps.cmsmuenbar.exports</a></li>
 	
+	<li><a href="symbols/GM.apps.cmsmuenbarv2.exports.html">GM.apps.cmsmuenbarv2.exports</a></li>
+	
+	<li><a href="symbols/GM.apps.comment.html">GM.apps.comment</a></li>
+	
 	<li><a href="symbols/GM.apps.editphoto.exports.html">GM.apps.editphoto.exports</a></li>
 	
 	<li><a href="symbols/GM.apps.ie6tips.exports.html">GM.apps.ie6tips.exports</a></li>
@@ -206,15 +210,23 @@ ul.inheritsList
 	
 	<li><a href="symbols/GM.widget.cityzone.html">GM.widget.cityzone</a></li>
 	
+	<li><a href="symbols/GM.widget.copy.html">GM.widget.copy</a></li>
+	
 	<li><a href="symbols/GM.widget.saycountdown.html">GM.widget.saycountdown</a></li>
 	
 	<li><a href="symbols/GM.widget.sharetosina.html">GM.widget.sharetosina</a></li>
 	
+	<li><a href="symbols/GM.widget.verify.html">GM.widget.verify</a></li>
+	
 	<li><a href="symbols/jQuery.html">jQuery</a></li>
+	
+	<li><a href="symbols/jQuery.bubble.html">jQuery.bubble</a></li>
 	
 	<li><a href="symbols/jQuery.carousel.html">jQuery.carousel</a></li>
 	
 	<li><a href="symbols/jQuery.cookie.html">jQuery.cookie</a></li>
+	
+	<li><a href="symbols/jQuery.overlay.html">jQuery.overlay</a></li>
 	
 </ul>
 <hr />
@@ -223,6 +235,44 @@ ul.inheritsList
 		<div id="content">
 			<h1 class="classTitle">File Index</h1>
 			
+			
+			<div>
+				<h2><a href="symbols/src/E__apache_htdocs_gm_src__apps_cmsmuenbarv2_cmsmuenbarv2.js.html">cmsmuenbarv2.js</a></h2>
+				
+cms 欢迎导航 根据cookie判断 新版
+				<dl>
+					
+						<dt class="heading">Author:</dt>
+						<dd><a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a></dd>
+					
+					
+						<dt class="heading">Version:</dt>
+							<dd>20110926</dd>
+					
+					
+					
+				</dl>
+			</div>
+			<hr />
+			
+			<div>
+				<h2><a href="symbols/src/E__apache_htdocs_gm_src__apps_comment_comment.css.html">comment.css</a></h2>
+				
+评论模块CSS样式，根据js异步载入
+				<dl>
+					
+						<dt class="heading">Author:</dt>
+						<dd>fuqiang[designsor@gmail.com]</dd>
+					
+					
+						<dt class="heading">Version:</dt>
+							<dd>20110926</dd>
+					
+					
+					
+				</dl>
+			</div>
+			<hr />
 			
 			<div>
 				<h2><a href="symbols/src/E__apache_htdocs_gm_src__apps_comment_comment.js.html">comment.js</a></h2>
@@ -282,6 +332,25 @@ ul.inheritsList
 			<hr />
 			
 			<div>
+				<h2><a href="symbols/src/E__apache_htdocs_gm_src__apps_idongmi_idongmi.js.html">idongmi.js</a></h2>
+				
+零散的idongmi的js代码回收，零散写入页面且已经被老代码通用的部分
+				<dl>
+					
+						<dt class="heading">Author:</dt>
+						<dd>fuqiang[designsor@gmail.com]</dd>
+					
+					
+						<dt class="heading">Version:</dt>
+							<dd>20110907</dd>
+					
+					
+					
+				</dl>
+			</div>
+			<hr />
+			
+			<div>
 				<h2><a href="symbols/src/E__apache_htdocs_gm_src__apps_ie6tips_ie6tips.css.html">ie6tips.css</a></h2>
 				
 ie6用户给出友善的升级浏览器提示
@@ -320,6 +389,25 @@ IE6以下用户友情提示升级或者更换浏览器
 			<hr />
 			
 			<div>
+				<h2><a href="symbols/src/E__apache_htdocs_gm_src__apps_login_login.js.html">login.js</a></h2>
+				
+x-dongmi登录 and 注册流程的校验部分 与ajax异步和bbs端登录同步的部分。
+				<dl>
+					
+						<dt class="heading">Author:</dt>
+						<dd>fuqiang[designsor@gmail.com]</dd>
+					
+					
+						<dt class="heading">Version:</dt>
+							<dd>20110915</dd>
+					
+					
+					
+				</dl>
+			</div>
+			<hr />
+			
+			<div>
 				<h2><a href="symbols/src/E__apache_htdocs_gm_src__apps_suggest_suggest.js.html">suggest.js</a></h2>
 				
 <p>search guess apps组件</p>
@@ -341,7 +429,15 @@ IE6以下用户友情提示升级或者更换浏览器
 			<div>
 				<h2><a href="symbols/src/E__apache_htdocs_gm_src__apps_syllabus_syllabus.js.html">syllabus.js</a></h2>
 				
-<p>课程表应用的js功能部分<br>使用reuqire加载然后用exports的方式暴露接口，init组织初始化,<br>这个文件是在iframe中被调用的，回引用window.parent的jQuery对象和GM对象，实现通讯。<br>主要功能为3个大部分:</p><ol><li>数据的通讯，主要是浮出层和iframe之间的数据交流.</li><li>四个不同tab的各种交互功能.</li><li>四个不同tab的通用功能.</li></ol>
+<p>课程表应用的js功能部分<br>
+使用reuqire加载然后用exports的方式暴露接口，init组织初始化,<br>
+这个文件是在iframe中被调用的，回引用window.parent的jQuery对象和GM对象，实现通讯。<br>
+主要功能为3个大部分:</p>
+<ol>
+<li>数据的通讯，主要是浮出层和iframe之间的数据交流.</li>
+<li>四个不同tab的各种交互功能.</li>
+<li>四个不同tab的通用功能.</li>
+</ol>
 				<dl>
 					
 						<dt class="heading">Author:</dt>
@@ -377,6 +473,25 @@ IE6以下用户友情提示升级或者更换浏览器
 			<hr />
 			
 			<div>
+				<h2><a href="symbols/src/E__apache_htdocs_gm_src__apps_test_test.js.html">test.js</a></h2>
+				
+测试各种体重腰围等等一堆东西的计算方法和校验等交互
+				<dl>
+					
+						<dt class="heading">Author:</dt>
+						<dd>fuqiang</dd>
+					
+					
+						<dt class="heading">Version:</dt>
+							<dd>20110907</dd>
+					
+					
+					
+				</dl>
+			</div>
+			<hr />
+			
+			<div>
 				<h2><a href="symbols/src/E__apache_htdocs_gm_src__core_GMcore.js.html">GMcore.js</a></h2>
 				
 Goodmedia前端js库core文件，负责创建GM对象和构建命名空间 基于jquery1.6.2
@@ -388,6 +503,25 @@ Goodmedia前端js库core文件，负责创建GM对象和构建命名空间 基�
 					
 						<dt class="heading">Version:</dt>
 							<dd>20110726</dd>
+					
+					
+					
+				</dl>
+			</div>
+			<hr />
+			
+			<div>
+				<h2><a href="symbols/src/E__apache_htdocs_gm_src__seed_seed.js.html">seed.js</a></h2>
+				
+动米网种子文件，负责加载和初始化整个js库
+				<dl>
+					
+						<dt class="heading">Author:</dt>
+						<dd>fuqiang[designsor@gmail.com]</dd>
+					
+					
+						<dt class="heading">Version:</dt>
+							<dd>20110915</dd>
 					
 					
 					
@@ -436,7 +570,8 @@ Goodmedia前端js库core文件，负责创建GM对象和构建命名空间 基�
 			<div>
 				<h2><a href="symbols/src/E__apache_htdocs_gm_src__tools_cookie_cookie.js.html">cookie.js</a></h2>
 				
-<p>直接引用jquery 开源cookie插件<a href="https://github.com/carhartl/jquery-cookie" target="_blank">jquery-cookie</a></p>
+<p>直接引用jquery 开源cookie插件
+<a href="https://github.com/carhartl/jquery-cookie" target="_blank">jquery-cookie</a></p>
 				<dl>
 					
 						<dt class="heading">Author:</dt>
@@ -510,6 +645,25 @@ Goodmedia前端js库core文件，负责创建GM对象和构建命名空间 基�
 			<hr />
 			
 			<div>
+				<h2><a href="symbols/src/E__apache_htdocs_gm_src__tools_switchable_switchable.js.html">switchable.js</a></h2>
+				
+switchable组件，哥实在扛不住挨个页面写一堆了……,没什么好介绍的，直接看cg参数
+				<dl>
+					
+						<dt class="heading">Author:</dt>
+						<dd>fuqiang[designsor@gmail.com]</dd>
+					
+					
+						<dt class="heading">Version:</dt>
+							<dd>20110906</dd>
+					
+					
+					
+				</dl>
+			</div>
+			<hr />
+			
+			<div>
 				<h2><a href="symbols/src/E__apache_htdocs_gm_src__tools_temp_temp.js.html">temp.js</a></h2>
 				
 模板替换，操作模板字符串等方法集合$.substitute,$.analyse
@@ -567,6 +721,25 @@ Goodmedia前端js库core文件，负责创建GM对象和构建命名空间 基�
 			<hr />
 			
 			<div>
+				<h2><a href="symbols/src/E__apache_htdocs_gm_src__widget_copy_copy.js.html">copy.js</a></h2>
+				
+复制文本到剪切板，不支持的非IE则做焦点移上手动复制
+				<dl>
+					
+						<dt class="heading">Author:</dt>
+						<dd>fuqiang</dd>
+					
+					
+						<dt class="heading">Version:</dt>
+							<dd>20110902</dd>
+					
+					
+					
+				</dl>
+			</div>
+			<hr />
+			
+			<div>
 				<h2><a href="symbols/src/E__apache_htdocs_gm_src__widget_debug_debug.js.html">debug.js</a></h2>
 				
 <p>debug模式下增加debug工具<br>
@@ -608,7 +781,7 @@ Goodmedia前端js库core文件，负责创建GM对象和构建命名空间 基�
 			<div>
 				<h2><a href="symbols/src/E__apache_htdocs_gm_src__widget_ie6fix_ie6fix.js.html">ie6fix.js</a></h2>
 				
-主要负责修复ie6的一些bug
+主要负责修复ie6的一些bug，去你妈的IE6 -_-||
 				<dl>
 					
 						<dt class="heading">Author:</dt>
@@ -701,6 +874,25 @@ google map api 接口实现地理定位
 			<hr />
 			
 			<div>
+				<h2><a href="symbols/src/E__apache_htdocs_gm_src__widget_verify_verify.js.html">verify.js</a></h2>
+				
+哥实在扛不住了，所以哥决定写一个校验组件 -_-||
+				<dl>
+					
+						<dt class="heading">Author:</dt>
+						<dd>fuqiang[designsor@gmail.com]</dd>
+					
+					
+						<dt class="heading">Version:</dt>
+							<dd>20110905</dd>
+					
+					
+					
+				</dl>
+			</div>
+			<hr />
+			
+			<div>
 				<h2><a href="symbols/src/E__apache_htdocs_gm_src__apps_cmsmuenbar_cmsmuenbar.js.html">cmsmuenbar.js</a></h2>
 				
 cms 欢迎导航 根据cookie判断
@@ -723,7 +915,7 @@ cms 欢迎导航 根据cookie判断
 		</div>
 		<div class="fineprint" style="clear:both">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blankt">JsDoc Toolkit</a> 2.4.0 on Thu Sep 01 2011 10:17:06 GMT+0800 (CST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blankt">JsDoc Toolkit</a> 2.4.0 on Mon Sep 26 2011 15:27:19 GMT+0800 (CST)
 		</div>
 	</body>
 </html>

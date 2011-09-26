@@ -1,7 +1,7 @@
 /**
  * @author fuqiang[designsor@gmail.com]
  * @version 20110915
- * @fileoverview x-dongmi登录 and 注册页面……唉。又和媳妇吵架了。
+ * @fileoverview x-dongmi登录 and 注册流程的校验部分 与ajax异步和bbs端登录同步的部分。
  */
 (function(W,G,$,doc){
     var login=function(){

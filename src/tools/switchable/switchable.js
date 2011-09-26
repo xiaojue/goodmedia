@@ -1,10 +1,13 @@
 /**
  * @author fuqiang[designsor@gmail.com]
  * @version 20110906
- * @fileoverview switchable组件，哥实在扛不住挨个页面写一堆了……
+ * @fileoverview switchable组件，哥实在扛不住挨个页面写一堆了……,没什么好介绍的，直接看cg参数
  */
 (function(W,G,$){
-	
+  /**
+   * @memberOf jQuery
+   * @description  switchable组件，哥实在扛不住挨个页面写一堆了……,没什么好介绍的，直接看cg参数
+   */
 	var switchable=function(cg){
 		
 		function _switch(cg){
@@ -22,6 +25,10 @@
 		};
 		
 		_switch.prototype={
+      /**
+       * @name jQuery.switchable#init
+       * @description 初始化switch，参数均在config里设置
+       */
 			init:function(){
 				var that=this,cg=that.config;
 				$(cg.wraps).hide();
