@@ -251,7 +251,7 @@
 											
 											//如果场馆坐标为0.0 就是数据库没有
 											if(resultlat=="0.0" && resultlng=="0.0"){
-												that._searchQ(resulr['cityZone'],function(location){
+												that._searchQ(result['cityZone'],function(location){
 													if(location){
                             addMarker(resultname,location.lat(),location.lng());
 													}
