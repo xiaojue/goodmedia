@@ -1,7 +1,6 @@
 /**
  * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
  * @version 20110805
- * @fileoverview google map api 接口实现地理定位
  */
 (function(W,G) {
 
