@@ -117,7 +117,7 @@
 	 * @static
 	 * @description 加载widget的方法
 	 * @function
-	 * @param {string} widget
+	 * @param {String} widget
 	 * @param {function} callback
 	 */
 	GM.widget.use=function(widget,callback){
@@ -155,7 +155,7 @@
 			exports.init();
 		});
 	}
-	})	
+  });	
 	
 	W.GM=GM;
 })(window,document,jQuery);

@@ -12,7 +12,6 @@
 		 host:'http://172.16.2.215/gm/',
 		 aver:W.location.href.match('debug')
 	 }
-		
 	 var basehost,
 	 		 debughost=W.GMDEBUG.host+'src/',
 	 		 version='20110915',
@@ -60,7 +59,9 @@
 		if(!basehost) throw 'base path not found';
 		
 		if(W.GMDEBUG.aver) loadtype='debug';
-		
+	  
+    if(!W.GM) var GM={};
+
 		putjs(loadtype);
 
 })(window,jQuery,document);
