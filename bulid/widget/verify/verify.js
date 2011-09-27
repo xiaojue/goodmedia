@@ -4,7 +4,13 @@
  * @fileoverview 哥实在扛不住了，所以哥决定写一个校验组件 -_-||
  */
 (function($,W,G){
-	
+	/**
+   * @name GM.widget.verify
+   * @class
+   * @description 表单校验组件，包含的校验规则存在rule中，自己查看源文件看吧
+   * @param {Object} config 配置，详细看源文件……有默认的都写了。
+   * @param {Object} rule [accessLevel] 如果有新增的校验或者独特的校验需求，在这里进行增加 
+   */
 	var verify=function(config,rule){
 		
 		var _config={
@@ -68,6 +74,10 @@
 	}
 	
 	verify.prototype={
+    /**
+     * @name GM.widget.verify#init
+     * @description 目前对外的结构就只有一个init方法，所有回调和自定义事件都在cfg里体现
+     */
 		init:function(){
 			var that=this,cg=that.config;
 			

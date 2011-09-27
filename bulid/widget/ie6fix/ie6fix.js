@@ -4,8 +4,11 @@
  * @fileoverview 主要负责修复ie6的一些bug，去你妈的IE6 -_-||
  */
 (function(W,G,$,doc){
-	
-	//修复png24不透明
+
+   /**
+    * @member jQuery
+    * @description 修复ie6下png24不透明的函数
+    */
 	var fixpng24=function() {
 		$('img').each(function(){
 			var imgName = this.src.toUpperCase();

@@ -4,7 +4,10 @@
  * @fileoverview 动米网评论模块
  */
 (function(W,$,G){
-	
+  /**
+   * @memberOf GM.apps
+   * @class
+   */
 	var comment=function(config){
 		
 		function sole(tag){
@@ -75,7 +78,7 @@
 	  		return CommentTemp;	
 		},
 		/**
-		 * 
+		 *  
 		 */
 		createBar:function(uid){
 			var that=this,cg=that.config,
@@ -329,10 +332,10 @@
 		 */
 		drawingName:function(str){
 			var that=this,cg=that.config;
-			var reg=/(@)(.*?)(|\||\.|,|\s|$)/g, 
+			var reg=/(@)(.*?)(\||\.|\,|\s|$)/g, 
 			    str=str.replace(reg,function($0,$1,$2){
                      var txt=$2;
-                     if(txt=="" || txt.length<=2 || txt.length>15) return $0; //小于2大于15为空的不渲染
+                     if(txt=="" || txt.length<=0 || txt.length>15) return $0; //小于2大于15为空的不渲染
                      return '<a class="'+cg.namecls.slice(1)+'" href="/u/'+txt+'" data-name="'+txt+'" target="_blank">'+$0+'</a>';
 				});
 			return str;

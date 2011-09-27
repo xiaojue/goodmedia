@@ -117,7 +117,7 @@
 	 * @static
 	 * @description 加载widget的方法
 	 * @function
-	 * @param {string} widget
+	 * @param {String} widget
 	 * @param {function} callback
 	 */
 	GM.widget.use=function(widget,callback){
@@ -155,7 +155,7 @@
 			exports.init();
 		});
 	}
-	})	
+  });	
 	
 	W.GM=GM;
 })(window,document,jQuery);
@@ -166,7 +166,9 @@
  */
 (function(W,doc,$,G){
 	/**
-	 * 对IE6进行兼容shade fixed
+   * @memberOf jQuery
+   * @constructor
+	 * @description 对IE6进行兼容shade fixed
 	 */
 	var overlay=function(cg){
 
@@ -205,7 +207,12 @@
 		 * 开放出去的通用api
 		 */
 		_overlay._init.prototype={
-			//触发
+      /**
+       * @name jQuery.overlay#fire
+       * @param {String} html [accessLevel] 覆盖掉覆盖层内部区域的字符串
+       * @param {Function} callback [accessLevel] 触发浮出层后的回调
+       * @description 触发覆盖层浮出
+       */
 			fire:function(html,callback){
 				var that=this,config=that.config;
 
@@ -242,11 +249,22 @@
 				if(callback) callback(wrap);
 
 			},
-			//可以在此处重置样式与高宽还有透明度
+      /**
+       * @name jQuery.overlay#opacity
+       * @param {Number} opacity 透明度值 
+       * @description 可以重新设置透明
+       */
 			opacity:function(opacity){
 				var that=this,config=that.config;
 				config.opacity=opacity;
 			},
+      /**
+       * @name jquery.overlay#reset
+       * @param {Number} w 宽度
+       * @param {Number} h 高度
+       * @param {Number} cls 样式名
+       * @description 重写设置高宽和样式
+       */
 			reset:function(w,h,cls){
 
 				var that=this,config=that.config;
@@ -265,7 +283,11 @@
 				that._fix($('#'+config.wrapId),that);
 				
 			},
-			//关闭
+      /**
+       * @name jQuery.overlay#close
+       * @description 关闭覆盖层
+       * @param {Function} callback 关闭后的回调
+       */
 			close:function(callback){
 
 				var that=this,config=that.config;
@@ -339,7 +361,10 @@
 				host._fix($('#'+host.config.wrapId),host);
 				$('#'+host.config.coverId).css({'height': doc.documentElement.clientHeight});
 			},
-			//注销
+      /**
+       * @name jQuery.overlay#destroy
+       * @description 注销覆盖层
+       */
 			destroy:function(){
 				var that=this;config=that.config;
 				$('#'+config.coverId).remove();
@@ -587,7 +612,11 @@
  * @fileoverview 气泡功能，自定义划过气泡，提供一些对外的接口和方法
  */
 (function(W,doc,$,G){
-	
+  /**
+   * @memberOf jQuery
+   * @constructor
+   * @description 气泡浮出层管理，可以指定上下左右4个方向进行弹出
+   */
 	var bubble=function(config){
 		var _config={
 			width:0,
@@ -605,26 +634,52 @@
 	
 	
 	bubble.prototype={
+    /**
+     * @name jQuery.bubble#init
+     * @description 初始化bubble功能
+     */
 		init:function(){
 			var that=this,cg=that.config;
 			that.createWrap(cg.target);
 		},
+    /**
+     * @name jQuery.bubble#remove
+     * @description 删除这个bubble
+     */
 		remove:function(){
 			var that=this,cg=that.config;
 			$(cg.id).remove();
 		},
+    /**
+     * @name jQuery.bubble#show
+     * @description 显示 
+     */
 		show:function(){
 			var that=this,cg=that.config;
 			$(cg.id).show();
 		},
+    /**
+     * @name jQuery.bubble#hide
+     * @description 隐藏
+     */
 		hide:function(){
 			var that=this,cg=that.config;
 			$(cg.id).hide();
 		},
+    /**
+     * @name jQuery.bubble#setcontent
+     * @description 设置气泡层内部html
+     * @param {string} html 需要设置的内容
+     */
 		setcontent:function(html){
 			var that=this,cg=that.config;
 			$(cg.id).html(html);
 		},
+    /**
+     * @name jQuery.bubble#createWrap
+     * @private
+     * @designsor 内部私有方法，构造整个bubble结构
+     */
 		createWrap:function(target){
 			var cg=this.config,
 				postion=$(target).offset(),
@@ -680,10 +735,13 @@
 /**
  * @author fuqiang[designsor@gmail.com]
  * @version 20110906
- * @fileoverview switchable组件，哥实在扛不住挨个页面写一堆了……
+ * @fileoverview switchable组件，哥实在扛不住挨个页面写一堆了……,没什么好介绍的，直接看cg参数
  */
 (function(W,G,$){
-	
+  /**
+   * @memberOf jQuery
+   * @description  switchable组件，哥实在扛不住挨个页面写一堆了……,没什么好介绍的，直接看cg参数
+   */
 	var switchable=function(cg){
 		
 		function _switch(cg){
@@ -701,6 +759,10 @@
 		};
 		
 		_switch.prototype={
+      /**
+       * @name jQuery.switchable#init
+       * @description 初始化switch，参数均在config里设置
+       */
 			init:function(){
 				var that=this,cg=that.config;
 				$(cg.wraps).hide();
@@ -725,17 +787,27 @@
 		switchable:switchable
 	})
 	
-})(window,GM,jQuery);/**
+})(window,GM,jQuery);
+/**
  * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
  * @version 20110808
  * @fileoverview 模板替换，操作模板字符串等方法集合$.substitute,$.analyse
  */
 (function(W,G,$){
-	
+  /**
+   * @memberOf jQuery
+   * @description temp方法集合
+   */
 	var temp=function(){
 		
 		return{
-			//先写一个replace方法用着-copy for kissy~
+      /**
+       * @name jQuery.substitute
+       * @param {String} str 替换的字符串
+       * @param {Object} o 匹配的object
+       * @param {regexp} regexp 附属匹配的正则
+       * @description 先写一个replace方法用着-copy for kissy~
+       */
 			substitute:function(str,o,regexp){
 	            return str.replace(regexp || /\\?\{([^{}]+)\}/g, function(match, name) {
 	                if (match.charAt(0) === '\\') {
@@ -744,7 +816,12 @@
 	                return (o[name] === undefined) ? '' : o[name];
 	            });				
 			},
-			//传入xx=oo&aa=bb，返回相应object
+      /**
+       * @name jQuery.analyse
+       * @param {String} str 传入xx=oo&aa=b
+       * @return {Object}
+       * @description 根据传入的xxx=oo&aa=vv的url返回对应键值的object
+       */
 			analyse:function(str){
 				var str=$.trim(str);
 				if(str=="" || !str) return {};
@@ -878,8 +955,11 @@
  * @fileoverview 主要负责修复ie6的一些bug，去你妈的IE6 -_-||
  */
 (function(W,G,$,doc){
-	
-	//修复png24不透明
+
+   /**
+    * @member jQuery
+    * @description 修复ie6下png24不透明的函数
+    */
 	var fixpng24=function() {
 		$('img').each(function(){
 			var imgName = this.src.toUpperCase();
@@ -949,7 +1029,11 @@
  * IE下如果不全部屏蔽功能，则可以通过ctrl+a或者从其他节点复制过来，造成影响。这里封装为IE下强制屏蔽复制，什么都不可以选，不可以复制。</p>
  */
 (function(W,doc,G){
-	
+  /**
+   * @name GM.widget.detercopy
+   * @function
+   * @description 阻止用户勾选与复制，ie非ie通用
+   */
 	var detercopy=function(selector){
 		$(function(){
 		

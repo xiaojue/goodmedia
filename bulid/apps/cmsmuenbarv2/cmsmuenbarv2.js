@@ -1,6 +1,6 @@
 /**
  * @author <a href="mailto:designsor@gmail.com" target="_blank">Fuqiang[designsor@gmail.com]</a>
- * @version 20110907
+ * @version 20110926
  * @fileoverview cms 欢迎导航 根据cookie判断 新版
  */
 (function(W,$,G){

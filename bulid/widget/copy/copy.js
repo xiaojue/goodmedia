@@ -4,7 +4,14 @@
  * @fileoverview 复制文本到剪切板，不支持的非IE则做焦点移上手动复制
  */
 (function(W,$,G){
-	
+  /**
+   * @name GM.widget.copy
+   * @class
+   * @description 复制到剪切板的功能
+   * @param {Element} btn 触发的按钮
+   * @param {String} txt 复制的文本
+   * @param {Element} target 需要显示复制文本的区域
+   */
 	var copy=function(btn,txt,target){
 		var _copy=function(txt){
 			   if($.browser.msie) {   

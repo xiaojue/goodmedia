@@ -6,7 +6,11 @@
  * IE下如果不全部屏蔽功能，则可以通过ctrl+a或者从其他节点复制过来，造成影响。这里封装为IE下强制屏蔽复制，什么都不可以选，不可以复制。</p>
  */
 (function(W,doc,G){
-	
+  /**
+   * @name GM.widget.detercopy
+   * @function
+   * @description 阻止用户勾选与复制，ie非ie通用
+   */
 	var detercopy=function(selector){
 		$(function(){
 		

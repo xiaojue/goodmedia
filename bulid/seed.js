@@ -1,15 +1,17 @@
 /**
  * @author fuqiang[designsor@gmail.com]
  * @version 20110915
- * @fileoverview 动米网种子文件
+ * @fileoverview 动米网种子文件，负责加载和初始化整个js库
  */
 (function(W,$,doc){
-
+   /**
+    * @static
+    * @description debug的信息，host保存调试机器项目路径
+    */
 	 W.GMDEBUG={
 		 host:'http://172.16.2.215/gm/',
 		 aver:W.location.href.match('debug')
 	 }
-		
 	 var basehost,
 	 		 debughost=W.GMDEBUG.host+'src/',
 	 		 version='20110915',
@@ -57,7 +59,9 @@
 		if(!basehost) throw 'base path not found';
 		
 		if(W.GMDEBUG.aver) loadtype='debug';
-		
+	  
+    if(!W.GM) var GM={};
+
 		putjs(loadtype);
 
 })(window,jQuery,document);
