@@ -124,8 +124,6 @@
 .Noname{
 	color:#444!important;
 	cursor:pointer;
-	text-decoration:line-through;
 }
 .Noname:hover{
-	text-decoration:line-through;
 }

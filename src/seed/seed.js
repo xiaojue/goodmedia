@@ -59,8 +59,6 @@
 		if(!basehost) throw 'base path not found';
 		
 		if(W.GMDEBUG.aver) loadtype='debug';
-	  
-    if(!W.GM) var GM={};
 
 		putjs(loadtype);
 

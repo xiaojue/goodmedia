@@ -369,7 +369,7 @@
 								'title':'此用户不存在'
 							}).addClass('Noname');
 						}else{
-							$(selector).eq(i).attr('href','/u/'+uids[i]);
+              $(selector).eq(i).attr('href','/u/'+uids[i]);
 						}
 					}	
 				},
