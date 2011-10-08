@@ -45,6 +45,7 @@
 									$.ajax({
                       url:'/api/api_getURL2js.jsp?op=login&username='+encodeURIComponent(username)+'&pwd='+data['password']+'&url='+encodeURIComponent(action),
 											datatype:'xml',
+                      type:'POST',
 											success:function(ret){
 												var root=$(ret).find('root')[0],
 														result=$(root).text();
@@ -104,7 +105,7 @@
 										 $.ajax({
 												 url:baseapi+encodeURIComponent(action),
 												 datatype:'xml',
-												 type:'post',
+												 type:'POST',
 												 success:function(ret){
 													 var root=$(ret).find('root')[0],
 														   result=$(root).text();
@@ -126,7 +127,7 @@
 										 $.ajax({
 												url:baseapi+encodeURIComponent(action),
 												datatype:'xml',
-												type:'post',
+												type:'POST',
 												success:function(ret){
 													var root=$(ret).find('root')[0],
 														result=$(root).text();
