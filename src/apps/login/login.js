@@ -104,7 +104,7 @@
 										 $.ajax({
 												 url:baseapi+encodeURIComponent(action),
 												 datatype:'xml',
-												 type:'get',
+												 type:'post',
 												 success:function(ret){
 													 var root=$(ret).find('root')[0],
 														   result=$(root).text();
@@ -126,7 +126,7 @@
 										 $.ajax({
 												url:baseapi+encodeURIComponent(action),
 												datatype:'xml',
-												type:'get',
+												type:'post',
 												success:function(ret){
 													var root=$(ret).find('root')[0],
 														result=$(root).text();
