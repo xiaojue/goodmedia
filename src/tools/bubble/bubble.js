@@ -88,11 +88,11 @@
 				},
 				right:{
 					left:postion.left+boxW,
-					top:postion.top-(cg.width/2)
+					top:postion.top-(cg.height/2)
 				},
 				left:{
 					left:postion.left-cg.width,
-					top:postion.top-(cg.width/2)
+					top:postion.top-(cg.height/2)
 				}
 			};
 			
