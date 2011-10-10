@@ -79,20 +79,20 @@
 				boxW=$(target).width(),
 				postionsign={
 				bottom:{
-					left:postion.left-(cg.width/2),
+          left:postion.left+(boxW-cg.width)/2,
 					top:postion.top+boxH
 				},
 				top:{
-					left:postion.left-(cg.width/2),
+          left:postion.left+(boxW-cg.width)/2,
 					top:postion.top-cg.height
 				},
 				right:{
 					left:postion.left+boxW,
-					top:postion.top-(cg.height/2)
+          top:postion.top+(boxH-cg.height)/2
 				},
 				left:{
 					left:postion.left-cg.width,
-					top:postion.top-(cg.height/2)
+          top:postion.top+(boxH-cg.height)/2
 				}
 			};
 			
