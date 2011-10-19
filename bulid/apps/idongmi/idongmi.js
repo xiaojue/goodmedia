@@ -56,12 +56,12 @@
 							});
 
 						//公告首尾相接
-						$('.J_Roll').css('position','absolute').parent().css({'overflow':'hidden','width':300,'position':'relative'});
+						$('.J_Roll').css('position','absolute').parent().css({'overflow':'hidden','width':181,'position':'relative'});
 						$('.J_Roll').wrap('<div style="position:relative;width:'+1000*1000+'px;height:29px;"></div>');
 						
 						var width=$('.J_Roll').width(),
 							innerWidth=$('.J_Roll>span:first').width(),
-							parentWidth=300,
+							parentWidth=181,
 							clone=$('.J_Roll>span:first').clone(),timer,nowleft=0;
 							
 							$('.J_Roll').append(clone);

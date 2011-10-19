@@ -527,7 +527,7 @@
 					Realwrap=$(config.wrap).find('.fixclear'),
 					l=$(config.wrap).find(config.wrapitem).length;
 				
-				if(guide>l || guide<0) return;
+				if(guide>l-1 || guide<0) return;
 				
 				config.current=guide;
 				

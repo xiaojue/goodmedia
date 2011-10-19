@@ -48,7 +48,7 @@
 				return (/^(?:13\d|15\d|18\d)-?\d{5}(\d{3}|\*{3})$/).test(val)
 			},
 			email:function(val){
-				return (/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/).test(val);
+				return (/^(?:[a-zA-Z0-9]+[_\-\+\.]?)*[a-zA-Z0-9]+@(?:([a-zA-Z0-9]+[_\-]?)*[a-zA-Z0-9]+\.)+([a-zA-Z]{2,})+$/).test(val);
 			},
 			equal:function(val,selected){
 				if(val!=$(selected).val()) return false;
