@@ -71,6 +71,9 @@
 															});
 															setTimeout(function(){
                                   if(referer=='null') referer='http://x.idongmi.com/';
+                                  if(decodeURIComponent(referer)=='http://www.idongmi.com/'){
+                                    referer='http://x.idongmi.com/';
+                                  };
 																	window.location.href=decodeURIComponent(referer);
 																},4000);
 														}

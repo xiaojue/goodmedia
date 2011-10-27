@@ -9,7 +9,7 @@
     * @description debug的信息，host保存调试机器项目路径
     */
 	 W.GMDEBUG={
-		 host:'http://172.16.2.215/gm/',
+		 host:'http://localhost/gm/',
 		 aver:W.location.href.match('debug')
 	 }
 	 var basehost,
