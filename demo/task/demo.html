@@ -4,82 +4,14 @@
 		<title>table demo</title>
 		<meta content="text/html; charset=utf-8" http-equiv="content-type">
 		<script src="../../jquery/jquery-1.6.2.js" charset=”utf-8″></script>
-		<script src="../../bulid/GM.js" type="text/javascript" charset=”UTF-8″></script>
+		<script src="../../bulid/seed-min.js" type="text/javascript" charset=”UTF-8″></script>
 		<link type="text/css" rel="stylesheet" href="http://s1.ifiter.com/static/css.css">
 	</head>
 	<body>
 		<script>
-		//alert($.cookie('GMTask'));
 			(function(W){
-				GM.apps.require('task',function(exports){
-					
-					/*
-					exports.fire('welcome',{
-						username:'付强',
-						coachname:'美女教练的名字',
-						coachpic:'http://s1.ifiter.com/static/images/pic_img1.jpg',
-						todourl:'http://s1.ifiter.com' //完成第1个任务的url
-					});
-					*/
-					
-					/*
-					exports.fire('step1',{
-						username:'付强',
-						coachname:'美女教练的名字',
-						coachpic:'http://s1.ifiter.com/static/images/pic_img1.jpg',
-						todourl:'http://s1.ifiter.com' //完成第1个任务的url
-					});
-					*/
-					/*
-					exports.fire('step1finish',{
-						username:'付强',
-						coachname:'美女教练的名字',
-						food:'马铃薯',
-						rice:'100',
-						coachpic:'http://s1.ifiter.com/static/images/pic_img1.jpg',
-						todourl:'http://s1.ifiter.com' //完成第2个任务的url
-					});
-					*/
-					/*
-					exports.fire('step2',{
-						username:'付强',
-						coachname:'美女教练的名字',
-						food:'马铃薯',
-						rice:'100',
-						coachpic:'http://s1.ifiter.com/static/images/pic_img1.jpg',
-						todourl:'http://s1.ifiter.com' //完成第2个任务的url
-					});
-					*/
-					/*
-					exports.fire('step2finish',{
-						username:'付强',
-						coachname:'美女教练的名字',
-						food:'马铃薯',
-						rice:'100',
-						coachpic:'http://s1.ifiter.com/static/images/pic_img1.jpg',
-						todourl:'http://s1.ifiter.com' //完成第2个任务的url
-					});
-					*/
-					/*
-					exports.fire('step3',{
-						username:'付强',
-						coachname:'美女教练的名字',
-						food:'马铃薯',
-						rice:'100',
-						coachpic:'http://s1.ifiter.com/static/images/pic_img1.jpg',
-						todourl:'http://s1.ifiter.com' //完成第2个任务的url
-					});
-					*/
-					
-					exports.fire('step3finish',{
-						username:'付强',
-						coachname:'美女教练的名字',
-						food:'马铃薯',
-						rice:'100',
-						coachpic:'http://s1.ifiter.com/static/images/pic_img1.jpg',
-						todourl:'http://s1.ifiter.com' //完成第2个任务的url
-					});
-					
+        GM.widget.use('sms',function(widget){
+          console.log(widget.sms)
 				});
 			})(window);
 		</script>
