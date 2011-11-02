@@ -38,7 +38,9 @@
 			deadlock:true,
 			current:1,
 			count:null,
-			region:3
+			region:3,
+      pids:[],
+      showuid:''
 		};
 		
 		$.extend(_config,config);
@@ -97,7 +99,7 @@
 			var that=this,cg=that.config,
 				litemp='<li data-rid="{rid}">'+
 	  					'<div class="picborder_l"><a href="http://x.idongmi.com/u/{uid}"><img src="{userpic}"></a></div>'+
-	  					'<div class="txtinfo"><a href="http://x.idongmi.com/u/{uid}">{name}</a>:<span class="'+cg.txt.slice(1)+'"> {content}</span> ({date})</div>'+
+	  					'<div class="txtinfo"><a href="http://x.idongmi.com/u/{uid}" data-uid="{uid}">{name}</a>:<span class="'+cg.txt.slice(1)+'"> {content}</span> ({date})</div>'+
 	  					'<div class="MIB_operate">{bar}</div>'+
 	  					'<div class="clear"></div>'+
 	  				'</li>',
@@ -269,7 +271,7 @@
 					cg.deadlock=true;
 					var result=$.trim(data);
 					try{
-						eval('var result='+result);
+            var result=eval('('+data+')');
 						if(callback) callback(result);
 					}catch(e){
 					console.log(e)
@@ -291,7 +293,7 @@
 			$.ajax({
 				url:'/api/reply/replyAjax.jsp',
 				type:'GET',
-				data:{type:cg.type,act:'add',content:txt,pid:cg.pid,syncwb:syncwb(),reload:1},
+        data:{showuid:cg.showuid,puid:cg.pids.join(),type:cg.type,act:'add',content:txt,pid:cg.pid,syncwb:syncwb(),reload:1},
 				success:function(data){
 					cg.deadlock=true;
 					var result=$.trim(data);
@@ -369,7 +371,7 @@
 								'title':'此用户不存在'
 							}).addClass('Noname');
 						}else{
-              $(selector).eq(i).attr('href','/u/'+uids[i]);
+              $(selector).eq(i).attr({'href':'/u/'+uids[i],'data-uid':uids[i]});
 						}
 					}	
 				},
@@ -414,11 +416,19 @@
 				//回复功能
 				$(cg.reply).live('click',function(){
 					var	info=$(this).closest('li').children('.txtinfo'),
-					 	txt=info.find(cg.txt).text(),
 						name=info.find('a:first').text();
-						$(cg.textid).val('@'+name+txt).focus();
+						$(cg.textid).val('@'+name).focus();
 						//更新一次计数
 						mysay.update();
+            //把当前这一条的所有@用户id取到，并保存,以备评论时传递给后台
+            var pids=[];
+            info.find('a').each(function(){
+                var uid=$(this).attr('data-uid');
+                if(uid && uid!=""){
+                  pids.push(uid);
+                };
+            });
+            cg.pids=pids; 
 				});
 			});
 			

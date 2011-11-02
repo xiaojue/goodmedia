@@ -61,6 +61,7 @@
 					
 				holdfn();
 				main.keyup(holdfn);
+				main.focus(holdfn);
 				
 				this.update=holdfn;
 			}
