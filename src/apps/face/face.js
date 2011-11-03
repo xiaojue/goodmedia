@@ -147,6 +147,7 @@
 					face.setcontent(html);
 					$(cg.ulid).html(lis);
 					face.show();
+          face.fixlocation();
 				});
 				
 				$('body').live('click',function(e){
@@ -159,7 +160,6 @@
 					var mean=$(this).attr('data-meaning'),v=$(cg.main).val();
 					face.hide();
 					$(cg.main).val(v+'['+mean+']').focus();
-					
 				});
 		},
 		init:function(){
