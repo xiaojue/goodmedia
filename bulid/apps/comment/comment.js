@@ -40,7 +40,10 @@
 			count:null,
 			region:3,
       pids:[],
-      showuid:''
+      showuid:'',
+      columnid:'',
+      cid:'',
+      oid:''
 		};
 		
 		$.extend(_config,config);
@@ -293,7 +296,7 @@
 			$.ajax({
 				url:'/api/reply/replyAjax.jsp',
 				type:'GET',
-        data:{showuid:cg.showuid,puid:cg.pids.join(),type:cg.type,act:'add',content:txt,pid:cg.pid,syncwb:syncwb(),reload:1},
+        data:{columnid:cg.columnid,showuid:cg.showuid,puid:cg.pids.join(),type:cg.type,act:'add',content:txt,pid:cg.pid,syncwb:syncwb(),reload:1},
 				success:function(data){
 					cg.deadlock=true;
 					var result=$.trim(data);

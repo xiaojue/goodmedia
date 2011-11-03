@@ -118,7 +118,12 @@
 						
 						
 					});
-				}
+				},
+        smsinit:function(){
+          G.widget.use('sms',function(widget){
+            widget.sms.init();
+          });
+        }
 			}
 		}
 	}();
