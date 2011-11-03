@@ -6,7 +6,7 @@
 (function(W, G, $) {
 	var sms = function() {
 
-		var name, content, pid, uid , GlobalT , T , timer = 5000, pushed , isInit , islock;
+		var name, content, pid, GlobalT , T , timer = 5000, pushed , isInit , islock;
 
 		function now() {
 			return new Date().valueOf();
@@ -14,8 +14,8 @@
 
 		var _sms = function(cg) {
 			var _cg = {
-				pushurl: 'http://dshop.idongmi.com/cart/getCart.json?ddd=1',
-				pullurl: 'callback=GM.widget.sms.pullback',
+				pushurl: 'http://x.idongmi.com/pm/indexAction.jsp?flag=send',
+				pullurl: 'http://x.idongmi.com/pm/indexAction.jsp?flag=receive&callback=GM.widget.sms.pullback',
         close:'#J_SMSclose',
         template:function(o){
           return '<div class="inform_cont pletter_cont" style="position:relative;width:450px;height:240px;min-height:240px;background:#fff;">'+
@@ -42,7 +42,7 @@
               '</div>';
         }
       };
-			$.extend(_cg, cg);
+      if(cg) $.extend(_cg, cg);
 			this.cg = _cg;
       this.overlay=$.overlay({
         content:_cg.template(_cg)
@@ -69,8 +69,8 @@
 				timer);
 			},
 			pull: function(data) {
-        var that=this,cg =that.cg,data=$.param(data);
-				$.getScript(cg.pullurl+'?'+data);
+        var that=this,cg =that.cg;
+				$.getScript(cg.pullurl);
 			},
 			setName: function(val) {
 				name = val;
@@ -81,9 +81,6 @@
 			setPid: function(val) {
 				pid = val;
 			},
-      setUid:function(val){
-        uid=val;
-      },
 			pushback: function(data) {
         var that=this;
         clearTimeout(GlobalT);
@@ -121,12 +118,19 @@
 			},
       updatebox:function(data){
         //更新气泡操作
+        $(function(){
+          if($('#J_Notice').length!=0 && $('#J_SMSNUM').length==0){
+            $('#J_Notice').after('<div class="notice_txt"><a href="/pm/index.jsp">消息（<span id="J_SMSNUM"></span>）</a></div>');
+          }
+          var count=data['feedcount']+data['smscount'];
+          $('#J_SMSNUM').text(count);
+        });
       },
       startpull:function(){
         var that=this;
-        that.pull({uid:uid})
+        that.pull()
         setInterval(function(){
-            that.pull({uid:uid})
+            that.pull()
         },30*1000);
       },
       bindTarget:function(cg){
@@ -196,7 +200,6 @@
       },
       init:function(config){
         var that=this;
-        that.setUid(config.uid);
         that.startpull(); //初始化直接开始轮训消息通道
         that.bindTarget(config);
       }

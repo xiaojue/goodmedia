@@ -706,6 +706,13 @@
 			};
 			return _ret;
 		},
+    fixlocation:function(){
+      var that=this,cg=that.config;
+      $(cg.id).offset({
+					left: that.postionsign(cg.target)[cg.postion].left,
+					top: that.postionsign(cg.target)[cg.postion].top
+			});
+    },
 		/**
      * @name jQuery.bubble#createWrap
      * @private

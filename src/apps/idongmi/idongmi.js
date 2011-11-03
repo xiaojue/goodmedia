@@ -115,15 +115,14 @@
 						$('.J_Roll').mouseout(function(){
 							run(nowleft);
 						});
-						
-						
+					  //私信消息初始化
+            if($('#J_Notice').length!=0){
+              G.widget.use('sms',function(widget){
+                widget.sms.init();
+              });
+            }
 					});
-				},
-        smsinit:function(){
-          G.widget.use('sms',function(widget){
-            widget.sms.init();
-          });
-        }
+				}
 			}
 		}
 	}();
