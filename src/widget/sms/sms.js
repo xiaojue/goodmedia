@@ -7,6 +7,7 @@
 	var sms = function() {
 
 		var name, content, pid, GlobalT , T , timer = 5000, pushed , isInit , islock;
+    var loadedcss=false;
 
 		function now() {
 			return new Date().valueOf();
@@ -36,7 +37,7 @@
           			'<div class="clear"></div>'+
           		'</div>'+
           		'<div class="pletter_but">'+
-          			'<input type="button" value="发   信" id="J_SMSPost">'+
+          			'<input type="button" value="发 信" id="J_SMSPost">'+
           		'</div>'+
               '<div style="position:absolute;width:15px;text-align:center;height:15px;line-height:15px;cursor:pointer;right:-5px;top:-5px;background:#000;color:#fff;font-size:18px;overflow:hidden;" title="关闭" id="'+o.close.slice(1)+'">&times</div>'+
               '</div>';
@@ -93,7 +94,8 @@
         }
         */
         if(data.s==1){
-            
+          alert('发送成功'); 
+          that.overlay.close();
         }else{
           that.pusherror(data.msg);
         }
@@ -141,9 +143,14 @@
           dataName:'data-name'
         }
         $.extend(_cg,cg);
-
         $(_cg.smstarget).live('click',function(){
-            var id=$(this).attr(_cg.dataPid),pname=$(this).attr(_cg.dataName);
+            if(!loadedcss){
+              var host=GM.widget.host,place='-min';
+              if(GM.debug) place='';
+              $.loadcss(host+'sms/sms'+place+'.css');
+              loadedcss=true;
+            };
+          var id=$(this).attr(_cg.dataPid),pname=$(this).attr(_cg.dataName);
           that.setPid(id);
           that.setName(pname);
           that.overlay.fire();
