@@ -121,11 +121,18 @@
       updatebox:function(data){
         //更新气泡操作
         $(function(){
-          if($('#J_Notice').length!=0 && $('#J_SMSNUM').length==0){
-            $('#J_Notice').after('<div class="notice_txt"><a href="/pm/index.jsp">消息（<span id="J_SMSNUM"></span>）</a></div>');
+          if($('#J_Notice').length!=0 && $('.notice_txt').length==0){
+            $('#J_Notice').after('<div class="notice_txt"><a href="/pm/index.jsp" id="J_T">通知(<span id="J_SMSN"></span>)</a><a href="/pm/sms.jsp" id="J_S">私信(<span id="J_SMST"></span>)</a></div>');
           }
           var count=data['feedcount']+data['smscount'];
-          $('#J_SMSNUM').text(count);
+          if(count==0) $('.notice_txt').hide();
+          else $('.notice_txt').show();
+          if(data['feedcount']==0) $('#J_T').hide();
+          else $('#J_T').show();
+          if(data['smscount']==0) $('#J_S').hide();
+          else $('#J_S').show();
+          $('#J_SMSN').text(data['feedcount']);
+          $('#J_SMST').text(data['smscount']);
         });
       },
       startpull:function(){
@@ -164,6 +171,7 @@
                 main:'#J_SMSContent',
                 wrap:'#J_SizeWrap',
                 errorCls:'blue',
+                max:300,
                 holdTarget:'#J_SMSPost',
                 holdAction:function(){
                   var Contentval=$.trim($('#J_SMSContent').val()),
@@ -184,7 +192,6 @@
                       content:content
                     });   
                   }
-                  
                 }
               });
                mysay.init();
@@ -197,7 +204,9 @@
                   });
                 SMSface.init();
             });
+            //清除上一次消息
           }
+          $('#J_SMSContent').val("");
           return false;
         });
 

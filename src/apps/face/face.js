@@ -9,7 +9,7 @@
 		
 		function sole(tag){
 			return tag+new Date().valueOf().toString().slice(3);
-		};
+		}
 		
 		var _config={
 			cls:sole('.J_FaceM'),
@@ -95,21 +95,22 @@
 				    '<div class="clear"></div>'+
 				    '<div><img src="http://s1.ifiter.com/static/images/popup1_bbg.png"></div>'+
 				'</div>'		
-		}
+    };
 		
-		$.extend(_config,config);
+    $.extend(_config,config);
 		
 		this.config=_config;
 	};
 	
 	face.prototype={
 		drawface:function(str){
+      var result=this.drawurl(str);
 			var that=this,
 				cg=that.config,
 				data=cg.facebag.data,
 				root=cg.facebag.root,
-				format=cg.facebag.format,
-				result=str.replace(/\[(.*?)\]/g,function($0,$1){
+        format=cg.facebag.format;
+		  result=result.replace(/\[(.*?)\]/g,function($0,$1){
 					if(data[$1]){
 						return ' <img src="'+root+data[$1]+'.'+format+'" alt="'+$1+'" title="'+$1+'"> ';
 					}else{
@@ -118,6 +119,14 @@
 				});
 			return result;				
 		},
+    drawurl:function(str){
+      var regUrl=/(htt(p|ps):\/\/[A-Za-z\.\d\/\?\&\=\#]+)\b/gi;
+       var Urls=str.replace(regUrl,function(s1,s2,s3,s4){
+          var uri=s2;
+          return '<a href="'+uri+'" target="_blank">'+uri+'</a>';
+        });
+       return Urls;
+    },
 		putsface:function(){
 			var that=this,cg=that.config;
 				
@@ -151,9 +160,10 @@
 				});
 				
 				$('body').live('click',function(e){
-					if($(e.target).parents(face.config.id).length == 0){
+            var l=$(e.target).parents(face.config.id).length;
+            if( l=== 0){
 						face.hide();
-					};
+					}
 				});
 				
 				$(cg.cls).live('click',function(){
@@ -174,7 +184,7 @@
 			exports:{
 				face:face
 			}
-		}
-	}
+    };
+  }
 	
 })(window,GM,jQuery);

@@ -296,7 +296,7 @@
 			$.ajax({
 				url:'/api/reply/replyAjax.jsp',
 				type:'GET',
-        data:{columnid:cg.columnid,showuid:cg.showuid,puid:cg.pids.join(),type:cg.type,act:'add',content:txt,pid:cg.pid,syncwb:syncwb(),reload:1},
+        data:{cid:cg.cid,oid:cg.oid,columnid:cg.columnid,showuid:cg.showuid,puid:cg.pids.join(),type:cg.type,act:'add',content:txt,pid:cg.pid,syncwb:syncwb(),reload:1},
 				success:function(data){
 					cg.deadlock=true;
 					var result=$.trim(data);
