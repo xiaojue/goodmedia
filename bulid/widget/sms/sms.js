@@ -53,14 +53,14 @@
 		_sms.prototype = {
 			timeout: function() {
         islock=false;
-				alert('相应超时,请重试');
+				alert('响应超时,请重试');
 			},
 			push: function(data) {
-        var that = this, cg = that.cg,data=$.param(data);
+        var that = this,cg = that.cg,param=$.param(data);
 				T = now();
 				pushed = false;
 				that['pushcallback'+T] = that.pushback;
-				$.getScript(cg.pushurl+'&'+data+'&callback=GM.widget.sms.pushcallback'+ T);
+				$.getScript(cg.pushurl+'&'+param+'&callback=GM.widget.sms.pushcallback'+ T);
 				GlobalT = setTimeout(function() {
 					if (!pushed) {
             delete that['pushcallback'+T];
@@ -102,7 +102,7 @@
         delete that['pushcallback'+T];
 			},
       pusherror:function(msg){
-        alert(msg)
+        alert(msg);
       },
 			pullback: function(data) {
         var that=this;
@@ -121,15 +121,15 @@
       updatebox:function(data){
         //更新气泡操作
         $(function(){
-          if($('#J_Notice').length!=0 && $('.notice_txt').length==0){
+          if($('#J_Notice').length!==0 && $('.notice_txt').length===0){
             $('#J_Notice').after('<div class="notice_txt"><a href="/pm/index.jsp" id="J_T">通知(<span id="J_SMSN"></span>)</a><a href="/pm/sms.jsp" id="J_S">私信(<span id="J_SMST"></span>)</a></div>');
           }
           var count=data['feedcount']+data['smscount'];
-          if(count==0) $('.notice_txt').hide();
+          if(count===0) $('.notice_txt').hide();
           else $('.notice_txt').show();
-          if(data['feedcount']==0) $('#J_T').hide();
+          if(data['feedcount']===0) $('#J_T').hide();
           else $('#J_T').show();
-          if(data['smscount']==0) $('#J_S').hide();
+          if(data['smscount']===0) $('#J_S').hide();
           else $('#J_S').show();
           $('#J_SMSN').text(data['feedcount']);
           $('#J_SMST').text(data['smscount']);
@@ -137,9 +137,9 @@
       },
       startpull:function(){
         var that=this;
-        that.pull()
+        that.pull();
         setInterval(function(){
-            that.pull()
+            that.pull();
         },30*1000);
       },
       bindTarget:function(cg){
@@ -148,7 +148,7 @@
           smstarget:'.J_SMS',
           dataPid:'data-pid',
           dataName:'data-name'
-        }
+        };
         $.extend(_cg,cg);
         $(_cg.smstarget).live('click',function(){
             if(!loadedcss){
@@ -156,7 +156,7 @@
               if(GM.debug) place='';
               $.loadcss(host+'sms/sms'+place+'.css');
               loadedcss=true;
-            };
+            }
           var id=$(this).attr(_cg.dataPid),pname=$(this).attr(_cg.dataName);
           that.setPid(id);
           that.setName(pname);
@@ -179,7 +179,7 @@
                   
                   that.setContent(Contentval);
   
-                  if(Contentval=="" || Nameval==""){
+                  if(Contentval==="" || Nameval===""){
                     alert('私信内容和收信人不能为空');
                     return;
                   }
@@ -219,7 +219,7 @@
         that.startpull(); //初始化直接开始轮训消息通道
         that.bindTarget(config);
       }
-		}
+    };
 
 		return _sms;
 	} ();

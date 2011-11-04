@@ -104,20 +104,19 @@
 	
 	face.prototype={
 		drawface:function(str){
-      var result=this.drawurl(str);
 			var that=this,
 				cg=that.config,
 				data=cg.facebag.data,
 				root=cg.facebag.root,
-        format=cg.facebag.format;
-		  result=result.replace(/\[(.*?)\]/g,function($0,$1){
+        format=cg.facebag.format,
+		    ret=str.replace(/\[(.*?)\]/g,function($0,$1){
 					if(data[$1]){
 						return ' <img src="'+root+data[$1]+'.'+format+'" alt="'+$1+'" title="'+$1+'"> ';
 					}else{
 						return $0;
 					} 
 				});
-			return result;				
+			return ret;				
 		},
     drawurl:function(str){
       var regUrl=/(htt(p|ps):\/\/[A-Za-z\.\d\/\?\&\=\#]+)\b/gi;
