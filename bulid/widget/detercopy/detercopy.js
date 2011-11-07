@@ -14,7 +14,7 @@
 	var detercopy=function(selector){
 		$(function(){
 		
-			if($(selector).length==0) return;
+			if($(selector).length===0) return;
 			
 			if(document.attachEvent){
 				
@@ -28,7 +28,7 @@
 				
 				doc.body.attachEvent('oncut',falseFn);
 				
-				$(document).keydown(function(){
+				$(document).keydown(function(event){
 					if(event.ctrlKey && event.keyCode==67){
 						event.keyCode=0;
 						event.returnValue=false;
@@ -47,7 +47,7 @@
 				});
 			}
 		});
-	}
+};
 	
 	if(G && G.widget){
 		G.widget.detercopy=detercopy;

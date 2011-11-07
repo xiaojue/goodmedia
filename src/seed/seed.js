@@ -4,7 +4,7 @@
  * @fileoverview 动米网种子文件，负责加载和初始化整个js库
  */
 (function(W, $, doc) {
-	/**
+	/** 1234567890一二三四五六七八九十
     * @static
     * @description debug的信息，host保存调试机器项目路径
     */
