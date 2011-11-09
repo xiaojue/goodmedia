@@ -105,15 +105,21 @@
 				//更新气泡操作
 				$(function() {
 					if ($('#J_Notice').length !== 0 && $('.notice_txt').length === 0) {
-						$('#J_Notice').after('<div class="notice_txt"><a href="/pm/index.jsp" id="J_T">通知(<span id="J_SMSN"></span>)</a><a href="/pm/sms.jsp" id="J_S">私信(<span id="J_SMST"></span>)</a></div>');
+						$('#J_Notice').after('<div class="notice_txt"><a href="/pm/index.jsp" id="J_T"><span id="J_SMSN"></span>条新评论</a><a href="/pm/sms.jsp" id="J_S"><span id="J_SMST"></span>条新消息</a></div>');
 					}
 					var count = data['feedcount'] + data['smscount'];
 					if (count === 0) $('.notice_txt').hide();
 					else $('.notice_txt').show();
-					if (data['feedcount'] === 0) $('#J_T').hide();
-					else $('#J_T').show();
-					if (data['smscount'] === 0) $('#J_S').hide();
-					else $('#J_S').show();
+					if (data['feedcount'] === 0){
+            $('#J_SMSN').addClass('gray').removeClass('red');
+          }else{
+            $('#J_SMSN').addClass('red').removeClass('gray');
+          }
+					if (data['smscount'] === 0){
+            $('#J_SMST').addClass('gray').removeClass('red');
+          } else{
+            $('#J_SMST').addClass('red').removeClass('gray');
+          }
 					$('#J_SMSN').text(data['feedcount']);
 					$('#J_SMST').text(data['smscount']);
 				});
@@ -200,10 +206,29 @@
 					that.overlay.close();
 				});
 			},
+      addSmsIcon:function(){
+        var hooks='div.friends>ul>li',
+        temp=function(pid,name){
+          return '<div class="user_messages"><a class="J_SMS" data-pid="'+pid+'" data-name="'+name+'" href="javascript:void(0);"></a></div>';
+        };
+        $(hooks).bind('mouseenter',function(){
+            var pid=$(this).attr('data-pid'),
+                name=$(this).attr('data-name');
+                if(!pid || !name) return;
+                if($(this).find('.J_SMS').length===0){
+                  $(this).append(temp(pid,name));
+                }else{
+                  $(this).find('.J_SMS').show();
+                }
+          }).bind('mouseleave',function(){
+              $(this).find('.J_SMS').hide(); 
+        });
+      },
 			init: function(config) {
 				var that = this;
 				that.startpull(); //初始化直接开始轮训消息通道
 				that.bindTarget(config);
+        that.addSmsIcon();
 			}
 		};
 

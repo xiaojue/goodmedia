@@ -202,7 +202,7 @@
 					this.config=_o;
 
 				}
-			}
+      };
 			
 		}();
 
@@ -232,7 +232,7 @@
 					//取得wrap的高宽直接传入reset
 					//that.reset(config.width,config.height,config.wrapCls);
 					
-					if(config.cover && $('#'+config.coverId).length==0) that._cover();
+					if(config.cover && $('#'+config.coverId).length===0) that._cover();
 
 				}else{
 					if(html) $('#'+config.wrapId).html(html);
@@ -245,10 +245,13 @@
 				$('#'+config.wrapId).css('display','inline');
 				
 				//高度的获取有时候会延迟在IE6下
+        if($.browser.msie && $.browser.version <= 6){
 				setTimeout(function(){
 					that.reset($('#'+config.wrapId).innerWidth(),$('#'+config.wrapId).innerHeight(),config.wrapCls);
 				},10);
-				
+        }else{
+					that.reset($('#'+config.wrapId).innerWidth(),$('#'+config.wrapId).innerHeight(),config.wrapCls);
+        }
 				if(callback) callback(wrap);
 
 			},

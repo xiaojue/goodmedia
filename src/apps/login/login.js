@@ -29,7 +29,7 @@
 									var action='http://bbs.idongmi.com/bbs/logging.php?action=login&loginsubmit=yes&inajax=1',
 											username=data['username'],
 											pwd=data['password'],
-											data={
+											ret={
 													password:pwd,
 													loginfield:'username',
 													questionid:0,
@@ -38,31 +38,48 @@
 													formhash:'52c87683'
 											};
 
-											if(data['cookietime']) data.cookietime=data['cookietime'];
+											if(data['cookietime']) ret.cookietime=data['cookietime'];
 
-											action+='&'+$.param(data);
+											action+='&'+$.param(ret);
 											
 									$.ajax({
-                      url:'/api/api_getURL2js.jsp?op=login&username='+encodeURIComponent(username)+'&pwd='+data['password']+'&url='+encodeURIComponent(action),
+                      url:'/api/api_getURL2js.jsp?op=login&url='+encodeURIComponent(action),
 											datatype:'xml',
-                      type:'POST',
+                      type:'post',
+                      data:{
+                        username:encodeURIComponent(username),
+                        pwd:data['password']
+                      },
 											success:function(ret){
 												var root=$(ret).find('root')[0],
 														result=$(root).text();
 													try{
-														if(result!='' && !(/\<script/.test(result))){
+														if(result!=='' && !(/\<script/.test(result))){
 															$('#J_Status').text(result);
 															$('#J_Status').closest('.login_text').show();
 														}else{
-															var scripts=result.match(/src="(.+?)"/g);
+                              var scripts=result.match(/src="(.+?)"/g),syncCookie=false,j=0;
 															for(var i=0;i<scripts.length;i++){
 																var src=scripts[i].slice(5,scripts[i].length-1);
-																$.getScript(src);
-															};
+                                if(console) console.log(src);
+                                $.getScript(src,function(){
+                                    j++;
+                                    if(console) console.log(j);
+                                });
+                              }
+                              //确保cookie同步
+                              var Timer=setInterval(function(){
+                                if(j===scripts.length){
+                                  clearInterval(Timer);
+                                  successAction();
+                                }
+                              },100);
+
+                              function successAction(){
 															var search=$.analyse(window.location.search.slice(1)),
 																  referer=search['referer'];
 															if(!referer) referer=(window.ref!='null' || window.ref=="http://x.idongmi.com/reg.jsp") ? window.ref : 'http://x.idongmi.com/';
-															$('#J_Status').html('欢迎您,'+username+',3秒后自动<a href="'+decodeURIComponent(referer)+'">返回</a>')
+                              $('#J_Status').html('欢迎您,'+username+',3秒后自动<a href="'+decodeURIComponent(referer)+'">返回</a>');
 															$('#J_Status').closest('.login_text').show();
 															$.cookie('CNAME',username,{
 																	domain:'.idongmi.com',
@@ -73,9 +90,11 @@
                                   if(referer=='null') referer='http://x.idongmi.com/';
                                   if(decodeURIComponent(referer)=='http://www.idongmi.com/'){
                                     referer='http://x.idongmi.com/';
-                                  };
+                                  }
 																	window.location.href=decodeURIComponent(referer);
 																},4000);
+                            }
+
 														}
 													}catch(e){
 														alert(e);
@@ -84,7 +103,7 @@
 											error:function(){
 												$('#J_Status').html('网络超时，请重试');
 											}
-										})
+                    });
 								},
 								batchcallback:_fn.bathcallbackhand,
 								focusfn:_fn.focushand
@@ -178,7 +197,7 @@
 						 });
 					 RegV.init();
 				 }
-			}
+       };
 
 
 			return {
@@ -195,9 +214,9 @@
 						});
 					}
 				}
-			}
+      };
 		}();
 
 		if(G && G.apps) G.apps.login=login;
 
-})(window,GM,jQuery,document)
+  })(window,GM,jQuery,document);
