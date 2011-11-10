@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>roulette</title>
+    <script src="swfobject.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <script>
+      function onRouletteStart(){
+        console.log('start');
+        return -1;
+      }
+
+      function onRouletteStop(){
+        console.log('stop');
+        return -1;
+      }
+    </script>
+    <div id="flash">
+    <script type="text/javascript">
+      var so = new SWFObject("image/Roulette.swf", "ID_swf", "487px", "487px", "9");
+      so.addParam("wmode", "transparent");
+      so.addParam("allowscriptaccess", "always");
+      so.addVariable("config", "roulette.xml");
+      so.addVariable("onStart", "onRouletteStart");
+      so.addVariable("onStop", "onRouletteStop");
+      so.write("flash");
+    </script>
+    </div>
+    </body>
+</html>

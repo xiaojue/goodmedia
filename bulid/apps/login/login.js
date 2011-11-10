@@ -47,7 +47,7 @@
 											datatype:'xml',
                       type:'post',
                       data:{
-                        username:encodeURIComponent(username),
+                        username:username,
                         pwd:data['password']
                       },
 											success:function(ret){
@@ -61,10 +61,8 @@
                               var scripts=result.match(/src="(.+?)"/g),syncCookie=false,j=0;
 															for(var i=0;i<scripts.length;i++){
 																var src=scripts[i].slice(5,scripts[i].length-1);
-                                if(console) console.log(src);
                                 $.getScript(src,function(){
                                     j++;
-                                    if(console) console.log(j);
                                 });
                               }
                               //确保cookie同步
