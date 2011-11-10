@@ -632,7 +632,7 @@
 			//left right top bottom 上下左右
 			target: '',
 			id: '#J_Bubble' + new Date().valueOf().toString().slice(3)
-		}
+    };
 
 		$.extend(_config, config);
 
@@ -714,9 +714,13 @@
 		},
     fixlocation:function(){
       var that=this,cg=that.config;
+        var left=that.postionsign(cg.target)[cg.postion].left,
+            top=that.postionsign(cg.target)[cg.postion].top;
+            if(left<0) left=0; 
+            if(left>$('body').width()-cg.width) left=$('body').width()-cg.width; 
       $(cg.id).offset({
-					left: that.postionsign(cg.target)[cg.postion].left,
-					top: that.postionsign(cg.target)[cg.postion].top
+					left:left,
+					top:top
 			});
     },
 		/**
@@ -730,24 +734,18 @@
 
 			//根据位置进行创建wrap
 			if (that.postionsign(target).hasOwnProperty(cg.postion)) {
-				var wrap = $('<div>').height(cg.height).width(cg.width).addClass(cg.cls).offset({
-					left: that.postionsign(target)[cg.postion].left,
-					top: that.postionsign(target)[cg.postion].top
-				}).css({
+				var wrap = $('<div>').height(cg.height).width(cg.width).addClass(cg.cls).css({
 					'z-index': 1200,
 					'position': 'absolute',
 					'display': 'none'
 				}).attr('id', cg.id.slice(1));
-
 				$('body').prepend(wrap);
+        that.fixlocation();
 				var T;
 				$(window).bind('scroll resize', function() {
 					clearTimeout(T);
 					setTimeout(function() {
-						$(cg.id).offset({
-							left: that.postionsign(target)[cg.postion].left,
-							top: that.postionsign(target)[cg.postion].top
-						});
+              that.fixlocation();
 					},
 				  30);
 				});
@@ -756,7 +754,7 @@
 				console.log('config.postion is error puts left,right,top or bottom');
 			}
 		}
-	}
+  };
 
 	$.extend({
 		bubble: bubble

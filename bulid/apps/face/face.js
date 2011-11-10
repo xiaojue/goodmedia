@@ -119,7 +119,7 @@
 			return ret;				
 		},
     drawurl:function(str){
-      var regUrl=/(htt(p|ps):\/\/[A-Za-z\.\d\/\?\&\=\#]+)\b/gi;
+      var regUrl=/(htt(p|ps):\/\/[A-Za-z\.\d\/\?\&\=\#_]+)\b/gi;
        var Urls=str.replace(regUrl,function(s1,s2,s3,s4){
           var uri=s2;
           return '<a href="'+uri+'" target="_blank">'+uri+'</a>';
@@ -147,14 +147,14 @@
 					format=cg.facebag.format,
 					lis="";
 				for(var i in data){
-					lis += '<li><a class="'+cg.cls.slice(1)+'" href="javascript:void(0);" data-meaning="'+i+'"><img src="'+root+data[i]+'.'+format+'"></a></li>';
+          lis += '<li><a class="'+cg.cls.slice(1)+'" href="javascript:void(0);" data-meaning="'+i+'" style="background:url('+root+data[i]+'.'+format+') no-repeat 2px 1px;"></a></li>';
 				}
 				
 				$(cg.target).live('click',function(e){
 					e.stopPropagation();
 					face.setcontent(html);
-					$(cg.ulid).html(lis);
 					face.show();
+					$(cg.ulid).html(lis);
           face.fixlocation();
 				});
 				

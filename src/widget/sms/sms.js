@@ -20,14 +20,13 @@
 				pullurl: 'http://x.idongmi.com/pm/indexAction.jsp?flag=receive&callback=GM.widget.sms.pullback',
 				close: '#J_SMSclose',
 				template: function(o) {
-					return '<div class="inform_cont pletter_cont" style="position:relative;width:450px;height:240px;min-height:240px;background:#fff;">' + '<div class="pletter_list">' + '<div class="post">收件人：</div>' + '<div class="pletter_content"><input id="J_SMSName" type="text" class="pletter_box1" readonly="readyonly" value=""></div>' + '<div class="clear"></div>' + '</div>' + '<div class="pletter_list">' + '<div class="post">内 容：</div>' + '<div class="pletter_content">' + '<div class="pletter_prompt" id="J_SizeWrap"></div>' + '<textarea id="J_SMSContent" class="pletter_box2"></textarea>' + '<div class="pletter_insert">' + '<a href="javascript:void(0);" id="J_SMSFace"><span class="ico1"></span>表情</a>' + '</div>' + '</div>' + '<div class="clear"></div>' + '</div>' + '<div class="pletter_but">' + '<input type="button" value="发 信" id="J_SMSPost">' + '</div>' + '<div style="position:absolute;width:15px;text-align:center;height:15px;line-height:15px;cursor:pointer;right:-5px;top:-5px;background:#000;color:#fff;font-size:18px;overflow:hidden;" title="关闭" id="' + o.close.slice(1) + '">&times</div>' + '</div>';
+					return '<div class="inform_cont pletter_cont" style="position:relative;width:510px;height:240px;min-height:240px;background:#fff;">' + '<div class="pletter_list">' + '<div class="post">收件人：</div>' + '<div class="pletter_content"><input id="J_SMSName" type="text" class="pletter_box1" readonly="readyonly" value=""></div>' + '<div class="clear"></div>' + '</div>' + '<div class="pletter_list">' + '<div class="post">内 容：</div>' + '<div class="pletter_content">' + '<div class="pletter_prompt" id="J_SizeWrap"></div>' + '<textarea id="J_SMSContent" class="pletter_box2"></textarea>' + '<div class="pletter_insert">' + '<a href="#face" id="J_SMSFace"><span class="ico1"></span>表情</a>' + '</div>' + '</div>' + '<div class="clear"></div>' + '</div>' + '<div class="pletter_but">' + '<input type="button" value="发 信" id="J_SMSPost">' + '</div>' + '<div style="position:absolute;width:15px;text-align:center;height:15px;line-height:15px;cursor:pointer;right:-5px;top:-5px;background:#000;color:#fff;font-size:18px;overflow:hidden;" title="关闭" id="' + o.close.slice(1) + '">&times</div>' + '</div>';
 				}
 			};
 			if (cg) $.extend(_cg, cg);
 			this.cg = _cg;
-			this.overlay = $.overlay({
-				content: _cg.template(_cg)
-			});
+      this.template=_cg.template(_cg);
+      this.overlay = $.overlay();
 		};
 
 		_sms.prototype = {
@@ -152,7 +151,11 @@
 					pname = $(this).attr(_cg.dataName);
 					that.setPid(id);
 					that.setName(pname);
-					that.overlay.fire();
+          if(!isInit){
+          that.overlay.fire(that.template);
+          }else{
+          that.overlay.fire();
+          }
 
 					$('#J_SMSName').val(name);
 

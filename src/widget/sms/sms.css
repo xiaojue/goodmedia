@@ -21,7 +21,6 @@
 }
 .pletter_list .pletter_content{
 	float:left;
-	width:445px;
 	position:relative;
 }
 .pletter_box1{
@@ -33,10 +32,10 @@
 	background:#fff;
 }
 .pletter_prompt{
-	position:relative;
+	position:absolute;
 	text-align:right;
-	margin-top:-20px;
-	margin-bottom:5px;
+  right:0px;
+  top:-20px;
 }
 .pletter_prompt span{
 	font-size:16px;
