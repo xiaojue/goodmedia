@@ -24,7 +24,7 @@
 							j.style.display = "none";
 						}
 						document.getElementById(showContent).style.display = "block";
-					}
+          };
 					
 					$(function(){
 						//头部搜索部分
@@ -45,11 +45,11 @@
 							});
 							txt.blur(function(){
 								var val=$.trim(txt.val());
-								if(val=="") $(this).val(msg);
+								if(val==="") $(this).val(msg);
 							});
 							$('#J_Search').submit(function(){
 								var val=$.trim(txt.val());
-								if(val=="" || val=="请输入关键字"){
+								if(val==="" || val=="请输入关键字"){
 									alert('请输入搜索条件');
 									return false;
 								}
@@ -62,9 +62,9 @@
 						var width=$('.J_Roll').width(),
 							innerWidth=$('.J_Roll>span:first').width(),
 							parentWidth=181,
-							clone=$('.J_Roll>span:first').clone(),timer,nowleft=0;
+							cloneDOM=$('.J_Roll>span:first').clone(),timer,nowleft=0;
 							
-							$('.J_Roll').append(clone);
+							$('.J_Roll').append(cloneDOM);
 							
 							if(innerWidth<=parentWidth){
 								$('.J_Roll span').css({
@@ -80,23 +80,23 @@
 							width=$('.J_Roll>span:first').width();
 							
 						function moveleft(node,speed,end,callback){
-							var left=parseInt($(node).css('left')); //0
+							var left=parseInt($(node).css('left'),10); //0
 							if(left<=end){
 								parentWidth=0;
 								if(callback) callback();
 								return;
-							};
+							}
 							nowleft=left-1;
 							$(node).css('left',nowleft);
 							timer=setTimeout(function(){
 								moveleft(node,speed,end,callback);
 							},speed);
-						};
+						}
 						
 						function run(left){
 							if(left) parentWidth=left;
 							$('.J_Roll').css('left',parentWidth);
-							moveleft('.J_Roll',30,-width,function(){
+							moveleft('.J_Roll',100,-width,function(){
 									if(left) run(parentWidth);
 									else
 										run();
@@ -116,7 +116,7 @@
 							run(nowleft);
 						});
 					  //私信消息初始化
-            if($('#J_Notice').length!=0){
+            if($('#J_Notice').length!==0){
               G.widget.use('sms',function(widget){
                 widget.sms.init();
               });
@@ -124,7 +124,7 @@
 					});
 				}
 			}
-		}
+    };
 	}();
 	
 	if(G && G.apps) G.apps.idongmi=idongmi;

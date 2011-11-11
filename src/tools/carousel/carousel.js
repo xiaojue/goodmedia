@@ -18,6 +18,9 @@
 	 */
 	var carousel=function(cg){
 		
+    var ua=W.navigator.userAgent;
+    var isWin = (W.navigator.platform === "Win32") || (W.navigator.platform === "Windows");
+
 		var _carousel=function(){
 			/**
 			 * @private
@@ -27,7 +30,7 @@
 			 */
 			var _bulid=function(cg){
 				var wrap=cg.wrap,wrapitem=cg.wrapitem;
-				if(wrap=="" || wrapitem=="") return;
+				if(wrap==="" || wrapitem==="") return;
 				
 				var firstChild=$(wrapitem).eq(0),w,h,size=$(wrapitem).size();
 				
@@ -91,7 +94,7 @@
 						this.autoEvent();
 					} 
 				}
-			}
+      };
 		}();
 		
 		_carousel._init.prototype={
@@ -140,10 +143,10 @@
 				
 				config.current=guide;
 				
-				if(config.direction=='left'){
-					moveObj={'left':'-'+$(config.wrap).width()*guide}
-				}else if(config.direction=='top'){
-					moveObj={'top':'-'+$(config.wrap).height()*guide}
+				if(config.direction==='left'){
+          moveObj={'left':'-'+$(config.wrap).width()*guide};
+				}else if(config.direction==='top'){
+          moveObj={'top':'-'+$(config.wrap).height()*guide};
 				}
 				
 				that.before(config.current);			
@@ -160,12 +163,22 @@
 			 */
 			auto:function(){
 				var that=this,config=that.config;
-				that.T=setInterval(function(){
+				//增加判断，xp系统不支持自动播放……
+        /*
+        if(isWin && (ua.indexOf("Windows NT 5.1") > -1 || ua.indexOf("Windows XP") > -1)){
+        }
+        */
+        that.T=setInterval(function(){
 					that.forward();
 				},config.autointerval);
 			},
 			stopauto:function(){
 				var that=this;
+				//增加判断，xp系统不支持自动播放……
+        /*
+        if(isWin && (ua.indexOf("Windows NT 5.1") > -1 || ua.indexOf("Windows XP") > -1)){
+        }
+        */
 				clearInterval(that.T);
 			},
 			/**

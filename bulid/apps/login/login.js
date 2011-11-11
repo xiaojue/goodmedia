@@ -47,7 +47,7 @@
 											datatype:'xml',
                       type:'post',
                       data:{
-                        username:username,
+                        username:data['username'],
                         pwd:data['password']
                       },
 											success:function(ret){
@@ -85,7 +85,7 @@
 																	expires:5
 															});
 															setTimeout(function(){
-                                  if(referer=='null') referer='http://x.idongmi.com/';
+                                  if(referer=='null' || referer==undefined) referer='http://x.idongmi.com/';
                                   if(decodeURIComponent(referer)=='http://www.idongmi.com/'){
                                     referer='http://x.idongmi.com/';
                                   }
