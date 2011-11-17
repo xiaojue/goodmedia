@@ -101,10 +101,11 @@
 				//出错不理会，不做任何处理,成功则做消息提醒的update
 			},
 			updatebox: function(data) {
+        var that=this;
 				//更新气泡操作
 				$(function() {
-					if ($('#J_Notice').length !== 0 && $('.notice_txt').length === 0) {
-						$('#J_Notice').after('<div class="notice_txt"><a href="/pm/index.jsp" id="J_T"><span id="J_SMSN"></span>条新评论</a><a href="/pm/sms.jsp" id="J_S"><span id="J_SMST"></span>条新消息</a></div>');
+					if ($('#J_Notice').length !== 0 && $('#J_SMSNotice').length === 0) {
+            $('body').append('<div id="J_SMSNotice" class="notice_txt"><a style="display:block;" href="/pm/index.jsp" id="J_T"><span id="J_SMSN"></span>条新评论</a><a href="/pm/sms.jsp" id="J_S" style="display:block;"><span id="J_SMST"></span>条新消息</a></div>');
 					}
 					var count = data['feedcount'] + data['smscount'];
 					if (count === 0) $('.notice_txt').hide();
@@ -121,6 +122,7 @@
           }
 					$('#J_SMSN').text(data['feedcount']);
 					$('#J_SMST').text(data['smscount']);
+          that.boxfix('top');
 				});
 			},
 			startpull: function() {
@@ -227,11 +229,36 @@
               $(this).find('.J_SMS').hide(); 
         });
       },
+      boxfix:function(type){
+        var O=$('#J_Notice').offset();
+        if(type=='top'){
+        $('#J_SMSNotice').css({
+            position:'absolute',
+            left:O.left,
+            top:O.top+20
+        });
+        }else{
+        $('#J_SMSNotice').css({
+            position:'absolute',
+            left:O.left,
+            top:$(window).scrollTop()
+        });
+        }
+      },
 			init: function(config) {
 				var that = this;
 				that.startpull(); //初始化直接开始轮训消息通道
 				that.bindTarget(config);
         that.addSmsIcon();
+        //增加滚动
+        $(window).bind('scroll resize',function(){
+            var t=$(window).scrollTop();
+            if(t===0){
+              that.boxfix('top');
+            }else{
+              that.boxfix();
+            }
+        });
 			}
 		};
 
