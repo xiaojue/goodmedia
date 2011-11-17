@@ -108,14 +108,14 @@
 
 
 /*右侧列表*/
-.searchMap,.search_bar {
+.searchAd,.searchMap,.search_bar {
 	background:#fff;
 	border:#ccc solid 1px;
 	padding:10px;
 	margin-bottom:15px;
 }
 
-.searchMap h2,.search_bar h2 {
+.searchAd h2,.searchMap h2,.search_bar h2 {
 	font-size:14px;
 	padding-bottom:10px;
 }
@@ -131,6 +131,46 @@ ul.maplist li {
 	padding-bottom:5px;
 	background:url(http://s1.ifiter.com/static/images/map/124.png) no-repeat left top;
 	_background-image:url(http://s1.ifiter.com/static/images/map/124ie6.png);
+}
+
+ul.sm1 li{
+  background:url(http://s1.ifiter.com/static/images/map/sm1.png) no-repeat left top;
+}
+
+ul.sm2 li{
+  background:url(http://s1.ifiter.com/static/images/map/sm2.png) no-repeat left top;
+}
+
+ul.sm3 li{
+  background:url(http://s1.ifiter.com/static/images/map/sm3.png) no-repeat left top;
+}
+
+ul.sm4 li{
+  background:url(http://s1.ifiter.com/static/images/map/sm4.png) no-repeat left top;
+}
+
+ul.sm5 li{
+  background:url(http://s1.ifiter.com/static/images/map/sm5.png) no-repeat left top;
+}
+
+ul.sm6 li{
+  background:url(http://s1.ifiter.com/static/images/map/sm6.png) no-repeat left top;
+}
+
+ul.sm7 li{
+  background:url(http://s1.ifiter.com/static/images/map/sm7.png) no-repeat left top;
+}
+
+ul.sm8 li{
+  background:url(http://s1.ifiter.com/static/images/map/sm8.png) no-repeat left top;
+}
+
+ul.sm9 li{
+  background:url(http://s1.ifiter.com/static/images/map/sm9.png) no-repeat left top;
+}
+
+ul.sm10 li{
+  background:url(http://s1.ifiter.com/static/images/map/sm10.png) no-repeat left top;
 }
 
 ul.maplist li p{

@@ -91,7 +91,7 @@
 				xingzuo = 9;
 			}
 			break;
-		}
+    }
 		$('#astro').val(xingzuo);
 	}
 

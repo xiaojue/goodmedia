@@ -21,7 +21,8 @@
 			revise: false,
 			center: null,
 			siteNo: null,
-			type: null
+			type: null,
+      key:""
 		};
 
 		$.extend(_cg, cg);
@@ -191,6 +192,20 @@
 					//给周边场馆增加坐标和事件
 					addrimmarkers: function(ary, map, info, markAry) {
 						var infotemp = '<div class="info-window" style="height:90px;">' + '<p><a href="/s/{siteno}" target="_blank" class="green">{name}</a></p>' + '<p class="coaches">入驻教练：{coaches}</p>' + '<p>热线电话：{tel}</p>' + '<p class="map_more"><a href="/s/{siteno}" target="_blank">会所详细介绍&gt;&gt;</a></p>' + '</div>';
+            var key=(G.widget.map.key==='undefined')? "undefined" : G.widget.map.key; 
+            var iconmap={
+              'undefined':'http://s1.ifiter.com/static/images/map/124.png',
+              '莱美':'http://s1.ifiter.com/static/images/map/sm1.png',
+              'NTC':'http://s1.ifiter.com/static/images/map/sm2.png',
+              'zumba':'http://s1.ifiter.com/static/images/map/sm3.png',
+              '乒乓球':'http://s1.ifiter.com/static/images/map/sm4.png',
+              '街舞':'http://s1.ifiter.com/static/images/map/sm5.png',
+              '力量训练':'http://s1.ifiter.com/static/images/map/sm6.png',
+              '跆拳道':'http://s1.ifiter.com/static/images/map/sm7.png',
+              '游泳':'http://s1.ifiter.com/static/images/map/sm8.png',
+              '瑜伽':'http://s1.ifiter.com/static/images/map/sm9.png',
+              '羽毛球':'http://s1.ifiter.com/static/images/map/sm10.png'
+            };
 						//清空暂存动作
 						_fn.infoopen = {};
 						for (var i = 0; i < ary.length; i++) { (function(i) {
@@ -204,7 +219,7 @@
 										title: name,
 										position: newlatlng,
 										map: map,
-										icon: 'http://s1.ifiter.com/static/images/map/124.png'
+										icon:iconmap[key] 
 									});
 
 									markAry.push(newmarker);
@@ -266,8 +281,22 @@
 					infoopen: {},
 					//生成左侧列表
 					createRightlist: function(data) {
-						var errorhandle = "this.parentNode.removeChild(this);",
-						returnstr = '<ul class="maplist">';
+            var errorhandle = "this.parentNode.removeChild(this);";
+            var key=(G.widget.map.key==='undefined')? "" :G.widget.map.key;
+            var classmap={
+              'undefined':'',
+              '莱美':'sm1',
+              'NTC':'sm2',
+              'zumba':'sm3',
+              '乒乓球':'sm4',
+              '街舞':'sm5',
+              '力量训练':'sm6',
+              '跆拳道':'sm7',
+              '游泳':'sm8',
+              '瑜伽':'sm9',
+              '羽毛球':'sm10'
+            };
+						var returnstr = '<ul class="maplist '+classmap[key]+'">';
 						for (var i = 0; i < data.length; i++) {
 							var obj = data[i],
 							temp = '<li data-index="' + i + '">' + '<p class="map_title"><a href="javascript:void(0)">{name}</a></p>' + '<p><span>会馆特色：</span>{feature}</p>' + '<p><span>特色项目：</span>{items}</p>' + '<p><span>热线电话：</span>{tel}</p>' + '<p><span>所在城市：</span>{cityZone}</p>' + '<p class="map_pic"><a href="/s/{siteno}" target="_blank"><img src="{logo}" width="120" height="120" title="{name}" alt="{name}" onerror="' + errorhandle + '"></a></p>' + '<p class="map_more"><a href="/s/{siteno}" target="_blank">会所详细介绍&gt;&gt;</a></p>' + '</li>';
@@ -490,7 +519,8 @@
 					},
 					//获取自己数据库的模糊查询信息
 					getourcoord: function(data, callback) {
-						var coordurl = '/api/mi.jsp?v=geokey/' + encodeURI(data.q),
+            var key=(G.widget.map.key==='undefined')? "" :'/'+G.widget.map.key; 
+            var coordurl = '/api/mi.jsp?v=geokey/' + encodeURI(data.q)+key,
 						c = 0,
 						mc = 3,
 						t = 1000;
@@ -536,7 +566,8 @@
 					//发送当前坐标到搜索api，返回周边场馆
 					postPostion: function(m) {
 						var coord = m.getPosition();
-						action = '/api/mi.jsp?v=geo/' + coord.lng() + '/' + coord.lat();
+            var key=(G.widget.map.key==='undefined')? "" :'/'+G.widget.map.key; 
+						action = '/api/mi.jsp?v=geo/' + coord.lng() + '/' + coord.lat()+key;
 
 						$.ajax({
 							url: action,
@@ -803,7 +834,6 @@
 			}
 		}
 	};
-
 	if (G && G.widget) G.widget.map = map;
 
 })(window, GM);
