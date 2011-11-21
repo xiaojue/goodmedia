@@ -520,6 +520,7 @@
 					//获取自己数据库的模糊查询信息
 					getourcoord: function(data, callback) {
             var key=(G.widget.map.key==='undefined')? "" :'/'+G.widget.map.key; 
+            if(key=="/undefined") key="";
             var coordurl = '/api/mi.jsp?v=geokey/' + encodeURI(data.q)+key,
 						c = 0,
 						mc = 3,
@@ -567,6 +568,7 @@
 					postPostion: function(m) {
 						var coord = m.getPosition();
             var key=(G.widget.map.key==='undefined')? "" :'/'+G.widget.map.key; 
+            if(key=="/undefined") key="";
 						action = '/api/mi.jsp?v=geo/' + coord.lng() + '/' + coord.lat()+key;
 
 						$.ajax({

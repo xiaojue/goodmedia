@@ -122,22 +122,30 @@
 	 * @param {String} widget
 	 * @param {function} callback
 	 */
+  
 	GM.widget.use = function(widget, callback) {
-		if (GM.widget.usemap.hasOwnProperty(widget)) {
-			callback(GM.widget);
-			return;
-		}
-
+    if(!GM['@widget'+widget]){
+    GM['@widget'+widget]={};
+    GM['@widget'+widget].isLoading=true;
 		var widgeturi = GM.host + 'widget/' + widget + '/' + widget + '-min.js';
 		if (GM.debug) widgeturi = GM.locality(widgeturi);
 		$(function() {
 			$.getScript(widgeturi, function() {
-				GM.widget.usemap[widget] = {
+        GM.widget.usemap[widget] = {
 					uri: widgeturi
 				};
-				callback(GM.widget);
+        GM['@widget'+widget].Loaded=true;
+        callback(GM.widget);
 			});
 		});
+    }else{
+     var T=setInterval(function(){
+        if(GM['@widget'+widget] && GM['@widget'+widget].Loaded){
+          clearInterval(T);
+          callback(GM.widget);
+        }
+      },500);
+    }
 	};
 
 	//debug 模式下开启debug.js并且初始化debug面板
