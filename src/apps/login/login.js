@@ -20,12 +20,7 @@
 						var parent=node.parent();
 						if(parent.next().hasClass('J_checked')) parent.next().hide();
 					},
-				 checkedLogin:function(){
-						var loginV=new G.widget.verify({
-								form:'#J_LoginForm',
-								cls:'.Gverify',
-								blur:true,
-								success:function(data){
+          logintoBss:function(data){
 									var action='http://bbs.idongmi.com/bbs/logging.php?action=login&loginsubmit=yes&inajax=1',
 											username=data['username'],
 											pwd=data['password'],
@@ -102,7 +97,13 @@
 												$('#J_Status').html('网络超时，请重试');
 											}
                     });
-								},
+          },
+				 checkedLogin:function(){
+						var loginV=new G.widget.verify({
+								form:'#J_LoginForm',
+								cls:'.Gverify',
+								blur:true,
+								success:_fn.logintoBss,
 								batchcallback:_fn.bathcallbackhand,
 								focusfn:_fn.focushand
 							});	
@@ -141,6 +142,25 @@
 											 });
 										 return true; //都返回true，因为是异步，在success中判断异步处理;
 				 },
+         checkCode:function(val,callback){
+           var action="/user/loginAjax.jsp?code="+val;
+              $.ajax({
+                url:action,
+                success:function(ret){
+                  var data=eval('('+$.trim(ret)+')');
+                  if(data['ret']===1){
+										if(callback) callback();
+                  }else{
+									  _fn.batchcallbackReghand('','验证码不正确',doc.getElementById('J_CheckCodeInput'));
+                    _fn.ChangeCheckCode();
+                  }
+                },
+                error:function(){
+								 _fn.batchcallbackReghand('','响应超时，请重新填写',doc.getElementById('J_CheckCodeInput'));
+                }
+             });
+           return true;
+         },
 				 checkeml:function(val,callback){
 								 var action='http://bbs.idongmi.com/bbs/ajax.php?infloat=register&handlekey=register&action=checkemail&email='+val+'&inajax=1&ajaxtarget=returnmessage4',
 								 		 baseapi= '/api/api_getURL2js.jsp?op=get&url=';
@@ -163,6 +183,11 @@
 											});
 									return true;
 				 },
+         ChangeCheckCode:function(){                                                                                                                
+                  var tmp=new Date().valueOf();
+                  var imgsrc="http://dev.idongmi.com/user/loginAction.jsp";
+                  $('#J_CheckCode').attr("src",imgsrc+"?t="+tmp);
+          },
 				 checkedReg:function(){
            //增加提示
            $('.J_Regverify').each(function(){
@@ -179,8 +204,10 @@
 								success:function(data){
 									_fn.checkname($('#J_UserName').val(),function(){
 											_fn.checkeml($('#J_Email').val(),function(){
-												$('#J_RegForm').die();	
-												$('#J_RegForm').submit();	
+                          _fn.checkCode($('#J_CheckCodeInput').val(),function(){
+												    $('#J_RegForm').die();	
+												    $('#J_RegForm').submit();	
+                          });
 											});
 									});
 								},
@@ -191,9 +218,12 @@
 								}
 						 },{
 							 checkusername:_fn.checkname,
-							 checkemail:_fn.checkeml
+							 checkemail:_fn.checkeml,
+               checkcode:_fn.checkCode
 						 });
 					 RegV.init();
+           //变换校验码
+           $('#J_ChangeCheckCOde').live('click',_fn.ChangeCheckCode);
 				 }
        };
 
@@ -210,7 +240,8 @@
 						G.widget.use('verify',function(widget){
 							_fn.checkedReg();
 						});
-					}
+					},
+          autoLogin:_fn.logintoBss
 				}
       };
 		}();
