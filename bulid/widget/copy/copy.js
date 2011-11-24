@@ -22,7 +22,7 @@
 	        			$(target).show().val(txt).focus().select().click(function(){
 	        				$(this).select();
 	        			});
-	        			if($('#J_CopyFuck').length==0){
+	        			if($('#J_CopyFuck').length===0){
 	        				$(target).after('<div class="red" id="J_CopyFuck">非IE浏览器请手动CTRL+C复制地址</div>');
 	        			}
 	        		}else{
@@ -30,10 +30,11 @@
 	        		}   
 	        	}  
 		};
+    $(btn).die();
 		$(btn).live('click',function(){
 			_copy(txt);
 		});
-	}
+};
 	
 	if(G && G.widget) G.widget.copy=copy;
 	

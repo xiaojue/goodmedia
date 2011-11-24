@@ -185,7 +185,7 @@
 				 },
          ChangeCheckCode:function(){                                                                                                                
                   var tmp=new Date().valueOf();
-                  var imgsrc="http://dev.idongmi.com/user/loginAction.jsp";
+                  var imgsrc="/user/loginAction.jsp";
                   $('#J_CheckCode').attr("src",imgsrc+"?t="+tmp);
           },
 				 checkedReg:function(){
