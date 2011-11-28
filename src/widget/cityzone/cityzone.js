@@ -199,6 +199,7 @@
         }
 
 				bulidzone(zonewrap, current, currentzone, cls);
+				bulidarea(areawrap, current, cls);
 
 				if (current !== '' && nowzone === '') {
 					$('.J_AllZone').addClass(cls);

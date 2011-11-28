@@ -224,7 +224,7 @@
        * @param {Function} callback [accessLevel] 触发浮出层后的回调
        * @description 触发覆盖层浮出
        */
-			fire:function(html,callback){
+			fire:function(html,callback,recover){
 				var that=this,config=that.config;
 
 				if(config._destroy) return;
@@ -241,16 +241,14 @@
 					//that.reset(config.width,config.height,config.wrapCls);
 					
 					if(config.cover && $('#'+config.coverId).length===0) that._cover();
-
+				  $('#'+config.wrapId).css('display','inline');
 				}else{
 					if(html) $('#'+config.wrapId).html(html);
-
-					$('#'+config.coverId).show();
-
-					$('#'+config.wrapId).show();
+          if(!recover){
+				    $('#'+config.wrapId).css('display','inline');
+            $('#'+config.coverId).show();
+          }
 				}
-				
-				$('#'+config.wrapId).css('display','inline');
 				
 				//高度的获取有时候会延迟在IE6下
         if($.browser.msie && $.browser.version <= 6){
@@ -802,12 +800,12 @@
 				wraps:null, //elements
 				action:'click',
 				switchafter:function(){}
-			}
+      };
 			
 			$.extend(_cg,cg);
 			
 			this.config=_cg;
-		};
+		}
 		
 		_switch.prototype={
       /**
@@ -828,7 +826,7 @@
 						cg.switchafter(index,ele,wrap);
 				});
 			}
-		}
+    };
 		
 		return new _switch(cg).init();
 		
@@ -836,7 +834,7 @@
 	
 	$.extend({
 		switchable:switchable
-	})
+  });
 	
 })(window,GM,jQuery);
 /**

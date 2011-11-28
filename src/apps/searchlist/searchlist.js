@@ -31,7 +31,7 @@
 					var s = GLOBALskey;
 					if (s) {
 						s = decodeURIComponent(s);
-						if (s != $('.J_Projectbtn').val()) $('#J_SearchBar').append('<input type="checkbox" value="' + s + '" class="J_S" checked="checked"/><span>' + s + '<aclass="J_closeIjs" href="#"></a></span>');
+						if (s != $('.J_Projectbtn').val()) $('#J_SearchBar').append('<input type="checkbox" value="' + s + '" class="J_S" checked="checked"/><span>' + s + '<a class="J_closeIjs" href="#"></a></span>');
 					}
 					$('input[value="全部城市"],input[value="显示全部"],input[value="全部城区"],input[value="全部项目"],input[value="全部地标"]').next().remove().end().remove();
 					$('li:contains("唐山"),li:contains("嘉兴"),li:contains("南宁")').hide();

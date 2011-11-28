@@ -22,7 +22,10 @@
 			center: null,
 			siteNo: null,
 			type: null,
-      loaded:null,
+      reload:true,
+      loaded:function(){
+
+      },
       key:""
 		};
 
@@ -629,6 +632,7 @@
 				//构建bar
 				if (that.bar) that._bulidbar(that.target);
 			}
+      return map;
 		},
 		//构建下部导航
 		_bulidbar: function(target) {
@@ -664,6 +668,7 @@
 			var that = this,
 			target = document.getElementById(that.target),
 			hashval = W.location.hash.slice(1),
+      map,Gmap = google.maps,Gevent = Gmap.event,
 			Initlatlng = $.analyse(hashval);
 
 			//加载相关css
@@ -679,7 +684,7 @@
 				that._searchQ(that.q, function(location) {
 					if (location) {
 						that.center = [location.lat(), location.lng()];
-						that.drawmap(target, that.center, that.name, that.siteNo);
+						map = that.drawmap(target, that.center, that.name, that.siteNo);
 					} else {
 						that._Initerror(target);
 					}
@@ -690,7 +695,7 @@
 					that.center = [that.center[1], that.center[0]];
 					centerflg = false;
 				}
-				that.drawmap(target, that.center, that.name, that.siteNo);
+				map = that.drawmap(target, that.center, that.name, that.siteNo);
 			}
 
 			//设置容器高宽
@@ -709,21 +714,24 @@
 			//绑定bar的事件
 			$('.J_LookBigMap').live('click', function() {
 				if (that.coord || that.center) {
-					that._BigMapaction();
+					that._BigMapaction(false);
 				} else {
 					that._errorClick();
 				}
 			});
 
 			//查看大图 ，监听参数
-			if (/jsmap\=lookmap/.test(W.location.href)) {
-				$(window).load(function() {
+			if (/jsmap\=lookmap/.test(W.location.href) && that.reload) {
+			  G.tools.overlay.opacity(0.5);
+        var Loading = '<div class="emersion bigmap" style="width:500px;">' + '<div style="width:500px;height:500px;text-align:center;font-size:14px;line-height:500px;">地图加载中...</div>' + '<a href="javascript:void(0);" class="J_OverlayClose mapclose">&times</a>' + '</div>';
+			  G.tools.overlay.fire(Loading);
+        Gevent.addListener(map,'tilesloaded',function(){
 					if (that.coord || that.center) {
-						that._BigMapaction();
+						that._BigMapaction(true);
 					} else {
 						that._errorClick();
 					}
-				});
+        });
 			}
 
 			//查询路线
@@ -771,13 +779,13 @@
 			});
 		},
 		//查看大图的浮层
-		_BigMapaction: function() {
+		_BigMapaction: function(show) {
 			var diget = new Date().valueOf(),
 			that = this,
 			BigMap = '<div class="emersion bigmap">' + '<div id="J_Map_' + diget + '" style="height:500px;"></div>' + '<a href="javascript:void(0);" class="J_OverlayClose mapclose">&times</a>' + '</div>';
 			G.tools.overlay.opacity(0.5);
-			G.tools.overlay.fire(BigMap);
-			var map = new G.widget.map({
+      G.tools.overlay.fire(BigMap,function(){
+       var map = new G.widget.map({
 				q: that.q,
 				markerhtml: that.markerhtml,
 				target: 'J_Map_' + diget,
@@ -785,9 +793,12 @@
 				height: 500,
 				bar: false,
 				name: that.name,
+        reload:false,
 				center: that.center,
 				siteNo: that.siteNo
-			}).init();
+			  }).init();
+      },show);
+     
 		},
 		//查询路线浮层
 		_lookway: function() {

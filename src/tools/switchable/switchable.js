@@ -17,12 +17,12 @@
 				wraps:null, //elements
 				action:'click',
 				switchafter:function(){}
-			}
+      };
 			
 			$.extend(_cg,cg);
 			
 			this.config=_cg;
-		};
+		}
 		
 		_switch.prototype={
       /**
@@ -43,7 +43,7 @@
 						cg.switchafter(index,ele,wrap);
 				});
 			}
-		}
+    };
 		
 		return new _switch(cg).init();
 		
@@ -51,6 +51,6 @@
 	
 	$.extend({
 		switchable:switchable
-	})
+  });
 	
 })(window,GM,jQuery);
