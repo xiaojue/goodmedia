@@ -4,7 +4,23 @@
  * @fileoverview 动米网种子文件，负责加载和初始化整个js库
  */
 (function(W, $, doc) {
-	/** 1234567890一二三四五六七八九十
+  /**
+   * @description 增加防套嵌代码
+   */
+  (function(){
+  try{
+    var topHost=W.top.location.hostname,
+    Host=W.location.hostname;
+    if(W.self!=W.top && topHost != Host && doc.referrer.search(/http:\/\/[^\/]+\.idongmi\.com/i) !== 0){
+      W.top.localtion.href = W.self.location.href;
+    }
+  }catch(e){
+    if (doc.referrer.search(/http:\/\/[^\/]+\.idongmi\.com/i) !== 0) {
+       W.top.location.href = W.location.href;
+    }    
+  }
+  })();
+	/** 
     * @static
     * @description debug的信息，host保存调试机器项目路径
     */

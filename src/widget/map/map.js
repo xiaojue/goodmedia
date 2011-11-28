@@ -431,7 +431,7 @@
 					},
 					tosearch: function() {
 						var q = $.trim($('#J_SearchMapText').val());
-						if (q === "") {
+						if (q === "" || q==="请输入关键字") {
 							alert('请输入搜索地址，比如:北京市 朝阳区');
 							return;
 						}
@@ -506,7 +506,13 @@
 						$('#J_SearchSub').live('click', _fn.tosearch);
 						$('#J_SearchMapText').live('keydown', function(e) {
 							if (e.keyCode == 13) _fn.tosearch();
-						});
+            }).live('focus',function(){
+                  var val=$(this).val();
+                  if(val==="请输入关键字") $(this).val("");
+                }).live('blur',function(){
+                    var val=$(this).val();
+                    if(val==="") $(this).val("请输入关键字");
+                  });
 						//分享到新浪微博
 						$('#J_ShareSina').live('click', function() {
 							var tsina = "http://v.t.sina.com.cn/share/share.php?title={T}&url={U}",
