@@ -22,6 +22,7 @@
 			center: null,
 			siteNo: null,
 			type: null,
+      loaded:null,
       key:""
 		};
 
@@ -149,6 +150,7 @@
 				};
 
 				var map = new Gmap.Map(target, myOptions); //载入地图
+        Gevent.addListener(map,'tilesloaded',that.loaded);
 				var marker = new Gmap.Marker({
 					title: name,
 					position: latlng,
