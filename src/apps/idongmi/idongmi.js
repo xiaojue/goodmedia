@@ -39,21 +39,80 @@
 							if(window.GLOBALskey) txt.val(GLOBALskey);
 							else
 							txt.val(msg);
+
+              //插入只能提示层
+            $('body').append('<div id="J_SearchKey" style="cursor:pointer;display:none;border:#999 solid 1px;background:#F5F5F5;width:'+$('#J_Q').width()+'px;"><div id="J_SiteWrap" style="height:22px;position:relative;"></div><div id="J_CoachWrap" style="height:22px;position:relative;"></div></div>');
+              var selectIndex=0,maxSelect=1;
 							txt.focus(function(){
 								var val=$.trim(txt.val());
 								if(val==msg) $(this).val("");
-							});
-							txt.blur(function(){
+							}).blur(function(){
 								var val=$.trim(txt.val());
 								if(val==="") $(this).val(msg);
-							});
+                setTimeout(function(){
+                $('#J_SearchKey').hide();
+              },500);
+              }).attr('autocomplete','off').bind('keydown keyup focus',function(e){
+                  var val=$(this).val();
+                  if($.trim(val)!==''){
+                    var offset=$(this).offset();
+                    $('#J_SearchKey').css({
+                      left:offset.left,
+                      top:offset.top+$(this).outerHeight(),
+                      position:'absolute'
+                    }).show();
+                  //上
+                  if(e.which===38){
+                    if(selectIndex>0) selectIndex=selectIndex-1;
+                  //下
+                  }else if(e.which===40){
+                    if(selectIndex<maxSelect) selectIndex=selectIndex+1;
+                  }
+                  }else{
+                    $('#J_SearchKey').hide();
+                  }
+                  if(val.length>8){
+                     val = val.slice(0,8)+'...';
+                  }
+                  $('#J_SiteWrap').html('<a href="http://x.idongmi.com/search/index.jsp" target="_blank"><span style="color:red;position:absolute;left:5px;top:3px;">'+val+'</span><span style="position:absolute;right:1px;top:3px;">相关会所&gt;&gt;</span></a>');
+                  $('#J_CoachWrap').html('<a href="http://x.idongmi.com/search/coach.jsp" target="_blank"><span style="color:red;position:absolute;left:5px;top:3px;">'+val+'</span><span style="position:absolute;right:1px;top:3px;">相关教练&gt;&gt;</span></a>');
+                  $('#J_SearchKey>div').css('background','none').eq(selectIndex).css('background','#EAEAEA');
+              });
+
+            $('#J_SiteWrap,#J_CoachWrap').live('mouseenter',function(){
+                $('#J_SiteWrap,#J_CoachWrap').css('background','none');
+                $(this).css('background','#EAEAEA');
+            });
+
+          $('#J_SiteWrap').live('click',function(){
+              var href=$(this).find('a').attr('href');
+              $('#J_Search').attr('action',href);
+              $('#J_Search').submit();
+              return false;
+            }).live('mouseenter',function(){
+              selectIndex=0;
+            });
+
+          $('#J_CoachWrap').live('click',function(){
+              var href=$(this).find('a').attr('href');
+              $('#J_Search').attr('action',href);
+              $('#J_Search').submit();
+              return false;
+           }).live('mouseenter',function(){
+            selectIndex=1;
+           });
+
 							$('#J_Search').submit(function(){
 								var val=$.trim(txt.val());
 								if(val==="" || val=="请输入关键字"){
 									alert('请输入搜索条件');
 									return false;
 								}
+                var actionlist=['/search/index.jsp','/search/coach.jsp'];
+                $(this).attr('action',actionlist[selectIndex]);
+                return true;
 							});
+              
 
 						//公告首尾相接
 						$('.J_Roll').css('position','absolute').parent().css({'overflow':'hidden','width':181,'position':'relative'});
