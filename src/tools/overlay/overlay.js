@@ -87,7 +87,6 @@
 					that.reset($('#'+config.wrapId).innerWidth(),$('#'+config.wrapId).innerHeight(),config.wrapCls);
         }
 				if(callback) callback(wrap);
-
 			},
       /**
        * @name jQuery.overlay#opacity
@@ -140,7 +139,6 @@
 					'width':'auto',
 					'height':'auto'
 				});
-
 				if(callback) callback($('#'+config.coverId),$('#'+config.wrapId));
 
 			},

@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>table demo</title>
+		<meta content="text/html; charset=utf-8" http-equiv="content-type">
+		<script src="../../jquery/jquery-1.6.2.js" charset=”utf-8″></script>
+		<script src="../../bulid/seed-min.js" type="text/javascript" charset=”UTF-8″></script>
+	</head>
+  <body>
+    <a href="#1" class="i1">1 iframe</a>
+    <a href="#2" class="i2">2 iframe</a>
+    <script>
+			(function(){
+        GM.apps.require('salegame',function(exports){
+          exports.receptor({
+            '.i1':{
+              content:'<iframe src="1.html?debug"></iframe>',
+              afterfire:function(){
+                console.log('afterfire');
+              }
+            },
+            '.i2':{
+              content:'<iframe src="2.html?debug"></iframe>'
+            }
+          });
+				});
+			})();
+		</script>
+	</body>
+</html>
+

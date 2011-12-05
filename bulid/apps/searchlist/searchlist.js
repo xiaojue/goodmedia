@@ -88,7 +88,6 @@
 					$(this).parent().prev().remove();
 					$(this).parent().remove();
 					$('#J_Zone').find('.all').removeClass('all');
-					$('#J_Zone').find('.all').removeClass('all');
 					$('.J_AllZone').addClass('all');
 					updateRt();
 					return false;
@@ -105,7 +104,6 @@
 					$(this).parent().prev().remove();
 					$(this).parent().remove();
 					$('#J_Area').find('.all').removeClass('all');
-					$('#J_Area').find('.all').removeClass('all');
 					$('.J_AllArea').addClass('all');
 					updateRt();
 					return false;
@@ -114,6 +112,8 @@
 					$(this).parent('span').prev().remove();
 					$(this).parent().remove();
 					$('#J_Q').val('请输入关键字');
+          $('#J_Project').find('.all').removeClass('all');
+					$('.J_AllProject').addClass('all');
 					window.GLOBALskey = null;
 					updateRt();
 					return false;
@@ -189,12 +189,12 @@
 				$('#J_Project a').live('click', function() {
 					$('#J_Project a').removeClass('all');
 					$(this).addClass('all');
-					findout();
 					$('.J_S').next().remove();
 					$('.J_S').remove();
 					$('#J_FindOut').addClass('btnactive');
 					$('#J_Q').val('请输入关键字');
 					window.GLOBALskey = null;
+					findout();
 					updateRt();
 				});
 
@@ -254,8 +254,8 @@
             return false;
         });
 
-				initproject(W.GLOBALskey);
 				findout();
+				initproject(W.GLOBALskey);
 				function updateRt(active) {
 					var s = $('.J_S').val(),
 					is = $('.J_S').attr('checked'),
@@ -278,7 +278,7 @@
 					if (tag == '&tag=全部地标') tag = '';
 					if (city == 'c=全部城市') city = '';
 					var page = 1;
-					if (typeof active == 'string') page = active;
+					if (typeof active == 'string' || typeof active == 'number') page = active;
 					var q = $('#J_Q').val();
 					if (q !== "请输入关键字") project = "&s=" + q;
 					var arg = '?' + city + zone + tag + project + '&pageNo=' + page + '&max=10';

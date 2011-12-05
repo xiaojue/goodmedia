@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>2</title>
+		<meta content="text/html; charset=utf-8" http-equiv="content-type">
+		<script src="../../jquery/jquery-1.6.2.js" charset=”utf-8″></script>
+		<script src="../../bulid/seed-min.js" type="text/javascript" charset=”UTF-8″></script>
+	</head>
+	<body>
+    <a href="#close" class="close">2close</a>
+		<script>
+        GM.apps.require('salegame',function(exports){
+        $('.close').live('click',function(){
+          exports.caller('close');
+          return false;
+        });
+				});
+		</script>
+	</body>
+</html>
+

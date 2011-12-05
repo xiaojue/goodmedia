@@ -108,7 +108,7 @@
 									alert('请输入搜索条件');
 									return false;
 								}
-                var actionlist=['/search/index.jsp','/search/coach.jsp'];
+                var actionlist=['http://x.idongmi.com/search/index.jsp','http://x.idongmi.com/search/coach.jsp'];
                 $(this).attr('action',actionlist[selectIndex]);
                 return true;
 							});
