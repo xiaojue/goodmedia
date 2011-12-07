@@ -8,12 +8,17 @@
 	</head>
 	<body>
     <a href="#close" class="close">2close</a>
+    <a href="#reload" class="reload">top reload</a>
 		<script>
         GM.apps.require('salegame',function(exports){
         $('.close').live('click',function(){
           exports.caller('close');
           return false;
         });
+        $('.reload').live('click',function(){
+          exports.caller('reload');
+          return false;
+        })
 				});
 		</script>
 	</body>
