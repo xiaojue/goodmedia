@@ -197,12 +197,28 @@
 					$.event.trigger('roll:right', [transverse()]);
 				}
 			};
+
 			handle[towards]();
+
 		},
-		run: function(towards) {
+    chaneTowards:function(towards){
+      this.config.towards=towards;
+    },
+    //加速
+    upshift:function(){
+      this.recoverspeed=this.config.speed;
+      this.config.speed=this.config.speed/2;
+
+    },
+    //还原速度
+    recoverspeed:function(){
+      this.config.speed=this.recoverspeed;
+    },
+		run: function() {
 			var that = this,
 			wrap = $(that.wrap),
 			cg = that.config,
+      towards=cg.towards,
 			scrollWrap = $(that.scrollWrap);
 
 			var ruler = {
@@ -211,8 +227,10 @@
 			};
 
 			if (ruler['transverse'] && ruler['vertical']) {
-				that._roll(towards);
-				$.event.trigger('roll:run');
+				that.T = setInterval(function() {
+					that._roll(towards);
+				},
+				that.config.speed);
 			}
 		},
 		stop: function() {
@@ -234,10 +252,11 @@
 				top: 0,
 				left: 0
 			});
-			that.run(cg.towards);
+			that.run();
 		}
 	};
 
 	if (G && G.widget) G.widget.roll = roll;
 
 })(window, GM, jQuery);
+
