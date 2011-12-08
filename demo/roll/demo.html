@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>table demo</title>
+		<meta content="text/html; charset=utf-8" http-equiv="content-type">
+		<script src="../../jquery/jquery-1.6.2.js" charset=”utf-8″></script>
+		<script src="../../bulid/seed-min.js" type="text/javascript" charset=”UTF-8″></script>
+	</head>
+  <body>
+    <div id="J_Roll" style="border:#ccc solid 1px;">
+      <ul>
+        <li>1234</li>
+        <li>1234</li>
+        <li>1234</li>
+        <li>1234</li>
+        <li>1234</li>
+        <li>1234</li>
+        <li>12345</li>
+      </ul>
+    </div>
+    <a href="#" id="up">up</a>
+    <a href="#" id="down">down</a>
+    <a href="#" id="stop">stop</a>
+    <script>
+			(function(){
+        GM.widget.use('roll',function(widget){
+          var roll = new GM.widget.roll("#J_Roll",{
+            height:100,
+            width:50,
+            speed:150,
+            auto:false,
+            towards:"down"
+          }); 
+          roll.init();
+          $('#stop').click(function(){
+            roll.stop();
+          });
+          $('#up').click(function(){
+            roll.auto(true);
+            roll.changeTowards('up');
+            roll.changespeed(100);
+          });
+           $('#down').click(function(){
+            roll.auto(true);
+            roll.changeTowards('down');
+            roll.changespeed(50);
+          });
+				});
+			})();
+		</script>
+	</body>
+</html>
+
