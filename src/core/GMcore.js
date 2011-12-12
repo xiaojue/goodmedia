@@ -89,25 +89,32 @@
 	 * @param {function} callback
 	 */
 
-	GM.apps.map = {};
+	GM.apps.usemap = {};
 
 	GM.apps.require = function(appname, callback) {
-		if (GM.apps.map.hasOwnProperty(appname)) {
-			callback(GM.apps[appname]['exports']);
-			return;
-		}
-		var appuri = GM.host + 'apps/' + appname + '/' + appname + '-min.js';
-		if (GM.debug) appuri = GM.locality(appuri);
-		$(function() {
-			$.getScript(appuri, function() {
-				if (callback) {
-					GM.apps.map[appname] = {
+		if (!GM['@apps' + appname]) {
+			GM['@apps' + appname] = {};
+			GM['@apps' + appname].isLoading = true;
+		  var appuri = GM.host + 'apps/' + appname + '/' + appname + '-min.js';
+		  if (GM.debug) appuri = GM.locality(appuri);
+			$(function() {
+				$.getScript(appuri, function() {
+					GM.apps.usemap[appname] = {
 						uri: appuri
 					};
+					GM['@apps' + appname].Loaded = true;
+					callback(GM.apps[appname]['exports']);
+				});
+			});
+		} else {
+			var T = setInterval(function() {
+				if (GM['@apps' + appname] && GM['@apps' + appname].Loaded) {
+					clearInterval(T);
 					callback(GM.apps[appname]['exports']);
 				}
-			});
-		});
+			},
+			500);
+		}
 	};
 	/**
 	 * @static
@@ -122,30 +129,31 @@
 	 * @param {String} widget
 	 * @param {function} callback
 	 */
-  
+
 	GM.widget.use = function(widget, callback) {
-    if(!GM['@widget'+widget]){
-    GM['@widget'+widget]={};
-    GM['@widget'+widget].isLoading=true;
-		var widgeturi = GM.host + 'widget/' + widget + '/' + widget + '-min.js';
-		if (GM.debug) widgeturi = GM.locality(widgeturi);
-		$(function() {
-			$.getScript(widgeturi, function() {
-        GM.widget.usemap[widget] = {
-					uri: widgeturi
-				};
-        GM['@widget'+widget].Loaded=true;
-        callback(GM.widget);
+		if (!GM['@widget' + widget]) {
+			GM['@widget' + widget] = {};
+			GM['@widget' + widget].isLoading = true;
+			var widgeturi = GM.host + 'widget/' + widget + '/' + widget + '-min.js';
+			if (GM.debug) widgeturi = GM.locality(widgeturi);
+			$(function() {
+				$.getScript(widgeturi, function() {
+					GM.widget.usemap[widget] = {
+						uri: widgeturi
+					};
+					GM['@widget' + widget].Loaded = true;
+					callback(GM.widget);
+				});
 			});
-		});
-    }else{
-     var T=setInterval(function(){
-        if(GM['@widget'+widget] && GM['@widget'+widget].Loaded){
-          clearInterval(T);
-          callback(GM.widget);
-        }
-      },500);
-    }
+		} else {
+			var T = setInterval(function() {
+				if (GM['@widget' + widget] && GM['@widget' + widget].Loaded) {
+					clearInterval(T);
+					callback(GM.widget);
+				}
+			},
+			500);
+		}
 	};
 
 	//debug 模式下开启debug.js并且初始化debug面板
@@ -157,6 +165,7 @@
 
 	GM.apps.require('idongmi', function(exports) {
 		exports.init();
+		exports.backtop();
 	});
 
 	$(function() {

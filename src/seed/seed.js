@@ -29,7 +29,7 @@
 		aver: W.location.href.match('debug')
 	};
 	var basehost, debughost = W.GMDEBUG.host + 'src/',
-	version = '20110915',
+	version = '20111209',
 	loadtype = 'normal',
 	scripts = $('script'),
 	onlinejs = 'GM-min.js',

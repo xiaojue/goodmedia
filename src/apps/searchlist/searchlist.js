@@ -263,6 +263,7 @@
 					zone = $('.J_Zonebtn').val() ? '&z=' + $('.J_Zonebtn').val() : '',
 					tag = $('.J_tagbtn').val() ? '&tag=' + $('.J_tagbtn').val() : '',
 					project = $('.J_Projectbtn').val() ? '&s=' + $('.J_Projectbtn').val() : '';
+          if(project==='&s=热舞') project='&s=舞';
 					if (project === '' && s) {
 						if (s == '全部项目') s = '';
 						project = '&s=' + s;
