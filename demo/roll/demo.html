@@ -21,6 +21,7 @@
     <a href="#" id="up">up</a>
     <a href="#" id="down">down</a>
     <a href="#" id="stop">stop</a>
+    <a href="#" id="update">update</a>
     <script>
 			(function(){
         GM.widget.use('roll',function(widget){
@@ -44,6 +45,9 @@
             roll.auto(true);
             roll.changeTowards('down');
             roll.changespeed(50);
+          });
+          $('#update').click(function(){
+            roll.update(' <ul><li>1234</li></ul>');
           });
 				});
 			})();

@@ -85,19 +85,19 @@
 				var verticalhandle = function() {
 					if (Math.abs(top) >= wrap.height()) {
 						wrap.css('top', 0);
-						if (towards === "up" || towards === "down"){
-              that.firstclone.css('top', -wrap.height());
-              that.lastclone.css('top', wrap.height());
-            }
+						if (towards === "up" || towards === "down") {
+							that.firstclone.css('top', - wrap.height());
+							that.lastclone.css('top', wrap.height());
+						}
 					}
 				};
 				var transversehandle = function() {
 					if (Math.abs(left) >= wrap.width()) {
 						wrap.css('left', 0);
-						if (towards === "left" || towards === "right"){
-              that.firstclone.css('left', -wrap.width());
-              that.lastclone.css('left', wrap.width());
-            }
+						if (towards === "left" || towards === "right") {
+							that.firstclone.css('left', - wrap.width());
+							that.lastclone.css('left', wrap.width());
+						}
 					}
 				};
 
@@ -152,6 +152,25 @@
 			handle[towards]();
 
 		},
+		reset: function() {
+			var that = this,
+			wrap = $(that.wrap),
+			towards = that.config.towards;
+			if (towards == 'up' || towards == 'down') {
+				that.firstclone.css('top', - wrap.height());
+				that.lastclone.css('top', wrap.height());
+			} else if (towards == "left" || towards == "right") {
+				that.firstclone.css('left', - wrap.width());
+				that.lastclone.css('left', wrap.width());
+			}
+
+			wrap.css({
+				'left': 0,
+				'top': 0
+			});
+			that.stop();
+			that.run();
+		},
 		changeTowards: function(towards) {
 			this.config.towards = towards;
 			this.stop();
@@ -179,11 +198,16 @@
 				vertical: (towards === "up" || towards === "down") ? (scrollWrap.height() < wrap.height()) : true
 			};
 
-			if (ruler['transverse'] && ruler['vertical'] && that.config.auto) {
-				that.T = setInterval(function() {
-					that._roll(towards);
-				},
-				that.config.speed);
+			if (ruler['transverse'] && ruler['vertical']) {
+				if (that.config.auto) {
+					that.T = setInterval(function() {
+						that._roll(towards);
+					},
+					that.config.speed);
+				}
+			} else {
+				that.firstclone.remove();
+				that.lastclone.remove();
 			}
 		},
 		stop: function() {
@@ -191,13 +215,15 @@
 			clearInterval(that.T);
 		},
 		createClone: function() {
-      var that=this,wrap=$(that.wrap),cg=that.config;
+			var that = this,
+			wrap = $(that.wrap),
+			cg = that.config;
 			that.firstclone = wrap.clone();
 			that.lastclone = wrap.clone();
 			that.firstclone.attr('id', 'J_' + new Date().valueOf());
 			that.lastclone.attr('id', 'J_' + new Date().valueOf());
-      wrap.parent().prepend(that.firstclone);
-      wrap.parent().append(that.lastclone);
+			wrap.parent().prepend(that.firstclone);
+			wrap.parent().append(that.lastclone);
 			var transverse = function() {
 				that.firstclone.css({
 					left: - wrap.width(),
@@ -215,7 +241,7 @@
 				});
 				that.lastclone.css({
 					left: 0,
-					top:  wrap.height()
+					top: wrap.height()
 				});
 			};
 			switch (cg.towards) {
@@ -250,11 +276,20 @@
 				overflow: 'hidden',
 				position: 'relative'
 			});
-      that.createClone();
+			that.createClone();
 			that.run();
+		},
+		update: function(html) {
+			var that = this;
+			that.firstclone.remove();
+			that.lastclone.remove();
+			$(that.wrap).html(html);
+			that.createClone();
+			that.reset();
 		}
 	};
 
 	if (G && G.widget) G.widget.roll = roll;
 
 })(window, GM, jQuery);
+
