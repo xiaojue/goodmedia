@@ -8,15 +8,15 @@
 		this.wrap = wrap;
 		this.scrollWrap = '#J_ScrollWrap' + new Date().valueOf();
 		this.T = null;
-		this.clone = null;
+		this.firstclone = null;
+		this.lastclone = null;
 		var _config = {
 			towards: 'up',
 			//4个prototype方向
 			height: 300,
 			width: 300,
 			speed: 200,
-			auto: true,
-			endtype: 'endtoend' // endtoend 首位相接
+			auto: true
 		};
 		$.extend(_config, config);
 		this.config = _config;
@@ -27,7 +27,8 @@
 			var that = this,
 			wrap = $(that.wrap),
 			scrollWrap = $(that.scrollWrap),
-      clone = that.clone,
+			firstclone = that.firstclone,
+			lastclone = that.lastclone,
 			transverse = function() {
 				return {
 					left: wrap.position().left
@@ -40,69 +41,81 @@
 			},
 			top = wrap.position().top,
 			left = wrap.position().left,
-      clonetop=clone.position().top,
-      cloneleft=clone.position().left;
+			firsttop = firstclone.position().top,
+			lasttop = lastclone.position().top,
+			firstleft = firstclone.position().left,
+			lastleft = lastclone.position().left;
 			var count = {
 				up: function() {
 					top--;
-          clonetop--;
+					firsttop--;
+					lasttop--;
 					wrap.css('top', top);
-					that.clone.css('top', clonetop);
+					that.firstclone.css('top', firsttop);
+					that.lastclone.css('top', lasttop);
 				},
 				down: function() {
 					top++;
-          clonetop++;
+					firsttop++;
+					lasttop++;
 					wrap.css('top', top);
-				  that.clone.css('top', clonetop);
+					that.firstclone.css('top', firsttop);
+					that.lastclone.css('top', lasttop);
 				},
 				left: function() {
 					left--;
-          cloneleft--;
+					firstleft--;
+					lastleft--;
 					wrap.css('left', left);
-					that.clone.css('left', cloneleft);
+					that.firstclone.css('left', firstleft);
+					that.lastclone.css('left', lastleft);
 				},
 				right: function() {
 					left++;
-          cloneleft++;
+					firstleft++;
+					lastleft++;
 					wrap.css('left', left);
-					that.clone.css('left', cloneleft);
+					that.firstclone.css('left', firstleft);
+					that.lastclone.css('left', lastleft);
 				}
 			};
 
-			var endhandle = {
-				endtoend: function() {
-					count[towards](); //一直滚，把当前的滚完，偏移设置回0
-					var verticalhandle = function() {
-            if (Math.abs(top) >= wrap.height() || Math.abs(clonetop) >= wrap.height()) {
-							wrap.css('top', 0);
-							if (towards === "up") that.clone.css('top', wrap.height());
-							if (towards === "down") that.clone.css('top', - wrap.height());
-						}
-					};
-					var transversehandle = function() {
-            if (Math.abs(left) >= wrap.width() || Math.abs(cloneleft) >= wrap.width()) {
-							wrap.css('left', 0);
-							if (towards === "left") that.clone.css('left', wrap.width());
-							if (towards === "right") that.clone.css('left', - wrap.width());
-						}
-					};
-
-					switch (towards) {
-					case "up":
-						verticalhandle();
-						break;
-					case "down":
-						verticalhandle();
-						break;
-					case "left":
-						transversehandle();
-						break;
-					case "right":
-						transversehandle();
-						break;
-					default:
-						break;
+			var endtoend = function() {
+				count[towards](); //一直滚，把当前的滚完，偏移设置回0
+				var verticalhandle = function() {
+					if (Math.abs(top) >= wrap.height()) {
+						wrap.css('top', 0);
+						if (towards === "up" || towards === "down"){
+              that.firstclone.css('top', -wrap.height());
+              that.lastclone.css('top', wrap.height());
+            }
 					}
+				};
+				var transversehandle = function() {
+					if (Math.abs(left) >= wrap.width()) {
+						wrap.css('left', 0);
+						if (towards === "left" || towards === "right"){
+              that.firstclone.css('left', -wrap.width());
+              that.lastclone.css('left', wrap.width());
+            }
+					}
+				};
+
+				switch (towards) {
+				case "up":
+					verticalhandle();
+					break;
+				case "down":
+					verticalhandle();
+					break;
+				case "left":
+					transversehandle();
+					break;
+				case "right":
+					transversehandle();
+					break;
+				default:
+					break;
 				}
 			};
 			var handle = {
@@ -110,28 +123,28 @@
 					if (Math.abs(top) <= wrap.height() - scrollWrap.height()) {
 						count[towards]();
 					} else {
-						endhandle[that.config.endtype]();
+						endtoend();
 					}
 				},
 				down: function() {
 					if (Math.abs(top) < scrollWrap.height()) {
 						count[towards]();
 					} else {
-						endhandle[that.config.endtype]();
+						endtoend();
 					}
 				},
 				left: function() {
 					if (Math.abs(left) <= wrap.width() - scrollWrap.width()) {
 						count[towards]();
 					} else {
-						endhandle[that.config.endtype]();
+						endtoend();
 					}
 				},
 				right: function() {
 					if (Math.abs(left) < scrollWrap.width()) {
 						count[towards]();
 					} else {
-						endhandle[that.config.endtype]();
+						endtoend();
 					}
 				}
 			};
@@ -177,6 +190,51 @@
 			var that = this;
 			clearInterval(that.T);
 		},
+		createClone: function() {
+      var that=this,wrap=$(that.wrap),cg=that.config;
+			that.firstclone = wrap.clone();
+			that.lastclone = wrap.clone();
+			that.firstclone.attr('id', 'J_' + new Date().valueOf());
+			that.lastclone.attr('id', 'J_' + new Date().valueOf());
+      wrap.parent().prepend(that.firstclone);
+      wrap.parent().append(that.lastclone);
+			var transverse = function() {
+				that.firstclone.css({
+					left: - wrap.width(),
+					top: 0
+				});
+				that.lastclone.css({
+					left: wrap.width(),
+					top: 0
+				});
+			},
+			vertical = function() {
+				that.firstclone.css({
+					left: 0,
+					top: - wrap.height()
+				});
+				that.lastclone.css({
+					left: 0,
+					top:  wrap.height()
+				});
+			};
+			switch (cg.towards) {
+			case "up":
+				vertical();
+				break;
+			case "down":
+				vertical();
+				break;
+			case "left":
+				transverse();
+				break;
+			case "right":
+				transverse();
+				break;
+			default:
+				break;
+			}
+		},
 		init: function() {
 			var that = this,
 			cg = that.config,
@@ -192,47 +250,7 @@
 				overflow: 'hidden',
 				position: 'relative'
 			});
-			//如果是endtoend的话，提前建立clone节点
-			if (that.config.endtype === "endtoend") {
-				that.clone = wrap.clone();
-				that.clone.attr('id', 'J_' + new Date().valueOf());
-				switch (cg.towards) {
-				case "up":
-					wrap.parent().append(that.clone);
-					that.clone.css({
-						left:
-						0,
-						top: wrap.height()
-					});
-					break;
-				case "down":
-					wrap.parent().prepend(that.clone);
-					that.clone.css({
-						left:
-						0,
-						top: - wrap.height()
-					});
-					break;
-				case "left":
-					wrap.parent().append(that.clone);
-					that.clone.css({
-						top:
-						0,
-						left: wrap.width()
-					});
-					break;
-				case "right":
-					wrap.parent().prepend(that.clone);
-					that.clone.css({
-						top:
-						0,
-						left: - wrap.width()
-					});
-					break;
-				default:
-					break;
-				}
-			}
+      that.createClone();
 			that.run();
 		}
 	};
@@ -240,4 +258,3 @@
 	if (G && G.widget) G.widget.roll = roll;
 
 })(window, GM, jQuery);
-

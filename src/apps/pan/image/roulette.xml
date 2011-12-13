@@ -1,0 +1,77 @@
+<!--@author bughuang-->
+<!--2010.8.24-->
+<!--duration:转动持续时间 (单位:秒)-->
+<!--speed:点击开始后的转动速度,正数 为顺时针, 负 为逆时针,值不能为0 (单位:角度)-->
+<!--usuallySpeed:未点击开始时的转动速度,正数 为顺时针, 负 为逆时针,值为0则不转动 (单位:角度)-->
+<!--delay:转动频率,即隔多少时间后触发一次转动动作 (单位: 毫秒)-->
+<!--x:转盘x坐标位置,不设置时默认flash场景上水平居中 (单位 : 像素)-->
+<!--y:转盘y坐标位置,不设置时默认flash场景上垂直居中 (单位 : 像素)-->
+<!--z:转盘z坐标位置(单位 : 像素)-->
+<!--rotationZ: z 轴旋转（以度为单位）-->
+<!--rotationX: x 轴旋转（以度为单位）-->
+<!--rotationY: y 轴旋转（以度为单位）-->
+<!--fieldOfView: 为三维视野指定一个角度（介于 0 度到 180 度之间）。-->
+<!-- mode : 模式, 默认为轮盘转动, 
+			0: 轮盘转动
+			1: 走马灯效果 ,backImage 为续帧动画-->
+<roulette duration="5" speed="20" usuallySpeed="0.5" delay="40" x="" y="" z="" rotationZ="" rotationX="" rotationY="" fieldOfView="" mode="0">
+	<!--backImage.url: 整个flash的底图的地址,可以为png或SWF-->
+	<backImage url=""/>
+	
+	<!--rouletteImage.url: 轮盘底图的地址,可以为png或SWF,如果是swf,则flash的原点要在轮盘的中心-->
+  <rouletteImage url="rouletteMovie.swf"/>
+
+	<!--startImage.url: 开始按钮的地址,可以为png或SWF,如果是swf,则flash的原点要在轮盘的中心-->
+  <startImage url="startButton.swf">
+		<!-- 这是开始的效果,mouseOver 是光标移上去,scaleX:宽度放大到1.1倍
+			duration : 是效果时间,默认是0.5秒 -->
+		<mouseOver duration="0.3" scaleX="1.1" scaleY="1.1"/>
+		<mouseOut duration="0.3" scaleX="1" scaleY="1"/>
+	</startImage>
+	<!--  
+		onStart  : 页面上定义的js函数名, 当用户点击某一牌时会如果onStart存在,则调用js的onStart函数, 并传入牌的索引值作为参数
+				      若 此函数存在且返回值为-1时,flash不作下一步操作,否则flash进入下一步向服务器发出请求
+		onResult : 页面上定义的js函数名,当前flash请求服务器返得到回后,若onResul存在,则调用此函数,并把服务器的返回结果作参数传入
+				      若 此函数存在且返回值为-1时,flash不作下一步操作,否则flash进入一步,直接会显示结果
+		onReset  : 页面上定义的js函数名,当用户点击再试一次按钮时,如果onReset存在 ,则调用之.
+				      若 此函数存在且返回值为-1时,flash不作一下步操作, 否则flash进入下一步操作,重置画面
+		onStop   : 动画停止播时调用
+	-->
+	<js onStart="" onResult="" onReset="" onStop=""/>
+	<!-- parts: 轮盘内的区域百分比大小和区域图片地址,大小可以是平分,也可以不平分-->
+	<!-- parts.showLine:是否显示区域线,测试用 -->
+	<!-- part.percent: 轮盘内的每个区域所点百分比大小,如果区域平分,则所有percent都设为相同数字-->
+	<!-- part.url: 轮盘内的每个区域的显示的图片或动画,可以是png或swf,
+		当为png图片时,图片物品必需正向上呈扇形
+		当为swf时,原点必需是轮盘的中心,动画正向上呈扇形,flash动画可做成两帧,第一帧为常态,第二帧为中奖后的状态-->
+	<!-- part.tip:光标移到区域上时显示的浮出tip内容的swf地址,且轮盘会停止转动,紧当part.url有值时,才有效 -->
+	<!-- part.id:区域的唯一标识,此标识会跟请求返回结果作配置,找到中奖区域 -->
+  <parts showLine="">
+		<part id="1" percent="40" url="" tip=""/>
+		<part id="2" percent="40" url="" tip=""/>
+		<part id="3" percent="40" url="" tip=""/>
+		<part id="4" percent="40" url="" tip=""/>
+		<part id="5" percent="40" url="" tip="a"/>
+		<part id="6" percent="40" url="" tip=""/>
+		<part id="7" percent="40" url="" tip=""/>
+		<part id="8" percent="40" url="" tip=""/>
+		<part id="9" percent="40" url="" tip=""/>
+	</parts>
+	
+	<!-- request.url : 点击开始后请求后台的URL地址,此值也可以由网页传入且网页传入的值优先于此值 ,网页参数名为request 
+		request.method : 请求后台的URL的方法,默认为GET,此值也可以由网页传入且网页传入的值优先于此值 ,网页参数名为method 
+		toJSType : 给JS的参数是0:原服务器数据,1:还是已处理成json对象
+	-->
+	<request url="" method="" toJStype="0">
+		<!--- 附加的发到送服务器端的参数 -->
+		<datas>
+			<data name="actid" value="13423"/>
+		</datas>
+		<!-- success.name : 返回的JSON结果中用于判断成功与否的属性名 -->
+		<!-- success.value : 判断成功的依据 -->
+		<success name="ret" value="-111111"/>
+		<!-- result.name : 返回用于定位区域的属性名,会与part.id匹配 -->
+		<result name="data.doing.cell.rec.prize"/>
+	</request>
+	
+</roulette>

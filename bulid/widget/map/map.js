@@ -168,7 +168,7 @@
 					//设置坐标值
 					setlatlng: function(m, c) {
 						var center = m.getPosition();
-						$('#J_Coord').html('lat:<span id="J_Pa">' + center.lat() + '</span><br/>lng:<span id="J_Oa">' + center.lng() + '</span>');
+            $('#J_Coord').html('lat:<input style="width:50px;" type="text" id="J_Pa" value="'+center.lat()+'"><br/>lng:<input style="width:50px;" type="text" id="J_Oa" value="'+center.lng()+'">');
 					},
 					//删除标记和圆圈
 					deleteMarkers: function(ary, cle) {
@@ -835,8 +835,8 @@
 					url: '/gestion/map.jsp',
 					data: {
 						siteno: that.siteNo,
-						latitude: $('#J_Oa').text(),
-						longitude: $('#J_Pa').text(),
+						latitude: $('#J_Oa').val(),
+						longitude: $('#J_Pa').val(),
 						act: 'update'
 					},
 					success: function(str) {
