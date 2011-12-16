@@ -19,10 +19,12 @@
 	<backImage url=""/>
 	
 	<!--rouletteImage.url: 轮盘底图的地址,可以为png或SWF,如果是swf,则flash的原点要在轮盘的中心-->
-  <rouletteImage url="rouletteMovie.swf"/>
+  <!-- <rouletteImage url="rouletteMovie.swf"/> -->
+  <rouletteImage url="rouletteMovie.png"/> 
 
 	<!--startImage.url: 开始按钮的地址,可以为png或SWF,如果是swf,则flash的原点要在轮盘的中心-->
-  <startImage url="startButton.swf">
+  <!-- <startImage url="startButton.swf"> -->
+  <startImage url="startButton.png">
 		<!-- 这是开始的效果,mouseOver 是光标移上去,scaleX:宽度放大到1.1倍
 			duration : 是效果时间,默认是0.5秒 -->
 		<mouseOver duration="0.3" scaleX="1.1" scaleY="1.1"/>
@@ -46,7 +48,7 @@
 		当为swf时,原点必需是轮盘的中心,动画正向上呈扇形,flash动画可做成两帧,第一帧为常态,第二帧为中奖后的状态-->
 	<!-- part.tip:光标移到区域上时显示的浮出tip内容的swf地址,且轮盘会停止转动,紧当part.url有值时,才有效 -->
 	<!-- part.id:区域的唯一标识,此标识会跟请求返回结果作配置,找到中奖区域 -->
-  <parts showLine="">
+  <parts showLine="0">
 		<part id="1" percent="40" url="" tip=""/>
 		<part id="2" percent="40" url="" tip=""/>
 		<part id="3" percent="40" url="" tip=""/>

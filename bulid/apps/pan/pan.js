@@ -9,13 +9,13 @@
 		var prizes = {
 			0: 1,
 			0: 2,
-			0: 3,
+			0: 8,
 			0: 4,
-			60: 5,
-			30: 6,
-			20: 7,
-			10: 8,
-			5: 9
+			0: 6,
+			60: 7,
+			20: 5,
+			10: 9,
+			5: 3
 		};
 
 		$.overlay();
@@ -117,7 +117,8 @@
 					success: function(data) {
 						var ret = eval("(" + data + ")");
 						var html = updateroll(ret.ret, true);
-						if (roll) roll.update(html);
+						updateroll(ret.ret);
+						//if (roll) roll.update(html);
 					}
 				});
 				return - 1;
@@ -140,12 +141,14 @@
 					success: function(data) {
 						var ret = eval("(" + data + ")");
 						updateroll(ret.ret);
-						roll = new GM.widget.roll("#J_Roll", {
+						/*
+            roll = new GM.widget.roll("#J_Roll", {
 							height: 240,
 							width: 460,
 							towards: 'down'
 						});
 						roll.init();
+            */
 					},
 					error: function() {
 						$('#J_Roll').html("<ul><li>网络超时，请尝试刷新重新获取中奖名单列表</li></ul>");
