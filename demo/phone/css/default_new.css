@@ -1,0 +1,95 @@
+/* 전역 정의 */
+html {margin: 0px; vertical-align: baseline; outline: 0; -webkit-text-size-adjust: none;}
+body,input,select,table,tr,td{
+	color:#000000;
+	font-family:'MS Gothic';
+	margin:0px;
+	padding:0px;
+}
+
+img {border:0;}
+
+a {
+	text-decoration:none;
+	font-family:'MS Gothic';
+	color:#2200C1;
+}
+
+.el_edit a {text-decoration:underline;}
+
+div {margin:20px 15px 0px 15px;}
+.el_edit div {margin:0;}
+
+/* 페이지 전역 */
+h2 {padding:0px;margin:0px;text-align:center;}
+
+.page {margin:5px 10px;margin-bottom:15px;min-height:311px;}
+.element {margin-top:15px;}
+
+.element_first, .element_table {margin-top:0px;}
+
+.el_spacing {padding-top:0px;}
+
+/* 표형 */
+table.text {border:1px solid #c6c6c6; border-top:0px; table-layout:fixed;}
+table.text td {background-color:#f7f7f7; border-top:solid 1px #c6c6c6; padding-top:6px; padding-bottom:6px;}
+table.text .td_title {padding-left:15px; word-break:keep-all; word-wrap:break-word}
+table.text .td_content {padding-left:9px;word-break:keep-all; word-wrap:break-word}
+
+table.prevTable td {border-top:0px;}
+table.prevTable td.td_table {border-top:solid 1px #c6c6c6;}
+
+.el_sub_img1 {text-align:center;padding-top:0;}
+.el_sub_img2 {text-align:center;}
+.el_sub_img3 {text-align:center;}
+.el_sub_img4 {text-align:center;}
+
+.sns_icon {border:0px; margin-right:5px;}
+
+.el_edit p {margin:0px; padding:0px;-webkit-text-size-adjust: none;}
+.img_width_100 {width:100%;}
+
+.slide_left {background:url('/images/mobile/landing/slide_left.png'); width:12px; height:23px;}
+.slide_rigth {background:url('/images/mobile/landing/slide_right.png'); width:12px; height:23px;}
+.paging_on {background:url('/images/mobile/landing/slide_page_on.png'); width:14px; height:14px; float:left;}
+.paging_off {background:url('/images/mobile/landing/slide_page_off.png'); width:14px; height:14px; float:left;}
+
+/****** footer ********/
+#footer {width:100%; height:40px; margin:0; display:none;}
+#footer table {width:100%; border-top:3px solid #999999;}
+#footer .copyright_logo {width:100%; background:#525252 url('/img/landing/footer_gabia.png') no-repeat center center; margin:0; height:37px;}
+
+/****** slide_coverflow ********/
+.slide_coverflow {
+	width:100%;
+	height:185px;
+	-webkit-perspective: 250;
+	-webkit-user-select: none;
+}
+
+.slide_coverflow .wrap {
+	width:240px;
+	height:0;
+	margin:0 auto;
+	-webkit-transform-style: preserve-3d;
+	-webkit-transition:-webkit-transform 0.4s ease-out;
+}
+
+.slide_coverflow .item {
+	margin:auto;
+	width:240px;
+	height:180px;
+	position:absolute;
+	-webkit-transition:-webkit-transform 0.5s ease-out;
+	-webkit-transform-origin:center 45%
+}
+
+.slide_coverflow .item img {
+	width:240px;
+	height:180px;
+	border:1px solid #666;
+}
+
+.slide_coverflow_title {margin-top:5px;}
+.slide_coverflow_title .title {text-align:center;margin:0 auto;font-size:16px;}
+.slide_coverflow_title .title a {text-decoration:none; color:#000000;}

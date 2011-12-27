@@ -1,0 +1,44 @@
+body {background-color:#FFF; background-image:none;}
+
+a {color:#4079CC;}
+a:visited {color:#4079CC;}
+a:link {color:#4079CC;}
+a:hover {color:#4079CC;}
+
+.page, .page_top, .acc_top, .page_bottom, .acc_bottom {margin:0px;}
+
+.page {padding-bottom:20px;background-color:#FFF;}
+
+.spacing {height:20px;}
+
+.element_first {padding-top:20px;}
+
+.el_sub_img1 {margin:0px;padding-top:0px;}
+.img_margin {margin:0px 15px;}
+
+.el_sub_tel_title, .el_sub_email_title, .el_sub_url_title, .el_sub_text_table {margin-left:0; margin-right:0;}
+
+table.text {border:1px solid #E8E8E8; border-width:0px 0px 1px 0px;}
+table.text td {background-color:#FFF; border-color:#E8E8E8;}
+table.text .td_title {width:30%; color:#333; border-right:solid 1px #E8E8E8;}
+table.text .td_content {color:#939393;}
+
+.slide_left {background-image:url('/images/mobile/landing/left.png'); width:18px; height:85px;}
+.slide_rigth {background-image:url('/images/mobile/landing/right.png'); width:18px; height:85px;}
+.paging_on {background-image:url('/images/mobile/landing/paging_on.png'); width:9px; height:9px;}
+.paging_off {background-image:url('/images/mobile/landing/paging_off.png'); width:9px; height:9px;}
+
+.sns_icon {border:0px; margin-right:35px;}
+
+.el_sns {background-color:#EFEFEF; margin-left:0; margin-right:0; padding:5px 15px;}
+
+.el_sub_url, .el_sub_url_text, .el_sub_email, .el_sub_tel {background:#FFF url('/img/landing/bullet.png') no-repeat center left; padding-left:17px;}
+
+.sns_icon_single {border:0px; margin-right:10px;}
+
+.img_wrap {background-color:#F2F2F2; border:1px solid #E6E6E6;}
+.el_slide {background-color:#F2F2F2;border:1px solid #E6E6E6;}
+
+#footer {height:37px;}
+#footer table {border-top:0;}
+#footer .copyright_logo {background-color:#454545;}

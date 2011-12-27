@@ -24,16 +24,18 @@
 
 		var laywrap = function(content, login) {
 			var islogin = '';
+      /*
 			if (login) {
 				var L = "'http://x.idongmi.com/user/login.jsp'";
 				var Z = "'http://x.idongmi.com/user/reg.jsp'";
-				islogin = '<div class="poput_but"><input type="button" onclick="window.location.href=' + L + '" value="登 陆,领取奖品" class="lottery lottery_box3"><input type="button" onclick="window.location.href=' + Z + '" value="注册" class="lottery lottery_box1">' + '</div>';
+				islogin = '<div class="poput_but"><input type="button" onclick="window.location.href=' + L + '" value="登陆" class="lottery lottery_box3"><input type="button" onclick="window.location.href=' + Z + '" value="注册" class="lottery lottery_box1">' + '</div>';
 			}
+      */
 			return '<div class="popup">' + '<a href="#" class="J_close close lottery"></a>' + '<div class="popup_main ks_clear">' + content + '</div>' + islogin + '</div>';
 		};
 
-		var lotterySuccess = function(m,msg) {
-      var html = '<div class="popup_l popLottery1" style="width:125px;"><img src="http://s1.ifiter.com/lottery/static/images/popup_img.jpg"></div>' + '<div class="popup_r" style="width:200px;">' + '<div class="popup_title">中奖了！</div>' + '<div class="popup_title1">您获得了<span>' + m + '</span>大米！</div>' + '<div class="share_title"> “分享到微博”可再得<span class="red">20大米</span></div>' + '<div class="share">' + '<a href="http://service.weibo.com/share/share.php?title='+msg+'&url=http%3A%2F%2Fx.idongmi.com%2Fgame%2Flotto%2Findex.jsp&appkey=3175811782&ralateUid=2263058335&searchPic=false" target="_blank"><span class="share_ico1 lottery"></span><span>新浪微博</span></a><a href="http://t.sohu.com/third/post.jsp?&url=http%3A%2F%2Fx.idongmi.com%2Fgame%2Flotto%2Findex.jsp&title='+msg+'&content=utf-8&pic=" target="_blank"><span class="share_ico2 lottery"></span><span>搜狐微博</span></a>' + '<div class="clear"></div>' + '</div>' + '<div class="share">' + '<a href="http://share.v.t.qq.com/index.php?c=share&a=index&title='+msg+'&url=http%3A%2F%2Fx.idongmi.com%2Fgame%2Flotto%2Findex.jsp&site=x.idongmi.com&pic=" target="_blank"><span class="share_ico3 lottery"></span><span>腾讯微博</span></a><a href="http://t.163.com/article/user/checkLogin.do?link=http://news.163.com/&source='+msg+'&info=http%3A%2F%2Fx.idongmi.com%2Fgame%2Flotto%2Findex.jsp&'+new Date().valueOf()+'" target="_blank"><span class="share_ico4 lottery"></span><span>网易微博</span></a>' + '<div class="clear"></div>' + '</div>' + '</div>' + '<div class="clear"></div>';
+		var lotterySuccess = function(m,msg,share) {
+      var html = '<div class="popup_l popLottery1" style="width:125px;"><img src="http://s1.ifiter.com/lottery/static/images/popup_img.jpg"></div>' + '<div class="popup_r" style="width:200px;">' + '<div class="popup_title">中奖了！</div>' + '<div class="popup_title1">您获得了<span>' + m + '</span>大米！</div>' + '<div class="share_title"> '+share+'</div>' + '<div class="share">' + '<a href="http://service.weibo.com/share/share.php?title='+msg+'&url=http%3A%2F%2Fx.idongmi.com%2Fgame%2Flotto%2Findex.jsp&appkey=3175811782&ralateUid=2263058335&searchPic=false" target="_blank"><span class="share_ico1 lottery"></span><span>新浪微博</span></a><a href="http://t.sohu.com/third/post.jsp?&url=http%3A%2F%2Fx.idongmi.com%2Fgame%2Flotto%2Findex.jsp&title='+msg+'&content=utf-8&pic=" target="_blank"><span class="share_ico2 lottery"></span><span>搜狐微博</span></a>' + '<div class="clear"></div>' + '</div>' + '<div class="share">' + '<a href="http://share.v.t.qq.com/index.php?c=share&a=index&title='+msg+'&url=http%3A%2F%2Fx.idongmi.com%2Fgame%2Flotto%2Findex.jsp&site=x.idongmi.com&pic=" target="_blank"><span class="share_ico3 lottery"></span><span>腾讯微博</span></a><a href="http://t.163.com/article/user/checkLogin.do?link=http://news.163.com/&source='+msg+'&info=http%3A%2F%2Fx.idongmi.com%2Fgame%2Flotto%2Findex.jsp&'+new Date().valueOf()+'" target="_blank"><span class="share_ico4 lottery"></span><span>网易微博</span></a>' + '<div class="clear"></div>' + '</div>' + '</div>' + '<div class="clear"></div>';
 			return html;
 		};
 
@@ -82,20 +84,34 @@
 							JSO.turnTo(prizes[ret.p]);
 							setTimeout(function() {
 								var isLogin = ret.isLogin;
-								if (isLogin === 0 && ret.p != - 1) {
-									//登录了
-                  html = laywrap(lotterySuccess(ret.p,encodeURIComponent('我在参加“动米网--魔法大转盘”活动，不幸抽中了'+ret.p+'大米！')), false);
-									GM.tools.overlay.fire(html);
-								} else if (isLogin === 1 && ret.p !== - 1) {
-									//没登陆     
-                  html = laywrap(lotterySuccess(ret.p,encodeURIComponent('我在参加“动米网--魔法大转盘”活动，不幸抽中了'+ret.p+'大米！')), true);
-									GM.tools.overlay.fire(html);
-								} else if (isLogin === 0 && ret.p == - 1) {
-									//登录了，没大米了
-									html = laywrap(lotteryError);
-									GM.tools.overlay.fire(html);
-								}
-								updateuser();
+                                if (isLogin === 0 && ret.p !== - 1) {
+                                    //登录了
+                                    if(ret.p==5||ret.p==10){
+                                        html = laywrap(lotterySuccess(ret.p,encodeURIComponent('我在参加“动米网--魔法大转盘”活动，不幸只抽中了'+ret.p+'大米！'),'分享到微博'), true);
+ GM.tools.overlay.fire(html);
+                                    }else if(ret.p==20||ret.p==60){
+                                        html = laywrap(lotterySuccess(ret.p,encodeURIComponent('我在参加“动米网--魔法大转盘”活动，幸运的抽中了'+ret.p+'大米！'),'分享到微博'), true);
+ GM.tools.overlay.fire(html);
+                                    }
+                  
+                                } else if (isLogin === 1 && ret.p !== - 1) {
+                                    //没登陆     
+                                    if(ret.p==5||ret.p==10){
+                                        html = laywrap(lotterySuccess(ret.p,encodeURIComponent('我在参加“动米网--魔法大转盘”活动，不幸只抽中了'+ret.p+'大米！'),'分享到微博'), true);
+                                    GM.tools.overlay.fire(html);
+                                    }else if(ret.p==20||ret.p==60){
+                                        html = laywrap(lotterySuccess(ret.p,encodeURIComponent('我在参加“动米网--魔法大转盘”活动，幸运的抽中了'+ret.p+'大米！'),'分享到微博'), true);
+                                    GM.tools.overlay.fire(html);
+                                    }
+                  
+                                } else if (isLogin === 0 && ret.p == - 1) {
+                                    //登录了，没大米了
+                                    html = laywrap(lotteryError);
+                                    GM.tools.overlay.fire(html);
+                                }
+                                updateuser();
+
+
 							},
 							1800);
 						},
