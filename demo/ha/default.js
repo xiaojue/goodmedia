@@ -74,15 +74,67 @@
 					break;
 				}
 			} else if (alt && nu) {
-        if(nu=='0'){
-          $('#jpId').jPlayer('stop');
-        }else if(musiclist[nu]){
-          $('#jpId').jPlayer('setMedia', {
-					  mp3: musiclist[nu]
-				  }).jPlayer("play");
-        }
+				if (nu == '0') {
+					$('#jpId').jPlayer('stop');
+				} else if (musiclist[nu]) {
+					$('#jpId').jPlayer('setMedia', {
+						mp3: musiclist[nu]
+					}).jPlayer("play");
+				}
 			}
 		});
+		//分页
+		var paging = function(id, prev, next, range, len) {
+			this.startIndex = 0;
+			this.range = range;
+			this.wrap = $(id);
+			this.prev = $(prev);
+			this.next = $(next);
+			this.max = len;
+		};
+		paging.prototype = {
+			constructor: paging,
+			event: function() {
+				var that = this;
+				that.prev.live('click', function(e) {
+					e.preventDefault();
+					if (that.startIndex === 0) return;
+					that.startIndex -= that.range;
+					that.createIndexRange(that.startIndex);
+				});
+				that.next.live('click', function(e) {
+					e.preventDefault();
+					that.startIndex += that.range;
+					that.createIndexRange(that.startIndex);
+				});
+        $('.J_Put').live('click',function(){
+            var val=$(this).val();
+            $(that).trigger('mypagelist:click',[val]);
+        });
+			},
+			createIndexRange: function(start) {
+				var that = this,
+				end = start + that.range,
+				strs = '';
+				for (var i = start; i <= end; i++) {
+          var val=i.toString(),len=that.max-val.length;
+          for(var j=0;j<len;j++){
+             val='0'+val; 
+          }
+					strs += '<input type="button" value="' + val + '" class="J_Put">';
+				}
+				that.wrap.html(strs);
+			},
+			init: function() {
+				this.event();
+				this.createIndexRange(this.startIndex);
+			}
+		};
+		var mypagelist = new paging('#J_pagelist', '#J_Prev', '#J_Next', 50, 4);
+		mypagelist.init();
+    $(mypagelist).bind('mypagelist:click',function(object,val){
+        $('#J_PutIn').val(val);
+    });
 	});
 })();
 

@@ -237,7 +237,11 @@
 				{
 					checkusername: _fn.checkname,
 					checkemail: _fn.checkeml,
-					checkcode: _fn.checkCode
+					checkcode: _fn.checkCode,
+          simpleness:function(val){
+            if(val=='123456') return false;
+            return true;
+          }
 				});
 				RegV.init();
 				//变换校验码

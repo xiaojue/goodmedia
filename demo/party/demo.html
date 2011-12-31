@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>demo</title>
+    <script src="jquery/jquery-1.6.2.js"></script>
+    <script src="js/default.js"></script>
+  </head>
+  <body>
+    <div id="J_LotteryWrap"></div>
+    <input type="button" id="J_Start" value="抽奖"/>
+    <input type="button" id="J_End" value="停"/>
+    <script>
+      $(function(){
+        var onelottery = new lottery();
+            onelottery.init();
+            $(onelottery).bind('switch',function(o,names,pics){
+              $('#J_LotteryWrap').text(names[0]);
+            });
+      });
+    </script>
+  </body>  
+</html>
+
