@@ -23,13 +23,13 @@
 
 		lottery.CB = function(data) {
 			lottery.prototype.data = data;
-      var list=data.data;
-      for(var i = 0;i<list.length;i++){
-        var img=new Image();
-        img.src='static/pic/'+list[i]['name']+'.JPG';
-        img.style.display='none';
-        $('body').append(img);
-      }
+			var list = data.data;
+			for (var i = 0; i < list.length; i++) {
+				var img = new Image();
+				img.src = 'static/pic/' + list[i]['name'] + '.JPG';
+				img.style.display = 'none';
+				$('body').append(img);
+			}
 		};
 
 		lottery.prototype = {
@@ -52,12 +52,13 @@
 						alert(IndexData);
 						break;
 					case 'object':
-						var name = [],pic=[];
+						var name = [],
+						pic = [];
 						for (var i = 0; i < IndexData.length; i++) {
-              name.push(IndexData[i]['name']);
-              pic.push('static/pic/'+IndexData[i]['name']+'.JPG');
-            }
-            $(that).trigger('switch',[name,pic]);
+							name.push(IndexData[i]['name']);
+							pic.push('static/pic/' + IndexData[i]['name'] + '.JPG');
+						}
+						$(that).trigger('switch', [name, pic]);
 						break;
 					default:
 						break;
@@ -160,7 +161,7 @@
 								that.switchover(retary);
 								$(that.cg.startBtn).show();
 								$(that.cg.endBtn).hide();
-                $(that).trigger('end',[retary]);
+								$(that).trigger('end', [retary]);
 							});
 						}
 					} else {

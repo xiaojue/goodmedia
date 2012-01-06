@@ -196,7 +196,7 @@
 					},
 					//给周边场馆增加坐标和事件
 					addrimmarkers: function(ary, map, info, markAry) {
-						var infotemp = '<div class="info-window" style="height:90px;">' + '<p><a href="/s/{siteno}" target="_blank" class="green">{name}</a></p>' + '<p class="coaches">入驻教练：{coaches}</p>' + '<p>热线电话：{tel}</p>' + '<p class="map_more"><a href="/s/{siteno}" target="_blank">会所详细介绍&gt;&gt;</a></p>' + '</div>';
+						var infotemp = '<div class="info-window" style="height:90px;">' + '<p><a href="/s/{siteno}" target="_blank" class="green">{name}</a></p>' + '<p class="coaches">入驻教练：{coaches}</p>' + '<p>会所电话：{tel}</p>' + '<p class="map_more"><a href="/s/{siteno}" target="_blank">会所详细介绍&gt;&gt;</a></p>' + '</div>';
             var key=(G.widget.map.key==='undefined')? "undefined" : G.widget.map.key; 
             var iconmap={
               'undefined':'http://s1.ifiter.com/static/images/map/124.png',
@@ -304,7 +304,7 @@
 						var returnstr = '<ul class="maplist '+classmap[key]+'">';
 						for (var i = 0; i < data.length; i++) {
 							var obj = data[i],
-							temp = '<li data-index="' + i + '">' + '<p class="map_title"><a href="javascript:void(0)">{name}</a></p>' + '<p><span>会馆特色：</span>{feature}</p>' + '<p><span>特色项目：</span>{items}</p>' + '<p><span>热线电话：</span>{tel}</p>' + '<p><span>所在城市：</span>{cityZone}</p>' + '<p class="map_pic"><a href="/s/{siteno}" target="_blank"><img src="{logo}" width="120" height="120" title="{name}" alt="{name}" onerror="' + errorhandle + '"></a></p>' + '<p class="map_more"><a href="/s/{siteno}" target="_blank">会所详细介绍&gt;&gt;</a></p>' + '</li>';
+							temp = '<li data-index="' + i + '">' + '<p class="map_title"><a href="javascript:void(0)">{name}</a></p>' + '<p><span>会馆特色：</span>{feature}</p>' + '<p><span>特色项目：</span>{items}</p>' + '<p><span>会所电话：</span>{tel}</p>' + '<p><span>所在城市：</span>{cityZone}</p>' + '<p class="map_pic"><a href="/s/{siteno}" target="_blank"><img src="{logo}" width="120" height="120" title="{name}" alt="{name}" onerror="' + errorhandle + '"></a></p>' + '<p class="map_more"><a href="/s/{siteno}" target="_blank">会所详细介绍&gt;&gt;</a></p>' + '</li>';
 							for (var j in data[i]) {
 								if (data[i][j] === "") data[i][j] = '暂无';
 							}
