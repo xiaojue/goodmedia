@@ -62,8 +62,9 @@
 	color:#333;
 }
 .MIB_txtbl{
-	padding:5px 75px 5px 35px;
+	padding:10px 75px 10px 35px;
 	border-bottom:1px dashed #ccc;
+  height:20px;
 }
 .MIB_txtbl span{
 	float:right;
@@ -126,4 +127,17 @@
 	cursor:pointer;
 }
 .Noname:hover{
+}
+.Countdown{
+  padding-left:40px;
+  padding-bottom:8px;
+}
+.Countdown span{
+  color:#999;
+}
+.MIB_txtbl label{
+  margin-right:40px;
+}
+.MIB_txtbl img{
+  vertical-align:middle;
 }

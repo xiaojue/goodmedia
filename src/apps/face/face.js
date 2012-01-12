@@ -156,12 +156,14 @@
 					face.show();
 					$(cg.ulid).html(lis);
           face.fixlocation();
+          $(that).trigger('face:click');
 				});
 				
 				$('body').live('click',function(e){
             var l=$(e.target).parents(face.config.id).length;
             if( l=== 0){
 						face.hide();
+            $(that).trigger('face:click');
 					}
 				});
 				
@@ -169,6 +171,7 @@
 					var mean=$(this).attr('data-meaning'),v=$(cg.main).val();
 					face.hide();
 					$(cg.main).val(v+'['+mean+']').focus();
+          $(that).trigger('face:click');
 				});
 		},
 		init:function(){

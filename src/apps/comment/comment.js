@@ -23,6 +23,7 @@
 			ulid: sole('#J_UL'),
 			pagid: sole('#J_PAG'),
 			syncwb: sole('#J_Syncwb'),
+			mib: sole('#J_MIB'),
 			textid: sole('#J_Text'),
 			subbtn: sole('#J_Subbtn'),
 			delbtn: sole('.J_Delbtn'),
@@ -60,11 +61,12 @@
 		 */
 		drawComment: function() {
 			var that = this,
-			cg = that.config;
-			var CommentTemp = '<div class="pcomment_sina pcmment_color">' + '<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>' + '<div class="pc_content">' + '<div class="pcomment_ico"><img src="http://s1.ifiter.com/static/images/comment/ico.gif"></div>' + '<div class="new_position">' + '<a href="#face" id="' + cg.faceid.slice(1) + '"><img src="http://s1.ifiter.com/static/images/comment/ico1.gif"></a>' + '<textarea class="lf" id="' + cg.textid.slice(1) + '"></textarea>' + '<a class="btn_normal" id="' + cg.subbtn.slice(1) + '" href="javascript:void(0);">评论</a>' + '<div class="clear"></div>' + '</div>' + '<div class="MIB_txtbl">' + '<span id="' + cg.countdownid.slice(1) + '"></span>' +
-			//'<input type="checkbox" id="'+cg.syncwb.slice(1)+'">'+
-			//'<label for="'+cg.syncwb.slice(1)+'">同时转发到我的微博</label>'+
-			'<div class="clear"></div>' + '</div>' + '<ul class="PL_list" id="' + cg.ulid.slice(1) + '">' + '</ul>' + '</div>' + '<b class="b5"></b><b class="b6"></b><b class="b7"></b><b class="b8"></b>' + '</div>';
+			cg = that.config,
+			syncwb = '<input type="checkbox" checked="checked" id="' + cg.syncwb.slice(1) + '">' + '<label for="' + cg.syncwb.slice(1) + '"> 转发到微博</label>';
+			if (!cg.islogin) {
+				syncwb = '';
+			}
+			var CommentTemp = '<div class="pcomment_sina pcmment_color">' + '<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>' + '<div class="pc_content">' + '<div class="pcomment_ico"><img src="http://s1.ifiter.com/static/images/comment/ico.gif"></div><div class="Countdown"><span id="' + cg.countdownid.slice(1) + '"></div></span><div class="new_position">' + '<a href="#face" id="' + cg.faceid.slice(1) + '"><img src="http://s1.ifiter.com/static/images/comment/ico1.gif"></a>' + '<textarea class="lf" id="' + cg.textid.slice(1) + '"></textarea>' + '<a class="btn_normal" id="' + cg.subbtn.slice(1) + '" href="javascript:void(0);">评论</a>' + '<div class="clear"></div>' + '</div>' + '<div class="MIB_txtbl" id="' + cg.mib.slice(1) + '">' + syncwb + '</div>' + '<ul class="PL_list" id="' + cg.ulid.slice(1) + '">' + '</ul>' + '</div>' + '<b class="b5"></b><b class="b6"></b><b class="b7"></b><b class="b8"></b>' + '</div>';
 
 			return CommentTemp;
 		},
@@ -88,10 +90,14 @@
 		createComment: function(data) {
 			var that = this,
 			cg = that.config,
-			litemp = '<li data-rid="{rid}">' + '<div class="picborder_l"><a href="http://x.idongmi.com/u/{uid}"><img src="{userpic}"></a></div>' + '<div class="txtinfo"><a href="http://x.idongmi.com/u/{uid}" data-uid="{uid}">{name}</a>:<span class="' + cg.txt.slice(1) + '"> {content}</span> ({date})</div>' + '<div class="MIB_operate">{bar}</div>' + '<div class="clear"></div>' + '</li>',
+			litemp = '<li data-rid="{rid}">' + '<div class="picborder_l"><a target="blank" href="http://x.idongmi.com/u/{uid}"><img src="{userpic}"></a></div>' + '<div class="txtinfo"><a href="http://x.idongmi.com/u/{uid}" target="blank" data-uid="{uid}">{name}</a>:<span class="' + cg.txt.slice(1) + '"> {content}</span> ({date})</div>' + '<div class="MIB_operate">{bar}</div>' + '<div class="clear"></div>' + '</li>',
 			ulstr = "";
 			if (data.length === 0) return '<li style="text-align:center;">暂时还没有人评论过,快来抢沙发吧</li>';
 			for (var i = 0; i < data.length; i++) {
+        if(data[i]['name']===""){
+          data[i]['name']='游客';
+          litemp = '<li data-rid="{rid}">' + '<div class="picborder_l"><a href="javascript:void(0);"><img src="{userpic}"></a></div>' + '<div class="txtinfo"><a href="javascript:void(0);" data-uid="{uid}">{name}</a>:<span class="' + cg.txt.slice(1) + '"> {content}</span> ({date})</div>' + '<div class="MIB_operate">{bar}</div>' + '<div class="clear"></div>' + '</li>';
+        }
 				data[i]['bar'] = that.createBar(data[i]['uid']);
 				data[i]['content'] = that.drawingName(data[i]['content']);
 				ulstr += cg.myface.drawface($.substitute(litemp, data[i]));
@@ -152,7 +158,7 @@
 
 			that.getdata(n, function(result) {
 				var CountTxt = that.createCount(result['cunt']),
-				PagTxt = that.createPag(result['cunt'], result['max'], cg.region),
+        PagTxt = that.createPag(result['cunt'], result['max'], cg.region),
 				ulstr = that.createComment(result['actList']);
 
 				cg.count = result['cunt'];
@@ -211,6 +217,7 @@
 			litemp = cg.myface.drawface($.substitute(litemp, sertobj));
 			$(cg.ulid).prepend(litemp);
 			that.getDmName('.J_New' + N + ' ' + cg.namecls);
+			$(that).trigger('comment:insert');
 		},
 		/**
 		 * @function
@@ -226,16 +233,19 @@
 				return (num.toString().length > 1) ? num: '0' + num.toString();
 			}
 			var t = correct(date.getMonth() + 1) + '月' + correct(date.getDate()) + '日 ' + correct(date.getHours()) + ':' + correct(date.getMinutes());
-
 			that.postdata(txt, function(rid) {
-				that.insertcommit({
-					userpic: cg.pic,
-					content: txt,
-					uid: cg.Nowuid,
-					name: cg.name,
-					date: t,
-					rid: rid
-				});
+				if (cg.islogin) {
+					that.insertcommit({
+						userpic: cg.pic,
+						content: txt,
+						uid: cg.Nowuid,
+						name: cg.name,
+						date: t,
+						rid: rid
+					});
+				}else{
+          alert('评论成功,游客身份需要被审核才能显示');
+        }
 				//清空评论框
 				$(cg.textid).val('');
 				that.updatecount(1);
@@ -281,35 +291,44 @@
 				}
 			});
 		},
-		postdata: function(txt, callback) {
+		postdatalist: function(txt) {
 			var that = this,
 			cg = that.config,
 			syncwb = function() {
 				if ($(cg.syncwb).attr('checked')) return 1;
 				else return 0;
 			};
+			return {
+				cid: cg.cid,
+				oid: cg.oid,
+				columnid: cg.columnid,
+				showuid: cg.showuid,
+				puid: cg.pids.join(),
+				type: cg.type,
+				act: 'add',
+				content: txt,
+				pid: cg.pid,
+				syncwb: syncwb(),
+				reload: 1
+			};
+		},
+		postsuccess: function(data, callback, that) {
+			var cg = that.config;
+			cg.deadlock = true;
+			var result = $.trim(data);
+			if (callback && result > 0) callback(result);
+			else if (result == - 1) alert('您评论的有点快，去健身休息一下吧！');
+			else alert('提交失败,请重新尝试');
+		},
+		postdata: function(txt, callback) {
+			var that = this,
+			cg = that.config;
 			$.ajax({
 				url: '/api/reply/replyAjax.jsp',
 				type: 'GET',
-				data: {
-					cid: cg.cid,
-					oid: cg.oid,
-					columnid: cg.columnid,
-					showuid: cg.showuid,
-					puid: cg.pids.join(),
-					type: cg.type,
-					act: 'add',
-					content: txt,
-					pid: cg.pid,
-					syncwb: syncwb(),
-					reload: 1
-				},
+				data: that.postdatalist(txt),
 				success: function(data) {
-					cg.deadlock = true;
-					var result = $.trim(data);
-					if (callback && result > 0) callback(result);
-					else if (result == - 1) alert('您评论的有点快，去健身休息一下吧！');
-					else alert('提交失败,请重新尝试');
+					that.postsuccess(data, callback, that);
 				},
 				error: function() {
 					cg.deadlock = true;
@@ -406,13 +425,23 @@
 					});
 				}
 			});
-
 		},
-		/**
-		 * 
-		 */
+		checkcommit: function(host) {
+			var that = host,
+			cg = host.config;
+			var val = $.trim($(cg.textid).val());
+			if (val === "") {
+				alert('评论不能为空');
+				return;
+			}
+			if (cg.deadlock) {
+				cg.deadlock = false;
+				that.commit();
+			}
+		},
 		Eventaction: function() {
 			var that = this,
+			host = this,
 			cg = that.config,
 			T;
 			//提交评论
@@ -424,15 +453,7 @@
 					holdTarget: cg.subbtn,
 					errorCls: 'red',
 					holdAction: function() {
-						var val = $.trim($(cg.textid).val());
-						if (val === "") {
-							alert('评论不能为空');
-							return;
-						}
-						if (cg.deadlock) {
-							cg.deadlock = false;
-							that.commit();
-						}
+						that.checkcommit(host);
 					}
 				}).init();
 
@@ -462,6 +483,7 @@
 					n = $(that).val().match(/\n/g),
 					l = n ? (n.length + 1) * 20: 24;
 					$(that).height(l);
+					$(host).trigger('comment:keyup');
 				},
 				50);
 			});
@@ -478,6 +500,7 @@
 						that.deleteReply($(this), function(node) {
 							that.updatecount( - 1);
 							that.fixnone(node);
+							$(that).trigger('comment:delete');
 						});
 					}
 				}
@@ -540,6 +563,11 @@
 					that.Eventaction();
 					//渲染名字
 					that.getDmName(cg.namecls);
+					//自定义事件
+					setTimeout(function() {
+						$(that).trigger('comment:end');
+					},
+					100);
 				});
 
 			});
@@ -550,7 +578,7 @@
 		G.apps.comment = {
 			exports: {
 				comment_init: comment
-      }
+			}
 		};
 	}
 
