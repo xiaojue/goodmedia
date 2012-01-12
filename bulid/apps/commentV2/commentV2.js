@@ -33,7 +33,7 @@
 							},
 							getNewCode: function() {
 								var T = new Date().valueOf();
-								return 'http://dev.idongmi.com/api/reply/replyAuth.jsp?t=' + T;
+								return 'http://x.idongmi.com/api/reply/replyAuth.jsp?t=' + T;
 							},
 							checkcommit: function(host) {
 								var that = host,
@@ -67,6 +67,7 @@
 								var result = $.trim(data);
 								if (callback && result > 0) callback(result);
 								else if (result == - 1) alert('您评论的有点快，去健身休息一下吧！');
+                else if (result == -98) alert('您的发言需要审核过后才能显示');
                 else if(result == -99) alert('校验码不正确');
 								else alert('提交失败,请重新尝试');
                 that.setNewCode();
@@ -90,10 +91,11 @@
 									puid: cg.pids.join(),
 									type: cg.type,
 									act: 'add',
-									content: txt,
+                  content: txt,
 									pid: cg.pid,
 									syncwb: syncwb(),
-									reload: 1
+									reload: 1,
+                  shareurl:cg.shareurl
 								};
 							}
 						});

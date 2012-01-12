@@ -38,11 +38,13 @@
 			pco: sole('#J_Pco'),
 			pagwrap: sole('#J_Pagwrap'),
 			faceid: sole('#J_Face'),
+      nocomment:sole('#J_NoComment'),
 			deadlock: true,
 			current: 1,
 			count: null,
 			region: 3,
 			pids: [],
+      shareurl:'',
 			showuid: '',
 			columnid: '',
 			cid: '',
@@ -64,7 +66,7 @@
 			cg = that.config,
 			syncwb = '<input type="checkbox" checked="checked" id="' + cg.syncwb.slice(1) + '">' + '<label for="' + cg.syncwb.slice(1) + '"> 转发到微博</label>';
 			if (!cg.islogin) {
-				syncwb = '';
+			  syncwb = '<input type="checkbox" disabled="disabled" id="' + cg.syncwb.slice(1) + '">' + '<label for="' + cg.syncwb.slice(1) + '"> 转发到微博</label>';
 			}
 			var CommentTemp = '<div class="pcomment_sina pcmment_color">' + '<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>' + '<div class="pc_content">' + '<div class="pcomment_ico"><img src="http://s1.ifiter.com/static/images/comment/ico.gif"></div><div class="Countdown"><span id="' + cg.countdownid.slice(1) + '"></div></span><div class="new_position">' + '<a href="#face" id="' + cg.faceid.slice(1) + '"><img src="http://s1.ifiter.com/static/images/comment/ico1.gif"></a>' + '<textarea class="lf" id="' + cg.textid.slice(1) + '"></textarea>' + '<a class="btn_normal" id="' + cg.subbtn.slice(1) + '" href="javascript:void(0);">评论</a>' + '<div class="clear"></div>' + '</div>' + '<div class="MIB_txtbl" id="' + cg.mib.slice(1) + '">' + syncwb + '</div>' + '<ul class="PL_list" id="' + cg.ulid.slice(1) + '">' + '</ul>' + '</div>' + '<b class="b5"></b><b class="b6"></b><b class="b7"></b><b class="b8"></b>' + '</div>';
 
@@ -92,7 +94,7 @@
 			cg = that.config,
 			litemp = '<li data-rid="{rid}">' + '<div class="picborder_l"><a target="blank" href="http://x.idongmi.com/u/{uid}"><img src="{userpic}"></a></div>' + '<div class="txtinfo"><a href="http://x.idongmi.com/u/{uid}" target="blank" data-uid="{uid}">{name}</a>:<span class="' + cg.txt.slice(1) + '"> {content}</span> ({date})</div>' + '<div class="MIB_operate">{bar}</div>' + '<div class="clear"></div>' + '</li>',
 			ulstr = "";
-			if (data.length === 0) return '<li style="text-align:center;">暂时还没有人评论过,快来抢沙发吧</li>';
+      if (data.length === 0) return '<li style="text-align:center;" id="'+cg.nocomment.slice(1)+'">暂时还没有人评论过,快来抢沙发吧</li>';
 			for (var i = 0; i < data.length; i++) {
         if(data[i]['name']===""){
           data[i]['name']='游客';
@@ -171,6 +173,7 @@
 				$(cg.ulid).html(ulstr);
 				//渲染名字
 				that.getDmName(cg.namecls);
+        $(that).trigger('comment:update');
 			});
 		},
 		/**
@@ -210,8 +213,10 @@
 			N = new Date().valueOf().toString().slice(6),
 			litemp = '<li data-rid="{rid}" class="J_New' + N + '">' + '<div class="picborder_l"><a href="http://x.idongmi.com/u/{uid}"><img src="{userpic}"></a></div>' + '<div class="txtinfo"><a href="http://x.idongmi.com/u/{uid}">{name}</a>:<span class="' + cg.txt.slice(1) + '"> {content}</span> ({date})</div>' + '<div class="MIB_operate">{bar}</div>' + '<div class="clear"></div>' + '</li>';
 
-			cg.current = 1;
-			that.trends_init(1); //插入之前先恢复到第一页		 
+			//cg.current = 1;
+			//that.trends_init(1); //插入之前先恢复到第一页		 
+      //删除为空时候的评论
+      $(cg.nocomment).remove();
 			sertobj['bar'] = that.createBar(sertobj['uid']);
 			sertobj['content'] = that.drawingName(sertobj['content']);
 			litemp = cg.myface.drawface($.substitute(litemp, sertobj));
@@ -309,7 +314,8 @@
 				content: txt,
 				pid: cg.pid,
 				syncwb: syncwb(),
-				reload: 1
+				reload: 1,
+        shareurl:cg.shareurl
 			};
 		},
 		postsuccess: function(data, callback, that) {
@@ -447,7 +453,7 @@
 			//提交评论
 			G.widget.use('saycountdown', function(widget) {
 				var mysay = widget.saycountdown({
-					max: 140,
+					max: 120,
 					main: cg.textid,
 					wrap: cg.countdownid,
 					holdTarget: cg.subbtn,

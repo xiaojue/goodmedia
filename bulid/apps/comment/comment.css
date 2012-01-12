@@ -49,7 +49,7 @@
 	 word-wrap: break-word; 
 	 font-size: 12px; 
 	 width:380px;
-	 height:24px;
+	 height:40px;
 	 line-height: 20px;
 	 float:left;
 }
@@ -141,3 +141,13 @@
 .MIB_txtbl img{
   vertical-align:middle;
 }
+
+.CMS .pcomment_sina{
+  width:100%;
+}
+
+.CMS .lf,.CMS .txtinfo{
+  width:500px;
+}
+
+
