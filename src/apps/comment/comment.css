@@ -60,6 +60,9 @@
 	text-align:center;
 	line-height:23px;
 	color:#333;
+  display:inline-block;
+  *display:inline;
+  *zoom:1;
 }
 .MIB_txtbl{
 	padding:10px 75px 10px 35px;

@@ -1,7 +1,7 @@
 /**
  * @author fuqiang[designsor@gmail.com]
  * @version 20111207
- * @description 通用走马灯
+ * @fileoverview 通用走马灯
  */
 (function(W, G, $) {
 	var roll = function(wrap, config) {

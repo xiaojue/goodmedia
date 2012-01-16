@@ -1,7 +1,7 @@
 /**
  * @author fuqiang[designsor@gmail.com]
  * @version 20111213
- * @description 转盘游戏部分的js
+ * @fileoverview 转盘游戏部分的js
  */
 (function(G) {
 	var pan = function() {

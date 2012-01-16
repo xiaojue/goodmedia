@@ -68,7 +68,7 @@
 			if (!cg.islogin) {
 			  syncwb = '<input type="checkbox" disabled="disabled" id="' + cg.syncwb.slice(1) + '">' + '<label for="' + cg.syncwb.slice(1) + '"> 转发到微博</label>';
 			}
-			var CommentTemp = '<div class="pcomment_sina pcmment_color">' + '<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>' + '<div class="pc_content">' + '<div class="pcomment_ico"><img src="http://s1.ifiter.com/static/images/comment/ico.gif"></div><div class="Countdown"><span id="' + cg.countdownid.slice(1) + '"></div></span><div class="new_position">' + '<a href="#face" id="' + cg.faceid.slice(1) + '"><img src="http://s1.ifiter.com/static/images/comment/ico1.gif"></a>' + '<textarea class="lf" id="' + cg.textid.slice(1) + '"></textarea>' + '<a class="btn_normal" id="' + cg.subbtn.slice(1) + '" href="javascript:void(0);">评论</a>' + '<div class="clear"></div>' + '</div>' + '<div class="MIB_txtbl" id="' + cg.mib.slice(1) + '">' + syncwb + '</div>' + '<ul class="PL_list" id="' + cg.ulid.slice(1) + '">' + '</ul>' + '</div>' + '<b class="b5"></b><b class="b6"></b><b class="b7"></b><b class="b8"></b>' + '</div>';
+			var CommentTemp = '<div class="pcomment_sina pcmment_color">' + '<b class="b1"></b><b class="b2"></b><b class="b3"></b><b class="b4"></b>' + '<div class="pc_content">' + '<div class="pcomment_ico"><img src="http://s1.ifiter.com/static/images/comment/ico.gif"></div><div class="Countdown"><span id="' + cg.countdownid.slice(1) + '"></div></span><div class="new_position">' + '<a href="#face" id="' + cg.faceid.slice(1) + '"><img src="http://s1.ifiter.com/static/images/comment/ico1.gif"></a>' + '<textarea class="lf" id="' + cg.textid.slice(1) + '"></textarea>' + '<div class="clear"></div>' + '</div>' + '<div class="MIB_txtbl" id="' + cg.mib.slice(1) + '">' + syncwb + '</div>' + '<ul class="PL_list" id="' + cg.ulid.slice(1) + '">' + '</ul>' + '</div>' + '<b class="b5"></b><b class="b6"></b><b class="b7"></b><b class="b8"></b>' + '</div>';
 
 			return CommentTemp;
 		},
@@ -487,7 +487,7 @@
 				T = setTimeout(function() {
 					var h = $(that).height(),
 					n = $(that).val().match(/\n/g),
-					l = n ? (n.length + 1) * 20: 24;
+					l = n ? (n.length + 1) * 20: 40;
 					$(that).height(l);
 					$(host).trigger('comment:keyup');
 				},
@@ -571,7 +571,9 @@
 					that.getDmName(cg.namecls);
 					//自定义事件
 					setTimeout(function() {
+            //移动提交的位置
 						$(that).trigger('comment:end');
+            $(cg.mib).append('<a class="btn_normal" id="' + cg.subbtn.slice(1) + '" href="javascript:void(0);">评论</a>');
 					},
 					100);
 				});

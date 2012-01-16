@@ -1,7 +1,7 @@
 /**
  * @author fuqiang[designsor@gmail.com]
  * @version 20120111
- * @description iframe自适应高
+ * @fileoverview iframe自适应高
  */
 (function(W,G,$) {
 	//iframe auto height

@@ -1,7 +1,7 @@
 /**
  * @author fuqiang[designsor@gmail.com]
  * @version 20111205
- * @description 好友买卖游戏app
+ * @fileoverview 好友买卖游戏app
  */
 (function(W, G, $) {
 	var salegame = function() {

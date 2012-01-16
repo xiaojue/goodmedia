@@ -1,7 +1,7 @@
 /**
  * @author fuqiang[designsor@gmail.com]
  * @version 20120109
- * @description 老板的评论功能修改，继承后重改几个方法，增加了校验码，HTML重构，评论开关，匿名回复等功能,自动增加自适应高功能
+ * @fileoverview 老板的评论功能修改，继承后重改几个方法，增加了校验码，HTML重构，评论开关，匿名回复等功能,自动增加自适应高功能
  */
 (function(W, $, G) {
 

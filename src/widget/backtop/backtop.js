@@ -1,7 +1,7 @@
 /**
  * @author fuqiang[designsor@gmail.com]
  * @version 20111209
- * @description 返回顶部
+ * @fileoverview 返回顶部
  */
 (function(W, G, $) {
 	var backtop = function(target, config) {
